@@ -4,85 +4,71 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public InputManager inputManager;
+#pragma warning disable 649
 
-    public Rigidbody rb;
-    public CapsuleCollider playerHeight;
+    [SerializeField] CharacterController controller;
+    [SerializeField] float speed = 11f;
+    [SerializeField] float sprintSpeed = 17f;
 
-    public float speed = 10f;
-    public float runSpeed = 15;
+    Vector2 horizontalInput;
 
-    public float jumpForce = 200f;
+    [SerializeField] float jumpHeight = 3.5f;
+    [SerializeField] float gravity = -30f; // -9.81
+    Vector3 verticalVelocity = Vector3.zero;
 
-    private bool _isGrounded;
+    [SerializeField] LayerMask groundMask;
 
-    
+    bool isGrounded;
+    bool jump;
+    bool sprint;
 
-    //public float maxSlopeAngle;
-    //private RaycastHit slopeHit;
-
-    void Start()
-    {
-        inputManager.inputMaster.Movement.Jump.started += _ => Jump();
-        rb = GetComponent<Rigidbody>();
-        //rb.freezeRotation = true;
-        
-    }
 
     private void Update()
     {
-        MovementInput();
-    }   
-
-
-    private void OnCollisionEnter(Collision other)
-    {
-        if (other.transform.CompareTag("Ground"))
+        isGrounded = Physics.CheckSphere(transform.position, 0.1f, groundMask);
+        if (isGrounded)
         {
-            _isGrounded = true;
+            verticalVelocity.y = 0;
         }
+
+        float currentSpeed = sprint ? sprintSpeed : speed;
+        Vector3 horizontalVelocity = (transform.right * horizontalInput.x + transform.forward * horizontalInput.y) * currentSpeed;
+        controller.Move(horizontalVelocity * Time.deltaTime);
+
+        if (jump)
+        {
+            if (isGrounded)
+            {
+                verticalVelocity.y = Mathf.Sqrt(-2f * jumpHeight * gravity);
+            }
+
+            jump = false;
+        }
+
+        verticalVelocity.y += gravity * Time.deltaTime;
+        controller.Move(verticalVelocity * Time.deltaTime);
     }
 
-    private void OnCollisionExit(Collision other)
+    public void ReceiveInput (Vector2 _horizontalInput)
     {
-        if (other.transform.CompareTag("Ground"))
-        {
-            _isGrounded = false;
-        }
+        horizontalInput = _horizontalInput;
     }
-    
-    public void MovementInput()
-    {
-        float forward = inputManager.inputMaster.Movement.Forward.ReadValue<float>();
-        float right = inputManager.inputMaster.Movement.Right.ReadValue<float>();
-        Vector3 move = transform.right * right + transform.forward * forward;
 
-        move *= inputManager.inputMaster.Movement.Run.ReadValue<float>() == 0 ? speed : runSpeed;
+    public void OnSprintPressed()
+    {
+        if (!sprint && !jump)
+        {
+            sprint = true;
+        }
+        else
+        {
+            sprint = false;
+        }
         
-        rb.velocity = new Vector3(move.x, rb.velocity.y, move.z);
     }
 
-    void Jump()
+    public void OnJumpPressed()
     {
-        if (_isGrounded)
-        {
-            rb.AddForce(Vector3.up * jumpForce);
-        }
+        jump = true;
     }
-
-    /*private bool OnSlope()
-    {
-        if(Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight.height * 0.5f + 0.3f))
-        {
-            float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
-            return angle < maxSlopeAngle && angle != 0;
-        }
-
-        return false;
-    }
-
-    private Vector3 GetSlopeMoveDirection()
-    {
-        return Vector3.ProjectOnPlane(moveDirection, slopeHit.normal).normalized;
-    }*/
 }

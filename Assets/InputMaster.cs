@@ -28,22 +28,13 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
             ""id"": ""631b2d19-5315-4a44-88ef-afce6efb3ca0"",
             ""actions"": [
                 {
-                    ""name"": ""Forward"",
-                    ""type"": ""Value"",
-                    ""id"": ""e4b26b8f-2454-47e2-9d43-062ed34eeeb9"",
-                    ""expectedControlType"": ""Axis"",
+                    ""name"": ""HorizontalMovement"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""b4845205-79e8-41ae-9e23-e331fb2307a9"",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""Right"",
-                    ""type"": ""Value"",
-                    ""id"": ""5414de13-cd50-48cb-a25f-fe6a9ed470b6"",
-                    ""expectedControlType"": ""Axis"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
+                    ""initialStateCheck"": false
                 },
                 {
                     ""name"": ""Jump"",
@@ -55,17 +46,8 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Crouch"",
-                    ""type"": ""Value"",
-                    ""id"": ""9b1ec8c8-c50b-4216-90fd-cfe75f7738b2"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""Run"",
-                    ""type"": ""Value"",
+                    ""name"": ""Sprint"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""4bfb9f35-dff1-42a9-a678-da053423221d"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
@@ -74,72 +56,6 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
                 }
             ],
             ""bindings"": [
-                {
-                    ""name"": ""1D Axis"",
-                    ""id"": ""3fca218b-743f-456f-91b6-d8d12eff5315"",
-                    ""path"": ""1DAxis"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Forward"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""f1b5690a-9907-4b6e-8f98-8276a12c0419"",
-                    ""path"": ""<Keyboard>/w"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Forward"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""negative"",
-                    ""id"": ""664c942f-c5ec-4d3d-94c9-10d9209e2f82"",
-                    ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Forward"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""1D Axis"",
-                    ""id"": ""c4ee130d-e116-4d40-a619-4175fe0a49d8"",
-                    ""path"": ""1DAxis"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Right"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""a1b24a67-4a18-4ea1-8ed0-b385c6d23556"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Right"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""negative"",
-                    ""id"": ""d5f38f39-3ec7-4dbf-923e-75b2bc37fcde"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Right"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
                 {
                     ""name"": """",
                     ""id"": ""1d179a9f-9230-4e2b-bdbd-7507c616e8f3"",
@@ -153,25 +69,69 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""ffd953f2-19e1-44ab-ab6f-a04b82631eeb"",
-                    ""path"": ""<Keyboard>/c"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Crouch"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""62c25de6-78bd-4dcd-bbec-ca800ee48308"",
                     ""path"": ""<Keyboard>/shift"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Run"",
+                    ""action"": ""Sprint"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""WASD"",
+                    ""id"": ""08ac9482-3b71-4b70-859c-b1ad70d70a8e"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""HorizontalMovement"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""e250acdd-904c-4c49-ab81-268e3ba5b10d"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""HorizontalMovement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""000e37dd-1f54-4c7d-89a7-b27b663cad09"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""HorizontalMovement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""6c132e76-0f69-4587-930c-b8dc5dc5e09a"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""HorizontalMovement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""125663f1-1f13-46d0-8ef7-9fb4d0665b72"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""HorizontalMovement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         },
@@ -181,7 +141,7 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
             ""actions"": [
                 {
                     ""name"": ""MouseX"",
-                    ""type"": ""Value"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""bdea78ae-b552-4bda-8963-112348f11a00"",
                     ""expectedControlType"": ""Axis"",
                     ""processors"": """",
@@ -190,7 +150,7 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""MouseY"",
-                    ""type"": ""Value"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""e50a3f96-1ca1-4cb2-913a-c38b76ba812d"",
                     ""expectedControlType"": ""Axis"",
                     ""processors"": """",
@@ -222,21 +182,50 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Weapons"",
+            ""id"": ""e6da222c-384d-4137-9bf7-f8fd6a4f0d52"",
+            ""actions"": [
+                {
+                    ""name"": ""Shoot"",
+                    ""type"": ""Button"",
+                    ""id"": ""2b2e9532-7b02-45e3-b462-b7fba5b921c2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""54e37849-f025-40ca-a827-e4c6fa4767c5"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
 }");
         // Movement
         m_Movement = asset.FindActionMap("Movement", throwIfNotFound: true);
-        m_Movement_Forward = m_Movement.FindAction("Forward", throwIfNotFound: true);
-        m_Movement_Right = m_Movement.FindAction("Right", throwIfNotFound: true);
+        m_Movement_HorizontalMovement = m_Movement.FindAction("HorizontalMovement", throwIfNotFound: true);
         m_Movement_Jump = m_Movement.FindAction("Jump", throwIfNotFound: true);
-        m_Movement_Crouch = m_Movement.FindAction("Crouch", throwIfNotFound: true);
-        m_Movement_Run = m_Movement.FindAction("Run", throwIfNotFound: true);
+        m_Movement_Sprint = m_Movement.FindAction("Sprint", throwIfNotFound: true);
         // CameraLook
         m_CameraLook = asset.FindActionMap("CameraLook", throwIfNotFound: true);
         m_CameraLook_MouseX = m_CameraLook.FindAction("MouseX", throwIfNotFound: true);
         m_CameraLook_MouseY = m_CameraLook.FindAction("MouseY", throwIfNotFound: true);
+        // Weapons
+        m_Weapons = asset.FindActionMap("Weapons", throwIfNotFound: true);
+        m_Weapons_Shoot = m_Weapons.FindAction("Shoot", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -298,20 +287,16 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
     // Movement
     private readonly InputActionMap m_Movement;
     private List<IMovementActions> m_MovementActionsCallbackInterfaces = new List<IMovementActions>();
-    private readonly InputAction m_Movement_Forward;
-    private readonly InputAction m_Movement_Right;
+    private readonly InputAction m_Movement_HorizontalMovement;
     private readonly InputAction m_Movement_Jump;
-    private readonly InputAction m_Movement_Crouch;
-    private readonly InputAction m_Movement_Run;
+    private readonly InputAction m_Movement_Sprint;
     public struct MovementActions
     {
         private @InputMaster m_Wrapper;
         public MovementActions(@InputMaster wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Forward => m_Wrapper.m_Movement_Forward;
-        public InputAction @Right => m_Wrapper.m_Movement_Right;
+        public InputAction @HorizontalMovement => m_Wrapper.m_Movement_HorizontalMovement;
         public InputAction @Jump => m_Wrapper.m_Movement_Jump;
-        public InputAction @Crouch => m_Wrapper.m_Movement_Crouch;
-        public InputAction @Run => m_Wrapper.m_Movement_Run;
+        public InputAction @Sprint => m_Wrapper.m_Movement_Sprint;
         public InputActionMap Get() { return m_Wrapper.m_Movement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -321,40 +306,28 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_MovementActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_MovementActionsCallbackInterfaces.Add(instance);
-            @Forward.started += instance.OnForward;
-            @Forward.performed += instance.OnForward;
-            @Forward.canceled += instance.OnForward;
-            @Right.started += instance.OnRight;
-            @Right.performed += instance.OnRight;
-            @Right.canceled += instance.OnRight;
+            @HorizontalMovement.started += instance.OnHorizontalMovement;
+            @HorizontalMovement.performed += instance.OnHorizontalMovement;
+            @HorizontalMovement.canceled += instance.OnHorizontalMovement;
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
-            @Crouch.started += instance.OnCrouch;
-            @Crouch.performed += instance.OnCrouch;
-            @Crouch.canceled += instance.OnCrouch;
-            @Run.started += instance.OnRun;
-            @Run.performed += instance.OnRun;
-            @Run.canceled += instance.OnRun;
+            @Sprint.started += instance.OnSprint;
+            @Sprint.performed += instance.OnSprint;
+            @Sprint.canceled += instance.OnSprint;
         }
 
         private void UnregisterCallbacks(IMovementActions instance)
         {
-            @Forward.started -= instance.OnForward;
-            @Forward.performed -= instance.OnForward;
-            @Forward.canceled -= instance.OnForward;
-            @Right.started -= instance.OnRight;
-            @Right.performed -= instance.OnRight;
-            @Right.canceled -= instance.OnRight;
+            @HorizontalMovement.started -= instance.OnHorizontalMovement;
+            @HorizontalMovement.performed -= instance.OnHorizontalMovement;
+            @HorizontalMovement.canceled -= instance.OnHorizontalMovement;
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
-            @Crouch.started -= instance.OnCrouch;
-            @Crouch.performed -= instance.OnCrouch;
-            @Crouch.canceled -= instance.OnCrouch;
-            @Run.started -= instance.OnRun;
-            @Run.performed -= instance.OnRun;
-            @Run.canceled -= instance.OnRun;
+            @Sprint.started -= instance.OnSprint;
+            @Sprint.performed -= instance.OnSprint;
+            @Sprint.canceled -= instance.OnSprint;
         }
 
         public void RemoveCallbacks(IMovementActions instance)
@@ -426,17 +399,65 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
         }
     }
     public CameraLookActions @CameraLook => new CameraLookActions(this);
+
+    // Weapons
+    private readonly InputActionMap m_Weapons;
+    private List<IWeaponsActions> m_WeaponsActionsCallbackInterfaces = new List<IWeaponsActions>();
+    private readonly InputAction m_Weapons_Shoot;
+    public struct WeaponsActions
+    {
+        private @InputMaster m_Wrapper;
+        public WeaponsActions(@InputMaster wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Shoot => m_Wrapper.m_Weapons_Shoot;
+        public InputActionMap Get() { return m_Wrapper.m_Weapons; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(WeaponsActions set) { return set.Get(); }
+        public void AddCallbacks(IWeaponsActions instance)
+        {
+            if (instance == null || m_Wrapper.m_WeaponsActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_WeaponsActionsCallbackInterfaces.Add(instance);
+            @Shoot.started += instance.OnShoot;
+            @Shoot.performed += instance.OnShoot;
+            @Shoot.canceled += instance.OnShoot;
+        }
+
+        private void UnregisterCallbacks(IWeaponsActions instance)
+        {
+            @Shoot.started -= instance.OnShoot;
+            @Shoot.performed -= instance.OnShoot;
+            @Shoot.canceled -= instance.OnShoot;
+        }
+
+        public void RemoveCallbacks(IWeaponsActions instance)
+        {
+            if (m_Wrapper.m_WeaponsActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IWeaponsActions instance)
+        {
+            foreach (var item in m_Wrapper.m_WeaponsActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_WeaponsActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public WeaponsActions @Weapons => new WeaponsActions(this);
     public interface IMovementActions
     {
-        void OnForward(InputAction.CallbackContext context);
-        void OnRight(InputAction.CallbackContext context);
+        void OnHorizontalMovement(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
-        void OnCrouch(InputAction.CallbackContext context);
-        void OnRun(InputAction.CallbackContext context);
+        void OnSprint(InputAction.CallbackContext context);
     }
     public interface ICameraLookActions
     {
         void OnMouseX(InputAction.CallbackContext context);
         void OnMouseY(InputAction.CallbackContext context);
+    }
+    public interface IWeaponsActions
+    {
+        void OnShoot(InputAction.CallbackContext context);
     }
 }
