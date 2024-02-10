@@ -14,21 +14,34 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] float jumpHeight = 3.5f;
     [SerializeField] float gravity = -30f; // -9.81
+    [SerializeField] float groundedRadius = 0.1f; // Added this to change the radius to detect if grounded while in the editor
     Vector3 verticalVelocity = Vector3.zero;
 
     [SerializeField] LayerMask groundMask;
 
-    bool isGrounded;
+    [SerializeField] bool isGrounded; // Serialized for debug
     bool jump;
+    [SerializeField] int jumpAmount = 2;
+    [SerializeField] int currentJump = 0; // Serialized for debug
     bool sprint;
 
 
     private void Update()
     {
-        isGrounded = Physics.CheckSphere(transform.position, 0.1f, groundMask);
+        isGrounded = Physics.CheckSphere(transform.position, groundedRadius, groundMask); // Grounded check feels iffy - Logan
         if (isGrounded)
         {
             verticalVelocity.y = 0;
+            currentJump = 0;
+        }
+        else
+        {
+            verticalVelocity.y += gravity * Time.deltaTime;
+
+            if (currentJump == 0)
+            {
+                currentJump += 1;
+            }
         }
 
         float currentSpeed = sprint ? sprintSpeed : speed;
@@ -37,15 +50,16 @@ public class PlayerMovement : MonoBehaviour
 
         if (jump)
         {
-            if (isGrounded)
+            if (currentJump < jumpAmount)
             {
                 verticalVelocity.y = Mathf.Sqrt(-2f * jumpHeight * gravity);
+                currentJump += 1;
             }
 
             jump = false;
         }
 
-        verticalVelocity.y += gravity * Time.deltaTime;
+        
         controller.Move(verticalVelocity * Time.deltaTime);
     }
 
