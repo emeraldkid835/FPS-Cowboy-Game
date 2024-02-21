@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        canJump = Physics.CheckSphere(transform.position, jumpGroundedRadius, groundMask);
+        canJump = Physics.Raycast(transform.position,Vector3.down,jumpGroundedRadius,groundMask);
         if (canJump)
         {
             currentJump = 0;
@@ -42,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
                 currentJump += 1;
             }
         }
-        isGrounded = Physics.CheckSphere(transform.position, groundedRadius, groundMask);
+        isGrounded = Physics.Raycast(transform.position,Vector3.down,groundedRadius,groundMask);
         if (isGrounded)
         {
             if (verticalVelocity.y < 0)
