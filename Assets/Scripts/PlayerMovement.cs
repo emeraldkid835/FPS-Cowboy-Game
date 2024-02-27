@@ -9,7 +9,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] CharacterController controller;
     [SerializeField] float speed = 11f;
     [SerializeField] float sprintSpeed = 17f;
-
+    [SerializeField] float timeToBeFastest = 1f;
+    float curTimeToBeFastest = 0f;
     Vector2 horizontalInput;
 
     [SerializeField] float jumpHeight = 3.5f;
@@ -55,9 +56,27 @@ public class PlayerMovement : MonoBehaviour
             verticalVelocity.y += gravity * Time.deltaTime;
         }
 
-        float currentSpeed = sprint ? sprintSpeed : speed;
+        if(sprint == false)
+        {
+            curTimeToBeFastest = 0f;
+        }
+        else
+        {
+            if(curTimeToBeFastest >= timeToBeFastest)
+            {
+                curTimeToBeFastest = timeToBeFastest;
+            }
+            else
+            {
+                curTimeToBeFastest += Time.deltaTime;
+            }
+        }
+
+        float currentSpeed = sprint ? Mathf.Lerp(speed, sprintSpeed, curTimeToBeFastest) : speed;
         Vector3 horizontalVelocity = (transform.right * horizontalInput.x + transform.forward * horizontalInput.y) * currentSpeed;
         controller.Move(horizontalVelocity * Time.deltaTime);
+
+        Debug.Log("current speed: " + currentSpeed);
 
         if (jump)
         {
