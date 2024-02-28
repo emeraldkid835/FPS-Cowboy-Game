@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     // Movement speed variables
     [SerializeField] float speed = 11f;
     [SerializeField] float sprintSpeed = 17f;
+    [SerializeField] float sprintAcceleration = 5f;
 
     // Variables for handling slopes
     [SerializeField] float slopeForce = 5f;
@@ -88,8 +89,17 @@ public class PlayerMovement : MonoBehaviour
 
         // Determine current speed based on sprinting status
         float currentSpeed = sprint ? sprintSpeed : speed;
+        // Determine target speed based on sprinting status
+        float targetSpeed = sprint ? sprintSpeed : speed;
+
+        // Lerp the current speed towards the target speed
+        currentSpeed = Mathf.Lerp(currentSpeed, targetSpeed, sprintAcceleration * Time.deltaTime);
         Vector3 horizontalVelocity = (transform.right * horizontalInput.x + transform.forward * horizontalInput.y) * currentSpeed;
 
+        
+        
+
+        
         // Check for slope
         if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, slopeRayLength, groundMask))
         {
@@ -101,7 +111,7 @@ public class PlayerMovement : MonoBehaviour
                 verticalVelocity += Vector3.down * slopeForce * Time.deltaTime;
 
                 // Add wall run force only while sprinting
-                if (sprint && slopeAngle < 90f)
+                if (slopeAngle < 90f)
                 {
                     // Calculate the direction of the wall run force
                     Vector3 wallRunForceDirection = Vector3.Cross(hit.normal, Vector3.up).normalized;
