@@ -265,6 +265,45 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""PauseOptions"",
+            ""id"": ""f666d0fb-1b78-4987-b24c-73de197debe2"",
+            ""actions"": [
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""e0f805fe-6399-489c-b14c-3f7e84bcd2c8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""3df371b6-8acc-40b5-8797-c80dc9639213"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""03cbc335-4a8a-4ed9-9273-48a27ba73d47"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -281,6 +320,9 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
         // Weapons
         m_Weapons = asset.FindActionMap("Weapons", throwIfNotFound: true);
         m_Weapons_Shoot = m_Weapons.FindAction("Shoot", throwIfNotFound: true);
+        // PauseOptions
+        m_PauseOptions = asset.FindActionMap("PauseOptions", throwIfNotFound: true);
+        m_PauseOptions_Pause = m_PauseOptions.FindAction("Pause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -500,6 +542,52 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
         }
     }
     public WeaponsActions @Weapons => new WeaponsActions(this);
+
+    // PauseOptions
+    private readonly InputActionMap m_PauseOptions;
+    private List<IPauseOptionsActions> m_PauseOptionsActionsCallbackInterfaces = new List<IPauseOptionsActions>();
+    private readonly InputAction m_PauseOptions_Pause;
+    public struct PauseOptionsActions
+    {
+        private @InputMaster m_Wrapper;
+        public PauseOptionsActions(@InputMaster wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Pause => m_Wrapper.m_PauseOptions_Pause;
+        public InputActionMap Get() { return m_Wrapper.m_PauseOptions; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(PauseOptionsActions set) { return set.Get(); }
+        public void AddCallbacks(IPauseOptionsActions instance)
+        {
+            if (instance == null || m_Wrapper.m_PauseOptionsActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_PauseOptionsActionsCallbackInterfaces.Add(instance);
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
+        }
+
+        private void UnregisterCallbacks(IPauseOptionsActions instance)
+        {
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
+        }
+
+        public void RemoveCallbacks(IPauseOptionsActions instance)
+        {
+            if (m_Wrapper.m_PauseOptionsActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IPauseOptionsActions instance)
+        {
+            foreach (var item in m_Wrapper.m_PauseOptionsActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_PauseOptionsActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public PauseOptionsActions @PauseOptions => new PauseOptionsActions(this);
     public interface IMovementActions
     {
         void OnHorizontalMovement(InputAction.CallbackContext context);
@@ -514,5 +602,9 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
     public interface IWeaponsActions
     {
         void OnShoot(InputAction.CallbackContext context);
+    }
+    public interface IPauseOptionsActions
+    {
+        void OnPause(InputAction.CallbackContext context);
     }
 }
