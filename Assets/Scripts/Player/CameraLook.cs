@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CameraLook : MonoBehaviour
 {
@@ -23,6 +24,9 @@ public class CameraLook : MonoBehaviour
 
     float headBobOffset = 2f;
 
+    [SerializeField] Slider sensitivityXSlider;
+    [SerializeField] Slider sensitivityYSlider;
+
     Vector3 originalCameraPosition;
 
     private void Start()
@@ -30,6 +34,9 @@ public class CameraLook : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
 
         originalCameraPosition = playerCamera.localPosition;
+
+        sensitivityXSlider.onValueChanged.AddListener(UpdateSensitivityX);
+        sensitivityYSlider.onValueChanged.AddListener(UpdateSensitivityY);
     }
     private void Update()
     {
@@ -68,9 +75,21 @@ public class CameraLook : MonoBehaviour
             playerCamera.localPosition = new Vector3(lateralBobAmount, currentHeadBobPosition, 0f);
         }
 
+
         
 
         
+    }
+    // Method to update sensitivityX based on UI Slider value
+    public void UpdateSensitivityX(float value)
+    {
+        sensitivityX = value;
+    }
+
+    // Method to update sensitivityY based on UI Slider value
+    public void UpdateSensitivityY(float value)
+    {
+        sensitivityY = value;
     }
 
 
