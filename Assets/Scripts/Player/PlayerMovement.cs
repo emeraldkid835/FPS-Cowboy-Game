@@ -38,7 +38,7 @@ public class PlayerMovement : MonoBehaviour
 
     // Ground check using layer mask
     [SerializeField] LayerMask groundMask;
-    [SerializeField] bool isGrounded; // Serialized for debug
+    [SerializeField] public bool isGrounded; // Serialized for debug
 
     // Jumping control variables
     bool canJump;
@@ -47,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] int currentJump = 0; // Serialized for debug
 
     // Sprinting control variables
-    bool sprint;
+    public bool sprint;
 
     // Update is called once per frame
     private void Update()
