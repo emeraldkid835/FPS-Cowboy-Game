@@ -16,33 +16,42 @@ public class PlayerPause : MonoBehaviour
         Time.timeScale = 1f;
         
         Cursor.lockState = CursorLockMode.Locked;
-        pausePanel.SetActive(false);
-        controlsPanel.SetActive(false);
+        if (pausePanel != null && controlsPanel != null)
+        {
+            pausePanel.SetActive(false);
+            controlsPanel.SetActive(false);
+        }
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    //void Update()
+    //{
         
-    }
+    //}
 
-    public void OnPausePressed()
+    public void OnPausePressed() //check added to do nothing if no panels are present, should not need any other changes. for now.
     {
-        if (isPaused == false)
+        if (pausePanel != null && controlsPanel != null)
         {
-            isPaused = true;
-            pausePanel.SetActive(true);
-            Cursor.lockState = CursorLockMode.None;
-            Time.timeScale = 0f;
+            if (isPaused == false)
+            {
+                isPaused = true;
+                pausePanel.SetActive(true);
+                Cursor.lockState = CursorLockMode.None;
+                Time.timeScale = 0f;
+            }
+            else
+            {
+                isPaused = false;
+                pausePanel.SetActive(false);
+                Cursor.lockState = CursorLockMode.Locked;
+                Time.timeScale = 1f;
+            }
         }
-        else 
+        else
         {
-            isPaused = false;
-            pausePanel.SetActive(false);
-            Cursor.lockState = CursorLockMode.Locked;
-            Time.timeScale = 1f;
+            Debug.Log("I'm missing panels, no pause for you!");
         }
-
 
     }
 
