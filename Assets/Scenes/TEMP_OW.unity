@@ -19795,37 +19795,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!1 &644894292 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3873793647960025711, guid: 763ef2bec51e71b49ab285e5e91fbf9e, type: 3}
-  m_PrefabInstance: {fileID: 706396352}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &644894293
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 644894292}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e485a952a1ac8540a10df974621a7b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isPaused: 0
-  pausePanel: {fileID: 936554382}
-  controlsPanel: {fileID: 943159728}
---- !u!114 &644894296 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3873793647960025705, guid: 763ef2bec51e71b49ab285e5e91fbf9e, type: 3}
-  m_PrefabInstance: {fileID: 706396352}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 644894292}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a25f8cc97dec814a81d39d8e5412fb4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &654356215
 GameObject:
   m_ObjectHideFlags: 0
@@ -25229,7 +25198,7 @@ PrefabInstance:
     - target: {fileID: 3873793647960025704, guid: 763ef2bec51e71b49ab285e5e91fbf9e, type: 3}
       propertyPath: playerPause
       value: 
-      objectReference: {fileID: 644894293}
+      objectReference: {fileID: 0}
     - target: {fileID: 3873793647960025707, guid: 763ef2bec51e71b49ab285e5e91fbf9e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 565
@@ -25245,7 +25214,7 @@ PrefabInstance:
     - target: {fileID: 3873793647960025716, guid: 763ef2bec51e71b49ab285e5e91fbf9e, type: 3}
       propertyPath: playerMovement
       value: 
-      objectReference: {fileID: 644894296}
+      objectReference: {fileID: 0}
     - target: {fileID: 3873793647960025716, guid: 763ef2bec51e71b49ab285e5e91fbf9e, type: 3}
       propertyPath: sensitivityXSlider
       value: 
@@ -25254,6 +25223,14 @@ PrefabInstance:
       propertyPath: sensitivityYSlider
       value: 
       objectReference: {fileID: 1526308620}
+    - target: {fileID: 4564468290162487399, guid: 763ef2bec51e71b49ab285e5e91fbf9e, type: 3}
+      propertyPath: pausePanel
+      value: 
+      objectReference: {fileID: 936554382}
+    - target: {fileID: 4564468290162487399, guid: 763ef2bec51e71b49ab285e5e91fbf9e, type: 3}
+      propertyPath: controlsPanel
+      value: 
+      objectReference: {fileID: 943159728}
     - target: {fileID: 4564468290162487411, guid: 763ef2bec51e71b49ab285e5e91fbf9e, type: 3}
       propertyPath: m_Name
       value: Player
