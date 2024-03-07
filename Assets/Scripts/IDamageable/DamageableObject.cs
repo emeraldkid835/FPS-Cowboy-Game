@@ -2,64 +2,104 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DamageableObject : MonoBehaviour, DamageSystem.IDamageable
+namespace Damageables
 {
-    [Header("Settings")]
-    [SerializeField] DamageableObjectSettings settings;
 
-    private float currentHealth;
 
-    void Start()
+    public class DamageableObject : MonoBehaviour, DamageSystem.IDamageable
     {
-        currentHealth = settings.initialHealth;
-        DamageSystem.DamageEvent.OnDamageTaken += TakeDamage;
-    }
+        [Header("Settings")]
+        [SerializeField] DamageableObjectSettings settings;
 
-    // IDamageable interface method
-    public void TakeDamage(float damage)
-    {
-        currentHealth -= damage;
+        [SerializeField] private float currentHealth;
 
-        // Visual and audio feedback using Scriptable Object settings
-        PlayDamageSound(settings.damageSound);
-        SpawnDamageParticles(settings.damageParticlesPrefab);
+        private bool hasDied = false;
 
-        if (currentHealth <= 0)
+        private GameObject deathParticlesInstance;
+        private GameObject damageParticlesInstance;
+        private bool hasPlayedDeathParticles = false;
+        private bool hasPlayedDamageParticles = false;
+
+        void Start()
         {
-            Die();
+            currentHealth = settings.initialHealth;
+            DamageSystem.DamageEvent.OnDamageTaken += TakeDamage;
         }
-    }
 
-    // Method to play damage sound
-    private void PlayDamageSound(AudioClip sound)
-    {
-        if (sound != null)
+        // IDamageable interface method
+        public void TakeDamage(float damage)
         {
-            // Play the sound
-            // Example: AudioSource.PlayOneShot(sound);
-        }
-    }
+            currentHealth -= damage;
 
-    // Method to spawn damage particles
-    private void SpawnDamageParticles(GameObject particlesPrefab)
-    {
-        if (particlesPrefab != null)
+            // Visual and audio feedback using Scriptable Object settings
+            PlayDamageSound(settings.damageSound);
+            SpawnDamageParticles(settings.damageParticlesPrefab);
+
+            if (currentHealth <= 0)
+            {
+                Die();
+            }
+        }
+
+        public float GetCurrentHealth()
         {
-            // Instantiate and spawn particles using the provided prefab
-            // Example: Instantiate(particlesPrefab, transform.position, Quaternion.identity);
+            return currentHealth;
         }
-    }
 
-    // Method to handle object destruction
-    private void Die()
-    {
-        // Implement object death logic here
-        // Example: Destroy(gameObject);
-    }
+        // Method to play damage sound
+        private void PlayDamageSound(AudioClip sound)
+        {
+            if (sound != null)
+            {
+                // Play the sound
+                // Example: AudioSource.PlayOneShot(sound);
+            }
+        }
 
-    void OnDestroy()
-    {
-        // Unsubscribe from the damage event to prevent memory leaks
-        DamageSystem.DamageEvent.OnDamageTaken -= TakeDamage;
+        // Method to spawn damage particles
+        private void SpawnDamageParticles(GameObject particlesPrefab)
+        {
+            if (particlesPrefab != null)
+            {
+                // Instantiate and spawn particles using the provided prefab
+                if (!hasPlayedDamageParticles)
+                    damageParticlesInstance = Instantiate(particlesPrefab, transform.position, Quaternion.identity);
+                Destroy(damageParticlesInstance, settings.particleDestroyDelay);
+            }
+        }
+
+       
+        // Method to handle object destruction
+        private void Die()
+        {
+            if (!hasDied)
+            {
+                hasDied = true;
+
+                // Check if death particles have not been played before
+                if (!hasPlayedDeathParticles && settings.DestroyParticlesPrefab != null)
+                {
+                    // Instantiate and store a reference to the death particle effect
+                    deathParticlesInstance = Instantiate(settings.DestroyParticlesPrefab, transform.position, Quaternion.identity);
+
+                    // Set the flag to indicate that death particles have been played
+                    hasPlayedDeathParticles = true;
+
+                    // Destroy the instantiated particles after a delay
+                    Destroy(deathParticlesInstance, settings.particleDestroyDelay);
+                }
+
+                // Implement object death logic here
+                Destroy(gameObject);
+            }
+
+
+        }
+
+        void OnDestroy()
+        {
+            // Unsubscribe from the damage event to prevent memory leaks
+            DamageSystem.DamageEvent.OnDamageTaken -= TakeDamage;
+        }
     }
 }

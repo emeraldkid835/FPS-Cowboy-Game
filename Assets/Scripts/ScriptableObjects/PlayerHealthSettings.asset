@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 31f2628b668936647b3c4bc8b5ffba98, type: 3}
-  m_Name: PlayerDamageSettings
+  m_Name: PlayerHealthSettings
   m_EditorClassIdentifier: 
   maxHealth: 100
   initialHealth: 100

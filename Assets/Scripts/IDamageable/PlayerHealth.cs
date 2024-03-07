@@ -2,64 +2,69 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerHealth : MonoBehaviour, DamageSystem.IDamageable
+namespace Damageables
 {
-    [Header("Settings")]
-    [SerializeField] PlayerSettings playerSettings; // Reference to PlayerSettings Scriptable Object
 
-    private float currentHealth;
 
-    void Start()
+    public class PlayerHealth : MonoBehaviour, DamageSystem.IDamageable
     {
-        currentHealth = playerSettings.initialHealth;
-        DamageSystem.DamageEvent.OnDamageTaken += TakeDamage;
-    }
+        [Header("Settings")]
+        [SerializeField] PlayerSettings playerSettings; // Reference to PlayerSettings Scriptable Object
 
-    // IDamageable interface method
-    public void TakeDamage(float damage)
-    {
-        currentHealth -= damage;
+        private float currentHealth;
 
-        // Visual and audio feedback using Scriptable Object settings
-        PlayDamageSound(playerSettings.damageSound);
-        SpawnDamageParticles(playerSettings.damageParticlesPrefab);
-
-        if (currentHealth <= 0)
+        void Start()
         {
-            Die();
+            currentHealth = playerSettings.initialHealth;
+            DamageSystem.DamageEvent.OnDamageTaken += TakeDamage;
         }
-    }
 
-    // Method to play damage sound
-    private void PlayDamageSound(AudioClip sound)
-    {
-        if (sound != null)
+        // IDamageable interface method
+        public void TakeDamage(float damage)
         {
-            // Play the sound
-            // Example: AudioSource.PlayOneShot(sound);
-        }
-    }
+            currentHealth -= damage;
 
-    // Method to spawn damage particles
-    private void SpawnDamageParticles(GameObject particlesPrefab)
-    {
-        if (particlesPrefab != null)
+            // Visual and audio feedback using Scriptable Object settings
+            PlayDamageSound(playerSettings.damageSound);
+            SpawnDamageParticles(playerSettings.damageParticlesPrefab);
+
+            if (currentHealth <= 0)
+            {
+                Die();
+            }
+        }
+
+        // Method to play damage sound
+        private void PlayDamageSound(AudioClip sound)
         {
-            // Instantiate and spawn particles using the provided prefab
-            // Example: Instantiate(particlesPrefab, transform.position, Quaternion.identity);
+            if (sound != null)
+            {
+                // Play the sound
+                // Example: AudioSource.PlayOneShot(sound);
+            }
         }
-    }
 
-    // Method to handle player death
-    private void Die()
-    {
-        // Implement player death logic here
-        // Example: Destroy(gameObject);
-    }
+        // Method to spawn damage particles
+        private void SpawnDamageParticles(GameObject particlesPrefab)
+        {
+            if (particlesPrefab != null)
+            {
+                // Instantiate and spawn particles using the provided prefab
+                // Example: Instantiate(particlesPrefab, transform.position, Quaternion.identity);
+            }
+        }
 
-    void OnDestroy()
-    {
-        // Unsubscribe from the damage event to prevent memory leaks
-        DamageSystem.DamageEvent.OnDamageTaken -= TakeDamage;
+        // Method to handle player death
+        private void Die()
+        {
+            // Implement player death logic here
+            // Example: Destroy(gameObject);
+        }
+
+        void OnDestroy()
+        {
+            // Unsubscribe from the damage event to prevent memory leaks
+            DamageSystem.DamageEvent.OnDamageTaken -= TakeDamage;
+        }
     }
 }
