@@ -8,12 +8,12 @@ namespace Damageables
     public class HealthDisplay : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI healthText;
-        [SerializeField] private DamageableObject playerDamageable;
+        [SerializeField] public PlayerSettings playerhealthsettings;
 
         void Start()
         {
             // Ensure the healthText and playerDamageable are properly assigned in the Unity Editor
-            if (healthText == null || playerDamageable == null)
+            if (healthText == null || playerhealthsettings == null)
             {
                 Debug.LogError("HealthDisplay: Assign the healthText and playerDamageable in the Unity Editor!");
                 return;
@@ -23,7 +23,7 @@ namespace Damageables
             DamageSystem.DamageEvent.OnDamageTaken += UpdateHealthText;
 
             // Set the initial health text
-            UpdateHealthText(playerDamageable.GetCurrentHealth());
+            UpdateHealthText(playerhealthsettings.GetCurrentHealth());
         }
 
         void UpdateHealthText(float currentHealth)

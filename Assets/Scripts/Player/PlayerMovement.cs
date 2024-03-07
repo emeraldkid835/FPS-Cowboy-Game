@@ -49,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
     // Sprinting control variables
     public bool sprint;
 
-    public PlayerSettings playerhealthsettings;
+    
     // Update is called once per frame
     private void Update()
     {

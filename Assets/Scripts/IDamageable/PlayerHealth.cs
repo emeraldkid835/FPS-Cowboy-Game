@@ -6,7 +6,7 @@ namespace Damageables
 {
 
 
-    public class PlayerHealth : MonoBehaviour, DamageSystem.IDamageable
+    public class PlayerHealth : MonoBehaviour
     {
         [Header("Settings")]
         [SerializeField] PlayerSettings playerSettings; // Reference to PlayerSettings Scriptable Object
