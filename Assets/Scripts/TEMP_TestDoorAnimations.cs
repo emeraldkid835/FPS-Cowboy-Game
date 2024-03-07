@@ -15,16 +15,16 @@ public class TEMP_TestDoorAnimations : MonoBehaviour
         curTime = 0f;
         openable = false;
         myCol = GetComponent<CapsuleCollider>();
-        myCol.isTrigger = true;
+       myCol.isTrigger = true;
         myAnims = GetComponent<Animator>();
         myAnims.SetBool("Open Door", false);
         myAnims.SetBool("Close Door", false);
     }
-
+    
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("I was touched");
-        if(other.tag == "Player" && myAnims.GetBool("Open Door") == false)
+        if(other.gameObject.tag == "Player" && myAnims.GetBool("Open Door") == false)
         {
             openable = true;
         }
@@ -32,7 +32,7 @@ public class TEMP_TestDoorAnimations : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         Debug.Log("I am alone :(");
-        if(other.tag == "Player")
+        if(other.gameObject.tag == "Player")
         {
             openable = false;
         }
