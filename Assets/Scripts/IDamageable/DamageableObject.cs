@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerHealth : MonoBehaviour, DamageSystem.IDamageable
+public class DamageableObject : MonoBehaviour, DamageSystem.IDamageable
 {
     [Header("Settings")]
-    [SerializeField] PlayerSettings playerSettings; // Reference to PlayerSettings Scriptable Object
+    [SerializeField] DamageableObjectSettings settings;
 
     private float currentHealth;
 
     void Start()
     {
-        currentHealth = playerSettings.initialHealth;
+        currentHealth = settings.initialHealth;
         DamageSystem.DamageEvent.OnDamageTaken += TakeDamage;
     }
 
@@ -21,8 +21,8 @@ public class PlayerHealth : MonoBehaviour, DamageSystem.IDamageable
         currentHealth -= damage;
 
         // Visual and audio feedback using Scriptable Object settings
-        PlayDamageSound(playerSettings.damageSound);
-        SpawnDamageParticles(playerSettings.damageParticlesPrefab);
+        PlayDamageSound(settings.damageSound);
+        SpawnDamageParticles(settings.damageParticlesPrefab);
 
         if (currentHealth <= 0)
         {
@@ -50,10 +50,10 @@ public class PlayerHealth : MonoBehaviour, DamageSystem.IDamageable
         }
     }
 
-    // Method to handle player death
+    // Method to handle object destruction
     private void Die()
     {
-        // Implement player death logic here
+        // Implement object death logic here
         // Example: Destroy(gameObject);
     }
 

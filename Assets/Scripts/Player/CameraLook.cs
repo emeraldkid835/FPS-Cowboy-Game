@@ -34,6 +34,7 @@ public class CameraLook : MonoBehaviour
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
 
         originalCameraPosition = playerCamera.localPosition;
         GameObject pausedPanel = GameObject.Find("Canvas/PausedPanel");

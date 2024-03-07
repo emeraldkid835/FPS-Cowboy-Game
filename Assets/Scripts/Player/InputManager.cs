@@ -7,13 +7,13 @@ public class InputManager : MonoBehaviour
     [SerializeField] PlayerMovement playerMovement;
     [SerializeField] CameraLook mouseLook;
     [SerializeField] PlayerPause playerPause;
-    //[SerializeField] Gun gun;
+    [SerializeField] Gun gun;
 
     public InputMaster inputMaster;
     InputMaster.MovementActions movement;
     InputMaster.CameraLookActions cameraLook;
     InputMaster.PauseOptionsActions pause;
-    //InputMaster.WeaponsActions weapon;
+    InputMaster.WeaponsActions weapon;
 
     Vector2 horizontalInput;
     Vector2 mouseInput;
@@ -23,6 +23,7 @@ public class InputManager : MonoBehaviour
         movement = inputMaster.Movement;
         cameraLook = inputMaster.CameraLook;
         pause = inputMaster.PauseOptions;
+        weapon = inputMaster.Weapons;
 
         movement.HorizontalMovement.performed += ctx => horizontalInput = ctx.ReadValue<Vector2>();
         movement.Sprint.performed += _ => playerMovement.OnSprintPressed();
@@ -32,9 +33,12 @@ public class InputManager : MonoBehaviour
         cameraLook.MouseX.performed += ctx => mouseInput.x = ctx.ReadValue<float>();
         cameraLook.MouseY.performed += ctx => mouseInput.y = ctx.ReadValue<float>();
 
+        weapon.Shoot.performed += _ => gun.Shoot();
         pause.Pause.performed += _ => playerPause.OnPausePressed();
 
-       // weapon.Shoot.performed += _ => gun.Shoot();
+
+
+       
     }
 
     private void Update()
