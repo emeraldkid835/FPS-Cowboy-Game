@@ -1976,15 +1976,24 @@ MonoBehaviour:
   controller: {fileID: 3873793647960025706}
   speed: 11
   sprintSpeed: 17
+  sprintAcceleration: 5
+  slopeForce: 5
+  slopeRayLength: 0.5
+  wallRunForce: 5
+  wallRunHeightOffset: 2
+  capsuleHeight: 2
+  capsuleRadius: 0.5
   jumpHeight: 3.5
   gravity: -30
   groundedRadius: 0.1
+  jumpGroundedRadius: 0.4
   groundMask:
     serializedVersion: 2
     m_Bits: 64
   isGrounded: 0
   jumpAmount: 2
   currentJump: 0
+  sprint: 0
 --- !u!114 &3873793647960025704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1999,6 +2008,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerMovement: {fileID: 3873793647960025705}
   mouseLook: {fileID: 3873793647960025716}
+  playerPause: {fileID: 0}
 --- !u!114 &3873793647960025716
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2011,10 +2021,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ad9ae7aa4db97e4099ca29fc73f0791, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerMovement: {fileID: 0}
   sensitivityX: 36
   sensitivityY: 0.13
   playerCamera: {fileID: 3873793648206860346}
   xClamp: 85
+  headBobFrequency: 2
+  headBobAmplitude: 0.1
+  lateralBobFrequency: 5
+  lateralBobAmplitude: 0.05
+  sensitivityXSlider: {fileID: 0}
+  sensitivityYSlider: {fileID: 0}
 --- !u!1 &3873793648206860345
 GameObject:
   m_ObjectHideFlags: 0
