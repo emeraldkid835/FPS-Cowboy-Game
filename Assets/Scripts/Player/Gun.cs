@@ -2,65 +2,69 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gun : MonoBehaviour
-{
-    Transform cam;
-    [SerializeField] Transform muzzleflashLocation;
-    private AudioSource audioSource;
-
-    [Header("Visual Effects")]
-    public GameObject muzzleFlash;
-
-    [Header("Sound Effects")]
-    public AudioClip shootAudio;
 
 
-    private GameObject MuzzleFlashInstance;
 
-    [SerializeField] float range = 100f;
-    [SerializeField] float damage = 50f;
-
-    private void Awake()
+    public class Gun : MonoBehaviour
     {
-        cam = Camera.main.transform;
-    }
+        Transform cam;
+        [SerializeField] Transform muzzleflashLocation;
+        private AudioSource audioSource;
 
-    private void Start()
-    {
-        audioSource = GetComponent<AudioSource>();
-        if (audioSource == null)
+        [Header("Visual Effects")]
+        public GameObject muzzleFlash;
+
+        [Header("Sound Effects")]
+        public AudioClip shootAudio;
+
+
+        private GameObject MuzzleFlashInstance;
+
+        [SerializeField] float range = 100f;
+        [SerializeField] float damage = 50f;
+
+        private void Awake()
         {
-            audioSource = gameObject.AddComponent<AudioSource>();
+            cam = Camera.main.transform;
         }
-    }
 
-    public void Shoot()
-    {
-        MuzzleFlashInstance = Instantiate(muzzleFlash, muzzleflashLocation.position, Quaternion.identity);
-        PlayAudio();
-        RaycastHit hit;
-        if (Physics.Raycast(cam.position, cam.forward, out hit, range))
+        private void Start()
         {
-            print(hit.collider.tag);
-
-            if (hit.collider.CompareTag("ExplodingBarrel"))
+            audioSource = GetComponent<AudioSource>();
+            if (audioSource == null)
             {
-                DamageSystem.DamageEvent.TriggerDamage(damage);
+                audioSource = gameObject.AddComponent<AudioSource>();
             }
         }
-        Destroy(MuzzleFlashInstance, 2f);
+
+        public void Shoot()
+        {
+            MuzzleFlashInstance = Instantiate(muzzleFlash, muzzleflashLocation.position, Quaternion.identity);
+            PlayAudio();
+            RaycastHit hit;
+            if (Physics.Raycast(cam.position, cam.forward, out hit, range))
+            {
+                print(hit.collider.tag);
+
+                if (hit.collider.CompareTag("ExplodingBarrel"))
+                {
+                    DamageSystem.DamageEvent.TriggerDamage(damage);
+                }
+            }
+            Destroy(MuzzleFlashInstance, 2f);
+        }
+
+        void PlayAudio()
+        {
+            if (shootAudio != null)
+            {
+                audioSource.clip = shootAudio;
+                audioSource.Play();
+            }
+            else
+            {
+                Debug.Log("AudioClip not assigned!");
+            }
+        }
     }
 
-    void PlayAudio()
-    {
-        if (shootAudio != null)
-        {
-            audioSource.clip = shootAudio;
-            audioSource.Play();
-        }
-        else
-        {
-            Debug.Log("AudioClip not assigned!");
-        }
-    }
-}

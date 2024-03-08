@@ -11,7 +11,7 @@ namespace Damageables
         [Header("Settings")]
         [SerializeField] DamageableObjectSettings settings;
 
-        [SerializeField] private float currentHealth;
+        [SerializeField] public float currentHealth;
 
         private bool hasDied = false;
 
@@ -20,8 +20,15 @@ namespace Damageables
         private bool hasPlayedDeathParticles = false;
         private bool hasPlayedDamageParticles = false;
 
+        private AudioSource audioSource;
+
         void Start()
         {
+            audioSource = GetComponent<AudioSource>();
+            if (audioSource == null)
+            {
+                audioSource = gameObject.AddComponent<AudioSource>();
+            }
             currentHealth = settings.initialHealth;
             DamageSystem.DamageEvent.OnDamageTaken += TakeDamage;
         }
@@ -29,6 +36,7 @@ namespace Damageables
         // IDamageable interface method
         public void TakeDamage(float damage)
         {
+            Debug.Log($"{gameObject.name} took {damage} damage. Current Health: {currentHealth}");
             currentHealth -= damage;
 
             // Visual and audio feedback using Scriptable Object settings
@@ -37,7 +45,9 @@ namespace Damageables
 
             if (currentHealth <= 0)
             {
+                PlayDamageSound(settings.damageSound);
                 Die();
+                
             }
         }
 
@@ -51,6 +61,12 @@ namespace Damageables
         {
             if (sound != null)
             {
+                audioSource.enabled = true;
+                
+                
+                audioSource.clip = settings.damageSound;
+                audioSource.Play();
+                
                 // Play the sound
                 // Example: AudioSource.PlayOneShot(sound);
             }
@@ -75,7 +91,7 @@ namespace Damageables
             if (!hasDied)
             {
                 hasDied = true;
-
+                
                 // Check if death particles have not been played before
                 if (!hasPlayedDeathParticles && settings.DestroyParticlesPrefab != null)
                 {

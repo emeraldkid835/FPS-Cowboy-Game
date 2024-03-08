@@ -6,10 +6,14 @@ using UnityEngine;
 public class PlayerSettings : ScriptableObject
 {
     [Header("Health Settings")]
-    public float maxHealth = 100f;
-    public float initialHealth = 100f;
+    public float PlayermaxHealth = 150f;
+    public float PlayerinitialHealth = 100f;
+    
 
     [Header("Visual and Audio Feedback")]
-    public AudioClip damageSound;
+    public AudioClip takebulletdamageSound;
+    public AudioClip takeFireDamageSound;
     public GameObject damageParticlesPrefab;
+
+    
 }

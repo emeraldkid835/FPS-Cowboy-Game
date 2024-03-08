@@ -4,43 +4,62 @@ using UnityEngine;
 
 namespace Damageables
 {
-
-
-    public class PlayerHealth : MonoBehaviour
+    public class PlayerHealth : MonoBehaviour, DamageSystem.IDamageable
     {
         [Header("Settings")]
         [SerializeField] PlayerSettings playerSettings; // Reference to PlayerSettings Scriptable Object
 
-        private float currentHealth;
+        [SerializeField] public float Playercurrenthealth;
+
+        public bool playerHurtSound = false;
+        private AudioSource audioSource;
+        private AudioClip TakeDamageSoundClip;
 
         void Start()
         {
-            currentHealth = playerSettings.initialHealth;
-            DamageSystem.DamageEvent.OnDamageTaken += TakeDamage;
+            audioSource = GetComponent<AudioSource>();
+            if (audioSource == null)
+            {
+                audioSource = gameObject.AddComponent<AudioSource>();
+            }
+            Playercurrenthealth = playerSettings.PlayerinitialHealth;
+            DamageSystem.DamageEvent.OnPlayerDamaged += TakeDamage;
         }
 
         // IDamageable interface method
         public void TakeDamage(float damage)
         {
-            currentHealth -= damage;
+            Debug.Log("Player is taking damage from the PlayerHealth Script");
+            playerHurtSound = true;
+            Playercurrenthealth -= damage;
 
             // Visual and audio feedback using Scriptable Object settings
-            PlayDamageSound(playerSettings.damageSound);
+            PlayDamageSound(playerSettings.takeFireDamageSound);
             SpawnDamageParticles(playerSettings.damageParticlesPrefab);
 
-            if (currentHealth <= 0)
+            if (Playercurrenthealth <= 0)
             {
+                Debug.Log("Player Is Dead");
                 Die();
             }
+        }
+
+        public float GetPlayerCurrentHealth()
+        {
+            return Playercurrenthealth;
         }
 
         // Method to play damage sound
         private void PlayDamageSound(AudioClip sound)
         {
-            if (sound != null)
+            if (sound != null )
             {
-                // Play the sound
-                // Example: AudioSource.PlayOneShot(sound);
+                if (playerHurtSound == true)
+                {
+                    audioSource.clip = playerSettings.takeFireDamageSound;
+                    audioSource.Play();
+                }
+                
             }
         }
 

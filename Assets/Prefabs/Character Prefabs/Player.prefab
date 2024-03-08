@@ -527,51 +527,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &1342797174851047457
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5349937929267868098}
-  - component: {fileID: 4925747453099349516}
-  m_Layer: 0
-  m_Name: PlayerHealth
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5349937929267868098
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1342797174851047457}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4564468290162487454}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4925747453099349516
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1342797174851047457}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8a413dce647ada45bef4796c85a4c7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerSettings: {fileID: 11400000, guid: 4b12325e1bb837843a46f5bbaa4dce4f, type: 2}
 --- !u!1 &1350611302426079983
 GameObject:
   m_ObjectHideFlags: 0
@@ -2015,7 +1970,7 @@ Transform:
   m_Children:
   - {fileID: 3969130246583967397}
   m_Father: {fileID: 4564468290162487454}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &4564468288612530234
 Camera:
@@ -2099,7 +2054,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4564468290162487454}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4564468288856746820
 MeshFilter:
@@ -2166,6 +2121,7 @@ GameObject:
   - component: {fileID: 4564468290162487395}
   - component: {fileID: 4564468290162487399}
   - component: {fileID: -266710250741583203}
+  - component: {fileID: 1695764688345893561}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2185,7 +2141,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5349937929267868098}
   - {fileID: 4564468288856746822}
   - {fileID: 4564468288612530236}
   m_Father: {fileID: 0}
@@ -2242,7 +2197,6 @@ MonoBehaviour:
   jumpAmount: 2
   currentJump: 0
   sprint: 0
-  playerhealthsettings: {fileID: 0}
 --- !u!114 &4564468290162487392
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2311,6 +2265,20 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1695764688345893561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4564468290162487411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8a413dce647ada45bef4796c85a4c7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageablePlayer: {fileID: 0}
+  playerSettings: {fileID: 11400000, guid: 3853134d5bbaf8545bd60f4c53f2fb64, type: 2}
 --- !u!1 &4568129897995260687
 GameObject:
   m_ObjectHideFlags: 0
