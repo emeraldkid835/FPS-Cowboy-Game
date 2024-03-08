@@ -25,36 +25,46 @@ using UnityEngine;
 
         private void Awake()
         {
-            cam = Camera.main.transform;
+            cam = Camera.main.transform; // Get the main camera transform for raycasting
         }
 
         private void Start()
         {
-            audioSource = GetComponent<AudioSource>();
+            audioSource = GetComponent<AudioSource>(); // Add an audioSource if it doesn't exist
             if (audioSource == null)
             {
                 audioSource = gameObject.AddComponent<AudioSource>();
             }
         }
 
-        public void Shoot()
+        public void Shoot() // method that is called in my InputMaster script that handles Unity's new Input method
         {
-            MuzzleFlashInstance = Instantiate(muzzleFlash, muzzleflashLocation.position, Quaternion.identity);
+            MuzzleFlashInstance = Instantiate(muzzleFlash, muzzleflashLocation.position, Quaternion.identity); // Instantiate and destroy the muzzle flash effect clone
             PlayAudio();
-            RaycastHit hit;
+            Destroy(MuzzleFlashInstance, 2f);
+            RaycastHit hit;  // Perform a raycast to detect objects within range of the gun
             if (Physics.Raycast(cam.position, cam.forward, out hit, range))
             {
-                print(hit.collider.tag);
+                Transform objectHit = hit.transform;
 
-                if (hit.collider.CompareTag("ExplodingBarrel"))
+                MonoBehaviour[] mono;
+                mono = objectHit.gameObject.GetComponents<MonoBehaviour>(); // Check if the object containing a monobehavior that was hit Implements the IDamage Interface
+                foreach (MonoBehaviour item in mono)
                 {
-                    DamageSystem.DamageEvent.TriggerDamage(damage);
+                    if(item is IDamage)
+                    {
+                        IDamage temp = item as IDamage; // Setting IDamage items as temp
+                        Debug.Log($"{gameObject.name} took {damage} damage.");
+                        temp.TakeDamage(damage);  // Calls the IDamage interface Method
+                        return;
+                    }
                 }
+                
             }
-            Destroy(MuzzleFlashInstance, 2f);
+            
         }
 
-        void PlayAudio()
+        void PlayAudio() // Method for playing the shoot audio
         {
             if (shootAudio != null)
             {

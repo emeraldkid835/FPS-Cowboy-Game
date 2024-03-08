@@ -2120,8 +2120,8 @@ GameObject:
   - component: {fileID: 4564468290162487392}
   - component: {fileID: 4564468290162487395}
   - component: {fileID: 4564468290162487399}
+  - component: {fileID: 774748781383639871}
   - component: {fileID: -266710250741583203}
-  - component: {fileID: 1695764688345893561}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2251,6 +2251,23 @@ MonoBehaviour:
   isPaused: 0
   pausePanel: {fileID: 0}
   controlsPanel: {fileID: 0}
+--- !u!114 &774748781383639871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4564468290162487411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8a413dce647ada45bef4796c85a4c7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerstartHealth: 100
+  Playercurrenthealth: 0
+  playerHurtSound: 0
+  audioSource: {fileID: 0}
+  TakeDamageSoundClip: {fileID: 8300000, guid: 7d156b8a5b340cd46bcf0a76557dd2dd, type: 3}
 --- !u!136 &-266710250741583203
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2265,20 +2282,6 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1695764688345893561
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4564468290162487411}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8a413dce647ada45bef4796c85a4c7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageablePlayer: {fileID: 0}
-  playerSettings: {fileID: 11400000, guid: 3853134d5bbaf8545bd60f4c53f2fb64, type: 2}
 --- !u!1 &4568129897995260687
 GameObject:
   m_ObjectHideFlags: 0
