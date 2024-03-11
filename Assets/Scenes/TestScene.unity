@@ -21945,6 +21945,10 @@ PrefabInstance:
       propertyPath: lateralBobFrequency
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 4564468290162487394, guid: 763ef2bec51e71b49ab285e5e91fbf9e, type: 3}
+      propertyPath: groundMask.m_Bits
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 4564468290162487399, guid: 763ef2bec51e71b49ab285e5e91fbf9e, type: 3}
       propertyPath: pausePanel
       value: 
