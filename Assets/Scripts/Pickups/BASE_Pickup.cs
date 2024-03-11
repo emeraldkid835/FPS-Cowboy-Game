@@ -12,7 +12,7 @@ public abstract class BASE_Pickup : MonoBehaviour
     private Animation myAnim;
     [SerializeField] private AudioSource pickupSFX;
     [SerializeField] private AudioSource ambientSFX;
-    // Start is called before the first frame update
+  
     protected void Start()
     {
         myCol = GetComponent<Collider>();
@@ -26,7 +26,7 @@ public abstract class BASE_Pickup : MonoBehaviour
     // Update is called once per frame
     protected void Update()
     {
-        if (myAnim.isPlaying == false)
+        if (myAnim.isPlaying == false) //basic loop logic for the animation and ambientSFX (assuming they exist, of course)
         {
             myAnim.Play();
         }
@@ -36,6 +36,8 @@ public abstract class BASE_Pickup : MonoBehaviour
         }
     }
 
+    //should change sound effect behaviors if we get an audio manager implemented.
+
     protected void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Player")
@@ -43,10 +45,10 @@ public abstract class BASE_Pickup : MonoBehaviour
             pickupSFX.Play();
             ambientSFX.Stop();
             PickupBehavior();
-            this.gameObject.GetComponent<MeshRenderer>().enabled = false;
+            this.gameObject.GetComponent<MeshRenderer>().enabled = false; //hide the gameobject while still letting logic run, if necessary
             myCol.enabled = false;
         }
     }
 
-    protected abstract void PickupBehavior();
+    protected abstract void PickupBehavior(); //this the mf you override to make the pickups do things
 }
