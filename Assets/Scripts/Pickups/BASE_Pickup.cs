@@ -20,17 +20,17 @@ public abstract class BASE_Pickup : MonoBehaviour
         pickupSFX = GetComponent<AudioSource>();
 
         myCol.isTrigger = true;
-        myAnim.Play();
+        myAnim?.Play();
     }
 
     // Update is called once per frame
     protected void Update()
     {
-        if (myAnim.isPlaying == false) //basic loop logic for the animation and ambientSFX (assuming they exist, of course)
+        if (myAnim != null && myAnim.isPlaying == false) //basic loop logic for the animation and ambientSFX (assuming they exist, of course)
         {
             myAnim.Play();
         }
-        if (ambientSFX.isPlaying == false)
+        if (ambientSFX != null && ambientSFX.isPlaying == false)
         {
             ambientSFX.Play();
         }
@@ -42,8 +42,14 @@ public abstract class BASE_Pickup : MonoBehaviour
     {
         if(other.tag == "Player")
         {
-            pickupSFX.Play();
-            ambientSFX.Stop();
+            if (pickupSFX != null)
+            {
+                pickupSFX.Play();
+            }
+            if (ambientSFX != null)
+            {
+                ambientSFX.Stop();
+            }
             PickupBehavior();
             this.gameObject.GetComponent<MeshRenderer>().enabled = false; //hide the gameobject while still letting logic run, if necessary
             myCol.enabled = false;
