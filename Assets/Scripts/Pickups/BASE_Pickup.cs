@@ -51,8 +51,18 @@ public abstract class BASE_Pickup : MonoBehaviour
                 ambientSFX.Stop();
             }
             PickupBehavior();
-            this.gameObject.GetComponent<MeshRenderer>().enabled = false; //hide the gameobject while still letting logic run, if necessary
+            if (this.gameObject.GetComponent<MeshRenderer>() != null) {
+                this.gameObject.GetComponent<MeshRenderer>().enabled = false; 
+            }//hide the gameobject while still letting logic run, if necessary
             myCol.enabled = false;
+
+            if(this.gameObject.transform.childCount > 0) //kill children?
+            {
+                foreach(Transform gum in this.gameObject.transform)
+                {
+                    gum.gameObject.SetActive(false);
+                }
+            }
         }
     }
 
