@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class WeaponPickupController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public WeaponPickup weaponpickup;
+    public Rigidbody rb;
+    public BoxCollider coll;
+    public Transform player, gunContainer, fpsCam;
 
-    // Update is called once per frame
-    void Update()
+    public float pickUpRange;
+    public float dropForwardForce, dropUpwardForce;
+
+    public bool equipped;
+    public static bool slotFull;
+
+    private void Update()
     {
-        
+        // Check if the player is in range
+        Vector3 distanceToPlayer = player.position - transform.position;
+
     }
 }
