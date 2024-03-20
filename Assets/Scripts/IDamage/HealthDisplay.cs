@@ -4,8 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-namespace Damageables
-{
+
     public class HealthDisplay : MonoBehaviour // HealthDisplay script is used to update the InGame UI by observing the PlayerHealth Script and returning those values to appear on the UI
     {
         [SerializeField] private TextMeshProUGUI healthText;
@@ -69,4 +68,4 @@ namespace Damageables
 
 
     }
-}
+

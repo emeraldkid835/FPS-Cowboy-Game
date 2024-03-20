@@ -7,7 +7,7 @@ public class InputManager : MonoBehaviour
     [SerializeField] PlayerMovement playerMovement;
     [SerializeField] CameraLook mouseLook;
     [SerializeField] PlayerPause playerPause;
-    [SerializeField] Gun gun;
+    [SerializeField] WeaponPickup weaponpickup;
 
     public InputMaster inputMaster;
     InputMaster.MovementActions movement;
@@ -33,7 +33,8 @@ public class InputManager : MonoBehaviour
         cameraLook.MouseX.performed += ctx => mouseInput.x = ctx.ReadValue<float>();
         cameraLook.MouseY.performed += ctx => mouseInput.y = ctx.ReadValue<float>();
 
-        weapon.Shoot.performed += _ => gun.Shoot();
+        weapon.Shoot.performed += _ => weaponpickup.Shoot();
+        weapon.Reload.performed += _ => weaponpickup.Reload();
         pause.Pause.performed += _ => playerPause.OnPausePressed();
 
 

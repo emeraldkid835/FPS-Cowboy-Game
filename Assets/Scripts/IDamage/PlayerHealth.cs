@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Damageables
-{
+
     public class PlayerHealth : MonoBehaviour, IDamage // Declaring that it is an IDamage, which needs to incorporate the method from the IDamage interface
     {
         [Header("Settings")]
@@ -71,8 +70,13 @@ namespace Damageables
             return PlayerstartHealth;
         }
 
-        // Method to play damage sound
-        private void PlayDamageSound(AudioClip sound)
+        public void RestoreHealth(float amount)
+        {
+            Playercurrenthealth = Mathf.Min(Playercurrenthealth + amount, PlayerstartHealth);
+        }
+
+    // Method to play damage sound
+    private void PlayDamageSound(AudioClip sound)
         {
             if (sound != null )
             {
@@ -106,4 +110,4 @@ namespace Damageables
 
         
     }
-}
+

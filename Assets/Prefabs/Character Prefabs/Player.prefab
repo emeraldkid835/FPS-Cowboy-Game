@@ -107,7 +107,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 94143719815752886}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -161,7 +161,7 @@ Transform:
   - {fileID: 6618764358734795373}
   - {fileID: 4994538644207733874}
   - {fileID: 7745025628709501319}
-  m_Father: {fileID: 4564468288612530236}
+  m_Father: {fileID: 2832578226079447503}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &393349389176180075
@@ -1938,6 +1938,38 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &4330888423039202062
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2832578226079447503}
+  m_Layer: 0
+  m_Name: GunContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2832578226079447503
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4330888423039202062}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -2.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3969130246583967397}
+  m_Father: {fileID: 4564468288612530236}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4564468288612530239
 GameObject:
   m_ObjectHideFlags: 0
@@ -1968,7 +2000,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3969130246583967397}
+  - {fileID: 2832578226079447503}
   m_Father: {fileID: 4564468290162487454}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2212,7 +2244,7 @@ MonoBehaviour:
   playerMovement: {fileID: 4564468290162487394}
   mouseLook: {fileID: 4564468290162487395}
   playerPause: {fileID: 4564468290162487399}
-  gun: {fileID: 0}
+  weaponpickup: {fileID: 0}
 --- !u!114 &4564468290162487395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2265,9 +2297,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerstartHealth: 100
   Playercurrenthealth: 0
-  playerHurtSound: 0
   audioSource: {fileID: 0}
   TakeDamageSoundClip: {fileID: 8300000, guid: 7d156b8a5b340cd46bcf0a76557dd2dd, type: 3}
+  fireHazard: {fileID: 0}
+  isPlayerDead: 0
 --- !u!136 &-266710250741583203
 CapsuleCollider:
   m_ObjectHideFlags: 0
