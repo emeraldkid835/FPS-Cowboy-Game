@@ -11,5 +11,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TEMP_OW.unity
     guid: 09f7c520cdf5abb438520b0a82836c72
+  - enabled: 1
+    path: Assets/Scenes/Ranch_Interior.unity
+    guid: 6a546c90d8fb6864c8c58087441fc22b
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: fcf04d545e2e45c4b9dee0e3c0a00b06, type: 2}
