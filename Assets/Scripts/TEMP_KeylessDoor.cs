@@ -12,6 +12,7 @@ public class TEMP_KeylessDoor : MonoBehaviour
     private float curTime;
     private Animation myAnim;
     private bool isOpen;
+    private bool inTrigger;
     // Start is called before the first frame update
     void Start()
     {
@@ -37,12 +38,13 @@ public class TEMP_KeylessDoor : MonoBehaviour
                 canOpen = false;
                 isOpen = true;
             }
-            if (isOpen == true && curTime < timeToclose)
+            if (isOpen == true && curTime < timeToclose && inTrigger == false)
             {
                 curTime += Time.deltaTime;
+                canOpen = false;
                 Debug.Log("Door is open, time spent open: " + curTime);
             }
-            else if (isOpen == true && curTime >= timeToclose)
+            else if (isOpen == true && curTime >= timeToclose && inTrigger == false)
             {
                 Debug.Log("Should be rewinding!");
                 curTime = 0f;
@@ -59,10 +61,16 @@ public class TEMP_KeylessDoor : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Player" && isOpen == false)
+        if(other.tag == "Player")
         {
-            canOpen = true;
+            if (isOpen == false)
+            {
+                canOpen = true;
+            }
+            inTrigger = true;
+            curTime = 0f;
         }
+        
     }
 
     private void OnTriggerExit(Collider other)
@@ -70,6 +78,7 @@ public class TEMP_KeylessDoor : MonoBehaviour
         if(other.tag == "Player")
         {
             canOpen = false;
+            inTrigger = false;
         }
     }
 }
