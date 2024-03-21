@@ -16,6 +16,7 @@ public class TEMP_KeylessDoor : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //get everything set up.
         myAnim = this.GetComponent<Animation>();
         mycol = this.GetComponent<Collider>();
         mycol.isTrigger = true;
@@ -27,9 +28,9 @@ public class TEMP_KeylessDoor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (myAnim != null)
+        if (myAnim != null)//check if there are any animations at all, do nothing if not
         {
-            if (canOpen == true && Input.GetKeyDown(KeyCode.E))
+            if (canOpen == true && Input.GetKeyDown(KeyCode.E)) //open the door
             {
                 myAnim[myAnim.clip.name].time = 0f;
                 myAnim[myAnim.clip.name].speed = 1f;
@@ -38,13 +39,13 @@ public class TEMP_KeylessDoor : MonoBehaviour
                 canOpen = false;
                 isOpen = true;
             }
-            if (isOpen == true && curTime < timeToclose && inTrigger == false)
+            if (isOpen == true && curTime < timeToclose && inTrigger == false) //timer logic
             {
                 curTime += Time.deltaTime;
                 canOpen = false;
                 Debug.Log("Door is open, time spent open: " + curTime);
             }
-            else if (isOpen == true && curTime >= timeToclose && inTrigger == false)
+            else if (isOpen == true && curTime >= timeToclose && inTrigger == false) //once timer is met, close the door
             {
                 Debug.Log("Should be rewinding!");
                 curTime = 0f;
@@ -54,7 +55,7 @@ public class TEMP_KeylessDoor : MonoBehaviour
                
                
                 isOpen = false;
-                canOpen = false;
+                canOpen = false; //canOpen should only be turned true by trigger enter. may be a bit awkward.
             }
         }
     }
@@ -67,7 +68,7 @@ public class TEMP_KeylessDoor : MonoBehaviour
             {
                 canOpen = true;
             }
-            inTrigger = true;
+            inTrigger = true; //important to make sure door doesn't close on the player (unintentionally)
             curTime = 0f;
         }
         
