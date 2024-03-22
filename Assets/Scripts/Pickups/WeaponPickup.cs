@@ -44,11 +44,17 @@ public class WeaponPickup : MonoBehaviour
     private int currentBullets;
     private int currentStoredAmmo;
     private bool isReloading = false;
+    
 
     public GunType gunType; // Enum representing the type of gun
 
     private float nextTimeToFire = 0f;
 
+    private AmmoDisplay ammoDisplay;
+
+    public Rigidbody rb;
+    public Collider coll;
+    private Transform gunContainer;
     
 
     void Awake()
@@ -67,6 +73,17 @@ public class WeaponPickup : MonoBehaviour
         SetGunStats(gunType);
         currentBullets = currentGunStats.maxBullets;
         currentStoredAmmo = currentGunStats.maxStoredBullets;
+
+        ammoDisplay = FindObjectOfType<AmmoDisplay>();
+        if(ammoDisplay == null)
+        {
+            Debug.LogError("ammoDisplay cannot be found in scene!");
+        }
+
+        rb = GetComponent<Rigidbody>();
+        coll = GetComponent<Collider>();
+
+        gunContainer = transform.parent;
     }
 
     void SetGunStats(GunType type)
@@ -87,6 +104,7 @@ public class WeaponPickup : MonoBehaviour
 
     public void Shoot()
     {
+      
         if (isReloading)
         {
             Debug.Log("Reloading... Can't shoot!");
@@ -139,6 +157,8 @@ public class WeaponPickup : MonoBehaviour
 
             yield return new WaitForSeconds(currentGunStats.reloadTime);
 
+            Debug.Log("Done Reloading");
+
             int bulletsToReload = Mathf.Min(currentGunStats.maxBullets - currentBullets, currentStoredAmmo);
             currentBullets += bulletsToReload;
             currentStoredAmmo -= bulletsToReload;
@@ -153,9 +173,35 @@ public class WeaponPickup : MonoBehaviour
         StartCoroutine(Reloadtime());
     }
 
-    public void DropWeapon()
+    public void Drop()
     {
+        //equipped = false;
+        // Enable Rigidbody and Collider components
+        rb.isKinematic = false;
+        coll.enabled = true;
 
+        // Disable shooting and reloading functionality
+        enabled = false;
+
+        // Detach from parent (gun container)
+        transform.parent = null;
+    }
+    
+    
+
+    public int GetCurrentAmmo()
+    {
+        return currentBullets;
+    }
+
+    public int GetCurrentStoredAmmo()
+    {
+        return currentStoredAmmo;
+    }
+
+    public void RestoreAmmo(int amount)
+    {
+        currentBullets = Mathf.Min(currentBullets + amount, currentGunStats.maxBullets);
     }
 
     void PlayAudio()

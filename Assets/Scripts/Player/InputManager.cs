@@ -7,18 +7,24 @@ public class InputManager : MonoBehaviour
     [SerializeField] PlayerMovement playerMovement;
     [SerializeField] CameraLook mouseLook;
     [SerializeField] PlayerPause playerPause;
-    [SerializeField] WeaponPickup weaponpickup;
+    //[SerializeField] WeaponPickup weaponpickup;
+    [SerializeField] Player player;
+    [SerializeField] GunClass equippedGun;
+
+    public static InputManager instance;
 
     public InputMaster inputMaster;
     InputMaster.MovementActions movement;
     InputMaster.CameraLookActions cameraLook;
     InputMaster.PauseOptionsActions pause;
-    InputMaster.WeaponsActions weapon;
+    public InputMaster.WeaponsActions weapon;
 
     Vector2 horizontalInput;
     Vector2 mouseInput;
-    private void Awake()
+    public void Awake()
     {
+        instance = this; // singleton Pattern
+
         inputMaster = new InputMaster();
         movement = inputMaster.Movement;
         cameraLook = inputMaster.CameraLook;
@@ -33,14 +39,16 @@ public class InputManager : MonoBehaviour
         cameraLook.MouseX.performed += ctx => mouseInput.x = ctx.ReadValue<float>();
         cameraLook.MouseY.performed += ctx => mouseInput.y = ctx.ReadValue<float>();
 
-        weapon.Shoot.performed += _ => weaponpickup.Shoot();
-        weapon.Reload.performed += _ => weaponpickup.Reload();
+        weapon.Shoot.performed += _ => equippedGun.Shoot();
+        weapon.Reload.performed += _ => equippedGun.Reload();
         pause.Pause.performed += _ => playerPause.OnPausePressed();
-
+        weapon.DropWeapon.performed += _ => player.DropGun();
+        weapon.PickupWeapon.performed += _ => player.EquipGun(equippedGun);
 
 
        
     }
+    
 
     private void Update()
     {
