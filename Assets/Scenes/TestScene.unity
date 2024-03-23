@@ -18673,8 +18673,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 618d2985da1060c4d96088c39ebbf2ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  equippedGun: {fileID: 0}
-  gunHold: {fileID: 0}
+  equippedGun: {fileID: 7989600879828593023}
+  gunHold: {fileID: 1336773247627221899}
 --- !u!114 &7989600879828593023 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3193411761189387204, guid: 346bc76a4e26300458d8a2bec81ffcc4, type: 3}
