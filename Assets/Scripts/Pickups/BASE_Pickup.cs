@@ -17,7 +17,7 @@ public abstract class BASE_Pickup : MonoBehaviour
     {
         myCol = GetComponent<Collider>();
         myAnim = GetComponent<Animation>();
-        pickupSFX = GetComponent<AudioSource>();
+        ambientSFX = GetComponent<AudioSource>();
 
         myCol.isTrigger = true;
         myAnim?.Play();
@@ -30,7 +30,7 @@ public abstract class BASE_Pickup : MonoBehaviour
         {
             myAnim.Play();
         }
-        if (ambientSFX != null && ambientSFX.isPlaying == false)
+        if (ambientSFX != null && ambientSFX.isPlaying == false && myCol.enabled == true)
         {
             ambientSFX.Play();
         }

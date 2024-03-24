@@ -13,7 +13,7 @@ public class TEMP_KeylessDoor : MonoBehaviour
     private Animation myAnim;
     private bool isOpen;
     private bool inTrigger;
-    // Start is called before the first frame update
+   
     void Start()
     {
         //get everything set up.
@@ -25,7 +25,7 @@ public class TEMP_KeylessDoor : MonoBehaviour
         curTime = 0f;
     }
 
-    // Update is called once per frame
+   
     void Update()
     {
         if (myAnim != null)//check if there are any animations at all, do nothing if not
