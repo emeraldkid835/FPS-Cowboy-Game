@@ -14,5 +14,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Ranch_Interior.unity
     guid: 6a546c90d8fb6864c8c58087441fc22b
+  - enabled: 1
+    path: Assets/Scenes/Inside Factory.unity
+    guid: aca20031c3ad8e14d8b55747f440b711
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: fcf04d545e2e45c4b9dee0e3c0a00b06, type: 2}
