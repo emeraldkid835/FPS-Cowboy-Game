@@ -24,8 +24,9 @@ public class FireballShooter : GunClass
     public override int MaxBulletsPerMagazine => 1; // Single shot
     
     public override float ReloadTime => 2f;
+    private bool isReloading = false;
 
-    
+
 
     public override GameObject MuzzleFlashPrefab => muzzleflashprefab;
     public override AudioClip ShootSound => shootAudio;
@@ -55,8 +56,9 @@ public class FireballShooter : GunClass
             audioSource = gameObject.AddComponent<AudioSource>();
         }
 
-        
+        currentBullets = MaxBulletsPerMagazine;
         recoil = GameObject.Find("CameraRot/CameraRecoil").GetComponent<Recoil>();
+        
     }
 
     // Implement shooting logic specific to the fireball shooter
@@ -96,17 +98,17 @@ public class FireballShooter : GunClass
         currentBullets--;
     }
 
+    private void Update()
+    {
+        Reload();
+    }
+
     // Implement reloading logic specific to the fireball shooter
     public override void Reload()
     {
-        if (currentStoredAmmo > 0 && currentBullets < MaxBulletsPerMagazine)
+        if ( currentBullets < MaxBulletsPerMagazine)
         {
-            // Calculate bullets to reload
-            int bulletsToReload = Mathf.Min(MaxBulletsPerMagazine - currentBullets, currentStoredAmmo);
-
-            // Update current bullets and stored ammo
-            currentBullets += bulletsToReload;
-            currentStoredAmmo -= bulletsToReload;
+            StartCoroutine(Reloadtime());
         }
     }
 
@@ -125,6 +127,28 @@ public class FireballShooter : GunClass
     {
         maxStoredAmmo += amount;
         Debug.Log("Max stored ammo increased by " + amount);
+    }
+
+    public IEnumerator Reloadtime()
+    {
+        Debug.Log("Hit Reload");
+        if (!isReloading && currentBullets != maxStoredAmmo && currentStoredAmmo != 0)// Revolver reloading logic
+        {
+            isReloading = true;
+            Debug.Log("Reloading");
+            // start reloading Audio
+
+            yield return new WaitForSeconds(ReloadTime);
+
+            Debug.Log("Done Reloading");
+
+            int bulletsToReload = Mathf.Min(MaxBulletsPerMagazine - currentBullets, currentStoredAmmo);
+            currentBullets += bulletsToReload;
+            currentStoredAmmo -= bulletsToReload;
+
+            isReloading = false;
+        }
+
     }
 }
 
