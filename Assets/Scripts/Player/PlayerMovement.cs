@@ -11,7 +11,8 @@ public class PlayerMovement : MonoBehaviour
 
     // Movement speed variables
     [SerializeField] float speed = 11f;
-    [SerializeField] float sprintSpeed = 17f;
+    [SerializeField] public float sprintSpeed = 17f;
+    [SerializeField] public float IncreasedSprintSpeed = 25f;
     [SerializeField] float sprintAcceleration = 5f;
 
     // Variables for handling slopes
@@ -49,6 +50,7 @@ public class PlayerMovement : MonoBehaviour
     // Sprinting control variables
     public bool sprint;
 
+    
     // Update is called once per frame
     private void Update()
     {
