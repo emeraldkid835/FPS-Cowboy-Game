@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
+    [SerializeField] WeaponSwitcher weaponSwitcher;
     [SerializeField] PlayerMovement playerMovement;
     [SerializeField] CameraLook mouseLook;
     [SerializeField] PlayerPause playerPause;
     //[SerializeField] WeaponPickup weaponpickup;
     [SerializeField] Player player;
-    [SerializeField] GunClass equippedGun;
+    [SerializeField] public GunClass equippedGun;
 
     public static InputManager instance;
 
@@ -47,13 +48,17 @@ public class InputManager : MonoBehaviour
         weapon.DropWeapon.performed += _ => player.DropGun();   
         weapon.PickupWeapon.performed += _ => player.EquipGun(equippedGun);
 
-
        
+
     }
+
+    
+
     
 
     private void Update()
     {
+       
         playerMovement.ReceiveInput(horizontalInput);
         if(playerPause.isPaused == false)
         {
@@ -63,9 +68,16 @@ public class InputManager : MonoBehaviour
         {
             return;
         }
+
+       
        
         
         
+    }
+
+    public void UpdateEquippedGun(GunClass newGun)
+    {
+        equippedGun = newGun;
     }
 
     private void OnEnable()

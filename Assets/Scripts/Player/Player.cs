@@ -15,15 +15,15 @@ public class Player : MonoBehaviour
     // Method to equip a gun for the player
     public void EquipGun(GunClass gun)
     {
-        if (equippedGun != null)
+        if (equippedGun != null && gun != equippedGun)
         {
-            SwitchGun(equippedGun);
+            DropGun();
+            
         }
 
         equippedGun = gun; // Set the equipped gun
-        equippedGun.transform.SetParent(gunHold); // Set gun's parent to gunHold
-        equippedGun.transform.localPosition = Vector3.zero; // Reset gun's local position
-        equippedGun.transform.localRotation = Quaternion.identity; // Reset gun's local rotation
+        
+        
 
         // Enable gun game object
         equippedGun.gameObject.SetActive(true);
@@ -36,8 +36,8 @@ public class Player : MonoBehaviour
     {
         if (equippedGun != null)
         {
-            // Instantiate gun drop prefab at player's position
-            GameObject droppedGun = Instantiate(equippedGun.gameObject, transform.position, Quaternion.identity);
+            equippedGun.gameObject.SetActive(false);
+            
             // Clear equipped gun reference
             equippedGun = null;
         }

@@ -109,7 +109,10 @@ public class Revolver : GunClass
     // Implement reloading logic specific to the Revolver
     public override void Reload()
     {
-        StartCoroutine(Reloadtime());
+        if (isReloading != true && currentBullets < MaxBulletsPerMagazine)
+        {
+            StartCoroutine(Reloadtime());
+        }
 
     }
 

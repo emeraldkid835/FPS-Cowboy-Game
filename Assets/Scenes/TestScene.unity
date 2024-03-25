@@ -10683,8 +10683,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3c6883c3ffca7946912ee0bd7a56230, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentAmmoText: {fileID: 1759776331}
-  CurrentStoredAmmoText: {fileID: 288185021}
+  currentAmmoText: {fileID: 1759776331}
+  currentStoredAmmoText: {fileID: 288185021}
 --- !u!1 &1426173020
 GameObject:
   m_ObjectHideFlags: 0
@@ -17207,6 +17207,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1761677459}
   m_CullTransparentMesh: 1
+--- !u!1 &1772917748 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2884270972626058522, guid: 346bc76a4e26300458d8a2bec81ffcc4, type: 3}
+  m_PrefabInstance: {fileID: 4805768206082609851}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1772917749 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2543739425027319712, guid: 346bc76a4e26300458d8a2bec81ffcc4, type: 3}
@@ -18817,6 +18822,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1336773247627221899}
+  - component: {fileID: 1336773247627221900}
   m_Layer: 6
   m_Name: GunContainer
   m_TagString: Untagged
@@ -19018,6 +19024,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 472036af7ec2e734ea44cf23452052f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponSwitcher: {fileID: 1336773247627221900}
   playerMovement: {fileID: 763999459200930342}
   mouseLook: {fileID: 763999459200930343}
   playerPause: {fileID: 763999459200930339}
@@ -19264,6 +19271,21 @@ Transform:
   m_Father: {fileID: 56043780}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -0.34, y: 0, z: 0}
+--- !u!114 &1336773247627221900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 709337690716377418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87479960b8505274587b7edfcfd64d37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  guns:
+  - {fileID: 1772917748}
+  - {fileID: 938820789041481774}
 --- !u!1001 &3869878210452506597
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19333,15 +19355,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4082212498109706933, guid: 4caa69f16f7f7664ca2d6f7f825faeb5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.176
+      value: -0.1760006
       objectReference: {fileID: 0}
     - target: {fileID: 4082212498109706933, guid: 4caa69f16f7f7664ca2d6f7f825faeb5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.035
+      value: 0.03500084
       objectReference: {fileID: 0}
     - target: {fileID: 4082212498109706933, guid: 4caa69f16f7f7664ca2d6f7f825faeb5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.264
+      value: -0.26399982
       objectReference: {fileID: 0}
     - target: {fileID: 4082212498109706933, guid: 4caa69f16f7f7664ca2d6f7f825faeb5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -19349,15 +19371,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4082212498109706933, guid: 4caa69f16f7f7664ca2d6f7f825faeb5, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4082212498109706933, guid: 4caa69f16f7f7664ca2d6f7f825faeb5, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4082212498109706933, guid: 4caa69f16f7f7664ca2d6f7f825faeb5, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4082212498109706933, guid: 4caa69f16f7f7664ca2d6f7f825faeb5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -19445,7 +19467,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2884270972626058522, guid: 346bc76a4e26300458d8a2bec81ffcc4, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2962245644252850725, guid: 346bc76a4e26300458d8a2bec81ffcc4, type: 3}
       propertyPath: m_Layer

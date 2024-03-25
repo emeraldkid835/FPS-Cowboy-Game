@@ -14,7 +14,7 @@ public class AmmoPickups : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        equippedGun = FindObjectOfType<GunClass>();
+        equippedGun = InputManager.instance.equippedGun;
         if (equippedGun == null)
         {
             Debug.Log("No weapon is equipped");
@@ -44,6 +44,6 @@ public class AmmoPickups : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        equippedGun = InputManager.instance.equippedGun;
     }
 }
