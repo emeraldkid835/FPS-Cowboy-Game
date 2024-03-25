@@ -25,6 +25,8 @@ public abstract class GunClass : MonoBehaviour                       //GUN CLASS
     public abstract void Reload();
 
     public abstract void AddAmmo(int amount);
+
+    public abstract void AmmoUpgrade(int amount);
 }
 
 public abstract class GunState
@@ -48,6 +50,7 @@ public abstract class GunState
     {
 
     }
+    public virtual void HandleAmmoUpgrade(int amount) { }
 }
 
 public class EquippedState : GunState
@@ -69,6 +72,10 @@ public class EquippedState : GunState
     public override void HandleAddAmmoInput(int amount)
     {
         gun.AddAmmo(amount);
+    }
+    public override void HandleAmmoUpgrade(int amount)
+    {
+        gun.AmmoUpgrade(amount);
     }
 }
 

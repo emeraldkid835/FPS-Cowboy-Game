@@ -18,7 +18,7 @@ public class Revolver : GunClass
     private bool isReloading = false;
 
     public override float Damage => 30f;
-    public override float Range => 300f;
+    public override float Range => 150f;
     public override float FireRate => 5f;
     public override int MaxBulletsPerMagazine => 6;
     public override float ReloadTime => 3f;
@@ -28,13 +28,13 @@ public class Revolver : GunClass
     public override GameObject MuzzleFlashPrefab => muzzleflashprefab;
     public override AudioClip ShootSound => shootAudio;
     public override int CurrentBullets => currentBullets;
-    public override int MaxStoredAmmo => 30;
+    public override int MaxStoredAmmo => maxStoredAmmo;
     public override int CurrentStoredAmmo => currentStoredAmmo;
     public Revolver()
     {
         
         currentBullets = MaxBulletsPerMagazine;
-        
+        maxStoredAmmo = MaxStoredAmmo;
         currentStoredAmmo = MaxStoredAmmo;
         muzzleflashprefab = MuzzleFlashPrefab;
         
@@ -122,6 +122,12 @@ public class Revolver : GunClass
         {
             currentStoredAmmo = Mathf.Min(currentStoredAmmo + amount, maxStoredAmmo);
         }
+    }
+
+    public override void AmmoUpgrade(int amount)
+    {
+        maxStoredAmmo += amount;
+        Debug.Log("maxStoredAmmo+10");
     }
 
 

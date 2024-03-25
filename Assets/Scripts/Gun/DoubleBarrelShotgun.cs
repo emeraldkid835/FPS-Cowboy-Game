@@ -18,7 +18,7 @@ public class DoubleBarrelShotgun : GunClass
     private bool isReloading = false;
 
     public override float Damage => 60f;
-    public override float Range => 100f;
+    public override float Range => 35f;
     public override float FireRate => 3f;
     public override int MaxBulletsPerMagazine => 2;
     public override float ReloadTime => 2f;
@@ -119,6 +119,11 @@ public class DoubleBarrelShotgun : GunClass
         {
             currentStoredAmmo = Mathf.Min(currentStoredAmmo + amount, maxStoredAmmo);
         }
+    }
+
+    public override void AmmoUpgrade(int amount)
+    {
+        maxStoredAmmo += amount;
     }
 
 
