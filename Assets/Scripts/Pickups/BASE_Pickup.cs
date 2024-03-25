@@ -50,7 +50,7 @@ public abstract class BASE_Pickup : MonoBehaviour
             {
                 ambientSFX.Stop();
             }
-            PickupBehavior();
+            PickupBehavior(other);
             if (this.gameObject.GetComponent<MeshRenderer>() != null) {
                 this.gameObject.GetComponent<MeshRenderer>().enabled = false; 
             }//hide the gameobject while still letting logic run, if necessary
@@ -66,5 +66,5 @@ public abstract class BASE_Pickup : MonoBehaviour
         }
     }
 
-    protected abstract void PickupBehavior(); //this the mf you override to make the pickups do things
+    protected abstract void PickupBehavior(Collider collider); //this the mf you override to make the pickups do things
 }
