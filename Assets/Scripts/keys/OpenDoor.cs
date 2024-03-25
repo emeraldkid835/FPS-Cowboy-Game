@@ -62,9 +62,10 @@ public class OpenDoor : MonoBehaviour
     public void KeyCollected()
     {
         keysCollected++;
-        if (keysCollected >= 2) // Check if the player has collected enough keys to unlock the door
+        if (keysCollected >= 1) // Check if the player has collected enough keys to unlock the door
         {
             UnlockDoor();
+            keysCollected = 0; // Reset keysCollected to 0 so that the door can be unlocked only once
         }
     }
 }
