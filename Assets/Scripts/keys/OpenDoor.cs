@@ -7,6 +7,8 @@ public class OpenDoor : MonoBehaviour
     public Animation doorHinge;
     private bool isLocked = true; // Assuming the door starts locked
     private int keysCollected = 0; // Number of keys collected by the player
+    private bool isOpen = false;
+    private bool inRange = false;
 
     // Add references to your audio clips and AudioSource
     public AudioClip openSound;
@@ -15,6 +17,7 @@ public class OpenDoor : MonoBehaviour
 
     void Start()
     {
+        isOpen = false;
         // Initialize the AudioSource component
         audioSource = GetComponent<AudioSource>();
         if (audioSource == null)
@@ -27,12 +30,12 @@ public class OpenDoor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && isOpen == false && inRange == true)
         {
             if (!isLocked)
             {
                 doorHinge.Play();
-                
+                isOpen = true;
                 // Play open sound effect
                 if (openSound != null && audioSource != null)
                 {
@@ -65,6 +68,22 @@ public class OpenDoor : MonoBehaviour
         if (keysCollected >= 2) // Check if the player has collected enough keys to unlock the door
         {
             UnlockDoor();
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Player")
+        {
+            inRange = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.tag == "Player")
+        {
+            inRange = false;
         }
     }
 }

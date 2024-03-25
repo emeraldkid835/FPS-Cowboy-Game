@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.06983006, g: 0.00000089806724, b: 0.000000091362026, a: 1}
+  m_IndirectSpecularColor: {r: 0.069830164, g: 0.0000008980467, b: 0.00000009135965, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -8203,6 +8203,7 @@ GameObject:
   - component: {fileID: 1743194923}
   - component: {fileID: 1743194922}
   - component: {fileID: 1743194927}
+  - component: {fileID: 1743194928}
   m_Layer: 0
   m_Name: OpenDoor
   m_TagString: Untagged
@@ -8399,6 +8400,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!65 &1743194928
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1743194920}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 12.56, y: 1, z: 2.2}
+  m_Center: {x: 0.000015258789, y: 0.000000029802322, z: 0}
 --- !u!1001 &1750405918
 PrefabInstance:
   m_ObjectHideFlags: 0
