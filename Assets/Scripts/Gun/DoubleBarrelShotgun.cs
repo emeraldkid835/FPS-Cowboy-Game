@@ -13,6 +13,7 @@ public class DoubleBarrelShotgun : GunClass
     public AudioClip shootAudio;
     private int currentStoredAmmo;
     public int maxStoredAmmo = 16;
+    private Recoil recoil;
 
     private bool isReloading = false;
 
@@ -45,9 +46,10 @@ public class DoubleBarrelShotgun : GunClass
         {
             audioSource = gameObject.AddComponent<AudioSource>();
         }
+        recoil = GameObject.Find("CameraRot/CameraRecoil").GetComponent<Recoil>();
     }
 
-    // Implement shooting logic specific to the Revolver
+    // Implement shooting logic specific to the shotgun
     public override void Shoot()
     {
         // DoubleBarrel shooting logic
@@ -70,7 +72,8 @@ public class DoubleBarrelShotgun : GunClass
         Destroy(muzzleFlashInstance, 2f);
         // Play shoot audio
         audioSource.PlayOneShot(shootAudio);
-
+        // Apply recoil when shooting
+        recoil.RecoilFire();
         // Perform a raycast to detect hits
         RaycastHit hit;
         if (Physics.Raycast(muzzleflashLocation.position, muzzleflashLocation.forward, out hit, Range))
@@ -104,6 +107,14 @@ public class DoubleBarrelShotgun : GunClass
     {
         StartCoroutine(Reloadtime());
 
+    }
+
+    public override void AddAmmo(int amount)
+    {
+        if (currentStoredAmmo < maxStoredAmmo)
+        {
+            currentStoredAmmo = Mathf.Min(currentStoredAmmo + amount, maxStoredAmmo);
+        }
     }
 
 

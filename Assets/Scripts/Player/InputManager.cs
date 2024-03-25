@@ -31,6 +31,8 @@ public class InputManager : MonoBehaviour
         pause = inputMaster.PauseOptions;
         weapon = inputMaster.Weapons;
 
+        equippedGun = GetComponentInChildren<GunClass>();
+
         movement.HorizontalMovement.performed += ctx => horizontalInput = ctx.ReadValue<Vector2>();
         movement.Sprint.performed += _ => playerMovement.OnSprintPressed();
 
@@ -42,7 +44,7 @@ public class InputManager : MonoBehaviour
         weapon.Shoot.performed += _ => equippedGun.Shoot();
         weapon.Reload.performed += _ => equippedGun.Reload();
         pause.Pause.performed += _ => playerPause.OnPausePressed();
-        weapon.DropWeapon.performed += _ => player.DropGun();
+        weapon.DropWeapon.performed += _ => player.DropGun();   
         weapon.PickupWeapon.performed += _ => player.EquipGun(equippedGun);
 
 

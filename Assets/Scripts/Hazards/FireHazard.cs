@@ -5,15 +5,21 @@ using UnityEngine;
 public class FireHazard : MonoBehaviour
 {
     [SerializeField] private float damagePerSecond = 1f;
+    [SerializeField] PlayerHealth playerhealth;
 
     public bool isBurning = false;
 
+    private void Awake()
+    {
+        playerhealth = FindObjectOfType<PlayerHealth>(); // Find the player health script in the scene.
+    }
     private void OnTriggerEnter(Collider other) // Method to detect if the Player is in the trigger collider of the fire object, and sets the isBurning boolean to true. allowing for the coroutine method to deal damage over time
     {
         if (other.CompareTag("Player")) // These two trigger methods can also have other tags to inflict damage to those IDamage objects
         {
             Debug.Log("Player entered Fire");
             isBurning = true;
+            playerhealth.PlayDamageSound(playerhealth.TakeFireDamageSoundClip);
             StartCoroutine(DealDamageOverTime(other));
         }
     }
@@ -24,6 +30,7 @@ public class FireHazard : MonoBehaviour
         {
             Debug.Log("Player exited Fire");
             isBurning = false;
+            playerhealth.PlayDamageSound(playerhealth.TakeFireDamageSoundClip);
         }
     }
 

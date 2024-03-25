@@ -23,6 +23,8 @@ public abstract class GunClass : MonoBehaviour                       //GUN CLASS
     // Abstract methods for shooting and reloading, to be implemented by derived classes
     public abstract void Shoot();
     public abstract void Reload();
+
+    public abstract void AddAmmo(int amount);
 }
 
 public abstract class GunState
@@ -39,6 +41,10 @@ public abstract class GunState
 
     }
     public virtual void HandleReloadInput()
+    {
+
+    }
+    public virtual void HandleAddAmmoInput(int amount)
     {
 
     }
@@ -59,6 +65,10 @@ public class EquippedState : GunState
     public override void HandleReloadInput()
     {
         gun.Reload();
+    }
+    public override void HandleAddAmmoInput(int amount)
+    {
+        gun.AddAmmo(amount);
     }
 }
 

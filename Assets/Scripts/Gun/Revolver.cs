@@ -13,6 +13,7 @@ public class Revolver : GunClass
     public AudioClip shootAudio;
     private int currentStoredAmmo;
     public int maxStoredAmmo = 30;
+    private Recoil recoil;
 
     private bool isReloading = false;
 
@@ -46,6 +47,8 @@ public class Revolver : GunClass
         {
             audioSource = gameObject.AddComponent<AudioSource>();
         }
+
+        recoil = GameObject.Find("CameraRot/CameraRecoil").GetComponent<Recoil>();
     }
 
     // Implement shooting logic specific to the Revolver
@@ -67,6 +70,9 @@ public class Revolver : GunClass
 
         // Instantiate muzzle flash prefab at the muzzle flash location
         muzzleFlashInstance = Instantiate(MuzzleFlashPrefab, muzzleflashLocation.position, muzzleflashLocation.rotation);
+
+        // Give Recoil
+        recoil.RecoilFire();
 
         Destroy(muzzleFlashInstance, 2f);
         // Play shoot audio
@@ -107,7 +113,15 @@ public class Revolver : GunClass
 
     }
 
-    
+    public override void AddAmmo(int amount)
+    {
+        if (currentStoredAmmo < maxStoredAmmo)
+        {
+            currentStoredAmmo = Mathf.Min(currentStoredAmmo + amount, maxStoredAmmo);
+        }
+    }
+
+
 
     public IEnumerator Reloadtime()
     {
@@ -116,6 +130,7 @@ public class Revolver : GunClass
         {
             isReloading = true;
             Debug.Log("Reloading");
+            // start reloading Audio
 
             yield return new WaitForSeconds(ReloadTime);
 

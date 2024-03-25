@@ -22,7 +22,7 @@ public class AmmoDisplay : MonoBehaviour
         activeGun = FindObjectOfType<GunClass>();
         if (activeGun == null)
         {
-            Debug.LogError("Can't find revolver in scene!");
+            Debug.LogError("Can't find gun in scene!");
             return;
         }
         UpdateCurrentAmmo(activeGun.CurrentBullets);

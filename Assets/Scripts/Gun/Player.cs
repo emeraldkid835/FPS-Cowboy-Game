@@ -7,6 +7,11 @@ public class Player : MonoBehaviour
     public GunClass equippedGun;
     public Transform gunHold; //where guns are stored on the player
 
+
+    public void Awake()
+    {
+        equippedGun = GetComponentInChildren<GunClass>();
+    }
     // Method to equip a gun for the player
     public void EquipGun(GunClass gun)
     {

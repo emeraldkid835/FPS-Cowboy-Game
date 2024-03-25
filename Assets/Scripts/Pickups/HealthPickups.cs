@@ -23,7 +23,7 @@ public class HealthPickups : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && playerHealth.Playercurrenthealth < playerHealth.PlayerstartHealth)
         {
             switch (pickup)
             {
