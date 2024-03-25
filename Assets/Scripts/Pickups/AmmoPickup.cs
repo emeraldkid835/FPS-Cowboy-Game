@@ -2,11 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-   
-public class AmmoUpgrade : Pickup
+public class AmmoPickup : Pickup
 {
-    
-    public int myValue;
+    public int ammoAmount = 10;
+
     private GunClass equippedGun;
 
     void Start()
@@ -19,21 +18,19 @@ public class AmmoUpgrade : Pickup
     }
     public override void Collect()
     {
-        equippedGun.AmmoUpgrade(myValue);
-        equippedGun.AddAmmo(myValue);
+        equippedGun.AddAmmo(ammoAmount);
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+       if (other.CompareTag("Player") && equippedGun.CurrentStoredAmmo < equippedGun.MaxStoredAmmo)
         {
             Collect();
-
             Destroy(gameObject);
         }
     }
 
-    private void Update()
+    public void Update()
     {
         equippedGun = InputManager.instance.equippedGun;
     }

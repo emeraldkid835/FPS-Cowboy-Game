@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpeedPickup : MonoBehaviour
+public class SpeedPickup : Pickup
 {
     private PlayerMovement playerMovement;
 
@@ -24,11 +24,16 @@ public class SpeedPickup : MonoBehaviour
         OriginalSprintSpeed = playerMovement.sprintSpeed;
     }
 
+    public override void Collect()
+    {
+        StartCoroutine(IncreaseSpeedTimer());
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player") && SpeedIncreased != true)
         {
-            StartCoroutine(IncreaseSpeedTimer());
+            Collect();
         }
     }
 
