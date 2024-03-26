@@ -109,6 +109,7 @@ GameObject:
   - component: {fileID: 2425041142967558486}
   - component: {fileID: 5120224639160646202}
   - component: {fileID: 8733301738541086344}
+  - component: {fileID: 3623257875166726816}
   m_Layer: 0
   m_Name: snipertf2
   m_TagString: Untagged
@@ -197,6 +198,20 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3623257875166726816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4378799623609500692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1229fc0d164c87a4a96f579bd471ff45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemystartHealth: 50
+  EnemycurrentHealth: 0
 --- !u!1 &7236693919037043495
 GameObject:
   m_ObjectHideFlags: 0
