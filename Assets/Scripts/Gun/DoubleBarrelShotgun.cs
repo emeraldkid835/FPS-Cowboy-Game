@@ -14,6 +14,7 @@ public class DoubleBarrelShotgun : GunClass
     private int currentStoredAmmo;
     public int maxStoredAmmo = 16;
     private Recoil recoil;
+    public PlayerPause playerPause;
 
     private bool isReloading = false;
 
@@ -47,6 +48,7 @@ public class DoubleBarrelShotgun : GunClass
             audioSource = gameObject.AddComponent<AudioSource>();
         }
         recoil = GameObject.Find("CameraRot/CameraRecoil").GetComponent<Recoil>();
+        
     }
 
     // Implement shooting logic specific to the shotgun
@@ -61,6 +63,10 @@ public class DoubleBarrelShotgun : GunClass
         if (currentBullets <= 0)
         {
             Debug.Log("Weapon Empty!");
+            return;
+        }
+        if (playerPause.isPaused == true)
+        {
             return;
         }
         if (Time.time < nextTimeToFire || currentBullets <= 0)

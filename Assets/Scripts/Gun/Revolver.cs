@@ -14,6 +14,7 @@ public class Revolver : GunClass
     private int currentStoredAmmo;
     public int maxStoredAmmo = 30;
     private Recoil recoil;
+    public PlayerPause playerPause;
 
     private bool isReloading = false;
 
@@ -49,6 +50,7 @@ public class Revolver : GunClass
         }
 
         recoil = GameObject.Find("CameraRot/CameraRecoil").GetComponent<Recoil>();
+        
     }
 
     // Implement shooting logic specific to the Revolver
@@ -63,6 +65,10 @@ public class Revolver : GunClass
         if (currentBullets <= 0)
         {
             Debug.Log("Weapon Empty!");
+            return;
+        }
+        if (playerPause.isPaused == true)
+        {
             return;
         }
         if (Time.time < nextTimeToFire || currentBullets <= 0)

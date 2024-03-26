@@ -16,6 +16,7 @@ public class FireballShooter : GunClass
     private int currentStoredAmmo = 1;
     public int maxStoredAmmo = 30;
     private Recoil recoil;
+    public PlayerPause playerPause;
 
     // Set values for the fireball shooter
     public override float Damage => 100f;
@@ -66,7 +67,15 @@ public class FireballShooter : GunClass
     {
         // Check if it's time to shoot
         if (Time.time < nextTimeToShoot || currentBullets <= 0)
+        {
             return;
+        }
+
+        if (playerPause.isPaused == true)
+        {
+            return;
+        }
+            
 
         // Instantiate fireball prefab
         GameObject fireballInstance = Instantiate(fireballPrefab, muzzleflashLocation.transform.position, muzzleflashLocation.transform.rotation);
