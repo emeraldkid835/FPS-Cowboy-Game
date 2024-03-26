@@ -5,7 +5,7 @@ using UnityEngine;
 public class WeaponSwitcher : MonoBehaviour
 {
 
-    public GameObject[] guns;
+    public List<GameObject> guns = new List<GameObject>();
     private int currentGunIndex = 0;
 
     
@@ -13,7 +13,7 @@ public class WeaponSwitcher : MonoBehaviour
     void Start()
     {
         // Disable all guns except the first one
-        for (int i = 1; i < guns.Length; i++)
+        for (int i = 1; i < guns.Count; i++)
         {
             guns[i].gameObject.SetActive(false);
         }
@@ -39,7 +39,7 @@ public class WeaponSwitcher : MonoBehaviour
         guns[currentGunIndex].SetActive(false);
 
         // Calculate the index of the next gun
-        currentGunIndex = (currentGunIndex + offset + guns.Length) % guns.Length;
+        currentGunIndex = (currentGunIndex + offset + guns.Count) % guns.Count;
 
         // Enable the next gun
         guns[currentGunIndex].SetActive(true);
