@@ -1,17 +1,34 @@
 fileFormatVersion: 2
-guid: b58e7fdfb89fbc549b36a69243aee4c0
-timeCreated: 1504768177
+guid: bf79c8265191f5b46a8ee67bce5d671b
+timeCreated: 1493665670
 licenseType: Store
 ModelImporter:
-  serializedVersion: 21
+  serializedVersion: 19
   fileIDToRecycleName:
     100000: //RootNode
+    100002: MRL_Rock_Medium 2_Collider
+    100004: MRL_Rock_Medium 2_LOD 0
+    100006: MRL_Rock_Medium 2_LOD 1
+    100008: MRL_Rock_Medium 2_LOD 2
     400000: //RootNode
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: Rock_4
+    400002: MRL_Rock_Medium 2_Collider
+    400004: MRL_Rock_Medium 2_LOD 0
+    400006: MRL_Rock_Medium 2_LOD 1
+    400008: MRL_Rock_Medium 2_LOD 2
+    2300000: MRL_Rock_Medium 2_Collider
+    2300002: MRL_Rock_Medium 2_LOD 0
+    2300004: MRL_Rock_Medium 2_LOD 1
+    2300006: MRL_Rock_Medium 2_LOD 2
+    3300000: MRL_Rock_Medium 2_Collider
+    3300002: MRL_Rock_Medium 2_LOD 0
+    3300004: MRL_Rock_Medium 2_LOD 1
+    3300006: MRL_Rock_Medium 2_LOD 2
+    4300000: MRL_Rock_Medium 2_LOD 2
+    4300002: MRL_Rock_Medium 2_LOD 1
+    4300004: MRL_Rock_Medium 2_Collider
+    4300006: MRL_Rock_Medium 2_LOD 0
   materials:
-    importMaterials: 1
+    importMaterials: 0
     materialName: 0
     materialSearch: 1
   animations:
@@ -20,8 +37,6 @@ ModelImporter:
     resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
-    rigImportErrors: 
-    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -32,7 +47,6 @@ ModelImporter:
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    extraUserProperties: []
     clipAnimations: []
     isReadable: 1
   meshes:
@@ -40,10 +54,7 @@ ModelImporter:
     globalScale: 1
     meshCompression: 0
     addColliders: 0
-    importVisibility: 1
     importBlendShapes: 1
-    importCameras: 1
-    importLights: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
@@ -59,11 +70,9 @@ ModelImporter:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
-    normalCalculationMode: 4
-  importAnimation: 1
+  importAnimation: 0
   copyAvatar: 0
   humanDescription:
-    serializedVersion: 2
     human: []
     skeleton: []
     armTwist: 0.5
@@ -74,10 +83,7 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     rootMotionBoneName: 
-    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
-    hasExtraRoot: 0
-    skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 0
   humanoidOversampling: 1

@@ -1,30 +1,21 @@
 fileFormatVersion: 2
-guid: 24da44c442496a0458025bfc14737a9d
+guid: 318351b249902a44ea6748a84674a269
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
-    100002: PT_Medieval_Village_Fence_02
     400000: //RootNode
-    400002: PT_Medieval_Village_Fence_02
-    2100000: PT_Medieval_mat
+    2100000: Fantasy_House_6
     2300000: //RootNode
-    2300002: PT_Medieval_Village_Fence_02
     3300000: //RootNode
-    3300002: PT_Medieval_Village_Fence_02
-    4300000: PT_Medieval_Village_Fence_02
+    4300000: Fantasy_House_6
     6400000: //RootNode
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: PT_Medieval_mat
-    second: {fileID: 2100000, guid: 56532089e45dbc1479865e115cc8c637, type: 2}
+  externalObjects: {}
   materials:
     importMaterials: 1
-    materialName: 1
+    materialName: 0
     materialSearch: 1
-    materialLocation: 0
+    materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -78,7 +69,7 @@ ModelImporter:
     normalImportMode: 0
     tangentImportMode: 3
     normalCalculationMode: 4
-    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 1
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
   importAnimation: 1
