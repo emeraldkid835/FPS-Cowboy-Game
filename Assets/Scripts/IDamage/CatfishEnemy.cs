@@ -32,10 +32,10 @@ using UnityEngine.AI;
     {
           Debug.Log($"Enemy took {damage} damage. Enemy has {EnemycurrentHealth - 10f} health.");
           EnemycurrentHealth -= damage; // EnemycurrentHealth = EnemycurrentHealth - damage
-
+          
             // Instantiate blood effect at the position where the enemy was hit
           GameObject bloodEffect = Instantiate(bloodEffectPrefab, bloodEffectLocation.position, Quaternion.identity);
-
+          StartCoroutine(isHitToggle()); 
             // Destroy the blood effect after a delay
           Destroy(bloodEffect, bloodEffectDuration);
           if (EnemycurrentHealth <= 0) // If enemy health hits 0 or less, begin die method
@@ -56,6 +56,15 @@ using UnityEngine.AI;
         agent.Stop();
         yield return new WaitForSeconds(4f);
         Destroy(gameObject);
+
+    }
+
+    IEnumerator isHitToggle()
+    {
+        animator.SetBool("isHit", true);
+        
+        yield return new WaitForSeconds(1);
+        animator.SetBool("isHit", false);
 
     }
 
