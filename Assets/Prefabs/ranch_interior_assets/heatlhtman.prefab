@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4520131102204905793}
   - component: {fileID: 7587474829974790367}
   - component: {fileID: 3843532829788863252}
+  - component: {fileID: 1760846788364673369}
   m_Layer: 0
   m_Name: heatlhtman
   m_TagString: Untagged
@@ -729,12 +730,26 @@ MeshCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1859995018177048507}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!114 &1760846788364673369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1859995018177048507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 392b6420d377d6b46b4061a9e15a0e6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 0
+  healthAmount: 50
 --- !u!1 &2510971332715774979
 GameObject:
   m_ObjectHideFlags: 0
@@ -1052,7 +1067,7 @@ MeshCollider:
   m_GameObject: {fileID: 2510971332715774979}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
