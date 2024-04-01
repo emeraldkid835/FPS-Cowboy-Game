@@ -2,10 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Animation))]
 public class Animation_on_Death_Damageable : DamageableObject
 {
     [SerializeField] private Animation deathAnim;
-    
+
+    protected override void Start()
+    {
+        deathAnim = GetComponent<Animation>();
+        audioSource = GetComponent<AudioSource>(); // Get an audio source if it doesn't have one
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+        currentHealth = startinghealth; // Setting the objects current health to its starting health on start
+                                        //explodeDamage = GetComponent<ExplosionDamage>();
+
+    }
 
     protected override void Die()
     {

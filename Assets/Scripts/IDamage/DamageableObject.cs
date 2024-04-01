@@ -31,12 +31,12 @@ using UnityEngine;
         protected AudioSource audioSource;
         [SerializeField] protected AudioClip deathSound;
 
-        protected void Start()
+        protected virtual void Start()
         {
             audioSource = GetComponent<AudioSource>(); // Get an audio source if it doesn't have one
             if (audioSource == null)
             {
-                audioSource = gameObject.AddComponent<AudioSource>();
+                audioSource = gameObject.AddComponent<AudioSource>(); //couldn't this be solved by a [RequiredComponent]??
             }
             currentHealth = startinghealth; // Setting the objects current health to its starting health on start
             //explodeDamage = GetComponent<ExplosionDamage>();
