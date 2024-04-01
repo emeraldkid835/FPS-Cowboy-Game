@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 1311560534204095874}
   - component: {fileID: 1311560534204095875}
   - component: {fileID: 1311560534204095903}
-  - component: {fileID: 4933404834965758917}
   m_Layer: 0
   m_Name: ExplodingDamageableObject
   m_TagString: ExplodingBarrel
@@ -113,22 +112,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startinghealth: 50
   currentHealth: 0
-  explosion: {fileID: 4933404834965758917}
-  deathParticles: {fileID: 0}
+  hasExploded: 0
+  deathParticles: {fileID: 1311560534204095876}
   damageParticles: {fileID: 0}
   deathSound: {fileID: 0}
---- !u!114 &4933404834965758917
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1311560534204095876}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6765c6f91b97ac84b81aeb50c41a2e08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  explosionRadius: 5
-  explosionForce: 10
-  explosionDamage: 50

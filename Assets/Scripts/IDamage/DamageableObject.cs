@@ -2,18 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Damageables
-{
+
 
 
     public class DamageableObject : MonoBehaviour, IDamage // Declaring that it is an IDamage, which needs to incorporate the method from the IDamage interface
     {
+        //private ExplosionDamage explodeDamage;
         [Header("Settings")]
         [SerializeField] public float startinghealth = 50f; // Objects starting health
 
         [SerializeField] public float currentHealth; // Objects current health at a given time
 
         private bool hasDied = false;
+        public bool hasExploded = false;
+        
 
         
 
@@ -37,7 +39,7 @@ namespace Damageables
                 audioSource = gameObject.AddComponent<AudioSource>();
             }
             currentHealth = startinghealth; // Setting the objects current health to its starting health on start
-            
+            //explodeDamage = GetComponent<ExplosionDamage>();
             
         }
 
@@ -55,7 +57,9 @@ namespace Damageables
             {
                 
                 PlayDamageSound(deathSound);
+                
                 Die();
+                
                 
             }
         }
@@ -106,21 +110,30 @@ namespace Damageables
                 {
                     // Instantiate and store a reference to the death particle effect
                     deathParticlesInstance = Instantiate(deathParticles, transform.position, Quaternion.identity);
+                    
+                    //explodeDamage.DealDamageInRadius();
 
                     // Set the flag to indicate that death particles have been played
                     hasPlayedDeathParticles = true;
+                
+                    
 
                     // Destroy the instantiated particles after a delay
                     Destroy(deathParticlesInstance, particlesDestroyDelay);
                 }
 
-                // Implement object death logic here
+                
                 Destroy(gameObject);
             }
+            /*if (hasExploded)    //if you have the ExplodeDamage.DealDamageInRadiusTurned on. Has allocation errors.
+            {
+                    
+                    Destroy(gameObject);
+            }*/
 
 
         }
 
         
     }
-}
+
