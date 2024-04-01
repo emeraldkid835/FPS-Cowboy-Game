@@ -102,7 +102,7 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    private void SearchWalkPoint()
+    private void SearchWalkPoint() //should probably use a start position, instead of current position, to prevent wandering to eternity
     {
         //Calculate random point in range
         float randomZ = Random.Range(-walkPointRange, walkPointRange);
