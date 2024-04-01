@@ -72,7 +72,7 @@ public class Revolver : GunClass
         muzzleFlashInstance = Instantiate(MuzzleFlashPrefab, muzzleflashLocation.position, muzzleflashLocation.rotation);
 
         // Give Recoil
-        recoil.RecoilFire();
+        
 
         Destroy(muzzleFlashInstance, 2f);
         // Play shoot audio
@@ -97,7 +97,7 @@ public class Revolver : GunClass
             }
         }
 
-
+        recoil.RecoilFire();
         // Update next time the pistol can fire
         nextTimeToFire = Time.time + 1f / FireRate;
         // Reduce current bullets
