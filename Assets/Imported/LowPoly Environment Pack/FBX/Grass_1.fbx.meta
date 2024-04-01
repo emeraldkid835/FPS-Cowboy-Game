@@ -1,30 +1,17 @@
 fileFormatVersion: 2
-guid: b6e127cb00c9dda40b7cac23fea4d82d
-labels:
-- bark
-- models
-- pine
-- spruce
-- tree
-timeCreated: 1493418754
+guid: 34dfeb3f659c70946a7698f1846d752b
+timeCreated: 1504768173
 licenseType: Store
 ModelImporter:
-  serializedVersion: 19
+  serializedVersion: 21
   fileIDToRecycleName:
     100000: //RootNode
-    100002: RHE_SpruceA_Leaves
-    100004: RHE_SpruceA_Trunk
     400000: //RootNode
-    400002: RHE_SpruceA_Leaves
-    400004: RHE_SpruceA_Trunk
-    2300000: RHE_SpruceA_Leaves
-    2300002: RHE_SpruceA_Trunk
-    3300000: RHE_SpruceA_Leaves
-    3300002: RHE_SpruceA_Trunk
-    4300000: RHE_SpruceA_Leaves
-    4300002: RHE_SpruceA_Trunk
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: Grass_1
   materials:
-    importMaterials: 0
+    importMaterials: 1
     materialName: 0
     materialSearch: 1
   animations:
@@ -33,6 +20,8 @@ ModelImporter:
     resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -43,6 +32,7 @@ ModelImporter:
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
+    extraUserProperties: []
     clipAnimations: []
     isReadable: 1
   meshes:
@@ -50,7 +40,10 @@ ModelImporter:
     globalScale: 1
     meshCompression: 0
     addColliders: 0
+    importVisibility: 1
     importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
@@ -66,9 +59,11 @@ ModelImporter:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
-  importAnimation: 0
+    normalCalculationMode: 4
+  importAnimation: 1
   copyAvatar: 0
   humanDescription:
+    serializedVersion: 2
     human: []
     skeleton: []
     armTwist: 0.5
@@ -79,11 +74,14 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
-  assetBundleName: models
+  assetBundleName: 
   assetBundleVariant: 
