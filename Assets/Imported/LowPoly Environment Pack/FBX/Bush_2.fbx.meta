@@ -1,15 +1,27 @@
 fileFormatVersion: 2
-guid: e03601284b71f4b409169b6ef1dd0606
-timeCreated: 1504768175
+guid: f81288375faa5fc489c60c1bfcd12306
+timeCreated: 1496697175
 licenseType: Store
 ModelImporter:
-  serializedVersion: 21
+  serializedVersion: 19
   fileIDToRecycleName:
     100000: //RootNode
+    100002: Fence
+    100004: Pole
+    100006: PoleSingle
     400000: //RootNode
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: Bush_2
+    400002: Fence
+    400004: Pole
+    400006: PoleSingle
+    2300000: Fence
+    2300002: Pole
+    2300004: PoleSingle
+    3300000: Fence
+    3300002: Pole
+    3300004: PoleSingle
+    4300000: Fence
+    4300002: PoleSingle
+    4300004: Pole
   materials:
     importMaterials: 1
     materialName: 0
@@ -20,8 +32,6 @@ ModelImporter:
     resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
-    rigImportErrors: 
-    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -32,7 +42,6 @@ ModelImporter:
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    extraUserProperties: []
     clipAnimations: []
     isReadable: 1
   meshes:
@@ -40,10 +49,7 @@ ModelImporter:
     globalScale: 1
     meshCompression: 0
     addColliders: 0
-    importVisibility: 1
     importBlendShapes: 1
-    importCameras: 1
-    importLights: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
@@ -59,7 +65,6 @@ ModelImporter:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
-    normalCalculationMode: 4
   importAnimation: 1
   copyAvatar: 0
   humanDescription:

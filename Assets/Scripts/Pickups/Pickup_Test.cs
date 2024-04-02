@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Pickup_Test : BASE_Pickup
 {
-    protected override void PickupBehavior()
+    protected override void PickupBehavior(Collider collider)
     {
         Debug.Log("I was a picked up boy!");
     }

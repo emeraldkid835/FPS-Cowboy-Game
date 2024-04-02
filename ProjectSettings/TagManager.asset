@@ -4,7 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - InteractiveObject
+  - Ground
+  - ExplodingBarrel
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -12,8 +14,8 @@ TagManager:
   - Ground
   - Water
   - UI
-  - Interact
-  - 
+  - FPSElements
+  - Player
   - 
   - 
   - 

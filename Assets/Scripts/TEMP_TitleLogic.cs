@@ -10,12 +10,14 @@ public class TEMP_TitleLogic : MonoBehaviour
     void Start()
     {
         meAnimator = this.GetComponent<Animator>();
-        meAnimator.SetBool("showcreds", false);
+        
         if (meAnimator == null)
         {
             Debug.Log("NO ANIMATOR FOR cANVAS!");
         }
-        else { Debug.Log("animator on canvas :)"); }
+        else { Debug.Log("animator on canvas :)"); meAnimator.SetBool("showcreds", false); }
+
+        
     }
 
     
@@ -41,12 +43,18 @@ public class TEMP_TitleLogic : MonoBehaviour
     public void Opencredits()
     {
         Debug.Log("Should be opening credits");
-        meAnimator.SetBool("showcreds", true);
+        if (meAnimator != null)
+        {
+            meAnimator.SetBool("showcreds", true);
+        }
     }
 
     public void Closecredits()
     {
         Debug.Log("Should be closing credits");
-        meAnimator.SetBool("showcreds", false);
+        if(meAnimator != null)
+        {
+            meAnimator.SetBool("showcreds", false);
+        }
     }
 }
