@@ -17,12 +17,14 @@ public class DoubleBarrelShotgun : GunClass
 
     private bool isReloading = false;
 
-    public override float Damage => 60f;
+    public override float Damage => 20f;
     public override float Range => 35f;
     public override float FireRate => 3f;
     public override int MaxBulletsPerMagazine => 2;
     public override float ReloadTime => 2f;
 
+    public uint pelletsPerShot = 6;
+    public uint maxVariation = 30; //tweak as necessary
 
 
     public override GameObject MuzzleFlashPrefab => muzzleflashprefab;
@@ -75,28 +77,34 @@ public class DoubleBarrelShotgun : GunClass
         // Apply recoil when shooting
         recoil.RecoilFire();
         // Perform a raycast to detect hits
-        RaycastHit hit;
-        if (Physics.Raycast(muzzleflashLocation.position, muzzleflashLocation.forward, out hit, Range))
-        {
-            // Handle hit detection, apply damage to the target, etc.
-            Transform objectHit = hit.transform;
-            if (objectHit.gameObject.tag != "Player")
-            {
-                MonoBehaviour[] mono = objectHit.gameObject.GetComponents<MonoBehaviour>();
 
-                foreach (MonoBehaviour item in mono)
+        for (int i = 0; i < pelletsPerShot - 1; i++)
+        {
+            Vector3 direction = muzzleflashLocation.forward;
+            direction += muzzleflashLocation.up * Random.Range((0 - maxVariation), maxVariation);
+            direction += muzzleflashLocation.right * Random.Range((0 - maxVariation), maxVariation);
+            RaycastHit hit;
+            if (Physics.Raycast(muzzleflashLocation.position, muzzleflashLocation.forward, out hit, Range))
+            {
+                // Handle hit detection, apply damage to the target, etc.
+                Transform objectHit = hit.transform;
+                if (objectHit.gameObject.tag != "Player")
                 {
-                    if (item is IDamage)
+                    MonoBehaviour[] mono = objectHit.gameObject.GetComponents<MonoBehaviour>();
+
+                    foreach (MonoBehaviour item in mono)
                     {
-                        IDamage temp = item as IDamage;
-                        temp.TakeDamage(Damage);
-                        break;
+                        if (item is IDamage)
+                        {
+                            IDamage temp = item as IDamage;
+                            temp.TakeDamage(Damage);
+                            break;
+                        }
                     }
                 }
             }
+
         }
-
-
         // Update next time the pistol can fire
         nextTimeToFire = Time.time + 1f / FireRate;
         // Reduce current bullets
