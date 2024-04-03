@@ -19,7 +19,7 @@ public class EnemyAI : MonoBehaviour
     //Waypoints
     public List<Transform> waypoints;
     private int currentWaypointIndex = 0;
-    public float waypointStopDuration = 2f;
+    [SerializeField] public float waypointStopDuration = 2f;
     private bool isWaitingAtWaypoint = false;
 
     //Patrolling
@@ -60,11 +60,18 @@ public class EnemyAI : MonoBehaviour
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
         
-
         
-
-        if (!playerInSightRange && !playerInAttackRange)
+        if (isWaitingAtWaypoint && !playerInSightRange && !playerInAttackRange)
         {
+            animator.SetBool("isIdle", true);
+            animator.SetBool("isWalking", false);
+            animator.SetBool("isChasing", false);
+            animator.SetBool("isAttacking", false);
+        }
+
+        if (!isWaitingAtWaypoint && !playerInSightRange && !playerInAttackRange)
+        {
+            animator.SetBool("isIdle", false);
             animator.SetBool("isWalking", true);
             animator.SetBool("isChasing", false);
             animator.SetBool("isAttacking", false);
@@ -72,7 +79,7 @@ public class EnemyAI : MonoBehaviour
         }
         if (playerInSightRange && !playerInAttackRange)
         {
-            
+            animator.SetBool("isIdle", false);
             animator.SetBool("isWalking", false);
             animator.SetBool("isChasing", true);
             animator.SetBool("isAttacking", false);
@@ -80,6 +87,7 @@ public class EnemyAI : MonoBehaviour
         }
         if (playerInAttackRange && playerInSightRange)
         {
+            animator.SetBool("isIdle", false);
             animator.SetBool("isWalking", false);
             animator.SetBool("isChasing", false);
             animator.SetBool("isAttacking", true);
@@ -133,7 +141,10 @@ public class EnemyAI : MonoBehaviour
         if (isWaitingAtWaypoint)
         {
             Debug.Log("StopAtWaypoint started");
+            
+
             yield return new WaitForSeconds(waypointStopDuration);
+            
             isWaitingAtWaypoint = false;
 
             // Move to the next waypoint
