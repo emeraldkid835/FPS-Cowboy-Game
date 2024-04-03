@@ -12,7 +12,7 @@ using UnityEngine;
         [Header("Respawn")]
         [SerializeField] public GameObject playerObject;
         
-        public RespawnManager respawnManager;
+        
         
 
         [Header("Audio & Visual")]
@@ -34,7 +34,7 @@ using UnityEngine;
             }
             Playercurrenthealth = PlayerstartHealth; // Setting the players current health to the players starting health at the beginning
 
-            respawnManager = GameObject.Find("GameManager").GetComponent<RespawnManager>();
+            
             playerObject = this.gameObject;
             
             // Find the HealthDisplay script in the scene
@@ -154,16 +154,7 @@ using UnityEngine;
             
         }
 
-        public void Respawn()
-        {
-            Debug.Log("Should Be teleported to respawnpoint");
-            respawnManager.RespawnPlayer();
-            
-            
-            ResetHealth();
-            isPlayerDead = false;
-            
-        }
+        
 
         
     }

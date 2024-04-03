@@ -103,22 +103,7 @@ public class HealthDisplay : MonoBehaviour // HealthDisplay script is used to up
         StartCoroutine(GotHitFlashCoroutine(playerhealth.GetPlayerCurrentHealth()));
     }
 
-    public void RespawnPlayer()
-    {
-        Debug.Log("In health display it called RespawnPlayer");
-        Time.timeScale = 1f;
-        playerhealth.Respawn();
-        
-        Cursor.lockState = CursorLockMode.Locked;
-        float aplha = 0f;
-        Color bloodColor = bloodImage.color;
-        bloodColor.a = aplha;
-        bloodImage.color = bloodColor;
-
-
-
-
-    }
+    
 
         
 
