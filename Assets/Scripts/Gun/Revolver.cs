@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Revolver : GunClass
@@ -84,15 +85,19 @@ public class Revolver : GunClass
         {
             // Handle hit detection, apply damage to the target, etc.
             Transform objectHit = hit.transform;
-            MonoBehaviour[] mono = objectHit.gameObject.GetComponents<MonoBehaviour>();
-
-            foreach (MonoBehaviour item in mono)
+            if (objectHit.gameObject.tag != "Player") //no more self damage!
             {
-                if (item is IDamage)
+                
+                MonoBehaviour[] mono = objectHit.gameObject.GetComponents<MonoBehaviour>();
+
+                foreach (MonoBehaviour item in mono)
                 {
-                    IDamage temp = item as IDamage;
-                    temp.TakeDamage(Damage);
-                    break;
+                    if (item is IDamage)
+                    {
+                        IDamage temp = item as IDamage;
+                        temp.TakeDamage(Damage);
+                        break;
+                    }
                 }
             }
         }
