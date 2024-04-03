@@ -83,6 +83,7 @@ public class Revolver : GunClass
         RaycastHit hit;
         if (Physics.Raycast(muzzleflashLocation.position, muzzleflashLocation.forward, out hit, Range))
         {
+            Debug.DrawLine(muzzleflashLocation.position, hit.point, Color.yellow, 5f);
             // Handle hit detection, apply damage to the target, etc.
             Transform objectHit = hit.transform;
             if (objectHit.gameObject.tag != "Player") //no more self damage!
