@@ -24,7 +24,7 @@ public class DoubleBarrelShotgun : GunClass
     public override float ReloadTime => 2f;
 
     public uint pelletsPerShot = 6;
-    public uint maxVariation = 30; //tweak as necessary
+    [Range(0f,1f)] public float maxVariation = 0.2f; //tweak as necessary
 
 
     public override GameObject MuzzleFlashPrefab => muzzleflashprefab;
@@ -81,11 +81,14 @@ public class DoubleBarrelShotgun : GunClass
         for (int i = 0; i < pelletsPerShot - 1; i++)
         {
             Vector3 direction = muzzleflashLocation.forward;
-            direction += muzzleflashLocation.up * Random.Range((0 - maxVariation), maxVariation);
-            direction += muzzleflashLocation.right * Random.Range((0 - maxVariation), maxVariation);
+            Vector3 spread = Vector3.zero;
+            spread += muzzleflashLocation.up * Random.Range(-1f, 1f);
+            spread += muzzleflashLocation.right * Random.Range(-1f, 1f);
+            direction += Vector3.Normalize(spread) * Random.Range(0f, maxVariation);
             RaycastHit hit;
-            if (Physics.Raycast(muzzleflashLocation.position, muzzleflashLocation.forward, out hit, Range))
+            if (Physics.Raycast(muzzleflashLocation.position, direction, out hit, Range))
             {
+                Debug.DrawLine(muzzleflashLocation.position, hit.point, Color.yellow, 5f);
                 // Handle hit detection, apply damage to the target, etc.
                 Transform objectHit = hit.transform;
                 if (objectHit.gameObject.tag != "Player")
