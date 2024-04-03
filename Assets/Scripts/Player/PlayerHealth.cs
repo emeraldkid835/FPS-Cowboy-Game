@@ -9,6 +9,10 @@ using UnityEngine;
         [SerializeField] public float PlayerstartHealth = 100f; // Players starting health that can be changed in the inspector
         [SerializeField] public float Playercurrenthealth;      // Players current health at a given time
 
+        [Header("Respawn")]
+        [SerializeField] public GameObject playerObject;
+        
+        public RespawnManager respawnManager;
         
 
         [Header("Audio & Visual")]
@@ -29,8 +33,10 @@ using UnityEngine;
                 audioSource = gameObject.AddComponent<AudioSource>();
             }
             Playercurrenthealth = PlayerstartHealth; // Setting the players current health to the players starting health at the beginning
-            
 
+            respawnManager = GameObject.Find("GameManager").GetComponent<RespawnManager>();
+            playerObject = this.gameObject;
+            
             // Find the HealthDisplay script in the scene
             healthDisplay = FindObjectOfType<HealthDisplay>();
             
@@ -55,15 +61,15 @@ using UnityEngine;
             //PlayDamageSound(TakeDamageSoundClip);// Visual and audio feedback using Scriptable Object settings
             Playercurrenthealth -= damage; // Playercurrenthealth = Playercurrenthealth - damage
 
-            
-            
+
+
             //SpawnDamageParticles();
 
-            healthDisplay.FlashBlood();  // calls my blood effect method from the HealthDisplay script
+            healthDisplay.GetHitflash();  // calls my blood effect method from the HealthDisplay script
 
             if (Playercurrenthealth <= 0) // If the players current health drops to or below zero, begin the die method
             {
-                Debug.Log("Player Is Dead");
+                
                 Die();
             }
         }
@@ -86,6 +92,11 @@ using UnityEngine;
                 PlayRestoreHealthSound(RestoreHealthSoundClip);
             }
             
+        }
+
+        public void ResetHealth()
+        {
+            Playercurrenthealth = PlayerstartHealth;
         }
 
         // Method to play damage sound
@@ -134,12 +145,24 @@ using UnityEngine;
         }
 
         // Method to handle player death
-        private void Die()
+        public void Die()
         {
             Debug.Log("Player Is Dead");
+            audioSource.Stop();
             isPlayerDead = true;
             // Implement player death logic here
-            // Example: Destroy(gameObject);
+            
+        }
+
+        public void Respawn()
+        {
+            Debug.Log("Should Be teleported to respawnpoint");
+            respawnManager.RespawnPlayer();
+            
+            
+            ResetHealth();
+            isPlayerDead = false;
+            
         }
 
         
