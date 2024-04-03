@@ -80,15 +80,15 @@ public class DoubleBarrelShotgun : GunClass
 
         for (int i = 0; i < pelletsPerShot - 1; i++)
         {
-            Vector3 direction = muzzleflashLocation.forward;
-            Vector3 spread = Vector3.zero;
-            spread += muzzleflashLocation.up * Random.Range(-1f, 1f);
+            Vector3 direction = muzzleflashLocation.forward; //don't know why we can't just manipulate this, but spread appears to be a necessary double step
+            Vector3 spread = Vector3.zero; 
+            spread += muzzleflashLocation.up * Random.Range(-1f, 1f); //give spread some juicy
             spread += muzzleflashLocation.right * Random.Range(-1f, 1f);
-            direction += Vector3.Normalize(spread) * Random.Range(0f, maxVariation);
+            direction += Vector3.Normalize(spread) * Random.Range(0f, maxVariation); //normalize to keep things sensible
             RaycastHit hit;
             if (Physics.Raycast(muzzleflashLocation.position, direction, out hit, Range))
             {
-                Debug.DrawLine(muzzleflashLocation.position, hit.point, Color.yellow, 5f);
+                Debug.DrawLine(muzzleflashLocation.position, hit.point, Color.yellow, 5f); //you need gizmos on for this bad boy
                 // Handle hit detection, apply damage to the target, etc.
                 Transform objectHit = hit.transform;
                 if (objectHit.gameObject.tag != "Player")
