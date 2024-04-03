@@ -16,6 +16,12 @@ public class EnemyAI : MonoBehaviour
 
     public LayerMask whatIsGround, whatIsPlayer;
 
+    //Waypoints
+    public List<Transform> waypoints;
+    private int currentWaypointIndex = 0;
+    public float waypointStopDuration = 2f;
+    private bool isWaitingAtWaypoint = false;
+
     //Patrolling
     public Vector3 walkPoint;
     bool walkPointSet;
@@ -84,7 +90,26 @@ public class EnemyAI : MonoBehaviour
 
     private void Patrolling()
     {
-        if (!walkPointSet) SearchWalkPoint();
+        
+        if (!isWaitingAtWaypoint)
+        {
+            if (waypoints.Count == 0)
+            {
+                Debug.LogWarning("No waypoints assigned!");
+                return;
+            }
+
+            // Move towards the current waypoint
+            agent.SetDestination(waypoints[currentWaypointIndex].position);
+
+            // Check if arrived at waypoint
+            if (Vector3.Distance(transform.position, waypoints[currentWaypointIndex].position) < 1f)
+            {
+                isWaitingAtWaypoint = true;
+                StartCoroutine(StopAtWaypoint());
+            }
+        }
+        /*if (!walkPointSet) SearchWalkPoint();
 
         if (walkPointSet)
         {
@@ -99,7 +124,26 @@ public class EnemyAI : MonoBehaviour
         if (distanceToWalkPoint.magnitude < 1f)
         {
             walkPointSet = false;
+        }*/
+    }
+
+    IEnumerator StopAtWaypoint()
+    {
+        Debug.Log("Coroutine Called");
+        if (isWaitingAtWaypoint)
+        {
+            Debug.Log("StopAtWaypoint started");
+            yield return new WaitForSeconds(waypointStopDuration);
+            isWaitingAtWaypoint = false;
+
+            // Move to the next waypoint
+            currentWaypointIndex = (currentWaypointIndex + 1) % waypoints.Count;
+
+        
+        
+            Debug.Log("Moving to waypoint " + currentWaypointIndex);
         }
+        
     }
 
     private void SearchWalkPoint()
