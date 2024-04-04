@@ -13,6 +13,7 @@ using UnityEngine.UI;
         [SerializeField] private float flashDuration = 0.5f;
         private float flashTimer = 0f;
         [SerializeField] private PlayerHealth playerhealth; // Reference to the PlayerHealth script
+        [SerializeField] private Button respawnButton;
 
         void Start()
         {
@@ -28,23 +29,35 @@ using UnityEngine.UI;
             UpdateHealthText(playerhealth.GetPlayerCurrentHealth()); // Calling the method UpdateHealthText which gets and returns the playerhealth current health value. This is called at start to ensure the current health is displayed 
         }
 
-        private void Update()
+    private void Update()
+    {
+        UpdateHealthText(playerhealth.GetPlayerCurrentHealth()); // Same as in start but this is for everyframe, so that any change to the players health will appear every frame
+
+
+
+        if (playerhealth.Playercurrenthealth <= 0f && playerhealth.isPlayerDead == true)
         {
-            UpdateHealthText(playerhealth.GetPlayerCurrentHealth()); // Same as in start but this is for everyframe, so that any change to the players health will appear every frame
+            YouAreDeadText.gameObject.SetActive(true);
+            YouAreDeadText.text = "You are dead";
+            respawnButton.gameObject.SetActive(true);
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.Confined;
+            Time.timeScale = 0f;
 
-            if (flashTimer > 0)
-            {
-                flashTimer -= Time.deltaTime;
-            }
 
-            if(playerhealth.Playercurrenthealth <= 0f)
-            {
-                YouAreDeadText.text = "You are dead";
-            }
-            
+        }
+        else
+        {
+            YouAreDeadText.gameObject.SetActive(false);
+            respawnButton.gameObject.SetActive(false);
+
         }
 
-        void UpdateHealthText(float PlayercurrentHealth)
+
+
+    }
+
+    void UpdateHealthText(float PlayercurrentHealth)
         {
         // Update the health text
             UpdateDamageFlash(PlayercurrentHealth);
