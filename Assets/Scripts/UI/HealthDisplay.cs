@@ -46,9 +46,10 @@ using UnityEngine.UI;
 
         void UpdateHealthText(float PlayercurrentHealth)
         {
-            // Update the health text
-            healthText.text = $"Health: {PlayercurrentHealth}";
+        // Update the health text
             UpdateDamageFlash(PlayercurrentHealth);
+            healthText.text = ("Health: " + Mathf.Ceil(PlayercurrentHealth));
+            
         }
 
         void UpdateDamageFlash(float playerCurrentHealth) // Update the damage flash/Blood effect based on the player's current health
