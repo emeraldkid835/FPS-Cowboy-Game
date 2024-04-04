@@ -27,7 +27,7 @@ public class EyeballEnemy : MonoBehaviour, IDamage // Declaring that it is an ID
     {
         EnemycurrentHealth = EnemystartHealth; // At start, sets the EnemycurrentHealth to the EnemystartHealth
     }
-    public void TakeDamage(float damage)  // IDamage interface method
+    public void TakeDamage(float damage, IDamage.DamageType damageType)  // IDamage interface method
     {
         Debug.Log($"Enemy took {damage} damage. Enemy has {EnemycurrentHealth - damage} health.");
         animator.SetBool("TookHit", true);

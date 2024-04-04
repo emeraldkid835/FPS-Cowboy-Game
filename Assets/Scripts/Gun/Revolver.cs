@@ -96,7 +96,7 @@ public class Revolver : GunClass
                     if (item is IDamage)
                     {
                         IDamage temp = item as IDamage;
-                        temp.TakeDamage(Damage);
+                        temp.TakeDamage(Damage, IDamage.DamageType.Sharp);
                         break;
                     }
                 }

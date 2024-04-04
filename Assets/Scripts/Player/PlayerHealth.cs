@@ -66,10 +66,9 @@ using UnityEngine.Rendering.PostProcessing;
     }
 
     // IDamageable interface method
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, IDamage.DamageType damageType)
         {   
-            
-            
+
             Debug.Log("Player is taking damage from the PlayerHealth Script");
             //PlayDamageSound(TakeDamageSoundClip);// Visual and audio feedback using Scriptable Object settings
             Playercurrenthealth -= damage; // Playercurrenthealth = Playercurrenthealth - damage

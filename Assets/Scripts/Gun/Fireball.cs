@@ -23,7 +23,7 @@ public class Fireball : MonoBehaviour
             // If the collided object implements the IDamage interface, apply damage
             if (damageable != null)
             {
-                damageable.TakeDamage(damageAmount);
+                damageable.TakeDamage(damageAmount, IDamage.DamageType.Fire);
                 Debug.Log("Hit damageable, Should Take Damage");
             }
 

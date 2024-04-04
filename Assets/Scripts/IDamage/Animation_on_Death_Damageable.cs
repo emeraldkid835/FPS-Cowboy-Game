@@ -6,6 +6,8 @@ using UnityEngine;
 public class Animation_on_Death_Damageable : DamageableObject
 {
     [SerializeField] private Animation deathAnim;
+    [SerializeField] private bool requireDamageType;
+    [SerializeField] private IDamage.DamageType damageType;
 
     protected override void Start()
     {
@@ -18,6 +20,29 @@ public class Animation_on_Death_Damageable : DamageableObject
         currentHealth = startinghealth; // Setting the objects current health to its starting health on start
                                         //explodeDamage = GetComponent<ExplosionDamage>();
 
+    }
+
+    public override void TakeDamage(float damage, IDamage.DamageType damagetype)
+    {
+        if (requireDamageType == true && damagetype == damageType || requireDamageType == false)
+        {
+            Debug.Log($"{gameObject.name} took {damage} damage. Current Health: {currentHealth - 10f}");
+            currentHealth -= damage; // currentHealth = currentHealth - damage
+
+            // Visual and audio feedback using Scriptable Object settings
+            //PlayDamageSound();
+            //SpawnDamageParticles();
+
+            if (currentHealth <= 0) // If the object reaches zero or below health, begin the die method
+            {
+
+                PlayDamageSound(deathSound);
+
+                Die();
+
+
+            }
+        }
     }
 
     protected override void Die()

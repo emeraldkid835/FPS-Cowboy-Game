@@ -44,7 +44,7 @@ using UnityEngine;
         }
 
         // IDamageable interface method
-        public void TakeDamage(float damage)
+        public virtual void TakeDamage(float damage, IDamage.DamageType damagetype)
         {
             Debug.Log($"{gameObject.name} took {damage} damage. Current Health: {currentHealth - 10f}");
             currentHealth -= damage; // currentHealth = currentHealth - damage

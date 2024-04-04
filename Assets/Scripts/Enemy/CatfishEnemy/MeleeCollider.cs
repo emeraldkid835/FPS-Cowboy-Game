@@ -6,6 +6,7 @@ public class MeleeCollider : MonoBehaviour
 {
     public PlayerHealth playerHealth;
     [SerializeField] float Damage = 20f;
+    [SerializeField] IDamage.DamageType damageType = IDamage.DamageType.Sharp;
 
     private void Awake()
     {
@@ -16,7 +17,7 @@ public class MeleeCollider : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Debug.Log("Enemy Hit the Player");
-            playerHealth.TakeDamage(Damage);
+            playerHealth.TakeDamage(Damage, damageType);
         }
     }
 }
