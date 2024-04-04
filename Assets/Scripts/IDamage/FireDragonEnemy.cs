@@ -14,7 +14,7 @@ public class FireDragonEnemy : MonoBehaviour, IDamage // Declaring that it is an
     [Header("Flamethrower Attack")]
     public GameObject flamethrowerPrefab;
     public GameObject flamethrowerSpawnPoint;
-    [SerializeField] float flamethrowerDuration = 3.5f;
+    [SerializeField] float flamethrowerDuration = 1.5f;
     
     private bool isAttacking = false;
 
@@ -85,20 +85,24 @@ public class FireDragonEnemy : MonoBehaviour, IDamage // Declaring that it is an
         // Set the flag to true to prevent repeated instantiations
         isAttacking = true;
 
-        
-        
+
+
 
         // Instantiate flamethrower particle system
-        GameObject flamethrowerInstance = Instantiate(flamethrowerPrefab, flamethrowerSpawnPoint.transform.parent.localPosition, flamethrowerSpawnPoint.transform.parent.localRotation);
-        //flamethrowerInstance.transform.parent = flamethrowerSpawnPoint.transform;
-
+        GameObject flamethrowerInstance = Instantiate(flamethrowerPrefab, flamethrowerSpawnPoint.transform.position, flamethrowerSpawnPoint.transform.rotation) ;
+        flamethrowerInstance.transform.parent = flamethrowerSpawnPoint.transform;
+        Debug.Log("should be a flame");
         
 
+        
+        yield return new WaitForSeconds(2f);// Wait for the specified delay
+        
         // Destroy the flamethrower particle system after a certain duration
-        Destroy(flamethrowerInstance, flamethrowerDuration);
-        yield return new WaitForSeconds(flamethrowerDuration);// Wait for the specified delay
+        Destroy(flamethrowerInstance);
+        
         // Reset the flag after the instantiation is complete
         isAttacking = false;
+        Debug.Log("Flamethrower should stop");
     }
 
 }
