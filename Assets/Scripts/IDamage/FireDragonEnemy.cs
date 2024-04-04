@@ -46,7 +46,7 @@ public class FireDragonEnemy : MonoBehaviour, IDamage // Declaring that it is an
             StartCoroutine(InstantiateFlamethrowerAfterDelay());
         }
     }
-    public void TakeDamage(float damage)  // IDamage interface method
+    public void TakeDamage(float damage, IDamage.DamageType damageType)  // IDamage interface method
     {
         Debug.Log($"Enemy took {damage} damage. Enemy has {EnemycurrentHealth - damage} health.");
         animator.SetBool("TookHit", true);

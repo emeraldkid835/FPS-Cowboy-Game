@@ -43,7 +43,7 @@ public class FlameThrowerDamage : MonoBehaviour
             if (damageable != null)
             {
                 float damage = damagePerSecond * Time.deltaTime; // Calculates damage per frame based on the damage per second
-                damageable.TakeDamage(damage); // IDamage interface method
+                damageable.TakeDamage(damage, IDamage.DamageType.Fire); // IDamage interface method
             }
 
             yield return null;
