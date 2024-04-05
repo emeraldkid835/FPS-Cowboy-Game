@@ -834,7 +834,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4085834901798653899, guid: 4caa69f16f7f7664ca2d6f7f825faeb5, type: 3}
       propertyPath: m_TagString
-      value: Player
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4caa69f16f7f7664ca2d6f7f825faeb5, type: 3}
@@ -891,6 +891,10 @@ PrefabInstance:
     - target: {fileID: 148469391582528800, guid: 213cf41c0e56fb94b9f785db90406fd8, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 148469391582528801, guid: 213cf41c0e56fb94b9f785db90406fd8, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 148469392079080650, guid: 213cf41c0e56fb94b9f785db90406fd8, type: 3}
       propertyPath: m_RootOrder
@@ -951,6 +955,10 @@ PrefabInstance:
     - target: {fileID: 148469392079080655, guid: 213cf41c0e56fb94b9f785db90406fd8, type: 3}
       propertyPath: m_Name
       value: FireballGun
+      objectReference: {fileID: 0}
+    - target: {fileID: 148469392079080655, guid: 213cf41c0e56fb94b9f785db90406fd8, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 148469392079080655, guid: 213cf41c0e56fb94b9f785db90406fd8, type: 3}
       propertyPath: m_TagString
@@ -1033,7 +1041,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2884270972626058522, guid: 346bc76a4e26300458d8a2bec81ffcc4, type: 3}
       propertyPath: m_TagString
-      value: Player
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 2962245644252850725, guid: 346bc76a4e26300458d8a2bec81ffcc4, type: 3}
       propertyPath: m_Layer
