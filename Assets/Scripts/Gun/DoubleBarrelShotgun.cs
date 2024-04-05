@@ -14,6 +14,7 @@ public class DoubleBarrelShotgun : GunClass
     private int currentStoredAmmo;
     public int maxStoredAmmo = 16;
     private Recoil recoil;
+    [SerializeField] private GameObject bulletVisualPrefab;
 
     private bool isReloading = false;
 
@@ -88,6 +89,12 @@ public class DoubleBarrelShotgun : GunClass
                 spread += muzzleflashLocation.right * Random.Range(-1f, 1f);
                 direction += Vector3.Normalize(spread) * Random.Range(0f, maxVariation);
             }//normalize to keep things sensible
+
+            GameObject tempV = GameObject.Instantiate(bulletVisualPrefab);
+            tempV.GetComponent<bullet_Visual>().renderPoint1 = muzzleflashLocation.position;
+            tempV.GetComponent<bullet_Visual>().gunDirection = direction;
+            tempV.GetComponent<bullet_Visual>().renderPoint2 = muzzleflashLocation.position + (direction * 3f);
+
             RaycastHit hit;
             if (Physics.Raycast(muzzleflashLocation.position, direction, out hit, Range))
             {

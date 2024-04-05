@@ -168,6 +168,9 @@ MonoBehaviour:
   muzzleflashLocation: {fileID: 3869878212048064440}
   shootAudio: {fileID: 8300000, guid: a764377339b869e459f5e53fb9258f73, type: 3}
   maxStoredAmmo: 16
+  bulletVisualPrefab: {fileID: 8726380182737884552, guid: e4681ae3f369d534bb6bce1e79483282, type: 3}
+  pelletsPerShot: 6
+  maxVariation: 0.2
 --- !u!1 &4086368780006323697
 GameObject:
   m_ObjectHideFlags: 0

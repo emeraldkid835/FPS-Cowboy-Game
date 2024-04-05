@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Revolver : GunClass
 {
+    [SerializeField] private GameObject bulletVisualPrefab;
     public int currentBullets;
     private float nextTimeToFire;
     public GameObject muzzleflashprefab;
@@ -81,6 +82,10 @@ public class Revolver : GunClass
 
         // Perform a raycast to detect hits
         RaycastHit hit;
+        GameObject temp = GameObject.Instantiate(bulletVisualPrefab);
+        temp.GetComponent<bullet_Visual>().renderPoint1 = muzzleflashLocation.position;
+        temp.GetComponent<bullet_Visual>().gunDirection = muzzleflashLocation.forward;
+        temp.GetComponent<bullet_Visual>().renderPoint2 = muzzleflashLocation.position + (muzzleflashLocation.forward * 3f);
         if (Physics.Raycast(muzzleflashLocation.position, muzzleflashLocation.forward, out hit, Range))
         {
             Debug.DrawLine(muzzleflashLocation.position, hit.point, Color.yellow, 5f);
@@ -95,8 +100,8 @@ public class Revolver : GunClass
                 {
                     if (item is IDamage)
                     {
-                        IDamage temp = item as IDamage;
-                        temp.TakeDamage(Damage, IDamage.DamageType.Sharp);
+                        IDamage tempI = item as IDamage;
+                        tempI.TakeDamage(Damage, IDamage.DamageType.Sharp);
                         break;
                     }
                 }
