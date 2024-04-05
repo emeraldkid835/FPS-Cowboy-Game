@@ -16,6 +16,7 @@ public class Revolver : GunClass
     private int currentStoredAmmo;
     public int maxStoredAmmo = 30;
     private Recoil recoil;
+    private WeaponSwitcher ws;
 
     private bool isReloading = false;
 
@@ -51,6 +52,7 @@ public class Revolver : GunClass
         }
 
         recoil = GameObject.Find("CameraRot/CameraRecoil").GetComponent<Recoil>();
+        ws = GameObject.Find("GunContainer").GetComponent<WeaponSwitcher>();
     }
 
     // Implement shooting logic specific to the Revolver
@@ -149,6 +151,7 @@ public class Revolver : GunClass
         if (!isReloading && currentBullets != maxStoredAmmo && currentStoredAmmo != 0)// Revolver reloading logic
         {
             isReloading = true;
+            ws.isReloading = true;
             Debug.Log("Reloading");
             // start reloading Audio
 
@@ -161,6 +164,7 @@ public class Revolver : GunClass
             currentStoredAmmo -= bulletsToReload;
 
             isReloading = false;
+            ws.isReloading = false;
         }
 
     }

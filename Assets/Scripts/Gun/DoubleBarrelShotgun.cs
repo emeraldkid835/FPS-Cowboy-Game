@@ -15,7 +15,7 @@ public class DoubleBarrelShotgun : GunClass
     public int maxStoredAmmo = 16;
     private Recoil recoil;
     [SerializeField] private GameObject bulletVisualPrefab;
-
+    private WeaponSwitcher ws;
     private bool isReloading = false;
 
     public override float Damage => 20f;
@@ -50,6 +50,7 @@ public class DoubleBarrelShotgun : GunClass
             audioSource = gameObject.AddComponent<AudioSource>();
         }
         recoil = GameObject.Find("CameraRot/CameraRecoil").GetComponent<Recoil>();
+        ws = GameObject.Find("GunContainer").GetComponent<WeaponSwitcher>();
     }
 
     // Implement shooting logic specific to the shotgun
@@ -158,6 +159,7 @@ public class DoubleBarrelShotgun : GunClass
         if (!isReloading && currentBullets != maxStoredAmmo && currentStoredAmmo != 0)// Revolver reloading logic
         {
             isReloading = true;
+            ws.isReloading = true;
             Debug.Log("Reloading");
 
             yield return new WaitForSeconds(ReloadTime);
@@ -169,6 +171,7 @@ public class DoubleBarrelShotgun : GunClass
             currentStoredAmmo -= bulletsToReload;
 
             isReloading = false;
+            ws.isReloading = false;
         }
 
     }
