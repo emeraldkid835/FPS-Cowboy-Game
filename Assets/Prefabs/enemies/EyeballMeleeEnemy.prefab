@@ -125,6 +125,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHealth: {fileID: 0}
   Damage: 10
+  damageType: 0
 --- !u!1 &1616006435439509931
 GameObject:
   m_ObjectHideFlags: 0
@@ -206,11 +207,14 @@ MonoBehaviour:
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 128
+  waypoints: []
+  waypointStopDuration: 2
   walkPoint: {x: 0, y: 0, z: 0}
   walkPointRange: 8
   timeBetweenAttacks: 2
   sightRange: 20
   attackRange: 2
+  sightAngle: 0
   playerInSightRange: 0
   playerInAttackRange: 0
 --- !u!195 &1922012963499359486
@@ -265,8 +269,8 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.85
-  m_Center: {x: 0, y: 2.03, z: 0.46}
+  m_Radius: 1
+  m_Center: {x: 0, y: 2, z: 0.46}
 --- !u!1 &1922012963875877478
 GameObject:
   m_ObjectHideFlags: 0
