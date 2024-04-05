@@ -11,7 +11,8 @@ public class PlayerMovement : MonoBehaviour
 
     // Movement speed variables
     [SerializeField] float speed = 11f;
-    [SerializeField] float sprintSpeed = 17f;
+    [SerializeField] public float sprintSpeed = 17f;
+    [SerializeField] public float IncreasedSprintSpeed = 25f;
     [SerializeField] float sprintAcceleration = 5f;
 
     // Variables for handling slopes
@@ -32,8 +33,8 @@ public class PlayerMovement : MonoBehaviour
     // Jumping variables
     [SerializeField] float jumpHeight = 3.5f;
     [SerializeField] float gravity = -30f;
-    [SerializeField] float groundedRadius = 0.1f;
-    [SerializeField] float jumpGroundedRadius = 0.4f;
+    [SerializeField] float groundedRadius = 0.2f;
+    [SerializeField] float jumpGroundedRadius = 0.8f;
     Vector3 verticalVelocity = Vector3.zero;
 
     // Ground check using layer mask
@@ -43,12 +44,13 @@ public class PlayerMovement : MonoBehaviour
     // Jumping control variables
     bool canJump;
     bool jump;
-    [SerializeField] int jumpAmount = 2;
+    [SerializeField] int jumpAmount = 1;
     [SerializeField] int currentJump = 0; // Serialized for debug
 
     // Sprinting control variables
     public bool sprint;
 
+    
     // Update is called once per frame
     private void Update()
     {
@@ -164,5 +166,10 @@ public class PlayerMovement : MonoBehaviour
     public void OnJumpPressed()
     {
         jump = true;
+    }
+
+    public void increaseJumpAmount(int amount)
+    {
+        jumpAmount += amount;
     }
 }

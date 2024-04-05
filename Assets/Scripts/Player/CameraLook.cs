@@ -29,14 +29,28 @@ public class CameraLook : MonoBehaviour
 
     Vector3 originalCameraPosition;
 
+    
+
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
 
         originalCameraPosition = playerCamera.localPosition;
+        GameObject pausedPanel = GameObject.Find("Canvas/PausedPanel");
 
-        sensitivityXSlider.onValueChanged.AddListener(UpdateSensitivityX);
-        sensitivityYSlider.onValueChanged.AddListener(UpdateSensitivityY);
+       if (pausedPanel != null)
+        {
+            // Find the sliders by type within the paused panel
+            sensitivityXSlider = pausedPanel.GetComponentInChildren<Slider>();
+            sensitivityYSlider = pausedPanel.GetComponentsInChildren<Slider>()[1]; // Assuming it's the second Slider in the hierarchy
+
+            // Add listeners to the sliders
+            sensitivityXSlider.onValueChanged.AddListener(UpdateSensitivityX);
+            sensitivityYSlider.onValueChanged.AddListener(UpdateSensitivityY);
+        }
+
+        
     }
     private void Update()
     {
