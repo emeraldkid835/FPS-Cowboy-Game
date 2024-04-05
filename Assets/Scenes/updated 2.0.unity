@@ -90393,6 +90393,7 @@ MonoBehaviour:
   TakeFireDamageSoundClip: {fileID: 8300000, guid: e723fde7ffa95ef4c9a263d193752bef, type: 3}
   RestoreHealthSoundClip: {fileID: 8300000, guid: eb29844b03df258489a10c01c6e51552, type: 3}
   healthVFX: {fileID: 11400000, guid: b9f3cb45f1efb8e4abf142735b81f950, type: 2}
+  healthDisplay: {fileID: 0}
   fireHazard: {fileID: 0}
   isPlayerDead: 0
 --- !u!4 &527267736016067307
@@ -91319,6 +91320,10 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   priority: 0
+  m_PreviousLayer: 31
+  m_PreviousPriority: 0
+  m_TempColliders: []
+  m_InternalProfile: {fileID: 0}
 --- !u!114 &1755489151687278272
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -91333,7 +91338,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   volumeTrigger: {fileID: 3696423199100595690}
   volumeLayer:
-    serializedVersion: 2
     m_Bits: 2147483648
   stopNaNPropagation: 1
   finalBlitToCameraTarget: 0
@@ -91343,6 +91347,9 @@ MonoBehaviour:
     sharpness: 0.25
     stationaryBlending: 0.95
     motionBlending: 0.85
+    <jitter>k__BackingField: {x: 0, y: 0}
+    m_ResetHistory: 1
+    <sampleIndex>k__BackingField: 0
   subpixelMorphologicalAntialiasing:
     quality: 2
   fastApproximateAntialiasing:
@@ -91351,21 +91358,18 @@ MonoBehaviour:
   fog:
     enabled: 1
     excludeSkybox: 1
+  dithering:
+    m_NoiseTextureIndex: 0
   debugLayer:
-    lightMeter:
-      width: 512
-      height: 256
-      showCurves: 1
-    histogram:
-      width: 512
-      height: 256
-      channel: 3
-    waveform:
-      exposure: 0.12
-      height: 256
-    vectorscope:
-      size: 256
-      exposure: 0.12
+    lightMeter: {<output>k__BackingField: {fileID: 0}, requested: 0, width: 512, height: 256, showCurves: 1}
+    histogram: {<output>k__BackingField: {fileID: 0}, requested: 0, width: 512, height: 256, channel: 3}
+    waveform: {<output>k__BackingField: {fileID: 0}, requested: 0, exposure: 0.12, height: 256}
+    vectorscope: {<output>k__BackingField: {fileID: 0}, requested: 0, size: 256, exposure: 0.12}
+    frameWidth: 0
+    frameHeight: 0
+    <debugOverlayTarget>k__BackingField: {fileID: 0}
+    <debugOverlayActive>k__BackingField: 0
+    <debugOverlay>k__BackingField: 0
     overlaySettings:
       linearDepth: 0
       motionColorIntensity: 4
@@ -91379,6 +91383,12 @@ MonoBehaviour:
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
   m_AfterStackBundles: []
+  <cameraDepthFlags>k__BackingField: 0
+  <haveBundlesBeenInited>k__BackingField: 0
+  m_Camera: {fileID: 3696423199100595692}
+  m_SettingsUpdateNeeded: 1
+  m_IsRenderingInSceneView: 0
+  m_NaNKilled: 0
 --- !u!4 &1798485585890400038
 Transform:
   m_ObjectHideFlags: 0
@@ -93379,6 +93389,7 @@ MonoBehaviour:
   - {fileID: 6008199611120146483}
   - {fileID: 3805907468531679164}
   - {fileID: 8064399657255578760}
+  currentGunIndex: 0
 --- !u!224 &3162018297989952516
 RectTransform:
   m_ObjectHideFlags: 0
@@ -94284,7 +94295,6 @@ MonoBehaviour:
   controller: {fileID: 3696423199823947191}
   speed: 9
   sprintSpeed: 16
-  IncreasedSprintSpeed: 25
   sprintAcceleration: 7
   slopeForce: 5
   slopeRayLength: 0.5
@@ -94338,12 +94348,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 472036af7ec2e734ea44cf23452052f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponSwitcher: {fileID: 3124156782999972894}
   playerMovement: {fileID: 3696423199823947188}
   mouseLook: {fileID: 3696423199823947189}
   playerPause: {fileID: 3696423199823947185}
-  player: {fileID: 8095253975298221896}
-  equippedGun: {fileID: 0}
 --- !u!143 &3696423199823947191
 CharacterController:
   m_ObjectHideFlags: 0
@@ -94897,10 +94904,16 @@ MonoBehaviour:
   muzzleflash: {fileID: 1743301284569550, guid: ad2ab49d0a2a17148bd51c93d977bdbc, type: 3}
   shootSound: {fileID: 8300000, guid: a764377339b869e459f5e53fb9258f73, type: 3}
   currentBullets: 2
+  nextTimeToFire: 0
   muzzleflashprefab: {fileID: 1743301284569550, guid: ad2ab49d0a2a17148bd51c93d977bdbc, type: 3}
   muzzleflashLocation: {fileID: 4167536257895382991}
+  muzzleFlashInstance: {fileID: 0}
+  audioSource: {fileID: 0}
   shootAudio: {fileID: 8300000, guid: a764377339b869e459f5e53fb9258f73, type: 3}
+  currentStoredAmmo: 16
   maxStoredAmmo: 16
+  recoil: {fileID: 0}
+  isReloading: 0
   pelletsPerShot: 6
   maxVariation: 0.2
 --- !u!4 &3802639133781389364
@@ -96208,6 +96221,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentAmmoText: {fileID: 4051932090965992778}
   currentStoredAmmoText: {fileID: 4051932090592260540}
+  equippedGun: {fileID: 0}
 --- !u!114 &4051932091663583235
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96224,6 +96238,7 @@ MonoBehaviour:
   YouAreDeadText: {fileID: 4051932091041414232}
   bloodImage: {fileID: 4051932091123673617}
   flashDuration: 1
+  flashTimer: 0
   playerhealth: {fileID: 492052345394722537}
   respawnButton: {fileID: 4667533138276006880}
 --- !u!1 &4051932091663583740
@@ -96409,6 +96424,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d256cae6a4bcb2349bed91e6e5be9f8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentRotation: {x: 0, y: 0, z: 0}
+  targetRotation: {x: 0, y: 0, z: 0}
   recoilX: -4
   recoilY: 3
   recoilZ: 0.35
@@ -96498,7 +96515,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 0ba8459d142ed114490c1d8d573ad7ae, type: 2}
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 2d520cbce2b09434ea9a61a0b39fc2e7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -96842,7 +96859,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 0ba8459d142ed114490c1d8d573ad7ae, type: 2}
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 2d520cbce2b09434ea9a61a0b39fc2e7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -96928,7 +96945,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 0ba8459d142ed114490c1d8d573ad7ae, type: 2}
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 2d520cbce2b09434ea9a61a0b39fc2e7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -97444,7 +97461,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 0ba8459d142ed114490c1d8d573ad7ae, type: 2}
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 2d520cbce2b09434ea9a61a0b39fc2e7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -97487,7 +97504,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 0ba8459d142ed114490c1d8d573ad7ae, type: 2}
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 2d520cbce2b09434ea9a61a0b39fc2e7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -100109,10 +100126,16 @@ MonoBehaviour:
   muzzleflash: {fileID: 1743301284569550, guid: ad2ab49d0a2a17148bd51c93d977bdbc, type: 3}
   shootSound: {fileID: 8300000, guid: 6739c01659ad96d47987f4ddee226b36, type: 3}
   currentBullets: 6
+  nextTimeToFire: 0
   muzzleflashprefab: {fileID: 1743301284569550, guid: ad2ab49d0a2a17148bd51c93d977bdbc, type: 3}
   muzzleflashLocation: {fileID: 1062796552255094821}
+  muzzleFlashInstance: {fileID: 0}
+  audioSource: {fileID: 0}
   shootAudio: {fileID: 8300000, guid: 6739c01659ad96d47987f4ddee226b36, type: 3}
+  currentStoredAmmo: 30
   maxStoredAmmo: 30
+  recoil: {fileID: 0}
+  isReloading: 0
 --- !u!54 &6225011053475292571
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -101711,10 +101734,15 @@ MonoBehaviour:
   shootSound: {fileID: 8300000, guid: 517177f59d3e2a6428c51f4ef4050843, type: 3}
   currentBullets: 0
   fireballSpeed: 45
+  nextTimeToShoot: 0
   muzzleflashprefab: {fileID: 1743301284569550, guid: ad2ab49d0a2a17148bd51c93d977bdbc, type: 3}
   muzzleflashLocation: {fileID: 8064399657736856935}
+  muzzleFlashInstance: {fileID: 0}
+  audioSource: {fileID: 0}
   shootAudio: {fileID: 8300000, guid: 517177f59d3e2a6428c51f4ef4050843, type: 3}
+  currentStoredAmmo: 30
   maxStoredAmmo: 30
+  recoil: {fileID: 0}
   fireballPrefab: {fileID: 154171966834773024, guid: ef9a3046de8f0994a9f8844e0e962492, type: 3}
 --- !u!65 &8064399657255578762
 BoxCollider:
