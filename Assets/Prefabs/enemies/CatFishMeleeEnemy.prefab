@@ -2122,7 +2122,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bloodEffectPrefab: {fileID: 1240250018707908, guid: 5656e7ea1f1a75d4c895547ec2b824b3, type: 3}
-  bloodEffectLocation: {fileID: 0}
+  bloodEffectLocation: {fileID: 5444140081522039161}
   bloodEffectDuration: 3
   EnemystartHealth: 100
   animator: {fileID: 239267303484977709}
