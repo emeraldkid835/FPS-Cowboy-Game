@@ -15,8 +15,8 @@ using UnityEngine;
 
         protected bool hasDied = false;
         public bool hasExploded = false; //a whole bool just for specific use case?
-        
 
+        private ExplosionDamage kaboom;
         
 
         [SerializeField] protected GameObject deathParticles;
@@ -40,7 +40,7 @@ using UnityEngine;
             }
             currentHealth = startinghealth; // Setting the objects current health to its starting health on start
             //explodeDamage = GetComponent<ExplosionDamage>();
-            
+            kaboom = this.GetComponent<ExplosionDamage>();
         }
 
         // IDamageable interface method
@@ -110,7 +110,10 @@ using UnityEngine;
                 {
                     // Instantiate and store a reference to the death particle effect
                     deathParticlesInstance = Instantiate(deathParticles, transform.position, Quaternion.identity);
-                    
+                    if(kaboom != null)
+                {
+                    kaboom.DealDamageInRadius();
+                }
                     //explodeDamage.DealDamageInRadius();
 
                     // Set the flag to indicate that death particles have been played

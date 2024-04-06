@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -375,6 +375,21 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1311560534204095872, guid: aafadb380e2abb546836d143ca14ef38, type: 3}
   m_PrefabInstance: {fileID: 71531300}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &71531312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 71531301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69e0aebc94c7b404ca125094ce5fca95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageRadius: 5
+  damageAmount: 10
+  damageType: 1
 --- !u!1 &75101250
 GameObject:
   m_ObjectHideFlags: 0
@@ -7005,6 +7020,21 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1311560534204095872, guid: aafadb380e2abb546836d143ca14ef38, type: 3}
   m_PrefabInstance: {fileID: 1311560533732311119}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &471948763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 471948747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69e0aebc94c7b404ca125094ce5fca95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageRadius: 5
+  damageAmount: 10
+  damageType: 1
 --- !u!1 &483330035
 GameObject:
   m_ObjectHideFlags: 0
@@ -7511,6 +7541,21 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1311560534204095872, guid: aafadb380e2abb546836d143ca14ef38, type: 3}
   m_PrefabInstance: {fileID: 553509704}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &553509716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 553509705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69e0aebc94c7b404ca125094ce5fca95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageRadius: 5
+  damageAmount: 10
+  damageType: 1
 --- !u!1 &584180717
 GameObject:
   m_ObjectHideFlags: 0
@@ -10595,6 +10640,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1390831484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1390831477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69e0aebc94c7b404ca125094ce5fca95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageRadius: 5
+  damageAmount: 10
+  damageType: 1
 --- !u!43 &1410844167
 Mesh:
   m_ObjectHideFlags: 0
@@ -10972,6 +11032,21 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1311560534204095872, guid: aafadb380e2abb546836d143ca14ef38, type: 3}
   m_PrefabInstance: {fileID: 1458621352}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1458621364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1458621353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69e0aebc94c7b404ca125094ce5fca95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageRadius: 5
+  damageAmount: 10
+  damageType: 1
 --- !u!1 &1483630016
 GameObject:
   m_ObjectHideFlags: 0
@@ -11520,6 +11595,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1571430488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1571430481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69e0aebc94c7b404ca125094ce5fca95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageRadius: 5
+  damageAmount: 10
+  damageType: 1
 --- !u!1 &1581087598
 GameObject:
   m_ObjectHideFlags: 0
@@ -17994,6 +18084,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1935431412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1935431405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69e0aebc94c7b404ca125094ce5fca95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageRadius: 5
+  damageAmount: 10
+  damageType: 1
 --- !u!1 &1995376304
 GameObject:
   m_ObjectHideFlags: 0
