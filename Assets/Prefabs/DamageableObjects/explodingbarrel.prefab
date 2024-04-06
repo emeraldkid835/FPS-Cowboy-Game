@@ -2010,7 +2010,6 @@ GameObject:
   - component: {fileID: 1806955365980661442}
   - component: {fileID: 1806955365980661443}
   - component: {fileID: 1806955365980661452}
-  - component: {fileID: 8556615448406868351}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
@@ -3593,29 +3592,11 @@ MeshCollider:
   m_GameObject: {fileID: 1806955365980661453}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
---- !u!114 &8556615448406868351
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1806955365980661453}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28c45fd157665f94dbff2db7828987d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startinghealth: 50
-  currentHealth: 0
-  hasExploded: 0
-  deathParticles: {fileID: 0}
-  damageParticles: {fileID: 0}
-  deathSound: {fileID: 0}
 --- !u!1 &1806955366059267836
 GameObject:
   m_ObjectHideFlags: 0
@@ -4979,7 +4960,7 @@ MeshCollider:
   m_GameObject: {fileID: 1806955366059267836}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
@@ -7345,7 +7326,7 @@ MeshCollider:
   m_GameObject: {fileID: 2678968026194093613}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
@@ -7397,12 +7378,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28c45fd157665f94dbff2db7828987d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startinghealth: 50
+  startinghealth: 30
   currentHealth: 0
   hasExploded: 0
-  deathParticles: {fileID: 0}
+  deathParticles: {fileID: 1121192042590650, guid: e1b08032bec16ba4eb1ae23cbd572664, type: 3}
   damageParticles: {fileID: 0}
-  deathSound: {fileID: 0}
+  deathSound: {fileID: 8300000, guid: 1fd31868d68903d4f9e2c4a3b7ef98f3, type: 3}
 --- !u!114 &5808802770725835344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7428,10 +7409,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 1.7
-  m_Height: 5
+  m_Radius: 2.03
+  m_Height: 5.69
   m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: -0.58, z: 0}
 --- !u!1 &5543542106006518652
 GameObject:
   m_ObjectHideFlags: 0
@@ -8795,7 +8776,7 @@ MeshCollider:
   m_GameObject: {fileID: 5543542106006518652}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
