@@ -38,6 +38,7 @@ public class PlayerPause : MonoBehaviour
                 isPaused = true;
                 pausePanel.SetActive(true);
                 Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
                 Time.timeScale = 0f;
             }
             else
@@ -45,6 +46,7 @@ public class PlayerPause : MonoBehaviour
                 isPaused = false;
                 pausePanel.SetActive(false);
                 Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
                 Time.timeScale = 1f;
             }
         }
@@ -60,6 +62,7 @@ public class PlayerPause : MonoBehaviour
         isPaused = false;
         pausePanel.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = true;
         Time.timeScale = 1f;
     }
 

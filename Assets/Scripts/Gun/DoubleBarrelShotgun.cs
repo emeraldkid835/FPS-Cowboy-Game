@@ -14,7 +14,8 @@ public class DoubleBarrelShotgun : GunClass
     private int currentStoredAmmo;
     public int maxStoredAmmo = 16;
     private Recoil recoil;
-
+    [SerializeField] private GameObject bulletVisualPrefab;
+    private WeaponSwitcher ws;
     private bool isReloading = false;
 
     public override float Damage => 20f;
@@ -49,6 +50,7 @@ public class DoubleBarrelShotgun : GunClass
             audioSource = gameObject.AddComponent<AudioSource>();
         }
         recoil = GameObject.Find("CameraRot/CameraRecoil").GetComponent<Recoil>();
+        ws = GameObject.Find("GunContainer").GetComponent<WeaponSwitcher>();
     }
 
     // Implement shooting logic specific to the shotgun
@@ -88,6 +90,12 @@ public class DoubleBarrelShotgun : GunClass
                 spread += muzzleflashLocation.right * Random.Range(-1f, 1f);
                 direction += Vector3.Normalize(spread) * Random.Range(0f, maxVariation);
             }//normalize to keep things sensible
+
+            GameObject tempV = GameObject.Instantiate(bulletVisualPrefab);
+            tempV.GetComponent<bullet_Visual>().renderPoint1 = muzzleflashLocation.position;
+            tempV.GetComponent<bullet_Visual>().gunDirection = direction;
+            tempV.GetComponent<bullet_Visual>().renderPoint2 = muzzleflashLocation.position + (direction * 3f);
+
             RaycastHit hit;
             if (Physics.Raycast(muzzleflashLocation.position, direction, out hit, Range))
             {
@@ -151,6 +159,7 @@ public class DoubleBarrelShotgun : GunClass
         if (!isReloading && currentBullets != maxStoredAmmo && currentStoredAmmo != 0)// Revolver reloading logic
         {
             isReloading = true;
+            ws.isReloading = true;
             Debug.Log("Reloading");
 
             yield return new WaitForSeconds(ReloadTime);
@@ -162,6 +171,7 @@ public class DoubleBarrelShotgun : GunClass
             currentStoredAmmo -= bulletsToReload;
 
             isReloading = false;
+            ws.isReloading = false;
         }
 
     }

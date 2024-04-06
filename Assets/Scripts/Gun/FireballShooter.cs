@@ -16,6 +16,7 @@ public class FireballShooter : GunClass
     private int currentStoredAmmo = 1;
     public int maxStoredAmmo = 30;
     private Recoil recoil;
+    private WeaponSwitcher ws;
 
     // Set values for the fireball shooter
     public override float Damage => 100f;
@@ -55,7 +56,7 @@ public class FireballShooter : GunClass
             audioSource = gameObject.AddComponent<AudioSource>();
         }
 
-        
+        ws = GameObject.Find("GunContainer").GetComponent<WeaponSwitcher>();
         recoil = GameObject.Find("CameraRot/CameraRecoil").GetComponent<Recoil>();
     }
 
@@ -99,6 +100,7 @@ public class FireballShooter : GunClass
     // Implement reloading logic specific to the fireball shooter
     public override void Reload()
     {
+        ws.isReloading = true;
         if (currentStoredAmmo > 0 && currentBullets < MaxBulletsPerMagazine)
         {
             // Calculate bullets to reload
@@ -108,6 +110,7 @@ public class FireballShooter : GunClass
             currentBullets += bulletsToReload;
             currentStoredAmmo -= bulletsToReload;
         }
+        ws.isReloading = false;
     }
 
     // Method to add ammo to the fireball shooter

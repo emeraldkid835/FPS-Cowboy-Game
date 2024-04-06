@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4100877116451506495}
   - component: {fileID: 3045099357134784553}
   - component: {fileID: 4513230234032723750}
+  - component: {fileID: -3517001422958362831}
   m_Layer: 0
   m_Name: greatcrate
   m_TagString: Untagged
@@ -6962,3 +6963,21 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!114 &-3517001422958362831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2090976753627558119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28c45fd157665f94dbff2db7828987d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startinghealth: 50
+  currentHealth: 0
+  hasExploded: 0
+  deathParticles: {fileID: 0}
+  damageParticles: {fileID: 0}
+  deathSound: {fileID: 0}

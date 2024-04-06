@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Revolver : GunClass
 {
+    [SerializeField] private GameObject bulletVisualPrefab;
     public int currentBullets;
     private float nextTimeToFire;
     public GameObject muzzleflashprefab;
@@ -15,6 +16,7 @@ public class Revolver : GunClass
     private int currentStoredAmmo;
     public int maxStoredAmmo = 30;
     private Recoil recoil;
+    private WeaponSwitcher ws;
 
     private bool isReloading = false;
 
@@ -50,6 +52,7 @@ public class Revolver : GunClass
         }
 
         recoil = GameObject.Find("CameraRot/CameraRecoil").GetComponent<Recoil>();
+        ws = GameObject.Find("GunContainer").GetComponent<WeaponSwitcher>();
     }
 
     // Implement shooting logic specific to the Revolver
@@ -81,6 +84,10 @@ public class Revolver : GunClass
 
         // Perform a raycast to detect hits
         RaycastHit hit;
+        GameObject temp = GameObject.Instantiate(bulletVisualPrefab);
+        temp.GetComponent<bullet_Visual>().renderPoint1 = muzzleflashLocation.position;
+        temp.GetComponent<bullet_Visual>().gunDirection = muzzleflashLocation.forward;
+        temp.GetComponent<bullet_Visual>().renderPoint2 = muzzleflashLocation.position + (muzzleflashLocation.forward * 3f);
         if (Physics.Raycast(muzzleflashLocation.position, muzzleflashLocation.forward, out hit, Range))
         {
             Debug.DrawLine(muzzleflashLocation.position, hit.point, Color.yellow, 5f);
@@ -95,8 +102,8 @@ public class Revolver : GunClass
                 {
                     if (item is IDamage)
                     {
-                        IDamage temp = item as IDamage;
-                        temp.TakeDamage(Damage, IDamage.DamageType.Sharp);
+                        IDamage tempI = item as IDamage;
+                        tempI.TakeDamage(Damage, IDamage.DamageType.Sharp);
                         break;
                     }
                 }
@@ -144,6 +151,7 @@ public class Revolver : GunClass
         if (!isReloading && currentBullets != maxStoredAmmo && currentStoredAmmo != 0)// Revolver reloading logic
         {
             isReloading = true;
+            ws.isReloading = true;
             Debug.Log("Reloading");
             // start reloading Audio
 
@@ -156,6 +164,7 @@ public class Revolver : GunClass
             currentStoredAmmo -= bulletsToReload;
 
             isReloading = false;
+            ws.isReloading = false;
         }
 
     }

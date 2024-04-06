@@ -695,6 +695,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHealth: {fileID: 0}
   Damage: 20
+  damageType: 0
 --- !u!1 &2362397312829586223
 GameObject:
   m_ObjectHideFlags: 0
@@ -2050,10 +2051,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 1.16
-  m_Height: 3.1
+  m_Radius: 1.43
+  m_Height: 5
   m_Direction: 1
-  m_Center: {x: 0, y: 1.48, z: 0}
+  m_Center: {x: 0, y: 1.87, z: 0}
 --- !u!195 &5924654572800973625
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2105,6 +2106,7 @@ MonoBehaviour:
   timeBetweenAttacks: 3
   sightRange: 25
   attackRange: 3.25
+  sightAngle: 0
   playerInSightRange: 0
   playerInAttackRange: 0
 --- !u!114 &5924654572800973629
@@ -2120,7 +2122,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bloodEffectPrefab: {fileID: 1240250018707908, guid: 5656e7ea1f1a75d4c895547ec2b824b3, type: 3}
-  bloodEffectLocation: {fileID: 0}
+  bloodEffectLocation: {fileID: 5444140081522039161}
   bloodEffectDuration: 3
   EnemystartHealth: 100
   animator: {fileID: 239267303484977709}
