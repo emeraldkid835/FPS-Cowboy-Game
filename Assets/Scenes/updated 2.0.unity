@@ -104604,7 +104604,7 @@ MonoBehaviour:
   muzzleflashLocation: {fileID: 4167536257895382991}
   shootAudio: {fileID: 8300000, guid: a764377339b869e459f5e53fb9258f73, type: 3}
   maxStoredAmmo: 16
-  bulletVisualPrefab: {fileID: 0}
+  bulletVisualPrefab: {fileID: 8726380182737884552, guid: e4681ae3f369d534bb6bce1e79483282, type: 3}
   pelletsPerShot: 6
   maxVariation: 0.2
 --- !u!4 &3802639133781389364
@@ -105687,7 +105687,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.2961667, y: 0.59462965}
   m_AnchorMax: {x: 0.7004583, y: 0.7574075}
-  m_AnchoredPosition: {x: -1.2616882, y: 1.9685974}
+  m_AnchoredPosition: {x: -1.2617188, y: 1.9685974}
   m_SizeDelta: {x: -2.5234375, y: -3.9374084}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4051932091041414235
@@ -109824,7 +109824,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   muzzleflash: {fileID: 1743301284569550, guid: ad2ab49d0a2a17148bd51c93d977bdbc, type: 3}
   shootSound: {fileID: 8300000, guid: 6739c01659ad96d47987f4ddee226b36, type: 3}
-  bulletVisualPrefab: {fileID: 0}
+  bulletVisualPrefab: {fileID: 8726380182737884552, guid: e4681ae3f369d534bb6bce1e79483282, type: 3}
   currentBullets: 6
   muzzleflashprefab: {fileID: 1743301284569550, guid: ad2ab49d0a2a17148bd51c93d977bdbc, type: 3}
   muzzleflashLocation: {fileID: 1062796552255094821}
