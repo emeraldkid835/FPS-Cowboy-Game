@@ -18,10 +18,9 @@ public class TEMP_TitleLogic : MonoBehaviour
         }
         else { Debug.Log("animator on canvas :)"); meAnimator.SetBool("showcreds", false); }
 
-        if(SceneManager.GetSceneAt(0).isLoaded == true)
-        {
-            audiomanager.instance.PlayBGM(titleMusic.clip);
-        }
+        
+        audiomanager.instance.PlayBGM(titleMusic.clip); //only a temp measure while we have shitty scene loading
+
     }
 
     
