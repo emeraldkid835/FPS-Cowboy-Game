@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class TEMP_TitleLogic : MonoBehaviour
 {
     private Animator meAnimator;
+    [SerializeField] private AudioSource titleMusic;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +18,10 @@ public class TEMP_TitleLogic : MonoBehaviour
         }
         else { Debug.Log("animator on canvas :)"); meAnimator.SetBool("showcreds", false); }
 
-        
+        if(SceneManager.GetSceneAt(0).isLoaded == true)
+        {
+            audiomanager.instance.PlayBGM(titleMusic.clip);
+        }
     }
 
     
