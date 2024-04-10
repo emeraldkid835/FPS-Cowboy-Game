@@ -35,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float gravity = -30f;
     [SerializeField] float groundedRadius = 0.2f;
     [SerializeField] float jumpGroundedRadius = 0.8f;
+    private bool ableToLandSound = false;
     Vector3 verticalVelocity = Vector3.zero;
 
     // Ground check using layer mask
@@ -78,6 +79,11 @@ public class PlayerMovement : MonoBehaviour
         isGrounded = Physics.CapsuleCast(transform.position, transform.position + Vector3.up * capsuleHeight, capsuleRadius, Vector3.down, groundedRadius, groundMask);
         if (isGrounded)
         {
+            if(ableToLandSound == true)
+            {
+                //play a landing sound
+                ableToLandSound = false;
+            }
             if (verticalVelocity.y < 0)
             {
                 verticalVelocity.y = 0;
@@ -140,6 +146,7 @@ public class PlayerMovement : MonoBehaviour
                 // Set vertical velocity for jumping
                 verticalVelocity.y = Mathf.Sqrt(-2f * jumpHeight * gravity);
                 currentJump += 1;
+                ableToLandSound = true;
             }
 
             jump = false;
