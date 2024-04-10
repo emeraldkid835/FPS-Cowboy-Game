@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class TEMP_TitleLogic : MonoBehaviour
 {
     private Animator meAnimator;
+    [SerializeField, Range(0f,1f)] private float BGMVolume = 1;
     [SerializeField] private AudioSource titleMusic;
     // Start is called before the first frame update
     void Start()
