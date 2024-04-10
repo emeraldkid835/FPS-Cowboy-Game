@@ -57,12 +57,14 @@ public class EnemyAI : MonoBehaviour
 
     private void Update()
     {
+        bool isenemyDead = animator.GetBool("isDead");
+
         //Check For sight and attack range
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer); 
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
         
         
-        if (isWaitingAtWaypoint && !playerInSightRange && !playerInAttackRange)
+        if (isWaitingAtWaypoint && !playerInSightRange && !playerInAttackRange && !isenemyDead)
         {
             animator.SetBool("isIdle", true);
             animator.SetBool("isWalking", false);
@@ -70,7 +72,7 @@ public class EnemyAI : MonoBehaviour
             animator.SetBool("isAttacking", false);
         }
 
-        if (!isWaitingAtWaypoint && !playerInSightRange && !playerInAttackRange)
+        if (!isWaitingAtWaypoint && !playerInSightRange && !playerInAttackRange && !isenemyDead)
         {
             animator.SetBool("isIdle", false);
             animator.SetBool("isWalking", true);
@@ -78,7 +80,7 @@ public class EnemyAI : MonoBehaviour
             animator.SetBool("isAttacking", false);
             Patrolling();
         }
-        if (playerInSightRange && !playerInAttackRange)
+        if (playerInSightRange && !playerInAttackRange && !isenemyDead)
         {
             animator.SetBool("isIdle", false);
             animator.SetBool("isWalking", false);
@@ -86,7 +88,7 @@ public class EnemyAI : MonoBehaviour
             animator.SetBool("isAttacking", false);
             ChasePlayer();
         }
-        if (playerInAttackRange && playerInSightRange)
+        if (playerInAttackRange && playerInSightRange && !isenemyDead)
         {
             animator.SetBool("isIdle", false);
             animator.SetBool("isWalking", false);
@@ -179,6 +181,7 @@ public class EnemyAI : MonoBehaviour
 
     private void AttackPlayer()
     {
+        
         // Stop the enemy from moving
         agent.SetDestination(transform.position);
 
