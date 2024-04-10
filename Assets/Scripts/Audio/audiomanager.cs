@@ -70,8 +70,10 @@ public class audiomanager : MonoBehaviour
             temp.spatialBlend = epicFloat;
             temp.pitch = Random.Range(minPitch, maxPitch);
             temp.Play();
-
-            StartCoroutine(BleanUp(gaming, clipToPlay.length));
+            if (clipToPlay != null)
+            {
+                StartCoroutine(BleanUp(gaming, clipToPlay.length));
+            }
         }
     }
 
