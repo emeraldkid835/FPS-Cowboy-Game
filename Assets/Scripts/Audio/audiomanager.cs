@@ -54,7 +54,7 @@ public class audiomanager : MonoBehaviour
         }
     }
 
-    public void PlaySFX3D(AudioClip clipToPlay, Vector3 position, float epicFloat = 1)
+    public void PlaySFX3D(AudioClip clipToPlay, Vector3 position, float epicFloat = 1, float minPitch = 1, float maxPitch = 1)
     {
         if (audioObject != null) //does an audio object exist?
         { 
@@ -68,6 +68,7 @@ public class audiomanager : MonoBehaviour
             AudioSource temp = gaming.GetComponent<AudioSource>();
             temp.clip = clipToPlay;
             temp.spatialBlend = epicFloat;
+            temp.pitch = Random.Range(minPitch, maxPitch);
             temp.Play();
 
             StartCoroutine(BleanUp(gaming, clipToPlay.length));

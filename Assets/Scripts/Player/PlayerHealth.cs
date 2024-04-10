@@ -75,7 +75,7 @@ using UnityEngine.Rendering.PostProcessing;
             Playercurrenthealth -= damage; // Playercurrenthealth = Playercurrenthealth - damage
             if(hurtSound != null)
             {
-                audiomanager.instance.PlaySFX3D(hurtSound.clip, this.transform.position);
+                audiomanager.instance.PlaySFX3D(hurtSound.clip, this.transform.position, 1, 0.9f, 0.1f);
             }
             UpdateHealthFX();
             //SpawnDamageParticles();
