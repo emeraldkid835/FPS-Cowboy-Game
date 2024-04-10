@@ -11,6 +11,8 @@ using UnityEngine.AI;
     [SerializeField] public float bloodEffectDuration = 3f;
     [SerializeField] public float EnemystartHealth = 100f; // Enemy starting health
 
+    [SerializeField] private AudioSource hurtSound;
+
     public Animator animator;
     public NavMeshAgent agent;
     public BoxCollider WeaponCollider;
@@ -33,6 +35,10 @@ using UnityEngine.AI;
           Debug.Log($"Enemy took {damage} damage. Enemy has {EnemycurrentHealth - 10f} health.");
           EnemycurrentHealth -= damage; // EnemycurrentHealth = EnemycurrentHealth - damage
           
+        if(hurtSound != null)
+        {
+            audiomanager.instance.PlaySFX3D(hurtSound.clip, this.transform.position);
+        }
             // Instantiate blood effect at the position where the enemy was hit
           GameObject bloodEffect = Instantiate(bloodEffectPrefab, bloodEffectLocation.position, Quaternion.identity);
           StartCoroutine(isHitToggle()); 
