@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class audiomanager : MonoBehaviour
 {
@@ -9,6 +10,12 @@ public class audiomanager : MonoBehaviour
 
     [SerializeField, Range(1, 20)] private int sfxAmount; //dictates how many sound effects we can have at once
     [SerializeField] private GameObject audioObject;
+
+    [SerializeField] Slider musicVolume;
+    [SerializeField] Slider sfxVolume;
+
+    private bool canOverideMusicVolume;
+
     private AudioSource[] sfxSources; //stores all the sound effect sources
     private AudioSource leMusic; //stores the background music
 
@@ -26,7 +33,15 @@ public class audiomanager : MonoBehaviour
         }
     }
 
- 
+    private void VolumeTick()
+    {
+        if (canOverideMusicVolume == true && leMusic.volume != musicVolume.value)
+        {
+            leMusic.volume = musicVolume.value;
+        }
+
+    }
+
     private void Awake() //is called before Start method, at start of the game
     {
         if (audiomanager.instance == null) //does the audiomanager exist?
@@ -37,7 +52,7 @@ public class audiomanager : MonoBehaviour
         {
             Destroy(this); // game end me
         }
-
+        InvokeRepeating("VolumeTick", 0.2f, 0.2f);
         InitSFX(); // now that the manager is up, initialize all needed audio sources
     }
 
@@ -66,6 +81,10 @@ public class audiomanager : MonoBehaviour
             }
 
             AudioSource temp = gaming.GetComponent<AudioSource>();
+            if (sfxVolume != null)
+            {
+                temp.volume = sfxVolume.value;
+            }
             temp.clip = clipToPlay;
             temp.spatialBlend = epicFloat;
             temp.pitch = Random.Range(minPitch, maxPitch);
@@ -96,17 +115,19 @@ public class audiomanager : MonoBehaviour
 
         while(t < fadeTime)
         {
+            canOverideMusicVolume = false;
             //increase t by amount of time passed between frames
             t += Time.deltaTime;
             //calc percent of time that has passed, based on fadeTime
             float perc = t / fadeTime;
             //fade the musics out/in
             leMusic.volume = Mathf.Lerp(oldMax, 0, t / perc);
-            newBGM.volume = Mathf.Lerp(0, volume, t / perc);
+            newBGM.volume = Mathf.Lerp(0, musicVolume.value, t / perc);
             //yield the frame, then continue
             yield return null;
         }
         //destroy unneeded audio sauce
+        canOverideMusicVolume = true;
         Destroy(leMusic);
         //set new sauce where the old sauce was
         leMusic = newBGM;
