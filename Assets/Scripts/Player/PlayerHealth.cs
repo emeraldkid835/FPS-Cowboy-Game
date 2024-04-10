@@ -20,6 +20,7 @@ using UnityEngine.Rendering.PostProcessing;
         [SerializeField] private PostProcessProfile healthVFX;
         private HealthDisplay healthDisplay;    // Reference to my HealthDisplay script that handles my UI changes
         [SerializeField] private FireHazard fireHazard;  // Reference to my FireHazard Script
+        [SerializeField] private AudioSource hurtSound;
 
         public bool isPlayerDead = false;  
 
@@ -72,7 +73,10 @@ using UnityEngine.Rendering.PostProcessing;
             Debug.Log("Player is taking damage from the PlayerHealth Script");
             //PlayDamageSound(TakeDamageSoundClip);// Visual and audio feedback using Scriptable Object settings
             Playercurrenthealth -= damage; // Playercurrenthealth = Playercurrenthealth - damage
-
+            if(hurtSound != null)
+            {
+                audiomanager.instance.PlaySFX3D(hurtSound.clip, this.transform.position);
+            }
             UpdateHealthFX();
             //SpawnDamageParticles();
 
