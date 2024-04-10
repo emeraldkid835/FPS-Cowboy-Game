@@ -7,6 +7,7 @@ public class HealthPickup : Pickup
     public int healthAmount = 20;
 
     private PlayerHealth playerHealth;
+   
 
     private void Start()
     {
@@ -27,6 +28,7 @@ public class HealthPickup : Pickup
         if (other.CompareTag("Player") && playerHealth.Playercurrenthealth < playerHealth.PlayerstartHealth)
         {
             Collect();
+            audiomanager.instance.PlaySFX3D(pickupSound.clip, this.transform.position);
             Destroy(gameObject);
         }
     }
