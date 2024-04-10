@@ -147,13 +147,13 @@ public class Winchester : GunClass
     public IEnumerator Reloadtime()
     {
         Debug.Log("Hit Reload");
-        if (!isReloading && currentBullets != maxStoredAmmo && currentStoredAmmo != 0)// Revolver reloading logic
+        if (!isReloading && currentBullets != maxStoredAmmo && currentStoredAmmo != 0)// Winchester reloading logic
         {
             isReloading = true;
             ws.isReloading = true;
             Debug.Log("Reloading");
             // start reloading Audio
-
+            // reloading animation here too
             yield return new WaitForSeconds(ReloadTime);
 
             Debug.Log("Done Reloading");
