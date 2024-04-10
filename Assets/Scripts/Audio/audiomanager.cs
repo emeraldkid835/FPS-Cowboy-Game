@@ -54,7 +54,7 @@ public class audiomanager : MonoBehaviour
         }
     }
 
-    public void PlaySFX3D(AudioClip clipToPlay, Vector3 position, float epicFloat = 1)
+    public void PlaySFX3D(AudioClip clipToPlay, Vector3 position, float epicFloat = 1, float minPitch = 1, float maxPitch = 1)
     {
         if (audioObject != null) //does an audio object exist?
         { 
@@ -68,6 +68,7 @@ public class audiomanager : MonoBehaviour
             AudioSource temp = gaming.GetComponent<AudioSource>();
             temp.clip = clipToPlay;
             temp.spatialBlend = epicFloat;
+            temp.pitch = Random.Range(minPitch, maxPitch);
             temp.Play();
 
             StartCoroutine(BleanUp(gaming, clipToPlay.length));
@@ -75,20 +76,20 @@ public class audiomanager : MonoBehaviour
     }
 
     //only exists so a coroutine can be called by another script
-    public void PlayBGM(AudioClip musicToPlay, float fadeTime = 5, bool isLooping = true)
+    public void PlayBGM(AudioClip musicToPlay, float fadeTime = 5, bool isLooping = true, float volume = 1)
     {
-        StartCoroutine(PlayBGMPog(musicToPlay, fadeTime, isLooping));
+        StartCoroutine(PlayBGMPog(musicToPlay, fadeTime, isLooping, volume));
     }
 
 
-    private IEnumerator PlayBGMPog(AudioClip musicToPlay, float fadeTime = 60, bool isLooping = true)
+    private IEnumerator PlayBGMPog(AudioClip musicToPlay, float fadeTime = 60, bool isLooping = true, float volume = 1)
     {
         AudioSource newBGM = gameObject.AddComponent<AudioSource>(); //make a new Audio sauce
         newBGM.clip = musicToPlay; //Init the new sauce, based on passed in values
         newBGM.volume = 0;
         newBGM.loop = isLooping;
         newBGM.Play();
-
+        float oldMax = leMusic.volume;
         float t = 0; //shorthand for time, starting at 0
 
         while(t < fadeTime)
@@ -98,8 +99,8 @@ public class audiomanager : MonoBehaviour
             //calc percent of time that has passed, based on fadeTime
             float perc = t / fadeTime;
             //fade the musics out/in
-            leMusic.volume = Mathf.Lerp(1, 0, t / perc);
-            newBGM.volume = Mathf.Lerp(0, 1, t / perc);
+            leMusic.volume = Mathf.Lerp(oldMax, 0, t / perc);
+            newBGM.volume = Mathf.Lerp(0, volume, t / perc);
             //yield the frame, then continue
             yield return null;
         }

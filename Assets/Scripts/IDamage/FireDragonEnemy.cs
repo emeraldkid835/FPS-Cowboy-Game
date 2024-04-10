@@ -18,6 +18,8 @@ public class FireDragonEnemy : MonoBehaviour, IDamage // Declaring that it is an
     
     private bool isAttacking = false;
 
+    [SerializeField] private AudioSource hurtSound;
+
     public Animator animator;
     public NavMeshAgent agent;
 
@@ -51,6 +53,11 @@ public class FireDragonEnemy : MonoBehaviour, IDamage // Declaring that it is an
         Debug.Log($"Enemy took {damage} damage. Enemy has {EnemycurrentHealth - damage} health.");
         animator.SetBool("TookHit", true);
         EnemycurrentHealth -= damage; // EnemycurrentHealth = EnemycurrentHealth - damage
+
+        if(hurtSound != null)
+        {
+            audiomanager.instance.PlaySFX3D(hurtSound.clip, this.transform.position);
+        }
 
         // Instantiate blood effect at the position where the enemy was hit
         GameObject bloodEffect = Instantiate(bloodEffectPrefab, bloodEffectLocation.position, Quaternion.identity);
