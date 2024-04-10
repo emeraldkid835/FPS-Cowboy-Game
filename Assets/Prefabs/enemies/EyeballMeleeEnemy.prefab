@@ -256,7 +256,7 @@ MonoBehaviour:
   bloodEffectLocation: {fileID: 1922012963875877479}
   bloodEffectDuration: 3
   EnemystartHealth: 50
-  eyeballHurtSound: {fileID: 0}
+  eyeballHurtSound: {fileID: 2560514834638095882}
   animator: {fileID: 1922012963499359484}
   agent: {fileID: 1922012963499359486}
   EnemycurrentHealth: 0

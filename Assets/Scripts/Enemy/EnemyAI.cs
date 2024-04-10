@@ -184,7 +184,8 @@ public class EnemyAI : MonoBehaviour
 
         transform.LookAt(player);
 
-        PlayAudioClip(attackClip);
+        audiomanager.instance.PlaySFX3D(attackClip, this.transform.position, 1, 0.9f, 0.1f);
+        //PlayAudioClip(attackClip);
 
         if (!alreadyAttacked)
         {
