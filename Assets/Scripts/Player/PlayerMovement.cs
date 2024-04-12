@@ -39,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
     private bool ableToLandSound = false;
     [SerializeField] List<string> soundForLandTags = new List<string>();
     [SerializeField] List<AudioSource> soundsForLand = new List<AudioSource>();
+
     Vector3 verticalVelocity = Vector3.zero;
 
     // Ground check using layer mask
@@ -156,8 +157,8 @@ public class PlayerMovement : MonoBehaviour
                 // Set vertical velocity for jumping
                 verticalVelocity.y = Mathf.Sqrt(-2f * jumpHeight * gravity);
                 currentJump += 1;
-               
-                    ableToLandSound = true;
+                audiomanager.instance.PlaySFX3D(jumpSound.clip, this.transform.position, 0, 0.99f, 1.01f);
+                ableToLandSound = true;
                 
             }
 
