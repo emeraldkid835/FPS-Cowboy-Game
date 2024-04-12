@@ -14,6 +14,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] public float sprintSpeed = 17f;
     [SerializeField] public float IncreasedSprintSpeed = 25f;
     [SerializeField] float sprintAcceleration = 5f;
+    [SerializeField] float stepInterval = 0.6f;
+    [SerializeField] float sprintStepInterval = 0.3f;
+    [SerializeField] List<AudioSource> stepSounds = new List<AudioSource>();
+    float stepT;
 
     // Variables for handling slopes
     [SerializeField] float slopeForce = 5f;
@@ -118,8 +122,27 @@ public class PlayerMovement : MonoBehaviour
         currentSpeed = Mathf.Lerp(currentSpeed, targetSpeed, sprintAcceleration * Time.deltaTime);
         Vector3 horizontalVelocity = (transform.right * horizontalInput.x + transform.forward * horizontalInput.y) * currentSpeed;
 
-        
-        
+
+        //do stepping noises lol, lmao (should probably have this in the if above, but fuck that)
+        if (isGrounded == true && horizontalVelocity != Vector3.zero)
+        {
+            if(stepT == 0)
+            {
+                for(int i = 0; i < tagsForSounds.Count; i++) {
+                    if (info.collider.gameObject.tag == tagsForSounds[i] && stepSounds[i] != null) 
+                    {
+                        Debug.Log("Step sound should happen now!");
+                        audiomanager.instance.PlaySFX3D(stepSounds[i].clip, this.transform.position, 0.2f, 0.95f, 1.05f);
+                    } 
+                }
+            }
+            stepT += Time.deltaTime;
+            float targetInterval = sprint ? sprintStepInterval : stepInterval;
+            if(stepT >= targetInterval)
+            {
+                stepT = 0;
+            }
+        }
 
         
         // Check for slope
@@ -195,5 +218,10 @@ public class PlayerMovement : MonoBehaviour
     public void increaseJumpAmount(int amount)
     {
         jumpAmount += amount;
+    }
+
+    private void Awake()
+    {
+        stepT = 0f;
     }
 }
