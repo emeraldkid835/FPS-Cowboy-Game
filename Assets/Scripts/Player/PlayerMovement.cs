@@ -83,17 +83,20 @@ public class PlayerMovement : MonoBehaviour
         isGrounded = Physics.CapsuleCast(transform.position, transform.position + Vector3.up * capsuleHeight, capsuleRadius, Vector3.down, out RaycastHit info, groundedRadius, groundMask);
         if (isGrounded)
         {
-            if(ableToLandSound == true)
+            if(ableToLandSound == true) //<- this is where I assume the jank lies for timing whether or not landing sound should play.
+                                        //i assume grounded and jump can happen at the same time, causing bad sound timing.
             {
-                for (int i = 0; i < soundForLandTags.Count; i++)
+                for (int i = 0; i < soundForLandTags.Count; i++) //run through every tag that should have a sound
                 {
-                    if(info.collider.gameObject.tag == soundForLandTags[i] && soundsForLand[i] != null)
+                    if(info.collider.gameObject.tag == soundForLandTags[i] && soundsForLand[i] != null) //does the object have one of the tags?
+                                                                                                        //and does the corresponding sound even exist?
                     {
-                        audiomanager.instance.PlaySFX3D(soundsForLand[i].clip, this.transform.position, 0, 0.99f, 1.01f);
+                        audiomanager.instance.PlaySFX3D(soundsForLand[i].clip, this.transform.position, 0, 0.99f, 1.01f); //play the correct sound, 2D,
+                                                                                                                          //with slight pitch variation
                         Debug.Log("Playing a landing sound");
                     }
                 }
-                ableToLandSound = false;
+                ableToLandSound = false; //guarentee that it doesn't play more than once, hopefully.
             }
             if (verticalVelocity.y < 0)
             {
@@ -158,8 +161,9 @@ public class PlayerMovement : MonoBehaviour
                 verticalVelocity.y = Mathf.Sqrt(-2f * jumpHeight * gravity);
                 currentJump += 1;
                 audiomanager.instance.PlaySFX3D(jumpSound.clip, this.transform.position, 0, 0.99f, 1.01f);
-                ableToLandSound = true;
-                
+                ableToLandSound = true; //I tried having this bool check if grounded is false first, to prevent playing landing sound at jump
+                                        //but it didn't go well. Fuck!
+
             }
 
             jump = false;
