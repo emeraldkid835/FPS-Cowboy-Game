@@ -79,12 +79,19 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // Check grounding with capsule cast
-        isGrounded = Physics.CapsuleCast(transform.position, transform.position + Vector3.up * capsuleHeight, capsuleRadius, Vector3.down, groundedRadius, groundMask);
+        isGrounded = Physics.CapsuleCast(transform.position, transform.position + Vector3.up * capsuleHeight, capsuleRadius, Vector3.down, out RaycastHit info, groundedRadius, groundMask);
         if (isGrounded)
         {
             if(ableToLandSound == true)
             {
-                //play a landing sound
+                for (int i = 0; i < soundForLandTags.Count; i++)
+                {
+                    if(info.collider.gameObject.tag == soundForLandTags[i] && soundsForLand[i] != null)
+                    {
+                        audiomanager.instance.PlaySFX3D(soundsForLand[i].clip, this.transform.position, 0, 0.99f, 1.01f);
+                        Debug.Log("Playing a landing sound");
+                    }
+                }
                 ableToLandSound = false;
             }
             if (verticalVelocity.y < 0)
@@ -149,7 +156,9 @@ public class PlayerMovement : MonoBehaviour
                 // Set vertical velocity for jumping
                 verticalVelocity.y = Mathf.Sqrt(-2f * jumpHeight * gravity);
                 currentJump += 1;
-                ableToLandSound = true;
+               
+                    ableToLandSound = true;
+                
             }
 
             jump = false;
