@@ -37,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float groundedRadius = 0.2f;
     [SerializeField] float jumpGroundedRadius = 0.8f;
     private bool ableToLandSound = false;
-    [SerializeField] List<string> soundForLandTags = new List<string>();
+    [SerializeField] List<string> tagsForSounds = new List<string>();
     [SerializeField] List<AudioSource> soundsForLand = new List<AudioSource>();
 
     Vector3 verticalVelocity = Vector3.zero;
@@ -86,9 +86,9 @@ public class PlayerMovement : MonoBehaviour
             if(ableToLandSound == true) //<- this is where I assume the jank lies for timing whether or not landing sound should play.
                                         //i assume grounded and jump can happen at the same time, causing bad sound timing.
             {
-                for (int i = 0; i < soundForLandTags.Count; i++) //run through every tag that should have a sound
+                for (int i = 0; i < tagsForSounds.Count; i++) //run through every tag that should have a sound
                 {
-                    if(info.collider.gameObject.tag == soundForLandTags[i] && soundsForLand[i] != null) //does the object have one of the tags?
+                    if(info.collider.gameObject.tag == tagsForSounds[i] && soundsForLand[i] != null) //does the object have one of the tags?
                                                                                                         //and does the corresponding sound even exist?
                     {
                         audiomanager.instance.PlaySFX3D(soundsForLand[i].clip, this.transform.position, 0, 0.99f, 1.01f); //play the correct sound, 2D,
