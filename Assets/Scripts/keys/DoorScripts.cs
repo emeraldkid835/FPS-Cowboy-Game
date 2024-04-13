@@ -2,19 +2,12 @@ using UnityEngine;
 
 public class DoorScripts : MonoBehaviour
 {
-    public bool isOpen = false;
-
-    public void OpenDoor()
+    private void OnTriggerEnter(Collider other)
     {
-        if (!isOpen)
+        if (other.CompareTag("Player"))
         {
-            transform.Translate(new Vector3(0, 5, 0)); // Move the door up by 5 units
-            isOpen = true;
+            // Remove the door object
+            Destroy(gameObject);
         }
-    }
-
-    public void LockDoor()
-    {
-        isOpen = false; // Just sets the state, doesn't physically move the door back
     }
 }
