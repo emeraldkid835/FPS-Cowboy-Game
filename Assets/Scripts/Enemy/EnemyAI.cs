@@ -16,6 +16,12 @@ public class EnemyAI : MonoBehaviour
 
     public LayerMask whatIsGround, whatIsPlayer;
 
+    //Waypoints
+    public List<Transform> waypoints;
+    private int currentWaypointIndex = 0;
+    [SerializeField] public float waypointStopDuration = 2f;
+    private bool isWaitingAtWaypoint = false;
+
     //Patrolling
     public Vector3 walkPoint;
     bool walkPointSet;
@@ -26,7 +32,7 @@ public class EnemyAI : MonoBehaviour
     bool alreadyAttacked;
 
     //States
-    public float sightRange, attackRange;
+    public float sightRange, attackRange, sightAngle;
     public bool playerInSightRange, playerInAttackRange;
 
     
@@ -40,6 +46,7 @@ public class EnemyAI : MonoBehaviour
         if (audioSource == null)
         {
             audioSource = gameObject.AddComponent<AudioSource>();
+            audioSource.volume = .5f;
         }
 
         if (attackClip == null)
@@ -51,14 +58,21 @@ public class EnemyAI : MonoBehaviour
     private void Update()
     {
         //Check For sight and attack range
-        playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
+        playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer); 
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
         
-
         
-
-        if (!playerInSightRange && !playerInAttackRange)
+        if (isWaitingAtWaypoint && !playerInSightRange && !playerInAttackRange)
         {
+            animator.SetBool("isIdle", true);
+            animator.SetBool("isWalking", false);
+            animator.SetBool("isChasing", false);
+            animator.SetBool("isAttacking", false);
+        }
+
+        if (!isWaitingAtWaypoint && !playerInSightRange && !playerInAttackRange)
+        {
+            animator.SetBool("isIdle", false);
             animator.SetBool("isWalking", true);
             animator.SetBool("isChasing", false);
             animator.SetBool("isAttacking", false);
@@ -66,7 +80,7 @@ public class EnemyAI : MonoBehaviour
         }
         if (playerInSightRange && !playerInAttackRange)
         {
-            
+            animator.SetBool("isIdle", false);
             animator.SetBool("isWalking", false);
             animator.SetBool("isChasing", true);
             animator.SetBool("isAttacking", false);
@@ -74,6 +88,7 @@ public class EnemyAI : MonoBehaviour
         }
         if (playerInAttackRange && playerInSightRange)
         {
+            animator.SetBool("isIdle", false);
             animator.SetBool("isWalking", false);
             animator.SetBool("isChasing", false);
             animator.SetBool("isAttacking", true);
@@ -84,7 +99,26 @@ public class EnemyAI : MonoBehaviour
 
     private void Patrolling()
     {
-        if (!walkPointSet) SearchWalkPoint();
+        
+        if (!isWaitingAtWaypoint)
+        {
+            if (waypoints.Count == 0)
+            {
+                Debug.LogWarning("No waypoints assigned!");
+                return;
+            }
+
+            // Move towards the current waypoint
+            agent.SetDestination(waypoints[currentWaypointIndex].position);
+
+            // Check if arrived at waypoint
+            if (Vector3.Distance(transform.position, waypoints[currentWaypointIndex].position) < 1f)
+            {
+                isWaitingAtWaypoint = true;
+                StartCoroutine(StopAtWaypoint());
+            }
+        }
+        /*if (!walkPointSet) SearchWalkPoint();
 
         if (walkPointSet)
         {
@@ -99,10 +133,32 @@ public class EnemyAI : MonoBehaviour
         if (distanceToWalkPoint.magnitude < 1f)
         {
             walkPointSet = false;
-        }
+        }*/
     }
 
-    private void SearchWalkPoint()
+    IEnumerator StopAtWaypoint()
+    {
+        Debug.Log("Coroutine Called");
+        if (isWaitingAtWaypoint)
+        {
+            Debug.Log("StopAtWaypoint started");
+            
+
+            yield return new WaitForSeconds(waypointStopDuration);
+            
+            isWaitingAtWaypoint = false;
+
+            // Move to the next waypoint
+            currentWaypointIndex = (currentWaypointIndex + 1) % waypoints.Count;
+
+        
+        
+            Debug.Log("Moving to waypoint " + currentWaypointIndex);
+        }
+        
+    }
+
+    private void SearchWalkPoint() //should probably use a start position, instead of current position, to prevent wandering to eternity
     {
         //Calculate random point in range
         float randomZ = Random.Range(-walkPointRange, walkPointRange);
@@ -128,7 +184,8 @@ public class EnemyAI : MonoBehaviour
 
         transform.LookAt(player);
 
-        PlayAudioClip(attackClip);
+        audiomanager.instance.PlaySFX3D(attackClip, this.transform.position, 1, 0.9f, 0.1f);
+        //PlayAudioClip(attackClip);
 
         if (!alreadyAttacked)
         {
@@ -141,6 +198,29 @@ public class EnemyAI : MonoBehaviour
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
     }
+    /*private bool PlayerInSightRange()
+    {
+        // Calculate direction towards the player
+        Vector3 directionToPlayer = player.position - transform.position;
+
+        // Check if the player is within the sight angle
+        if (Vector3.Angle(transform.forward, directionToPlayer) < sightAngle / 2f)
+        {
+            RaycastHit hit;
+
+            // Cast a ray towards the player
+            if (Physics.Raycast(transform.position, directionToPlayer.normalized, out hit, sightRange, whatIsPlayer))
+            {
+                // Check if the ray hit the player
+                if (hit.collider.CompareTag("Player"))
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }*/
 
     private void ResetAttack()
     {
@@ -154,8 +234,12 @@ public class EnemyAI : MonoBehaviour
         {
             // Assign the AudioClip to the AudioSource
             audioSource.clip = clip;
-            // Play the AudioClip
-            audioSource.Play();
+            if (!alreadyAttacked)
+            {
+                // Play the AudioClip
+                StartCoroutine(soundDelay());
+            }
+            
         }
         else
         {
@@ -169,6 +253,13 @@ public class EnemyAI : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, attackRange);
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, sightRange);
+        
+    }
+
+    private IEnumerator soundDelay()
+    {
+        yield return new WaitForSeconds(.5f);
+        audioSource.Play();
     }
 
 

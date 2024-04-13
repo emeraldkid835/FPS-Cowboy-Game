@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 
 public class WeaponSwitcher : MonoBehaviour
 {
-
+    public bool isReloading;
     public List<GameObject> guns = new List<GameObject>();
     private int currentGunIndex = 0;
 
@@ -12,6 +13,7 @@ public class WeaponSwitcher : MonoBehaviour
 
     void Start()
     {
+        isReloading = false;
         // Disable all guns except the first one
         for (int i = 1; i < guns.Count; i++)
         {
@@ -35,17 +37,20 @@ public class WeaponSwitcher : MonoBehaviour
 
     public void SwitchGun(int offset)
     {
-        // Disable current gun
-        guns[currentGunIndex].SetActive(false);
+        if (isReloading == false)
+        {
+            // Disable current gun
+            guns[currentGunIndex].SetActive(false);
 
-        // Calculate the index of the next gun
-        currentGunIndex = (currentGunIndex + offset + guns.Count) % guns.Count;
+            // Calculate the index of the next gun
+            currentGunIndex = (currentGunIndex + offset + guns.Count) % guns.Count;
 
-        // Enable the next gun
-        guns[currentGunIndex].SetActive(true);
+            // Enable the next gun
+            guns[currentGunIndex].SetActive(true);
 
-        // Notify the InputManager about the weapon switch
-        InputManager.instance.UpdateEquippedGun(guns[currentGunIndex].GetComponent<GunClass>());
+            // Notify the InputManager about the weapon switch
+            InputManager.instance.UpdateEquippedGun(guns[currentGunIndex].GetComponent<GunClass>());
+        }
     }
 
     // Method to get the currently equipped gun

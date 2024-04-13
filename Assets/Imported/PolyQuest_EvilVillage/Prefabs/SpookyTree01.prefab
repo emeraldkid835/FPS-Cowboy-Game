@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 4880894226780048}
   - component: {fileID: 33224840039247920}
   - component: {fileID: 23172565669833788}
+  - component: {fileID: 1199658311072312233}
+  - component: {fileID: 4752120687819292253}
   m_Layer: 0
   m_Name: SpookyTree01
   m_TagString: Untagged
@@ -83,3 +85,42 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!205 &1199658311072312233
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1948164049626208}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: -0.23202515, y: 2.0002642, z: 0.08935714}
+  m_Size: 4.1710215
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.00024930743
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 23172565669833788}
+  - screenRelativeHeight: 0
+    fadeTransitionWidth: 0
+    renderers: []
+  - screenRelativeHeight: 0
+    fadeTransitionWidth: 0
+    renderers: []
+  m_Enabled: 1
+--- !u!64 &4752120687819292253
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1948164049626208}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 5808f999cbd279d438f4d59a4d0ffb11, type: 3}

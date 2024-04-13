@@ -7,6 +7,7 @@ public class ExplosionDamage : MonoBehaviour
     [SerializeField] public float damageRadius = 5f;
     [SerializeField] public float damageAmount = 10f;
     private DamageableObject damagableObject;
+    [SerializeField] private IDamage.DamageType damageType = IDamage.DamageType.Fire;
 
     private void Awake()
     {
@@ -32,7 +33,7 @@ public class ExplosionDamage : MonoBehaviour
                 float actualDamage = damageAmount * (1f - distance / damageRadius);
 
                 // Call the TakeDamage method on the damageable object
-                damageable.TakeDamage(actualDamage);
+                damageable.TakeDamage(actualDamage, damageType);
                 damagableObject.hasExploded = true;
 
             }

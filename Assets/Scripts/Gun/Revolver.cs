@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Revolver : GunClass
 {
+    [SerializeField] private GameObject bulletVisualPrefab;
     public int currentBullets;
     private float nextTimeToFire;
     public GameObject muzzleflashprefab;
@@ -14,6 +16,7 @@ public class Revolver : GunClass
     private int currentStoredAmmo;
     public int maxStoredAmmo = 30;
     private Recoil recoil;
+    private WeaponSwitcher ws;
 
     private bool isReloading = false;
 
@@ -49,6 +52,7 @@ public class Revolver : GunClass
         }
 
         recoil = GameObject.Find("CameraRot/CameraRecoil").GetComponent<Recoil>();
+        ws = GameObject.Find("GunContainer").GetComponent<WeaponSwitcher>();
     }
 
     // Implement shooting logic specific to the Revolver
@@ -72,32 +76,41 @@ public class Revolver : GunClass
         muzzleFlashInstance = Instantiate(MuzzleFlashPrefab, muzzleflashLocation.position, muzzleflashLocation.rotation);
 
         // Give Recoil
-        recoil.RecoilFire();
+        
 
         Destroy(muzzleFlashInstance, 2f);
         // Play shoot audio
-        audioSource.PlayOneShot(shootAudio);
+        audiomanager.instance.PlaySFX3D(shootAudio, muzzleflashLocation.position, 1f, 0.99f, 1.01f);
 
         // Perform a raycast to detect hits
         RaycastHit hit;
+        GameObject temp = GameObject.Instantiate(bulletVisualPrefab);
+        temp.GetComponent<bullet_Visual>().renderPoint1 = muzzleflashLocation.position;
+        temp.GetComponent<bullet_Visual>().gunDirection = muzzleflashLocation.forward;
+        temp.GetComponent<bullet_Visual>().renderPoint2 = muzzleflashLocation.position + (muzzleflashLocation.forward * 3f);
         if (Physics.Raycast(muzzleflashLocation.position, muzzleflashLocation.forward, out hit, Range))
         {
+            Debug.DrawLine(muzzleflashLocation.position, hit.point, Color.yellow, 5f);
             // Handle hit detection, apply damage to the target, etc.
             Transform objectHit = hit.transform;
-            MonoBehaviour[] mono = objectHit.gameObject.GetComponents<MonoBehaviour>();
-
-            foreach (MonoBehaviour item in mono)
+            if (objectHit.gameObject.tag != "Player") //no more self damage!
             {
-                if (item is IDamage)
+                
+                MonoBehaviour[] mono = objectHit.gameObject.GetComponents<MonoBehaviour>();
+
+                foreach (MonoBehaviour item in mono)
                 {
-                    IDamage temp = item as IDamage;
-                    temp.TakeDamage(Damage);
-                    break;
+                    if (item is IDamage)
+                    {
+                        IDamage tempI = item as IDamage;
+                        tempI.TakeDamage(Damage, IDamage.DamageType.Sharp);
+                        break;
+                    }
                 }
             }
         }
 
-
+        recoil.RecoilFire();
         // Update next time the pistol can fire
         nextTimeToFire = Time.time + 1f / FireRate;
         // Reduce current bullets
@@ -138,6 +151,7 @@ public class Revolver : GunClass
         if (!isReloading && currentBullets != maxStoredAmmo && currentStoredAmmo != 0)// Revolver reloading logic
         {
             isReloading = true;
+            ws.isReloading = true;
             Debug.Log("Reloading");
             // start reloading Audio
 
@@ -150,6 +164,7 @@ public class Revolver : GunClass
             currentStoredAmmo -= bulletsToReload;
 
             isReloading = false;
+            ws.isReloading = false;
         }
 
     }

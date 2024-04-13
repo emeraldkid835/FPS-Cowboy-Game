@@ -13,38 +13,38 @@ using UnityEngine;
 
         [SerializeField] public float currentHealth; // Objects current health at a given time
 
-        private bool hasDied = false;
-        public bool hasExploded = false;
+        protected bool hasDied = false;
+        public bool hasExploded = false; //a whole bool just for specific use case?
+
+        private ExplosionDamage kaboom;
         
 
-        
+        [SerializeField] protected GameObject deathParticles;
+        [SerializeField] protected GameObject damageParticles;
+        protected GameObject deathParticlesInstance;
+        protected GameObject damageParticlesInstance;
+        protected float particlesDestroyDelay = 3f;
 
-        [SerializeField] private GameObject deathParticles;
-        [SerializeField] private GameObject damageParticles;
-        private GameObject deathParticlesInstance;
-        private GameObject damageParticlesInstance;
-        private float particlesDestroyDelay = 3f;
+        protected bool hasPlayedDeathParticles = false;
+        protected bool hasPlayedDamageParticles = false;
 
-        private bool hasPlayedDeathParticles = false;
-        private bool hasPlayedDamageParticles = false;
+        protected AudioSource audioSource;
+        [SerializeField] protected AudioClip deathSound;
 
-        private AudioSource audioSource;
-        [SerializeField] private AudioClip deathSound;
-
-        void Start()
+        protected virtual void Start()
         {
             audioSource = GetComponent<AudioSource>(); // Get an audio source if it doesn't have one
             if (audioSource == null)
             {
-                audioSource = gameObject.AddComponent<AudioSource>();
+                audioSource = gameObject.AddComponent<AudioSource>(); //couldn't this be solved by a [RequiredComponent]??
             }
             currentHealth = startinghealth; // Setting the objects current health to its starting health on start
             //explodeDamage = GetComponent<ExplosionDamage>();
-            
+            kaboom = this.GetComponent<ExplosionDamage>();
         }
 
         // IDamageable interface method
-        public void TakeDamage(float damage)
+        public virtual void TakeDamage(float damage, IDamage.DamageType damagetype)
         {
             Debug.Log($"{gameObject.name} took {damage} damage. Current Health: {currentHealth - 10f}");
             currentHealth -= damage; // currentHealth = currentHealth - damage
@@ -70,7 +70,7 @@ using UnityEngine;
         }
 
         // Method to play damage sound
-        private void PlayDamageSound(AudioClip sound)
+        protected void PlayDamageSound(AudioClip sound)
         {
             if (sound != null)
             {
@@ -86,7 +86,7 @@ using UnityEngine;
         }
 
         // Method to spawn damage particles
-        private void SpawnDamageParticles(GameObject particlesPrefab)
+        protected void SpawnDamageParticles(GameObject particlesPrefab)
         {
             if (particlesPrefab != null)
             {
@@ -99,7 +99,7 @@ using UnityEngine;
 
        
         // Method to handle object destruction
-        private void Die()
+        protected virtual void Die()
         {
             if (!hasDied)
             {
@@ -110,7 +110,10 @@ using UnityEngine;
                 {
                     // Instantiate and store a reference to the death particle effect
                     deathParticlesInstance = Instantiate(deathParticles, transform.position, Quaternion.identity);
-                    
+                    if(kaboom != null)
+                {
+                    kaboom.DealDamageInRadius();
+                }
                     //explodeDamage.DealDamageInRadius();
 
                     // Set the flag to indicate that death particles have been played

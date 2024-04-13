@@ -11,6 +11,8 @@ public class EyeballEnemy : MonoBehaviour, IDamage // Declaring that it is an ID
     [SerializeField] public float bloodEffectDuration = 3f;
     [SerializeField] public float EnemystartHealth = 50f; // Enemy starting health
 
+    [SerializeField] AudioSource eyeballHurtSound;
+
     public Animator animator;
     public NavMeshAgent agent;
     
@@ -27,12 +29,15 @@ public class EyeballEnemy : MonoBehaviour, IDamage // Declaring that it is an ID
     {
         EnemycurrentHealth = EnemystartHealth; // At start, sets the EnemycurrentHealth to the EnemystartHealth
     }
-    public void TakeDamage(float damage)  // IDamage interface method
+    public void TakeDamage(float damage, IDamage.DamageType damageType)  // IDamage interface method
     {
         Debug.Log($"Enemy took {damage} damage. Enemy has {EnemycurrentHealth - damage} health.");
         animator.SetBool("TookHit", true);
         EnemycurrentHealth -= damage; // EnemycurrentHealth = EnemycurrentHealth - damage
-
+        if(eyeballHurtSound != null)
+        {
+            audiomanager.instance.PlaySFX3D(eyeballHurtSound.clip, this.transform.position);
+        }
         // Instantiate blood effect at the position where the enemy was hit
         GameObject bloodEffect = Instantiate(bloodEffectPrefab, bloodEffectLocation.position, Quaternion.identity);
 

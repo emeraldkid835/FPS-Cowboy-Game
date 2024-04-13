@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Fireball : MonoBehaviour
@@ -8,18 +9,26 @@ public class Fireball : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        // Check if the collided object implements the IDamage interface
-        IDamage damageable = collision.gameObject.GetComponent<IDamage>();
-        Debug.Log("Fireball hit something");
-
-        // If the collided object implements the IDamage interface, apply damage
-        if (damageable != null)
+        if (collision.gameObject.tag == "Player") //do nothing if player, since it's a player projectile
         {
-            damageable.TakeDamage(damageAmount);
-            Debug.Log("Hit damageable, Should Take Damage");
+            Debug.Log("Fireball hit player");
+            return;
         }
+        else
+        {
+            // Check if the collided object implements the IDamage interface
+            IDamage damageable = collision.gameObject.GetComponent<IDamage>();
+            Debug.Log("Fireball hit something");
 
-        // Destroy the fireball on collision
-        Destroy(gameObject);
+            // If the collided object implements the IDamage interface, apply damage
+            if (damageable != null)
+            {
+                damageable.TakeDamage(damageAmount, IDamage.DamageType.Fire);
+                Debug.Log("Hit damageable, Should Take Damage");
+            }
+
+            // Destroy the fireball on collision
+            Destroy(gameObject);
+        }
     }
 }

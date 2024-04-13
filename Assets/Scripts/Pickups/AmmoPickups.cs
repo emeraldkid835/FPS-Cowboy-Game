@@ -9,6 +9,8 @@ public class AmmoPickups : MonoBehaviour
 
     public int myValue;
 
+    [SerializeField] private AudioSource pickupSound;
+
     private GunClass equippedGun;
 
     // Start is called before the first frame update
@@ -27,6 +29,7 @@ public class AmmoPickups : MonoBehaviour
         {
             switch (pickup)
             {
+               
                 case AmmoPickupTypes.SMALLAMMO:
                     equippedGun.AddAmmo(myValue);
                     break;
@@ -37,7 +40,7 @@ public class AmmoPickups : MonoBehaviour
                     equippedGun.AddAmmo(myValue);
                     break;
             }
-
+            audiomanager.instance.PlaySFX3D(pickupSound.clip, this.transform.position);
             Destroy(gameObject);
         }
     }

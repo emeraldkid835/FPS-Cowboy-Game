@@ -14,6 +14,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] public float sprintSpeed = 17f;
     [SerializeField] public float IncreasedSprintSpeed = 25f;
     [SerializeField] float sprintAcceleration = 5f;
+    [SerializeField] float stepInterval = 0.6f;
+    [SerializeField] float sprintStepInterval = 0.3f;
+    [SerializeField] List<AudioSource> stepSounds = new List<AudioSource>();
+    float stepT;
 
     // Variables for handling slopes
     [SerializeField] float slopeForce = 5f;
@@ -32,9 +36,14 @@ public class PlayerMovement : MonoBehaviour
 
     // Jumping variables
     [SerializeField] float jumpHeight = 3.5f;
+    [SerializeField] AudioSource jumpSound;
     [SerializeField] float gravity = -30f;
     [SerializeField] float groundedRadius = 0.2f;
     [SerializeField] float jumpGroundedRadius = 0.8f;
+    private bool ableToLandSound = false;
+    [SerializeField] List<string> tagsForSounds = new List<string>();
+    [SerializeField] List<AudioSource> soundsForLand = new List<AudioSource>();
+
     Vector3 verticalVelocity = Vector3.zero;
 
     // Ground check using layer mask
@@ -75,9 +84,24 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // Check grounding with capsule cast
-        isGrounded = Physics.CapsuleCast(transform.position, transform.position + Vector3.up * capsuleHeight, capsuleRadius, Vector3.down, groundedRadius, groundMask);
+        isGrounded = Physics.CapsuleCast(transform.position, transform.position + Vector3.up * capsuleHeight, capsuleRadius, Vector3.down, out RaycastHit info, groundedRadius, groundMask);
         if (isGrounded)
         {
+            if(ableToLandSound == true) //<- this is where I assume the jank lies for timing whether or not landing sound should play.
+                                        //i assume grounded and jump can happen at the same time, causing bad sound timing.
+            {
+                for (int i = 0; i < tagsForSounds.Count; i++) //run through every tag that should have a sound
+                {
+                    if(info.collider.gameObject.tag == tagsForSounds[i] && soundsForLand[i] != null) //does the object have one of the tags?
+                                                                                                        //and does the corresponding sound even exist?
+                    {
+                        audiomanager.instance.PlaySFX3D(soundsForLand[i].clip, this.transform.position, 0, 0.99f, 1.01f); //play the correct sound, 2D,
+                                                                                                                          //with slight pitch variation
+                        Debug.Log("Playing a landing sound");
+                    }
+                }
+                ableToLandSound = false; //guarentee that it doesn't play more than once, hopefully.
+            }
             if (verticalVelocity.y < 0)
             {
                 verticalVelocity.y = 0;
@@ -98,8 +122,27 @@ public class PlayerMovement : MonoBehaviour
         currentSpeed = Mathf.Lerp(currentSpeed, targetSpeed, sprintAcceleration * Time.deltaTime);
         Vector3 horizontalVelocity = (transform.right * horizontalInput.x + transform.forward * horizontalInput.y) * currentSpeed;
 
-        
-        
+
+        //do stepping noises lol, lmao (should probably have this in the if above, but fuck that)
+        if (isGrounded == true && horizontalVelocity != Vector3.zero)
+        {
+            if(stepT == 0)
+            {
+                for(int i = 0; i < tagsForSounds.Count; i++) {
+                    if (info.collider.gameObject.tag == tagsForSounds[i] && stepSounds[i] != null) 
+                    {
+                        Debug.Log("Step sound should happen now!");
+                        audiomanager.instance.PlaySFX3D(stepSounds[i].clip, this.transform.position, 0.2f, 0.95f, 1.05f);
+                    } 
+                }
+            }
+            stepT += Time.deltaTime;
+            float targetInterval = sprint ? sprintStepInterval : stepInterval;
+            if(stepT >= targetInterval)
+            {
+                stepT = 0;
+            }
+        }
 
         
         // Check for slope
@@ -140,6 +183,10 @@ public class PlayerMovement : MonoBehaviour
                 // Set vertical velocity for jumping
                 verticalVelocity.y = Mathf.Sqrt(-2f * jumpHeight * gravity);
                 currentJump += 1;
+                audiomanager.instance.PlaySFX3D(jumpSound.clip, this.transform.position, 0, 0.99f, 1.01f);
+                ableToLandSound = true; //I tried having this bool check if grounded is false first, to prevent playing landing sound at jump
+                                        //but it didn't go well. Fuck!
+
             }
 
             jump = false;
@@ -171,5 +218,10 @@ public class PlayerMovement : MonoBehaviour
     public void increaseJumpAmount(int amount)
     {
         jumpAmount += amount;
+    }
+
+    private void Awake()
+    {
+        stepT = 0f;
     }
 }

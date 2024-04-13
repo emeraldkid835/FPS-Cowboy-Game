@@ -18,7 +18,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Inside Factory.unity
     guid: aca20031c3ad8e14d8b55747f440b711
   - enabled: 1
-    path: Assets/updated1.5.unity
-    guid: 126617c142878eb4085d126529f31e23
+    path: Assets/Scenes/updated 2.0.unity
+    guid: e9db4b80cd9d54c46bbb3c39156ddff9
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: fcf04d545e2e45c4b9dee0e3c0a00b06, type: 2}

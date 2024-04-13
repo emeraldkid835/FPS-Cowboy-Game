@@ -14,15 +14,18 @@ public class DoubleBarrelShotgun : GunClass
     private int currentStoredAmmo;
     public int maxStoredAmmo = 16;
     private Recoil recoil;
-
+    [SerializeField] private GameObject bulletVisualPrefab;
+    private WeaponSwitcher ws;
     private bool isReloading = false;
 
-    public override float Damage => 60f;
+    public override float Damage => 20f;
     public override float Range => 35f;
     public override float FireRate => 3f;
     public override int MaxBulletsPerMagazine => 2;
     public override float ReloadTime => 2f;
 
+    public uint pelletsPerShot = 6;
+    [Range(0f,1f)] public float maxVariation = 0.2f; //tweak as necessary
 
 
     public override GameObject MuzzleFlashPrefab => muzzleflashprefab;
@@ -47,6 +50,7 @@ public class DoubleBarrelShotgun : GunClass
             audioSource = gameObject.AddComponent<AudioSource>();
         }
         recoil = GameObject.Find("CameraRot/CameraRecoil").GetComponent<Recoil>();
+        ws = GameObject.Find("GunContainer").GetComponent<WeaponSwitcher>();
     }
 
     // Implement shooting logic specific to the shotgun
@@ -71,29 +75,50 @@ public class DoubleBarrelShotgun : GunClass
 
         Destroy(muzzleFlashInstance, 2f);
         // Play shoot audio
-        audioSource.PlayOneShot(shootAudio);
+        audiomanager.instance.PlaySFX3D(shootAudio, muzzleflashLocation.position, 1f, 0.99f, 1.01f);
         // Apply recoil when shooting
         recoil.RecoilFire();
         // Perform a raycast to detect hits
-        RaycastHit hit;
-        if (Physics.Raycast(muzzleflashLocation.position, muzzleflashLocation.forward, out hit, Range))
-        {
-            // Handle hit detection, apply damage to the target, etc.
-            Transform objectHit = hit.transform;
-            MonoBehaviour[] mono = objectHit.gameObject.GetComponents<MonoBehaviour>();
 
-            foreach (MonoBehaviour item in mono)
+        for (int i = 0; i < pelletsPerShot - 1; i++)
+        {
+            Vector3 direction = muzzleflashLocation.forward; //don't know why we can't just manipulate this, but spread appears to be a necessary double step
+            if (i != 0) //first shot should be accurate
             {
-                if (item is IDamage)
+                Vector3 spread = Vector3.zero;
+                spread += muzzleflashLocation.up * Random.Range(-1f, 1f); //give spread some juicy
+                spread += muzzleflashLocation.right * Random.Range(-1f, 1f);
+                direction += Vector3.Normalize(spread) * Random.Range(0f, maxVariation);
+            }//normalize to keep things sensible
+
+            GameObject tempV = GameObject.Instantiate(bulletVisualPrefab);
+            tempV.GetComponent<bullet_Visual>().renderPoint1 = muzzleflashLocation.position;
+            tempV.GetComponent<bullet_Visual>().gunDirection = direction;
+            tempV.GetComponent<bullet_Visual>().renderPoint2 = muzzleflashLocation.position + (direction * 3f);
+
+            RaycastHit hit;
+            if (Physics.Raycast(muzzleflashLocation.position, direction, out hit, Range))
+            {
+                Debug.DrawLine(muzzleflashLocation.position, hit.point, Color.yellow, 5f); //you need gizmos on for this bad boy
+                // Handle hit detection, apply damage to the target, etc.
+                Transform objectHit = hit.transform;
+                if (objectHit.gameObject.tag != "Player")
                 {
-                    IDamage temp = item as IDamage;
-                    temp.TakeDamage(Damage);
-                    break;
+                    MonoBehaviour[] mono = objectHit.gameObject.GetComponents<MonoBehaviour>();
+
+                    foreach (MonoBehaviour item in mono)
+                    {
+                        if (item is IDamage)
+                        {
+                            IDamage temp = item as IDamage;
+                            temp.TakeDamage(Damage, IDamage.DamageType.Sharp);
+                            break;
+                        }
+                    }
                 }
             }
+
         }
-
-
         // Update next time the pistol can fire
         nextTimeToFire = Time.time + 1f / FireRate;
         // Reduce current bullets
@@ -134,6 +159,7 @@ public class DoubleBarrelShotgun : GunClass
         if (!isReloading && currentBullets != maxStoredAmmo && currentStoredAmmo != 0)// Revolver reloading logic
         {
             isReloading = true;
+            ws.isReloading = true;
             Debug.Log("Reloading");
 
             yield return new WaitForSeconds(ReloadTime);
@@ -145,6 +171,7 @@ public class DoubleBarrelShotgun : GunClass
             currentStoredAmmo -= bulletsToReload;
 
             isReloading = false;
+            ws.isReloading = false;
         }
 
     }

@@ -11,6 +11,7 @@ public enum PickupType
 public abstract class Pickup : MonoBehaviour
 {
     public PickupType type;
+    [SerializeField] protected AudioSource pickupSound;
 
     public abstract void Collect();
 }

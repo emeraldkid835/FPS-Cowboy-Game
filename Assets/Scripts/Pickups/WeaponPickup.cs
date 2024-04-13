@@ -44,6 +44,8 @@ public class WeaponPickup : MonoBehaviour
     private int currentBullets;
     private int currentStoredAmmo;
     private bool isReloading = false;
+
+    [SerializeField] private IDamage.DamageType damageType;
     
 
     public GunType gunType; // Enum representing the type of gun
@@ -137,7 +139,7 @@ public class WeaponPickup : MonoBehaviour
                 if (item is IDamage)
                 {
                     IDamage temp = item as IDamage;
-                    temp.TakeDamage(currentGunStats.damage);
+                    temp.TakeDamage(currentGunStats.damage, damageType);
                     break;
                 }
             }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 
     public class PlayerHealth : MonoBehaviour, IDamage // Declaring that it is an IDamage, which needs to incorporate the method from the IDamage interface
@@ -10,19 +11,24 @@ using UnityEngine;
         [SerializeField] public float Playercurrenthealth;      // Players current health at a given time
 
         
+        
 
         [Header("Audio & Visual")]
         [SerializeField] private AudioSource audioSource;    
         [SerializeField] public AudioClip TakeFireDamageSoundClip;
         [SerializeField] public AudioClip RestoreHealthSoundClip;
-
+        [SerializeField] private PostProcessProfile healthVFX;
         private HealthDisplay healthDisplay;    // Reference to my HealthDisplay script that handles my UI changes
         [SerializeField] private FireHazard fireHazard;  // Reference to my FireHazard Script
+        [SerializeField] private AudioSource hurtSound;
 
         public bool isPlayerDead = false;  
 
         void Start()
         {
+            ResetHealthFX();
+
+       
             audioSource = GetComponent<AudioSource>(); // Get audio source, don't have one? add one
             if (audioSource == null)
             {
@@ -46,17 +52,32 @@ using UnityEngine;
             }
         }
 
-        // IDamageable interface method
-        public void TakeDamage(float damage)
+    private void UpdateHealthFX()
+    {
+        healthVFX.GetSetting<ColorGrading>().colorFilter.value.g = (Playercurrenthealth / PlayerstartHealth);
+        healthVFX.GetSetting<ColorGrading>().colorFilter.value.b = ((Playercurrenthealth / PlayerstartHealth));
+        Debug.Log("Green value? " + healthVFX.GetSetting<ColorGrading>().colorFilter.value.g);
+    }
+
+    private void ResetHealthFX()
+    {
+        healthVFX.GetSetting<ColorGrading>().colorFilter.value.g = 1;
+        healthVFX.GetSetting<ColorGrading>().colorFilter.value.r = 1;
+        healthVFX.GetSetting<ColorGrading>().colorFilter.value.b = 1;
+    }
+
+    // IDamageable interface method
+    public void TakeDamage(float damage, IDamage.DamageType damageType)
         {   
-            
-            
+
             Debug.Log("Player is taking damage from the PlayerHealth Script");
             //PlayDamageSound(TakeDamageSoundClip);// Visual and audio feedback using Scriptable Object settings
             Playercurrenthealth -= damage; // Playercurrenthealth = Playercurrenthealth - damage
-
-            
-            
+            if(hurtSound != null)
+            {
+                audiomanager.instance.PlaySFX3D(hurtSound.clip, this.transform.position, 1, 0.9f, 0.1f);
+            }
+            UpdateHealthFX();
             //SpawnDamageParticles();
 
             healthDisplay.FlashBlood();  // calls my blood effect method from the HealthDisplay script
@@ -84,6 +105,7 @@ using UnityEngine;
             {
                 Playercurrenthealth = Mathf.Min(Playercurrenthealth + amount, PlayerstartHealth);
                 PlayRestoreHealthSound(RestoreHealthSoundClip);
+                UpdateHealthFX();
             }
             
         }

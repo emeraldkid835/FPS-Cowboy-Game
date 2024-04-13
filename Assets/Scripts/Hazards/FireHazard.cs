@@ -6,6 +6,7 @@ public class FireHazard : MonoBehaviour
 {
     [SerializeField] private float damagePerSecond = 1f;
     [SerializeField] PlayerHealth playerhealth;
+    [SerializeField] private IDamage.DamageType damageType= IDamage.DamageType.Fire;
 
     public bool isBurning = false;
 
@@ -43,7 +44,7 @@ public class FireHazard : MonoBehaviour
             if (damageable != null)
             {
                 float damage = damagePerSecond * Time.deltaTime; // Calculates damage per frame based on the damage per second
-                damageable.TakeDamage(damage); // IDamage interface method
+                damageable.TakeDamage(damage, damageType); // IDamage interface method
             }
 
             yield return null;
