@@ -43,6 +43,8 @@ public class PlayerMovement : MonoBehaviour
     
     [SerializeField] float jumpGroundedRadius = 0.8f;
     [SerializeField] private bool ableToLandSound = false; //Serialized for debug
+    [SerializeField] private float ableToLandSoundRequiredTime = 0.3f;
+    private float ableToLandTimer = 0f;
     [SerializeField] List<string> tagsForSounds = new List<string>();
     [SerializeField] List<AudioSource> soundsForLand = new List<AudioSource>();
 
@@ -88,9 +90,23 @@ public class PlayerMovement : MonoBehaviour
         // Check grounding with capsule cast
         isGrounded = Physics.CapsuleCast(transform.position + Vector3.up * capsuleVerticalOffset, transform.position + Vector3.up * capsuleHeight + Vector3.up * capsuleVerticalOffset, capsuleRadius, Vector3.down, out RaycastHit info, groundedRadius, groundMask);
         
+        if(verticalVelocity.y < 0)
+        {
+            if (ableToLandTimer >= ableToLandSoundRequiredTime)
+            {
+                ableToLandSound = true;
+            }
+            else
+            {
+                ableToLandTimer += Time.deltaTime;
+            }
+
+            
+        }
         
         if (isGrounded)
         {
+            ableToLandTimer = 0f;
             if(ableToLandSound == true) //<- this is where I assume the jank lies for timing whether or not landing sound should play.
                                         //i assume grounded and jump can happen at the same time, causing bad sound timing.
             {
@@ -184,12 +200,11 @@ public class PlayerMovement : MonoBehaviour
         {
             if (currentJump < jumpAmount)
             {
+                
                 // Set vertical velocity for jumping
                 verticalVelocity.y = Mathf.Sqrt(-2f * jumpHeight * gravity);
                 currentJump += 1;
                 audiomanager.instance.PlaySFX3D(jumpSound.clip, this.transform.position, 0, 0.99f, 1.01f);
-                ableToLandSound = true; //I tried having this bool check if grounded is false first, to prevent playing landing sound at jump
-                                        //but it didn't go well. Fuck!
 
             }
 
@@ -227,5 +242,6 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         stepT = 0f;
+        ableToLandTimer = 0f;
     }
 }
