@@ -10,6 +10,7 @@ TagManager:
   - Grassy
   - Industrial
   - Wooden
+  - Fabric
   layers:
   - Default
   - TransparentFX
