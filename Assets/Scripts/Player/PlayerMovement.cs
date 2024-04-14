@@ -30,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
     // Capsule dimensions for grounding check
     [SerializeField] float capsuleHeight = 2f;
     [SerializeField] float capsuleRadius = 0.5f;
+    [SerializeField] float capsuleVerticalOffset = 0.25f;
 
     // Input variables
     Vector2 horizontalInput;
@@ -39,6 +40,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] AudioSource jumpSound;
     [SerializeField] float gravity = -30f;
     [SerializeField] float groundedRadius = 0.2f;
+    
     [SerializeField] float jumpGroundedRadius = 0.8f;
     private bool ableToLandSound = false;
     [SerializeField] List<string> tagsForSounds = new List<string>();
@@ -84,7 +86,9 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // Check grounding with capsule cast
-        isGrounded = Physics.CapsuleCast(transform.position, transform.position + Vector3.up * capsuleHeight, capsuleRadius, Vector3.down, out RaycastHit info, groundedRadius, groundMask);
+        isGrounded = Physics.CapsuleCast(transform.position + Vector3.up * capsuleVerticalOffset, transform.position + Vector3.up * capsuleHeight + Vector3.up * capsuleVerticalOffset, capsuleRadius, Vector3.down, out RaycastHit info, groundedRadius, groundMask);
+        
+        
         if (isGrounded)
         {
             if(ableToLandSound == true) //<- this is where I assume the jank lies for timing whether or not landing sound should play.
