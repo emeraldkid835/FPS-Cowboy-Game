@@ -796,13 +796,14 @@ MonoBehaviour:
   wallRunHeightOffset: 10
   capsuleHeight: 2
   capsuleRadius: 0.5
-  capsuleVerticalOffset: 0.25
+  capsuleVerticalOffset: 0.5
   jumpHeight: 3.5
   jumpSound: {fileID: 4451716919834240919}
   gravity: -25
-  groundedRadius: 0.1
-  jumpGroundedRadius: 0.8
+  groundedRadius: 1
+  jumpGroundedRadius: 1.1
   ableToLandSound: 0
+  ableToLandSoundRequiredTime: 0.3
   tagsForSounds:
   - Grassy
   - Industrial
@@ -895,7 +896,7 @@ MonoBehaviour:
   RestoreHealthSoundClip: {fileID: 8300000, guid: eb29844b03df258489a10c01c6e51552, type: 3}
   healthVFX: {fileID: 11400000, guid: b9f3cb45f1efb8e4abf142735b81f950, type: 2}
   fireHazard: {fileID: 0}
-  hurtSound: {fileID: 0}
+  hurtSound: {fileID: 1435867834229985046}
   isPlayerDead: 0
 --- !u!114 &8095253975251429188
 MonoBehaviour:
