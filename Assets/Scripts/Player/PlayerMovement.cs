@@ -42,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float groundedRadius = 0.2f;
     
     [SerializeField] float jumpGroundedRadius = 0.8f;
-    private bool ableToLandSound = false;
+    [SerializeField] private bool ableToLandSound = false; //Serialized for debug
     [SerializeField] List<string> tagsForSounds = new List<string>();
     [SerializeField] List<AudioSource> soundsForLand = new List<AudioSource>();
 
