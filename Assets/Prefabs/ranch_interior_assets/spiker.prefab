@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7749807214763335251}
   m_Layer: 3
   m_Name: Cone (7)
-  m_TagString: Untagged
+  m_TagString: Industrial
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -501,7 +501,7 @@ GameObject:
   - component: {fileID: 7749807214817132511}
   m_Layer: 3
   m_Name: Cone (9)
-  m_TagString: Untagged
+  m_TagString: Industrial
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -986,7 +986,7 @@ GameObject:
   - component: {fileID: 7749807214868725644}
   m_Layer: 3
   m_Name: Cone (1)
-  m_TagString: Untagged
+  m_TagString: Industrial
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1471,7 +1471,7 @@ GameObject:
   - component: {fileID: 7749807214943504261}
   m_Layer: 3
   m_Name: Cone (5)
-  m_TagString: Untagged
+  m_TagString: Industrial
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1956,7 +1956,7 @@ GameObject:
   - component: {fileID: 7749807215132953730}
   m_Layer: 3
   m_Name: Cone (6)
-  m_TagString: Untagged
+  m_TagString: Industrial
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2441,7 +2441,7 @@ GameObject:
   - component: {fileID: 7749807215216979526}
   m_Layer: 3
   m_Name: Cone
-  m_TagString: Untagged
+  m_TagString: Industrial
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2926,7 +2926,7 @@ GameObject:
   - component: {fileID: 7749807215274209977}
   m_Layer: 3
   m_Name: Cone (6)
-  m_TagString: Untagged
+  m_TagString: Industrial
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3454,7 +3454,7 @@ GameObject:
   - component: {fileID: 7749807215333598019}
   m_Layer: 3
   m_Name: Cone (2)
-  m_TagString: Untagged
+  m_TagString: Industrial
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3939,7 +3939,7 @@ GameObject:
   - component: {fileID: 7749807215643687077}
   m_Layer: 3
   m_Name: Cone (4)
-  m_TagString: Untagged
+  m_TagString: Industrial
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4424,7 +4424,7 @@ GameObject:
   - component: {fileID: 7749807215847124249}
   m_Layer: 3
   m_Name: Cone (11)
-  m_TagString: Untagged
+  m_TagString: Industrial
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4909,7 +4909,7 @@ GameObject:
   - component: {fileID: 7749807215908388757}
   m_Layer: 3
   m_Name: Cone (8)
-  m_TagString: Untagged
+  m_TagString: Industrial
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5391,7 +5391,7 @@ GameObject:
   - component: {fileID: 6299644698081491276}
   m_Layer: 3
   m_Name: spiker
-  m_TagString: Untagged
+  m_TagString: Industrial
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5440,6 +5440,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damagePerSecond: 10
   playerhealth: {fileID: 0}
+  damageType: 1
   isBurning: 0
 --- !u!1 &7749807216058850402
 GameObject:
@@ -5457,7 +5458,7 @@ GameObject:
   - component: {fileID: 7749807216058850332}
   m_Layer: 3
   m_Name: Cone (11)
-  m_TagString: Untagged
+  m_TagString: Industrial
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5942,7 +5943,7 @@ GameObject:
   - component: {fileID: 7749807216087283588}
   m_Layer: 3
   m_Name: Cone (8)
-  m_TagString: Untagged
+  m_TagString: Industrial
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6427,7 +6428,7 @@ GameObject:
   - component: {fileID: 7749807216252344287}
   m_Layer: 3
   m_Name: Cone (9)
-  m_TagString: Untagged
+  m_TagString: Industrial
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6912,7 +6913,7 @@ GameObject:
   - component: {fileID: 7749807216323933570}
   m_Layer: 3
   m_Name: Cone (3)
-  m_TagString: Untagged
+  m_TagString: Industrial
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7397,7 +7398,7 @@ GameObject:
   - component: {fileID: 7749807216324103885}
   m_Layer: 3
   m_Name: Cone (7)
-  m_TagString: Untagged
+  m_TagString: Industrial
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7882,7 +7883,7 @@ GameObject:
   - component: {fileID: 7749807216372130132}
   m_Layer: 3
   m_Name: Cone
-  m_TagString: Untagged
+  m_TagString: Industrial
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8367,7 +8368,7 @@ GameObject:
   - component: {fileID: 7749807216532465368}
   m_Layer: 3
   m_Name: Cone (5)
-  m_TagString: Untagged
+  m_TagString: Industrial
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8852,7 +8853,7 @@ GameObject:
   - component: {fileID: 7749807216535664986}
   m_Layer: 3
   m_Name: Cone (10)
-  m_TagString: Untagged
+  m_TagString: Industrial
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9337,7 +9338,7 @@ GameObject:
   - component: {fileID: 7749807216577885690}
   m_Layer: 3
   m_Name: Cone (10)
-  m_TagString: Untagged
+  m_TagString: Industrial
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9822,7 +9823,7 @@ GameObject:
   - component: {fileID: 7749807216614650465}
   m_Layer: 3
   m_Name: Cone (3)
-  m_TagString: Untagged
+  m_TagString: Industrial
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10307,7 +10308,7 @@ GameObject:
   - component: {fileID: 7749807216704800661}
   m_Layer: 3
   m_Name: Cone (2)
-  m_TagString: Untagged
+  m_TagString: Industrial
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10792,7 +10793,7 @@ GameObject:
   - component: {fileID: 7749807216749696727}
   m_Layer: 3
   m_Name: Cone (4)
-  m_TagString: Untagged
+  m_TagString: Industrial
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11320,7 +11321,7 @@ GameObject:
   - component: {fileID: 7749807216853749808}
   m_Layer: 3
   m_Name: Cone (1)
-  m_TagString: Untagged
+  m_TagString: Industrial
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
