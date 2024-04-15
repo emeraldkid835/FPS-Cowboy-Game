@@ -110,6 +110,12 @@ using UnityEngine.Rendering.PostProcessing;
             
         }
 
+        public void AlterMaxHealth(float amount)
+        {
+            PlayerstartHealth += amount;
+            UpdateHealthFX();
+        }
+
         // Method to play damage sound
         public void PlayDamageSound(AudioClip sound)
         {
