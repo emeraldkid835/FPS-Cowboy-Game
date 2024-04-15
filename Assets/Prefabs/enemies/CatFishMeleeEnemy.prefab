@@ -696,7 +696,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHealth: {fileID: 0}
   Damage: 20
-  hitSound: {fileID: 0}
+  hitSound: {fileID: 8277892458384459689}
   damageType: 0
 --- !u!82 &8277892458384459689
 AudioSource:
@@ -2224,7 +2224,7 @@ MonoBehaviour:
   bloodEffectLocation: {fileID: 5444140081522039161}
   bloodEffectDuration: 3
   EnemystartHealth: 100
-  hurtSound: {fileID: 0}
+  hurtSound: {fileID: 2084988518406411993}
   animator: {fileID: 239267303484977709}
   agent: {fileID: 5924654572800973625}
   WeaponCollider: {fileID: 0}
