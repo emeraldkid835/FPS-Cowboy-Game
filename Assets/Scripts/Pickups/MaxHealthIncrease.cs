@@ -16,6 +16,7 @@ public class MaxHealthIncrease : Pickup
     public override void Collect()
     {
         health.AlterMaxHealth(increaseAmount);
+        health.RestoreHealth(Mathf.Infinity);
     }
 
     public void OnTriggerEnter(Collider other)
