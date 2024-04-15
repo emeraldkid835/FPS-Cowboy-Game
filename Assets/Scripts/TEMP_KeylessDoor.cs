@@ -8,6 +8,9 @@ public class TEMP_KeylessDoor : MonoBehaviour
 {
     private bool canOpen;
     [SerializeField] private float timeToclose = 5f;
+    [SerializeField] private AudioSource openSound;
+    [SerializeField] private AudioSource closeSound;
+    [SerializeField] private Transform soundPosition;
     private Collider mycol;
     private float curTime;
     private Animation myAnim;
@@ -35,7 +38,10 @@ public class TEMP_KeylessDoor : MonoBehaviour
                 myAnim[myAnim.clip.name].time = 0f;
                 myAnim[myAnim.clip.name].speed = 1f;
                 myAnim.Play();
-                
+                if(openSound != null && audiomanager.instance != null)
+                {
+                    audiomanager.instance.PlaySFX3D(openSound.clip, soundPosition.position);
+                }
                 canOpen = false;
                 isOpen = true;
             }
@@ -53,7 +59,10 @@ public class TEMP_KeylessDoor : MonoBehaviour
                 myAnim[myAnim.clip.name].speed = -1f;
                 myAnim.Play();
                
-               
+                if(audiomanager.instance != null && closeSound != null)
+                {
+                    audiomanager.instance.PlaySFX3D(closeSound.clip, soundPosition.position);
+                }
                 isOpen = false;
                 canOpen = false; //canOpen should only be turned true by trigger enter. may be a bit awkward.
             }
