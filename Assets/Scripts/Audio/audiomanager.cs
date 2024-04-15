@@ -8,11 +8,14 @@ public class audiomanager : MonoBehaviour
 
     public static audiomanager instance; //global variable, every object can see and send messages to the audio manager
 
-    [SerializeField, Range(1, 20)] private int sfxAmount; //dictates how many sound effects we can have at once
+    [SerializeField, Range(1, 20)] private int sfxAmount = 20; //dictates how many sound effects we can have at once
     [SerializeField] private GameObject audioObject;
 
     [SerializeField] Slider musicVolume;
     [SerializeField] Slider sfxVolume;
+
+    [SerializeField, Range(-3, 1)] float minVariation;
+    [SerializeField, Range(1, 3)] float maxVariation;
 
     private bool canOverideMusicVolume;
 
@@ -24,7 +27,7 @@ public class audiomanager : MonoBehaviour
     private void InitSFX()
     {
         sfxSources = new AudioSource[sfxAmount]; //set the size of the audiosources array
-        
+        sfxIndex = 0;
         leMusic = gameObject.AddComponent<AudioSource>();//create new audio source, make it the bgm
 
         for (int i = 0; i < sfxAmount; i++) //for size of array, add a new audio source, and put it into the correct index of the array
@@ -35,7 +38,7 @@ public class audiomanager : MonoBehaviour
 
     private void VolumeTick()
     {
-        if (canOverideMusicVolume == true && leMusic.volume != musicVolume.value)
+        if (canOverideMusicVolume == true && leMusic.volume != musicVolume.value && musicVolume != null)
         {
             leMusic.volume = musicVolume.value;
         }
@@ -59,6 +62,9 @@ public class audiomanager : MonoBehaviour
     public void PlaySFX(AudioClip clipToPlay) 
     {
         sfxSources[sfxIndex].clip = clipToPlay; //tell the current audio source to load x clip
+       
+        sfxSources[sfxIndex].pitch = Random.Range(minVariation, maxVariation);
+        
         sfxSources[sfxIndex].Play(); //tell the current audio source to play
 
         sfxIndex++; //increment to next current clip
@@ -122,7 +128,11 @@ public class audiomanager : MonoBehaviour
             float perc = t / fadeTime;
             //fade the musics out/in
             leMusic.volume = Mathf.Lerp(oldMax, 0, t / perc);
-            newBGM.volume = Mathf.Lerp(0, musicVolume.value, t / perc);
+            if (musicVolume != null)
+            {
+                newBGM.volume = Mathf.Lerp(0, musicVolume.value, t / perc);
+            }
+            else { newBGM.volume = Mathf.Lerp(0, oldMax, t / perc); }
             //yield the frame, then continue
             yield return null;
         }
