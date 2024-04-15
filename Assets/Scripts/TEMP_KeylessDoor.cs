@@ -49,11 +49,11 @@ public class TEMP_KeylessDoor : MonoBehaviour
             {
                 curTime += Time.deltaTime;
                 canOpen = false;
-                Debug.Log("Door is open, time spent open: " + curTime);
+                //Debug.Log("Door is open, time spent open: " + curTime);
             }
             else if (isOpen == true && curTime >= timeToclose && inTrigger == false) //once timer is met, close the door
             {
-                Debug.Log("Should be rewinding!");
+                //Debug.Log("Should be rewinding!");
                 curTime = 0f;
                 myAnim[myAnim.clip.name].time = myAnim.clip.length;
                 myAnim[myAnim.clip.name].speed = -1f;

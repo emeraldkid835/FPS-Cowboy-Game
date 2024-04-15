@@ -22,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
     // Variables for handling slopes
     [SerializeField] float slopeForce = 5f;
     [SerializeField] float slopeRayLength = 0.5f;
+    [SerializeField, Range(0, 100)] float slopeLimit = 30f;
 
     // Variables for wall running
     [SerializeField] float wallRunForce = 5f;
@@ -74,8 +75,9 @@ public class PlayerMovement : MonoBehaviour
     void HandleMovementInput()
     {
         // Check if the player can jump based on a downward raycast
-        canJump = Physics.Raycast(transform.position, Vector3.down, jumpGroundedRadius, groundMask);
-        if (canJump)
+        canJump = Physics.Raycast(transform.position, Vector3.down, out RaycastHit jumpInfo, jumpGroundedRadius, groundMask);
+        Debug.Log("Surface normal? :" + jumpInfo.normal);
+        if (canJump && jumpInfo.normal.y >= (1 - (slopeLimit / 100)))
         {
             currentJump = 0;
         }
