@@ -14,6 +14,7 @@ using UnityEngine.UI;
         private float flashTimer = 0f;
         [SerializeField] private PlayerHealth playerhealth; // Reference to the PlayerHealth script
         [SerializeField] private Button respawnButton;
+        [SerializeField] private Slider betterHealthMan;
 
         void Start()
         {
@@ -60,9 +61,13 @@ using UnityEngine.UI;
     void UpdateHealthText(float PlayercurrentHealth)
         {
         // Update the health text
+            if(PlayercurrentHealth < 0)
+            {
+                PlayercurrentHealth = 0;
+            }
             UpdateDamageFlash(PlayercurrentHealth);
-            healthText.text = ("Health: " + Mathf.Ceil(PlayercurrentHealth));
-            
+            healthText.text = ("" + (Mathf.Ceil(PlayercurrentHealth)));
+            betterHealthMan.value = PlayercurrentHealth / playerhealth.PlayerstartHealth;
         }
 
         void UpdateDamageFlash(float playerCurrentHealth) // Update the damage flash/Blood effect based on the player's current health
