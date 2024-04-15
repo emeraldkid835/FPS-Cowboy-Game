@@ -56,7 +56,7 @@ public class FireDragonEnemy : MonoBehaviour, IDamage // Declaring that it is an
 
         if(hurtSound != null)
         {
-            audiomanager.instance.PlaySFX3D(hurtSound.clip, this.transform.position);
+            audiomanager.instance.PlaySFX3D(hurtSound.clip, this.transform.position, 0.9f, 0.975f, 1.025f);
         }
 
         // Instantiate blood effect at the position where the enemy was hit
