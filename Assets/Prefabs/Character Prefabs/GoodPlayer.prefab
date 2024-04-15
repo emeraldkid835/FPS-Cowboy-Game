@@ -783,8 +783,8 @@ MonoBehaviour:
   sprintSpeed: 16
   IncreasedSprintSpeed: 25
   sprintAcceleration: 7
-  stepInterval: 0.6
-  sprintStepInterval: 0.3
+  stepInterval: 0.5
+  sprintStepInterval: 0.2
   stepSounds:
   - {fileID: 37422323059294330}
   - {fileID: 8343658975625692355}
