@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
 public class DoubleBarrelShotgun : GunClass
 {
     public int currentBullets;
@@ -22,7 +23,7 @@ public class DoubleBarrelShotgun : GunClass
     public override float Range => 35f;
     public override float FireRate => 3f;
     public override int MaxBulletsPerMagazine => 2;
-    public override float ReloadTime => 2f;
+    public override float ReloadTime => 4f;
 
     public uint pelletsPerShot = 6;
     [Range(0f,1f)] public float maxVariation = 0.2f; //tweak as necessary
@@ -33,6 +34,7 @@ public class DoubleBarrelShotgun : GunClass
     public override int CurrentBullets => currentBullets;
     public override int MaxStoredAmmo => 16;
     public override int CurrentStoredAmmo => currentStoredAmmo;
+    private Animator _animator;
 
     public DoubleBarrelShotgun()
     {
@@ -51,6 +53,7 @@ public class DoubleBarrelShotgun : GunClass
         }
         recoil = GameObject.Find("CameraRot/CameraRecoil").GetComponent<Recoil>();
         ws = GameObject.Find("GunContainer").GetComponent<WeaponSwitcher>();
+        _animator = GetComponent<Animator>();
     }
 
     // Implement shooting logic specific to the shotgun
@@ -132,6 +135,7 @@ public class DoubleBarrelShotgun : GunClass
     {
         if (isReloading != true && currentBullets < MaxBulletsPerMagazine)
         {
+            _animator.SetTrigger("Reload");
             StartCoroutine(Reloadtime());
         }
         

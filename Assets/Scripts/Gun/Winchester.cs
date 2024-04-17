@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
 public class Winchester : GunClass
 {
     [SerializeField] private GameObject bulletVisualPrefab;
@@ -23,7 +24,7 @@ public class Winchester : GunClass
     public override float Range => 300f;
     public override float FireRate => 3f;
     public override int MaxBulletsPerMagazine => 8;
-    public override float ReloadTime => 4f;
+    public override float ReloadTime => 9.2f;
 
 
 
@@ -32,6 +33,7 @@ public class Winchester : GunClass
     public override int CurrentBullets => currentBullets;
     public override int MaxStoredAmmo => maxStoredAmmo;
     public override int CurrentStoredAmmo => currentStoredAmmo;
+    private Animator _animator;
     public Winchester()
     {
 
@@ -52,6 +54,7 @@ public class Winchester : GunClass
 
         recoil = GameObject.Find("CameraRot/CameraRecoil").GetComponent<Recoil>();
         ws = GameObject.Find("GunContainer").GetComponent<WeaponSwitcher>();
+        _animator = GetComponent<Animator>();
     }
 
     // Implement shooting logic specific to the Revolver
@@ -123,6 +126,7 @@ public class Winchester : GunClass
     {
         if (isReloading != true && currentBullets < MaxBulletsPerMagazine)
         {
+            _animator.SetTrigger("Reload");
             StartCoroutine(Reloadtime());
         }
 
