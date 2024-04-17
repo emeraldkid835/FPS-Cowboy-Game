@@ -113,7 +113,7 @@ using UnityEngine.Rendering.PostProcessing;
         // Method to play damage sound
         public void PlayDamageSound(AudioClip sound)
         {
-            if (sound != null )
+            if (sound != null && fireHazard != null )
             {
                 if (fireHazard.isBurning == true)
                 {
