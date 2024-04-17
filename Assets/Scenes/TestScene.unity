@@ -5779,6 +5779,7 @@ MonoBehaviour:
   RetreatWaypoint: {fileID: 0}
   isRetreating: 0
   isAtRetreat: 0
+  isDoneRetreating: 0
 --- !u!195 &189242895
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -9049,6 +9050,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &872093207 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5924654572800973629, guid: 9f104a46cc661aa46be04ddc8c0a5727, type: 3}
+  m_PrefabInstance: {fileID: 5924654573420336794}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1229fc0d164c87a4a96f579bd471ff45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &896409933 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 483147552064828895, guid: b0218ee1ccb27324190f588b3ef0db2c, type: 3}
@@ -10701,7 +10713,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh134400
+  m_Name: pb_Mesh31570
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -10942,7 +10954,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HealthOverTime: 25
-  catfishenemy: {fileID: 0}
+  catfishenemy: {fileID: 872093207}
 --- !u!65 &1451889593
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -19203,6 +19215,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FireDragonEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 3409119101656210941, guid: b0218ee1ccb27324190f588b3ef0db2c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3409119101663505976, guid: b0218ee1ccb27324190f588b3ef0db2c, type: 3}
       propertyPath: player
       value: 
@@ -19365,7 +19381,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1616006435439509931, guid: f216f0f1ebf29d744b79dc6b1a451fc6, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1922012963499359485, guid: f216f0f1ebf29d744b79dc6b1a451fc6, type: 3}
       propertyPath: player
@@ -19375,6 +19391,10 @@ PrefabInstance:
       propertyPath: sightRange
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 1922012963499359485, guid: f216f0f1ebf29d744b79dc6b1a451fc6, type: 3}
+      propertyPath: RetreatWaypoint
+      value: 
+      objectReference: {fileID: 1451889591}
     - target: {fileID: 1922012963499359485, guid: f216f0f1ebf29d744b79dc6b1a451fc6, type: 3}
       propertyPath: waypoints.Array.size
       value: 4

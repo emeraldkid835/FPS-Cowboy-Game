@@ -37,8 +37,9 @@ public class EnemyAI : MonoBehaviour
 
     //Retreat
     public Transform RetreatWaypoint;
-    public bool isRetreating;
-    public bool isAtRetreat;
+    public bool isRetreating = false;
+    public bool isAtRetreat = false;
+    public bool isDoneRetreating = false;
     
 
     
@@ -103,7 +104,7 @@ public class EnemyAI : MonoBehaviour
             animator.SetBool("isAttacking", true);
             AttackPlayer();
         }
-        if (isRetreating && RetreatWaypoint != null && !isenemyDead)
+        if (isRetreating && RetreatWaypoint != null && !isDoneRetreating && !isenemyDead)
         {
             animator.SetBool("isIdle", false);
             animator.SetBool("isWalking", false);
@@ -298,7 +299,9 @@ public class EnemyAI : MonoBehaviour
 
     private IEnumerator WaitDelay()
     {
+
         yield return new WaitForSeconds(4f);
+        isDoneRetreating = true;
         isRetreating = false;
         animator.SetBool("isIdle", false);
         animator.SetBool("isWalking", false);

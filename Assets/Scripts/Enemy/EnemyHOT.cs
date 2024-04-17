@@ -17,11 +17,13 @@ public class EnemyHOT : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) // Method to detect if the Player is in the trigger collider of the health area object, and sets the isHealing boolean to true. allowing for the coroutine method to apply health over time
     {
+        Debug.Log("yep");
         if (other.CompareTag("Enemy")) // These two trigger methods can also have other tags to add health to those IDamage objects
         {
-            catfishenemy = other.GetComponent<CatfishEnemy>();
-            
             Debug.Log("Enemy entered Healing area");
+            catfishenemy = other.gameObject.GetComponent<CatfishEnemy>();
+            
+            
             isHealing = true;
             //Play healing noise
             StartCoroutine(AddHealthOverTime());

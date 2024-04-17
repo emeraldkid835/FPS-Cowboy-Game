@@ -48,11 +48,11 @@ using UnityEngine.AI;
 
     public void Update()
     {
-        if (EnemycurrentHealth <= 25f)
+        if (EnemycurrentHealth <= 30f && !enemyai.isDoneRetreating)
         {
             enemyai.isRetreating = true;
         }
-        if (EnemycurrentHealth > 25f)
+        else
         {
             enemyai.isRetreating = false;
         }
