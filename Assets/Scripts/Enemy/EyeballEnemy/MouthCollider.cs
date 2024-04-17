@@ -7,6 +7,7 @@ public class MouthCollider : MonoBehaviour
     public PlayerHealth playerHealth;
     [SerializeField] float Damage = 10f;
     [SerializeField] IDamage.DamageType damageType = IDamage.DamageType.Sharp;
+    [SerializeField] AudioSource hittheMF;
 
     private void Awake()
     {
@@ -17,6 +18,7 @@ public class MouthCollider : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Debug.Log("Enemy Hit the Player");
+            audiomanager.instance.PlaySFX3D(hittheMF.clip, this.transform.position);
             playerHealth.TakeDamage(Damage, damageType);
         }
     }

@@ -88,7 +88,7 @@ public class FireballShooter : GunClass
         }
 
         // Play shoot audio
-        audioSource.PlayOneShot(shootAudio);
+        audiomanager.instance.PlaySFX3D(shootAudio, muzzleflashLocation.position, 1f, 0.99f, 1.01f);
 
         // Update next time the fireball shooter can shoot
         nextTimeToShoot = Time.time + 1f / FireRate;

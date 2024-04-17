@@ -8,7 +8,7 @@ public class AmmoUpgrade : Pickup
     
     public int myValue;
     private GunClass equippedGun;
-
+ 
     void Start()
     {
         equippedGun = InputManager.instance.equippedGun;
@@ -19,6 +19,7 @@ public class AmmoUpgrade : Pickup
     }
     public override void Collect()
     {
+        audiomanager.instance.PlaySFX3D(pickupSound.clip, this.transform.position);
         equippedGun.AmmoUpgrade(myValue);
         equippedGun.AddAmmo(myValue);
     }

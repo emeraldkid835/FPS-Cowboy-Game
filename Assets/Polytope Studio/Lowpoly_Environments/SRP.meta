@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Polytope Studio/Lowpoly_Environments/SRP.meta
 guid: 87797bce41637e0429a503587b56584f
+========
+guid: b9f6ae96bb3da284ea7233f0dd9728ab
+>>>>>>>> 4c698ccd33159b89dc4f59b5ea63b31855346d77:Assets/Imported/Fantasy Skybox FREE.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

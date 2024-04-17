@@ -75,7 +75,7 @@ public class DoubleBarrelShotgun : GunClass
 
         Destroy(muzzleFlashInstance, 2f);
         // Play shoot audio
-        audioSource.PlayOneShot(shootAudio);
+        audiomanager.instance.PlaySFX3D(shootAudio, muzzleflashLocation.position, 1f, 0.99f, 1.01f);
         // Apply recoil when shooting
         recoil.RecoilFire();
         // Perform a raycast to detect hits

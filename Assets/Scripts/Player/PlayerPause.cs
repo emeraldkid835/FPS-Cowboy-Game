@@ -45,6 +45,7 @@ public class PlayerPause : MonoBehaviour
             {
                 isPaused = false;
                 pausePanel.SetActive(false);
+                controlsPanel.SetActive(false);
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
                 Time.timeScale = 1f;
@@ -61,6 +62,7 @@ public class PlayerPause : MonoBehaviour
     {
         isPaused = false;
         pausePanel.SetActive(false);
+        controlsPanel.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = true;
         Time.timeScale = 1f;
