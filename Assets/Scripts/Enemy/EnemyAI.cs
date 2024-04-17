@@ -35,6 +35,12 @@ public class EnemyAI : MonoBehaviour
     public float sightRange, attackRange, sightAngle;
     public bool playerInSightRange, playerInAttackRange;
 
+    //Retreat
+    public Transform RetreatWaypoint;
+    public bool isRetreating;
+    public bool isAtRetreat;
+    
+
     
 
 
@@ -63,6 +69,7 @@ public class EnemyAI : MonoBehaviour
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer); 
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
         
+
         
         if (isWaitingAtWaypoint && !playerInSightRange && !playerInAttackRange && !isenemyDead)
         {
@@ -96,6 +103,16 @@ public class EnemyAI : MonoBehaviour
             animator.SetBool("isAttacking", true);
             AttackPlayer();
         }
+        if (isRetreating && RetreatWaypoint != null && !isenemyDead)
+        {
+            animator.SetBool("isIdle", false);
+            animator.SetBool("isWalking", false);
+            animator.SetBool("isChasing", true);
+            animator.SetBool("isAttacking", false);
+
+            Retreat();
+        }
+
     }
 
 
@@ -177,6 +194,21 @@ public class EnemyAI : MonoBehaviour
     private void ChasePlayer()
     {
         agent.SetDestination(player.position);
+    }
+
+    private void Retreat()
+    {
+        isAtRetreat = false;
+        agent.SetDestination(RetreatWaypoint.position);
+        if(Vector3.Distance(transform.position, RetreatWaypoint.position) < 1f)
+        {
+            isAtRetreat = true;
+            animator.SetBool("isIdle", true);
+            animator.SetBool("isWalking", false);
+            animator.SetBool("isChasing", false);
+            animator.SetBool("isAttacking", false);
+            StartCoroutine(WaitDelay());
+        }
     }
 
     private void AttackPlayer()
@@ -262,6 +294,17 @@ public class EnemyAI : MonoBehaviour
     {
         yield return new WaitForSeconds(.5f);
         audioSource.Play();
+    }
+
+    private IEnumerator WaitDelay()
+    {
+        yield return new WaitForSeconds(4f);
+        isRetreating = false;
+        animator.SetBool("isIdle", false);
+        animator.SetBool("isWalking", false);
+        animator.SetBool("isChasing", true);
+        animator.SetBool("isAttacking", false);
+        ChasePlayer();
     }
 
 

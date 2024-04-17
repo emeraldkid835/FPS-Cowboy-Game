@@ -14,6 +14,7 @@ using UnityEngine.AI;
     public Animator animator;
     public NavMeshAgent agent;
     public BoxCollider WeaponCollider;
+    public EnemyAI enemyai;
 
     [SerializeField] public float EnemycurrentHealth; // Enemy current health at a given time
 
@@ -23,6 +24,7 @@ using UnityEngine.AI;
         agent = GetComponent<NavMeshAgent>();
         WeaponCollider = GetComponentInChildren<BoxCollider>();
         bloodEffectLocation = GameObject.Find("BloodeffectLocation").GetComponent<Transform>();
+        enemyai = GetComponent<EnemyAI>();
     }
     public void Start()
     {
@@ -42,6 +44,18 @@ using UnityEngine.AI;
           {
               Die();
           }
+    }
+
+    public void Update()
+    {
+        if (EnemycurrentHealth <= 25f)
+        {
+            enemyai.isRetreating = true;
+        }
+        if (EnemycurrentHealth > 25f)
+        {
+            enemyai.isRetreating = false;
+        }
     }
 
     private void Die() // Simple die method that will be added to in the future

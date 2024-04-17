@@ -86,11 +86,13 @@ public class SniperEnemy : MonoBehaviour, IDamage
     {
         transform.LookAt(player);
         isAttacking = true;
-        GameObject FireballInstance = Instantiate(FireballPrefab, FireballSpawnPoint.transform.position, Quaternion.identity);
+        GameObject FireballInstance = Instantiate(FireballPrefab, FireballSpawnPoint.transform.position, FireballSpawnPoint.transform.rotation);
         Rigidbody FireballRigidbody = FireballInstance.GetComponent<Rigidbody>();
+
         if (FireballRigidbody != null)
         {
-            FireballRigidbody.AddForce(transform.forward * fireballSpeed, ForceMode.Impulse);
+            FireballInstance.transform.LookAt(player);
+            FireballRigidbody.AddForce(FireballInstance.transform.forward * fireballSpeed, ForceMode.Impulse);
         }
 
         yield return new WaitForSeconds(TimeBetweenShots);
