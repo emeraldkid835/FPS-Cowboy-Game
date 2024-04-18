@@ -8,6 +8,7 @@ public class EyeballEnemy : MonoBehaviour, IDamage // Declaring that it is an ID
     [Header("Settings")]
     public GameObject bloodEffectPrefab;
     public Transform bloodEffectLocation;
+    private EnemyAI enemyai;
     [SerializeField] public float bloodEffectDuration = 3f;
     [SerializeField] public float EnemystartHealth = 50f; // Enemy starting health
 
@@ -23,7 +24,20 @@ public class EyeballEnemy : MonoBehaviour, IDamage // Declaring that it is an ID
     {
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
+        enemyai = GetComponent<EnemyAI>();
         
+    }
+
+    public void Update()
+    {
+        if (EnemycurrentHealth <= 15f && !enemyai.isDoneRetreating)
+        {
+            enemyai.isRetreating = true;
+        }
+        else
+        {
+            enemyai.isRetreating = false;
+        }
     }
     public void Start()
     {
