@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
 
     // CharacterController component for player movement
     [SerializeField] CharacterController controller;
+    public bool isMoving = false;
 
     // Movement speed variables
     [SerializeField] float speed = 11f;
@@ -144,9 +145,17 @@ public class PlayerMovement : MonoBehaviour
         currentSpeed = Mathf.Lerp(currentSpeed, targetSpeed, sprintAcceleration * Time.deltaTime);
         Vector3 horizontalVelocity = (transform.right * horizontalInput.x + transform.forward * horizontalInput.y) * currentSpeed;
 
+        if(horizontalVelocity != Vector3.zero)
+        {
+            isMoving = true;
+        }
+        else
+        {
+            isMoving = false;
+        }
 
         //do stepping noises lol, lmao (should probably have this in the if above, but fuck that)
-        if (isGrounded == true && horizontalVelocity != Vector3.zero)
+        if (isGrounded == true && isMoving == true)
         {
             if(stepT == 0)
             {

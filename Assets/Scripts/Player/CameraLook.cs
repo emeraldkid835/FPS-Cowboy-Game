@@ -76,7 +76,7 @@ public class CameraLook : MonoBehaviour
        
 
         // Calculate lateral bobbing motion based on sprinting status
-        if (playerMovement.isGrounded == true)
+        if (playerMovement.isGrounded == true && playerMovement.isMoving == true)
         { 
             float bobAmount = Mathf.Sin(Time.time * headBobFrequency) * headBobAmplitude;
             float lateralBobAmount = playerMovement.sprint ? Mathf.Sin(Time.time * lateralBobFrequency) * lateralBobAmplitude : 0f;
