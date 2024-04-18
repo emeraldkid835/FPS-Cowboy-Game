@@ -52,7 +52,7 @@ using UnityEngine.Rendering.PostProcessing;
             }
         }
 
-    private void UpdateHealthFX()
+    public void UpdateHealthFX()
     {
         healthVFX.GetSetting<ColorGrading>().colorFilter.value.g = (Playercurrenthealth / PlayerstartHealth);
         healthVFX.GetSetting<ColorGrading>().colorFilter.value.b = ((Playercurrenthealth / PlayerstartHealth));
@@ -119,7 +119,7 @@ using UnityEngine.Rendering.PostProcessing;
         // Method to play damage sound
         public void PlayDamageSound(AudioClip sound)
         {
-            if (sound != null )
+            if (sound != null && fireHazard != null )
             {
                 if (fireHazard.isBurning == true)
                 {

@@ -35,6 +35,13 @@ public class EnemyAI : MonoBehaviour
     public float sightRange, attackRange, sightAngle;
     public bool playerInSightRange, playerInAttackRange;
 
+    //Retreat
+    public Transform RetreatWaypoint;
+    public bool isRetreating = false;
+    public bool isAtRetreat = false;
+    public bool isDoneRetreating = false;
+    
+
     
 
 
@@ -57,12 +64,15 @@ public class EnemyAI : MonoBehaviour
 
     private void Update()
     {
+        bool isenemyDead = animator.GetBool("isDead");
+
         //Check For sight and attack range
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer); 
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
         
+
         
-        if (isWaitingAtWaypoint && !playerInSightRange && !playerInAttackRange)
+        if (isWaitingAtWaypoint && !playerInSightRange && !playerInAttackRange && !isenemyDead)
         {
             animator.SetBool("isIdle", true);
             animator.SetBool("isWalking", false);
@@ -70,7 +80,7 @@ public class EnemyAI : MonoBehaviour
             animator.SetBool("isAttacking", false);
         }
 
-        if (!isWaitingAtWaypoint && !playerInSightRange && !playerInAttackRange)
+        if (!isWaitingAtWaypoint && !playerInSightRange && !playerInAttackRange && !isenemyDead)
         {
             animator.SetBool("isIdle", false);
             animator.SetBool("isWalking", true);
@@ -78,7 +88,7 @@ public class EnemyAI : MonoBehaviour
             animator.SetBool("isAttacking", false);
             Patrolling();
         }
-        if (playerInSightRange && !playerInAttackRange)
+        if (playerInSightRange && !playerInAttackRange && !isenemyDead)
         {
             animator.SetBool("isIdle", false);
             animator.SetBool("isWalking", false);
@@ -86,7 +96,7 @@ public class EnemyAI : MonoBehaviour
             animator.SetBool("isAttacking", false);
             ChasePlayer();
         }
-        if (playerInAttackRange && playerInSightRange)
+        if (playerInAttackRange && playerInSightRange && !isenemyDead)
         {
             animator.SetBool("isIdle", false);
             animator.SetBool("isWalking", false);
@@ -94,6 +104,16 @@ public class EnemyAI : MonoBehaviour
             animator.SetBool("isAttacking", true);
             AttackPlayer();
         }
+        if (isRetreating && RetreatWaypoint != null && !isDoneRetreating && !isenemyDead)
+        {
+            animator.SetBool("isIdle", false);
+            animator.SetBool("isWalking", false);
+            animator.SetBool("isChasing", true);
+            animator.SetBool("isAttacking", false);
+
+            Retreat();
+        }
+
     }
 
 
@@ -177,8 +197,24 @@ public class EnemyAI : MonoBehaviour
         agent.SetDestination(player.position);
     }
 
+    private void Retreat()
+    {
+        isAtRetreat = false;
+        agent.SetDestination(RetreatWaypoint.position);
+        if(Vector3.Distance(transform.position, RetreatWaypoint.position) < 1f)
+        {
+            isAtRetreat = true;
+            animator.SetBool("isIdle", true);
+            animator.SetBool("isWalking", false);
+            animator.SetBool("isChasing", false);
+            animator.SetBool("isAttacking", false);
+            StartCoroutine(WaitDelay());
+        }
+    }
+
     private void AttackPlayer()
     {
+        
         // Stop the enemy from moving
         agent.SetDestination(transform.position);
 
@@ -260,6 +296,19 @@ public class EnemyAI : MonoBehaviour
     {
         yield return new WaitForSeconds(.5f);
         audioSource.Play();
+    }
+
+    private IEnumerator WaitDelay()
+    {
+
+        yield return new WaitForSeconds(4f);
+        isDoneRetreating = true;
+        isRetreating = false;
+        animator.SetBool("isIdle", false);
+        animator.SetBool("isWalking", false);
+        animator.SetBool("isChasing", true);
+        animator.SetBool("isAttacking", false);
+        ChasePlayer();
     }
 
 
