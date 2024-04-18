@@ -67,6 +67,7 @@ public class Revolver : GunClass
         if (currentBullets <= 0)
         {
             Debug.Log("Weapon Empty!");
+            Reload();
             return;
         }
         if (Time.time < nextTimeToFire || currentBullets <= 0)

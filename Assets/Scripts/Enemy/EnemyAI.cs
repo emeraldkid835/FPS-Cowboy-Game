@@ -220,7 +220,7 @@ public class EnemyAI : MonoBehaviour
 
         transform.LookAt(player);
 
-        audiomanager.instance.PlaySFX3D(attackClip, this.transform.position, 1, 0.9f, 0.1f);
+        
         //PlayAudioClip(attackClip);
 
         if (!alreadyAttacked)
@@ -228,7 +228,7 @@ public class EnemyAI : MonoBehaviour
             // Put Attack Code/Logic in here
             Debug.Log("Enemy attacked");
 
-            
+            audiomanager.instance.PlaySFX3D(attackClip, this.transform.position, 1, 0.9f, 1.1f); //should fix weird ah attack sound calls
 
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);

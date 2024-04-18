@@ -65,6 +65,7 @@ public class DoubleBarrelShotgun : GunClass
         if (currentBullets <= 0)
         {
             Debug.Log("Weapon Empty!");
+            Reload();
             return;
         }
         if (Time.time < nextTimeToFire || currentBullets <= 0)

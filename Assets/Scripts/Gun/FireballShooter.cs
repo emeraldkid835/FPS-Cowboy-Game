@@ -64,8 +64,14 @@ public class FireballShooter : GunClass
     public override void Shoot()
     {
         // Check if it's time to shoot
-        if (Time.time < nextTimeToShoot || currentBullets <= 0)
+        if (Time.time < nextTimeToShoot)
+        {
             return;
+        }else if(currentBullets <= 0)
+        {
+            Reload();
+            return;
+        }
 
         // Instantiate fireball prefab
         GameObject fireballInstance = Instantiate(fireballPrefab, muzzleflashLocation.transform.position, muzzleflashLocation.transform.rotation);
