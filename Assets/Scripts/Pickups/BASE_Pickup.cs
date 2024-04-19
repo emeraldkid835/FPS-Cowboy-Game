@@ -30,9 +30,9 @@ public abstract class BASE_Pickup : MonoBehaviour
         {
             myAnim.Play();
         }
-        if (ambientSFX != null && ambientSFX.isPlaying == false && myCol.enabled == true)
+        if (ambientSFX != null && audiomanager.instance.alreadyPlaying(ambientSFX.clip) == false && myCol.enabled == true)
         {
-            ambientSFX.Play();
+            audiomanager.instance.PlaySFX3D(ambientSFX.clip, this.transform.position);
         }
     }
 
@@ -44,12 +44,9 @@ public abstract class BASE_Pickup : MonoBehaviour
         {
             if (pickupSFX != null)
             {
-                pickupSFX.Play();
+                audiomanager.instance.PlaySFX3D(pickupSFX.clip, this.transform.position);
             }
-            if (ambientSFX != null)
-            {
-                ambientSFX.Stop();
-            }
+            
             PickupBehavior(other);
             if (this.gameObject.GetComponent<MeshRenderer>() != null) {
                 this.gameObject.GetComponent<MeshRenderer>().enabled = false; 

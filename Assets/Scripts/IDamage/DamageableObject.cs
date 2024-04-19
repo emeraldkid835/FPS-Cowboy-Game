@@ -78,7 +78,8 @@ using UnityEngine;
                 
                 
                 audioSource.clip = deathSound;
-                audioSource.Play();
+                audiomanager.instance.PlaySFX3D(audioSource.clip, this.transform.position);
+                
                 
                 // Play the sound
                 // Example: AudioSource.PlayOneShot(sound);
