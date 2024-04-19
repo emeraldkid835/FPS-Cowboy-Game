@@ -82,11 +82,22 @@ public class EnemyAI : MonoBehaviour
 
         if (!isWaitingAtWaypoint && !playerInSightRange && !playerInAttackRange && !isenemyDead)
         {
-            animator.SetBool("isIdle", false);
-            animator.SetBool("isWalking", true);
-            animator.SetBool("isChasing", false);
-            animator.SetBool("isAttacking", false);
-            Patrolling();
+            if (waypoints.Count >= 1)
+            {
+                animator.SetBool("isIdle", false);
+                animator.SetBool("isWalking", true);
+                animator.SetBool("isChasing", false);
+                animator.SetBool("isAttacking", false);
+                Patrolling();
+            }
+            else
+            {
+                animator.SetBool("isIdle", true);
+                animator.SetBool("isWalking", false);
+                animator.SetBool("isChasing", false);
+                animator.SetBool("isAttacking", false);
+            }
+           
         }
         if (playerInSightRange && !playerInAttackRange && !isenemyDead)
         {
