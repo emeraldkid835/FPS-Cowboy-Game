@@ -312,10 +312,14 @@ MonoBehaviour:
   walkPointRange: 8
   timeBetweenAttacks: 2
   sightRange: 20
-  attackRange: 2
+  attackRange: 1.5
   sightAngle: 0
   playerInSightRange: 0
   playerInAttackRange: 0
+  RetreatWaypoint: {fileID: 0}
+  isRetreating: 0
+  isAtRetreat: 0
+  isDoneRetreating: 0
 --- !u!195 &1922012963499359486
 NavMeshAgent:
   m_ObjectHideFlags: 0
