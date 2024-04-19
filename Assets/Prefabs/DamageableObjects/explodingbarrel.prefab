@@ -1012,9 +1012,9 @@ GameObject:
   - component: {fileID: 1806955365064253885}
   - component: {fileID: 1806955365064253886}
   - component: {fileID: 1806955365064253887}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cylinder (1)
-  m_TagString: Untagged
+  m_TagString: Industrial
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2010,9 +2010,9 @@ GameObject:
   - component: {fileID: 1806955365980661442}
   - component: {fileID: 1806955365980661443}
   - component: {fileID: 1806955365980661452}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cylinder
-  m_TagString: Untagged
+  m_TagString: Wooden
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3611,9 +3611,9 @@ GameObject:
   - component: {fileID: 1806955366059267824}
   - component: {fileID: 1806955366059267825}
   - component: {fileID: 1806955366059267826}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Pipe
-  m_TagString: Untagged
+  m_TagString: Industrial
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7343,9 +7343,9 @@ GameObject:
   - component: {fileID: 3414235063269241300}
   - component: {fileID: 5808802770725835344}
   - component: {fileID: 6255038477537120582}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: explodingbarrel
-  m_TagString: Untagged
+  m_TagString: Wooden
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7412,7 +7412,7 @@ CapsuleCollider:
   m_Radius: 2.03
   m_Height: 5.69
   m_Direction: 1
-  m_Center: {x: 0, y: -0.58, z: 0}
+  m_Center: {x: 0, y: -0.58, z: -0.2}
 --- !u!1 &5543542106006518652
 GameObject:
   m_ObjectHideFlags: 0
