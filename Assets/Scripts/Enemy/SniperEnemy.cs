@@ -5,6 +5,7 @@ using UnityEngine.AI;
 
 public class SniperEnemy : MonoBehaviour, IDamage
 {
+    [SerializeField] private AudioSource hurtSound;
     [Header("Settings")]
     public GameObject bloodEffectPrefab;
     public Transform bloodEffectLocation;
@@ -53,7 +54,10 @@ public class SniperEnemy : MonoBehaviour, IDamage
         Debug.Log($"Enemy took {damage} damage. Enemy has {EnemycurrentHealth - damage} health.");
         animator.SetBool("TookHit", true);
         EnemycurrentHealth -= damage; // EnemycurrentHealth = EnemycurrentHealth - damage
-
+        if (hurtSound != null)
+        {
+            audiomanager.instance.PlaySFX3D(hurtSound.clip, this.transform.position);
+        }
         // Instantiate blood effect at the position where the enemy was hit
         GameObject bloodEffect = Instantiate(bloodEffectPrefab, bloodEffectLocation.position, Quaternion.identity);
 
@@ -91,6 +95,7 @@ public class SniperEnemy : MonoBehaviour, IDamage
 
         if (FireballRigidbody != null)
         {
+
             FireballInstance.transform.LookAt(player);
             FireballRigidbody.AddForce(FireballInstance.transform.forward * fireballSpeed, ForceMode.Impulse);
         }

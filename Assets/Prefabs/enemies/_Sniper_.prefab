@@ -1369,7 +1369,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb424394d632be549b0b0cf28d258caf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bloodEffectPrefab: {fileID: 0}
+  bloodEffectPrefab: {fileID: 1240250018707908, guid: 5656e7ea1f1a75d4c895547ec2b824b3, type: 3}
   bloodEffectLocation: {fileID: 1608875793130990518}
   bloodEffectDuration: 3
   EnemystartHealth: 150

@@ -34,7 +34,8 @@ public class EnemyAIStationary : MonoBehaviour
         if (audioSource == null)
         {
             audioSource = gameObject.AddComponent<AudioSource>();
-            audioSource.volume = .5f;
+            audioSource.minDistance = 3;
+            audioSource.volume = 1f;
         }
 
         if (attackClip == null)
@@ -114,7 +115,7 @@ public class EnemyAIStationary : MonoBehaviour
     private IEnumerator soundDelay()
     {
         yield return new WaitForSeconds(.5f);
-        audioSource.Play();
+        audiomanager.instance.PlaySFX3D(attackClip, this.transform.position);
     }
 
     private void OnDrawGizmosSelected()
