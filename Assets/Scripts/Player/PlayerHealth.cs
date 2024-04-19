@@ -56,7 +56,10 @@ using UnityEngine.Rendering.PostProcessing;
     {
         healthVFX.GetSetting<ColorGrading>().colorFilter.value.g = (Playercurrenthealth / PlayerstartHealth);
         healthVFX.GetSetting<ColorGrading>().colorFilter.value.b = ((Playercurrenthealth / PlayerstartHealth));
-       
+        if(Playercurrenthealth <= 0)
+        {
+            Die();
+        }
     }
 
     private void ResetHealthFX()
@@ -75,7 +78,7 @@ using UnityEngine.Rendering.PostProcessing;
             Playercurrenthealth -= damage; // Playercurrenthealth = Playercurrenthealth - damage
             if(hurtSound != null)
             {
-                audiomanager.instance.PlaySFX3D(hurtSound.clip, this.transform.position, 1, 0.9f, 0.1f);
+                audiomanager.instance.PlaySFX3D(hurtSound.clip, this.transform.position, 1, 0.9f, 1.1f);
             }
             UpdateHealthFX();
             //SpawnDamageParticles();
