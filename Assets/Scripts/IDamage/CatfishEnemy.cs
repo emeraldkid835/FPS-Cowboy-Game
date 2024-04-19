@@ -34,18 +34,21 @@ using UnityEngine.AI;
     }
     public void TakeDamage(float damage, IDamage.DamageType damageType)  // IDamage interface method
     {
-          Debug.Log($"Enemy took {damage} damage. Enemy has {EnemycurrentHealth - 10f} health.");
-          EnemycurrentHealth -= damage; // EnemycurrentHealth = EnemycurrentHealth - damage
-          
-        if(hurtSound != null)
+        Debug.Log($"Enemy took {damage} damage. Enemy has {EnemycurrentHealth - 10f} health.");
+        EnemycurrentHealth -= damage; // EnemycurrentHealth = EnemycurrentHealth - damage
+
+        if (hurtSound != null)
         {
             audiomanager.instance.PlaySFX3D(hurtSound.clip, this.transform.position);
         }
-            // Instantiate blood effect at the position where the enemy was hit
-          GameObject bloodEffect = Instantiate(bloodEffectPrefab, bloodEffectLocation.position, Quaternion.identity);
-          StartCoroutine(isHitToggle()); 
+        // Instantiate blood effect at the position where the enemy was hit
+        if (bloodEffectPrefab != null && bloodEffectLocation != null)
+        {
+            GameObject bloodEffect = Instantiate(bloodEffectPrefab, bloodEffectLocation.position, Quaternion.identity);
+            StartCoroutine(isHitToggle());
             // Destroy the blood effect after a delay
-          Destroy(bloodEffect, bloodEffectDuration);
+            Destroy(bloodEffect, bloodEffectDuration);
+        }
           if (EnemycurrentHealth <= 0) // If enemy health hits 0 or less, begin die method
           {
               Die();
