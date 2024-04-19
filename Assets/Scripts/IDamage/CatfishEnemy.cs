@@ -54,6 +54,10 @@ using UnityEngine.AI;
 
     public void Update()
     {
+        if (enemyai == null)
+        {
+            enemyai = GetComponent<EnemyAI>();
+        }
         if (EnemycurrentHealth <= 30f && !enemyai.isDoneRetreating)
         {
             enemyai.isRetreating = true;

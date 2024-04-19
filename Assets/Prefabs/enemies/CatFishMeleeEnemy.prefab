@@ -2208,6 +2208,10 @@ MonoBehaviour:
   sightAngle: 0
   playerInSightRange: 0
   playerInAttackRange: 0
+  RetreatWaypoint: {fileID: 0}
+  isRetreating: 0
+  isAtRetreat: 0
+  isDoneRetreating: 0
 --- !u!114 &5924654572800973629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2227,7 +2231,8 @@ MonoBehaviour:
   hurtSound: {fileID: 2084988518406411993}
   animator: {fileID: 239267303484977709}
   agent: {fileID: 5924654572800973625}
-  WeaponCollider: {fileID: 0}
+  WeaponCollider: {fileID: 5924654574016499140}
+  enemyai: {fileID: 5924654572800973630}
   EnemycurrentHealth: 0
 --- !u!82 &2084988518406411993
 AudioSource:
