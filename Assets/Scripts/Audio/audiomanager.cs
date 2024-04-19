@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class audiomanager : MonoBehaviour
 {
-
+    private bool valid;
     public static audiomanager instance; //global variable, every object can see and send messages to the audio manager
 
     [SerializeField, Range(1, 20)] private int sfxAmount = 20; //dictates how many sound effects we can have at once
@@ -27,6 +27,7 @@ public class audiomanager : MonoBehaviour
 
     private void InitSFX()
     {
+        valid = true;
         sfxSources = new AudioSource[sfxAmount]; //set the size of the audiosources array
         sfxIndex = 0;
         leMusic = gameObject.AddComponent<AudioSource>();//create new audio source, make it the bgm
@@ -36,7 +37,10 @@ public class audiomanager : MonoBehaviour
             sfxSources[i] = gameObject.AddComponent<AudioSource>();
         }
     }
-
+    public void SetSoundValid(bool valide)
+    {
+        valid = valide;
+    }
     private void VolumeTick()
     {
         if (canOverideMusicVolume == true && leMusic.volume != musicVolume.value && musicVolume != null)
@@ -62,23 +66,26 @@ public class audiomanager : MonoBehaviour
 
     public void PlaySFX(AudioClip clipToPlay) 
     {
-        sfxSources[sfxIndex].clip = clipToPlay; //tell the current audio source to load x clip
-       
-        sfxSources[sfxIndex].pitch = Random.Range(minVariation, maxVariation);
-        
-        sfxSources[sfxIndex].Play(); //tell the current audio source to play
-
-        sfxIndex++; //increment to next current clip
-
-        if (sfxIndex >= sfxSources.Length) //check if index goes out of range
+        if (valid == true)
         {
-            sfxIndex = 0; //reset index if true
+            sfxSources[sfxIndex].clip = clipToPlay; //tell the current audio source to load x clip
+
+            sfxSources[sfxIndex].pitch = Random.Range(minVariation, maxVariation);
+
+            sfxSources[sfxIndex].Play(); //tell the current audio source to play
+
+            sfxIndex++; //increment to next current clip
+
+            if (sfxIndex >= sfxSources.Length) //check if index goes out of range
+            {
+                sfxIndex = 0; //reset index if true
+            }
         }
     }
 
     public void PlaySFX3D(AudioClip clipToPlay, Vector3 position, float epicFloat = 1, float minPitch = 1, float maxPitch = 1)
     {
-        if (audioObject != null) //does an audio object exist?
+        if (audioObject != null && valid == true) //does an audio object exist?
         { 
             GameObject gaming = Instantiate(audioObject, position, Quaternion.identity); //Quaternion.identity is basically default for Quaternions
 

@@ -169,6 +169,7 @@ using UnityEngine.Rendering.PostProcessing;
         {
             Debug.Log("Player Is Dead");
             isPlayerDead = true;
+            audiomanager.instance.SetSoundValid(false);
             // Implement player death logic here
             // Example: Destroy(gameObject);
         }
