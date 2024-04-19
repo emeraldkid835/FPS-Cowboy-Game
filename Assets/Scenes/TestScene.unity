@@ -6042,12 +6042,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24f18eac3754efd47bd23983fc173484, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sfxAmount: 0
-  audioObject: {fileID: 288786115}
+  sfxAmount: 20
+  audioObject: {fileID: 6841519541976787402, guid: 6df098e18579d814f8317b76ad95e13f, type: 3}
   musicVolume: {fileID: 1641145585}
   sfxVolume: {fileID: 1641145584}
-  minVariation: 0
-  maxVariation: 0
+  minVariation: 1
+  maxVariation: 1
 --- !u!4 &288786117
 Transform:
   m_ObjectHideFlags: 0
@@ -15746,12 +15746,117 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3604432228173672437, guid: 56d6f9101bbee9745aa13a4d8a174c7d, type: 3}
+      propertyPath: meSound
+      value: 
+      objectReference: {fileID: 3604432228724171752}
     - target: {fileID: 3604432228173672439, guid: 56d6f9101bbee9745aa13a4d8a174c7d, type: 3}
       propertyPath: m_Name
       value: HealOverTime
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 56d6f9101bbee9745aa13a4d8a174c7d, type: 3}
+--- !u!1 &3604432228724171751 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3604432228173672439, guid: 56d6f9101bbee9745aa13a4d8a174c7d, type: 3}
+  m_PrefabInstance: {fileID: 3604432228724171750}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &3604432228724171752
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3604432228724171751}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: fb51452bb2e05ee4db9a72f4f0c031a4, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &4051932091814834726
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15910,6 +16015,14 @@ PrefabInstance:
     - target: {fileID: 4667533136828195527, guid: ad43a20080ca05c45bb050d66f1e8e9d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5958395038480474342, guid: ad43a20080ca05c45bb050d66f1e8e9d, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5958395038480474342, guid: ad43a20080ca05c45bb050d66f1e8e9d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad43a20080ca05c45bb050d66f1e8e9d, type: 3}

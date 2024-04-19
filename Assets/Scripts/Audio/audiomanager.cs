@@ -21,6 +21,7 @@ public class audiomanager : MonoBehaviour
 
     private AudioSource[] sfxSources; //stores all the sound effect sources
     private AudioSource leMusic; //stores the background music
+    public List<GameObject> worldSFX = new List<GameObject>();
 
     private int sfxIndex = 0; //Store the current sfx index
 
@@ -95,6 +96,7 @@ public class audiomanager : MonoBehaviour
             temp.spatialBlend = epicFloat;
             temp.pitch = Random.Range(minPitch, maxPitch);
             temp.Play();
+            worldSFX.Add(gaming);
             if (clipToPlay != null)
             {
                 StartCoroutine(BleanUp(gaming, clipToPlay.length));
@@ -146,6 +148,7 @@ public class audiomanager : MonoBehaviour
     private IEnumerator BleanUp(GameObject gaming, float duration)
     {
         yield return new WaitForSeconds(duration);
+        worldSFX.Remove(gaming);
         Destroy(gaming);
     }
 }

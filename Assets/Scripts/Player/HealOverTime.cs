@@ -1,17 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class HealOverTime : MonoBehaviour
 {
     [SerializeField] PlayerHealth playerhealth;
     [SerializeField] private float healthOverTime = 25f;
+    [SerializeField] private AudioSource meSound;
+
+    private float audioTimer;
 
     private bool isHealing = false;
+   
 
     private void Awake()
     {
         playerhealth = FindObjectOfType<PlayerHealth>(); // Find the player health script in the scene.
+        audioTimer = 0;
+    
     }
 
     private void Update()
@@ -24,7 +31,9 @@ public class HealOverTime : MonoBehaviour
         if (other.CompareTag("Player")) // These two trigger methods can also have other tags to add health to those IDamage objects
         {
             Debug.Log("Player entered Healing area");
+            
             isHealing = true;
+            audioTimer = Mathf.Infinity;
             //Play healing noise
             StartCoroutine(AddHealthOverTime());
         }
@@ -35,6 +44,7 @@ public class HealOverTime : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Debug.Log("Player exited Healing area");
+            audioTimer = 0;
             isHealing = false;
             
         }
@@ -46,15 +56,39 @@ public class HealOverTime : MonoBehaviour
         {
             
 
-            if (playerhealth.Playercurrenthealth < playerhealth.PlayerstartHealth)
+            if (playerhealth.Playercurrenthealth <= playerhealth.PlayerstartHealth) //<= for negative values being valid at full health
             {
+                bool canPlay = true;
                 playerhealth.Playercurrenthealth = Mathf.Min(playerhealth.Playercurrenthealth + healthOverTime * Time.deltaTime); // Calculates health per frame based on the health per second
                 playerhealth.UpdateHealthFX();
+                audioTimer += Time.deltaTime;
+                if (meSound != null)
+                {
+                    if (audioTimer >= meSound.clip.length)
+                    {
+                        foreach(GameObject go in audiomanager.instance.worldSFX) //no more dup on enter rudely
+                        {
+                            if (go.GetComponent<AudioSource>().clip == meSound.clip)
+                            {
+                                Debug.Log("Found same audio!");
+                                canPlay = false;
+                                
+                            }
+                          
+                        }
+                       
+                        if (canPlay == true)
+                        {
+                            audioTimer = 0;
+                            audiomanager.instance.PlaySFX3D(meSound.clip, this.transform.position);
+                        }
+                    }
+                }
             }
 
-            if(playerhealth.Playercurrenthealth > 100)
+            if(playerhealth.Playercurrenthealth > playerhealth.PlayerstartHealth)
             {
-                playerhealth.Playercurrenthealth = 100f;
+                playerhealth.Playercurrenthealth = playerhealth.PlayerstartHealth;
             }
 
             yield return null;

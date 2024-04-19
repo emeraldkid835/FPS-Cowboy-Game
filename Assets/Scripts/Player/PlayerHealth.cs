@@ -56,7 +56,7 @@ using UnityEngine.Rendering.PostProcessing;
     {
         healthVFX.GetSetting<ColorGrading>().colorFilter.value.g = (Playercurrenthealth / PlayerstartHealth);
         healthVFX.GetSetting<ColorGrading>().colorFilter.value.b = ((Playercurrenthealth / PlayerstartHealth));
-        Debug.Log("Green value? " + healthVFX.GetSetting<ColorGrading>().colorFilter.value.g);
+       
     }
 
     private void ResetHealthFX()

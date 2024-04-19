@@ -77,7 +77,7 @@ public class PlayerMovement : MonoBehaviour
     {
         // Check if the player can jump based on a downward raycast
         canJump = Physics.Raycast(transform.position, Vector3.down, out RaycastHit jumpInfo, jumpGroundedRadius, groundMask);
-        Debug.Log("Surface normal? :" + jumpInfo.normal);
+       
         if (canJump && jumpInfo.normal.y >= (1 - (slopeLimit / 100)))
         {
             currentJump = 0;
