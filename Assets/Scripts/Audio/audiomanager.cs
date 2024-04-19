@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,6 +19,17 @@ public class audiomanager : MonoBehaviour
     [SerializeField, Range(1, 3)] float maxVariation;
 
     private bool canOverideMusicVolume;
+    public bool alreadyPlaying(AudioClip clip)
+    {
+        foreach(GameObject go in worldSFX)
+        {
+            if(go.GetComponent<AudioSource>().clip == clip)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 
     private AudioSource[] sfxSources; //stores all the sound effect sources
     private AudioSource leMusic; //stores the background music

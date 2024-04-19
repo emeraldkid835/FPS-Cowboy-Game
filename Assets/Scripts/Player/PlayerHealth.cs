@@ -76,7 +76,7 @@ using UnityEngine.Rendering.PostProcessing;
             Debug.Log("Player is taking damage from the PlayerHealth Script");
             //PlayDamageSound(TakeDamageSoundClip);// Visual and audio feedback using Scriptable Object settings
             Playercurrenthealth -= damage; // Playercurrenthealth = Playercurrenthealth - damage
-            if(hurtSound != null)
+            if(hurtSound != null && audiomanager.instance.alreadyPlaying(hurtSound.clip) == false)
             {
                 audiomanager.instance.PlaySFX3D(hurtSound.clip, this.transform.position, 1, 0.9f, 1.1f);
             }

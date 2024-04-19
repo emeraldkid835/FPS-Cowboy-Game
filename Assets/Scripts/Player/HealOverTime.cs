@@ -58,7 +58,7 @@ public class HealOverTime : MonoBehaviour
 
             if (playerhealth.Playercurrenthealth <= playerhealth.PlayerstartHealth) //<= for negative values being valid at full health
             {
-                bool canPlay = true;
+                
                 playerhealth.Playercurrenthealth = Mathf.Min(playerhealth.Playercurrenthealth + healthOverTime * Time.deltaTime); // Calculates health per frame based on the health per second
                 playerhealth.UpdateHealthFX();
                 audioTimer += Time.deltaTime;
@@ -66,18 +66,8 @@ public class HealOverTime : MonoBehaviour
                 {
                     if (audioTimer >= meSound.clip.length)
                     {
-                        foreach(GameObject go in audiomanager.instance.worldSFX) //no more dup on enter rudely
-                        {
-                            if (go.GetComponent<AudioSource>().clip == meSound.clip)
-                            {
-                                Debug.Log("Found same audio!");
-                                canPlay = false;
-                                
-                            }
-                          
-                        }
-                       
-                        if (canPlay == true)
+                        
+                        if (audiomanager.instance.alreadyPlaying(meSound.clip) == false)
                         {
                             audioTimer = 0;
                             audiomanager.instance.PlaySFX3D(meSound.clip, this.transform.position);
