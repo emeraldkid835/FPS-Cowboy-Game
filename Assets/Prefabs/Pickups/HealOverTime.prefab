@@ -115,6 +115,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerhealth: {fileID: 0}
   healthOverTime: 25
+  meSound: {fileID: 0}
 --- !u!65 &3604432228173672436
 BoxCollider:
   m_ObjectHideFlags: 0
