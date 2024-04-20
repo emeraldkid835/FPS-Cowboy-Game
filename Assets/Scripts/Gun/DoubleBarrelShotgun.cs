@@ -15,6 +15,7 @@ public class DoubleBarrelShotgun : GunClass
     public int maxStoredAmmo = 16;
     private Recoil recoil;
     [SerializeField] private GameObject bulletVisualPrefab;
+    [SerializeField] private AudioSource reloadSound;
     private WeaponSwitcher ws;
     private bool isReloading = false;
 
@@ -133,6 +134,10 @@ public class DoubleBarrelShotgun : GunClass
     {
         if (isReloading != true && currentBullets < MaxBulletsPerMagazine)
         {
+            if(reloadSound != null)
+            {
+                audiomanager.instance.PlaySFX3D(reloadSound.clip, this.transform.position, 0);
+            }
             StartCoroutine(Reloadtime());
         }
         

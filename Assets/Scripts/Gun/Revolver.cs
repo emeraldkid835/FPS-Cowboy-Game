@@ -18,6 +18,8 @@ public class Revolver : GunClass
     private Recoil recoil;
     private WeaponSwitcher ws;
 
+    [SerializeField] private AudioSource reloadSound;
+
     private bool isReloading = false;
 
     public override float Damage => 30f;
@@ -125,6 +127,10 @@ public class Revolver : GunClass
     {
         if (isReloading != true && currentBullets < MaxBulletsPerMagazine)
         {
+            if(reloadSound != null)
+            {
+                audiomanager.instance.PlaySFX3D(reloadSound.clip, this.transform.position, 0);
+            }
             StartCoroutine(Reloadtime());
         }
 

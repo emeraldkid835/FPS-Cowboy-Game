@@ -17,6 +17,7 @@ public class FireballShooter : GunClass
     public int maxStoredAmmo = 30;
     private Recoil recoil;
     private WeaponSwitcher ws;
+    [SerializeField] private AudioSource reloadSound;
 
     // Set values for the fireball shooter
     public override float Damage => 100f;
@@ -109,6 +110,10 @@ public class FireballShooter : GunClass
         ws.isReloading = true;
         if (currentStoredAmmo > 0 && currentBullets < MaxBulletsPerMagazine)
         {
+            if (reloadSound != null && audiomanager.instance.alreadyPlaying(reloadSound.clip) == false)
+            {
+                audiomanager.instance.PlaySFX3D(reloadSound.clip, this.transform.position, 0);
+            }
             // Calculate bullets to reload
             int bulletsToReload = Mathf.Min(MaxBulletsPerMagazine - currentBullets, currentStoredAmmo);
 
