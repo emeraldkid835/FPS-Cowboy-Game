@@ -15,6 +15,9 @@ public class audiomanager : MonoBehaviour
     [SerializeField] Slider musicVolume;
     [SerializeField] Slider sfxVolume;
 
+    private float musicVolumeValue;
+    private float sfxVolumeValue;
+
     [SerializeField, Range(-3, 1)] float minVariation;
     [SerializeField, Range(1, 3)] float maxVariation;
 
@@ -57,7 +60,10 @@ public class audiomanager : MonoBehaviour
     {
         if (canOverideMusicVolume == true && leMusic.volume != musicVolume.value && musicVolume != null)
         {
+            
+            musicVolume.value = musicVolumeValue;
             leMusic.volume = musicVolume.value;
+
         }
 
     }
@@ -109,7 +115,8 @@ public class audiomanager : MonoBehaviour
             AudioSource temp = gaming.GetComponent<AudioSource>();
             if (sfxVolume != null)
             {
-                temp.volume = sfxVolume.value;
+                sfxVolumeValue = sfxVolume.value;
+                temp.volume = sfxVolumeValue;
             }
             temp.clip = clipToPlay;
             temp.spatialBlend = epicFloat;
@@ -169,5 +176,21 @@ public class audiomanager : MonoBehaviour
         yield return new WaitForSeconds(duration);
         worldSFX.Remove(gaming);
         Destroy(gaming);
+    }
+
+    public void SaveMusicVolume()
+    {
+        Debug.Log("VolumeSaved");
+        PlayerPrefs.SetFloat("MusicVolume", musicVolumeValue);
+        PlayerPrefs.SetFloat("SfxVolume", sfxVolumeValue);
+        PlayerPrefs.Save();
+    }
+
+    public void LoadMusicVolume()
+    {
+        Debug.Log("VolumeLoaded");
+        musicVolumeValue = PlayerPrefs.GetFloat("MusicVolume");
+        sfxVolumeValue = PlayerPrefs.GetFloat("SfxVolume");
+
     }
 }

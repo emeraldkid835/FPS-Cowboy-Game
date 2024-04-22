@@ -36,6 +36,8 @@ public class CameraLook : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
+        
+
         originalCameraPosition = playerCamera.localPosition;
         GameObject pausedPanel = GameObject.Find("Canvas/PausedPanel");
 
@@ -98,12 +100,16 @@ public class CameraLook : MonoBehaviour
     public void UpdateSensitivityX(float value)
     {
         sensitivityX = value;
+        PlayerPrefs.SetFloat("sensX", value);
+        PlayerPrefs.Save();
     }
 
     // Method to update sensitivityY based on UI Slider value
     public void UpdateSensitivityY(float value)
     {
         sensitivityY = value;
+        PlayerPrefs.SetFloat("sensX", value); 
+        PlayerPrefs.Save();
     }
 
 
