@@ -7,8 +7,8 @@ public class CameraLook : MonoBehaviour
 {
     [SerializeField] PlayerMovement playerMovement;
 
-    [SerializeField] float sensitivityX = 8f;
-    [SerializeField] float sensitivityY = 0.5f;
+    [SerializeField] public float sensitivityX = 8f;
+    [SerializeField] public float sensitivityY = 0.5f;
     float mouseX, mouseY;
 
     [SerializeField] Transform playerCamera;
@@ -26,6 +26,9 @@ public class CameraLook : MonoBehaviour
 
     [SerializeField] Slider sensitivityXSlider;
     [SerializeField] Slider sensitivityYSlider;
+
+    public Button saveButton;
+    public Button loadButton;
 
     Vector3 originalCameraPosition;
 
@@ -47,10 +50,22 @@ public class CameraLook : MonoBehaviour
             sensitivityXSlider = pausedPanel.GetComponentInChildren<Slider>();
             sensitivityYSlider = pausedPanel.GetComponentsInChildren<Slider>()[1]; // Assuming it's the second Slider in the hierarchy
 
-            // Add listeners to the sliders
-            sensitivityXSlider.onValueChanged.AddListener(UpdateSensitivityX);
-            sensitivityYSlider.onValueChanged.AddListener(UpdateSensitivityY);
+            
         }
+            // Add listeners to sliders
+            if (sensitivityXSlider != null)
+            {
+                sensitivityXSlider.onValueChanged.AddListener(UpdateSensitivityX);
+            }
+            if (sensitivityYSlider != null)
+            {
+                sensitivityYSlider.onValueChanged.AddListener(UpdateSensitivityY);
+            }
+        // Add listeners to the Save and Load buttons
+        saveButton.onClick.AddListener(SaveSettings);
+        loadButton.onClick.AddListener(LoadSettings);
+
+        LoadSettings();
 
         
     }
@@ -102,14 +117,53 @@ public class CameraLook : MonoBehaviour
         sensitivityX = value;
         PlayerPrefs.SetFloat("sensX", value);
         PlayerPrefs.Save();
+
+        Debug.Log("Updated sensX: " + sensitivityX);
+        Debug.Log("SliderX value: " + value);
     }
 
     // Method to update sensitivityY based on UI Slider value
     public void UpdateSensitivityY(float value)
     {
         sensitivityY = value;
-        PlayerPrefs.SetFloat("sensX", value); 
+        PlayerPrefs.SetFloat("sensY", value);
         PlayerPrefs.Save();
+
+        Debug.Log("Updated sensY: " + sensitivityY);
+        Debug.Log("SliderY value: " + value);
+    }
+
+    // Method to save sensitivity settings
+    private void SaveSettings()
+    {
+        PlayerPrefs.SetFloat("sensX", sensitivityX);
+        PlayerPrefs.SetFloat("sensY", sensitivityY);
+        PlayerPrefs.Save();
+        Debug.Log("Saved sensX: " + sensitivityX + ", sensY: " + sensitivityY);
+
+    }
+
+    // Method to load sensitivity settings
+    private void LoadSettings()
+    {
+        sensitivityX = PlayerPrefs.GetFloat("sensX", sensitivityX);
+        sensitivityY = PlayerPrefs.GetFloat("sensY", sensitivityY);
+
+        Debug.Log("Loaded sensX: " + sensitivityX + ", sensY: " + sensitivityY);
+
+        // Update sliders
+        if (sensitivityXSlider != null)
+        {
+            sensitivityXSlider.value = sensitivityX;
+            UpdateSensitivityX(sensitivityX);
+            Debug.Log("SliderX value: " + sensitivityXSlider.value);
+        }
+        if (sensitivityYSlider != null)
+        {
+            sensitivityYSlider.value = sensitivityY;
+            UpdateSensitivityY(sensitivityY);
+            Debug.Log("SliderY value: " + sensitivityYSlider.value);
+        }
     }
 
 

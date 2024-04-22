@@ -15,8 +15,8 @@ public class audiomanager : MonoBehaviour
     [SerializeField] Slider musicVolume;
     [SerializeField] Slider sfxVolume;
 
-    private float musicVolumeValue;
-    private float sfxVolumeValue;
+    public float musicVolumeValue;
+    public float sfxVolumeValue;
 
     [SerializeField, Range(-3, 1)] float minVariation;
     [SerializeField, Range(1, 3)] float maxVariation;
@@ -60,9 +60,9 @@ public class audiomanager : MonoBehaviour
     {
         if (canOverideMusicVolume == true && leMusic.volume != musicVolume.value && musicVolume != null)
         {
+            musicVolumeValue = musicVolume.value;
             
-            musicVolume.value = musicVolumeValue;
-            leMusic.volume = musicVolume.value;
+            leMusic.volume = musicVolumeValue;
 
         }
 
@@ -80,6 +80,11 @@ public class audiomanager : MonoBehaviour
         }
         InvokeRepeating("VolumeTick", 0.2f, 0.2f);
         InitSFX(); // now that the manager is up, initialize all needed audio sources
+    }
+
+    private void Start()
+    {
+        LoadVolumeSettings();
     }
 
     public void PlaySFX(AudioClip clipToPlay) 
@@ -116,6 +121,7 @@ public class audiomanager : MonoBehaviour
             if (sfxVolume != null)
             {
                 sfxVolumeValue = sfxVolume.value;
+                
                 temp.volume = sfxVolumeValue;
             }
             temp.clip = clipToPlay;
@@ -178,19 +184,35 @@ public class audiomanager : MonoBehaviour
         Destroy(gaming);
     }
 
-    public void SaveMusicVolume()
+    // Method to save volume settings
+    public void SaveVolumeSettings()
     {
-        Debug.Log("VolumeSaved");
-        PlayerPrefs.SetFloat("MusicVolume", musicVolumeValue);
-        PlayerPrefs.SetFloat("SfxVolume", sfxVolumeValue);
+        PlayerPrefs.SetFloat("MusicVolume", musicVolume.value);
+        PlayerPrefs.SetFloat("SfxVolume", sfxVolume.value);
         PlayerPrefs.Save();
     }
 
-    public void LoadMusicVolume()
+    // Method to load volume settings
+    public void LoadVolumeSettings()
     {
-        Debug.Log("VolumeLoaded");
-        musicVolumeValue = PlayerPrefs.GetFloat("MusicVolume");
-        sfxVolumeValue = PlayerPrefs.GetFloat("SfxVolume");
+        musicVolume.value = PlayerPrefs.GetFloat("MusicVolume", 1f); // Default value of 1f
+        sfxVolume.value = PlayerPrefs.GetFloat("SfxVolume", 1f); // Default value of 1f
 
+        // Update volume immediately after loading
+        UpdateVolume();
+    }
+
+    // Method to update volume settings
+    private void UpdateVolume()
+    {
+        // Update music volume
+        if (leMusic != null)
+            leMusic.volume = musicVolume.value;
+
+        // Update sfx volume for existing sources
+        foreach (var source in sfxSources)
+        {
+            source.volume = sfxVolume.value;
+        }
     }
 }
