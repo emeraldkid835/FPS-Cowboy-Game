@@ -50,9 +50,10 @@ public class ChickenEnemy : MonoBehaviour, IDamage
     }
     public void TakeDamage(float damage, IDamage.DamageType damageType)  // IDamage interface method
     {
-        Debug.Log($"Enemy took {damage} damage. Enemy has {EnemycurrentHealth - damage} health.");
-        animator.SetBool("TookHit", true);
+        
+        
         EnemycurrentHealth -= damage; // EnemycurrentHealth = EnemycurrentHealth - damage
+        Debug.Log($"Enemy took {damage} damage. Enemy has {EnemycurrentHealth - damage} health.");
         if (hurtSound != null)
         {
             audiomanager.instance.PlaySFX3D(hurtSound.clip, this.transform.position);
