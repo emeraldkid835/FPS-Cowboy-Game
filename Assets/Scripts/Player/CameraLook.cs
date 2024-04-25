@@ -66,7 +66,7 @@ public class CameraLook : MonoBehaviour
         RaycastHit hit;
         int mask = 1 << 6;
         mask = ~mask;
-        Debug.Log("Shooter position: " + interactShooterPoint.position);
+
         if(Physics.Raycast(interactShooterPoint.position, interactShooterPoint.forward, out hit, maxInteractionDistance, mask))
         {
             //PLAYER cAMERA IS WEIRD???

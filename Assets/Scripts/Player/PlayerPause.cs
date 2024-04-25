@@ -64,8 +64,16 @@ public class PlayerPause : MonoBehaviour
         pausePanel.SetActive(false);
         controlsPanel.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = true;
+        Cursor.visible = false;
         Time.timeScale = 1f;
+    }
+
+    public void PanicPause()
+    {
+        isPaused = true;
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
+        Time.timeScale = 0f;
     }
 
     public void Quit()
