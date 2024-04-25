@@ -41,6 +41,7 @@ public class InputManager : MonoBehaviour
 
         cameraLook.MouseX.performed += ctx => mouseInput.x = ctx.ReadValue<float>();
         cameraLook.MouseY.performed += ctx => mouseInput.y = ctx.ReadValue<float>();
+        cameraLook.InteractButton.performed += _ => mouseLook.InteractButtonPressed();
 
         weapon.Shoot.performed += _ => equippedGun.Shoot();
         weapon.Reload.performed += _ => equippedGun.Reload();
@@ -63,9 +64,11 @@ public class InputManager : MonoBehaviour
         if(playerPause.isPaused == false)
         {
             mouseLook.ReceiveInput(mouseInput);
+
         }
         else
         {
+            
             return;
         }
 

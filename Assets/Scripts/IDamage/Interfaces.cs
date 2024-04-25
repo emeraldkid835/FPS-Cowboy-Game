@@ -7,3 +7,9 @@ public interface IDamage // This is my IDamage interface, any monobehaviour with
     }
     void TakeDamage(float damage, DamageType damagetype);
 }
+
+public interface IInteract
+{
+    public bool validToReinteract();
+    void Interaction();
+}

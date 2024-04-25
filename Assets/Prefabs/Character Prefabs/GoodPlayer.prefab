@@ -864,6 +864,9 @@ MonoBehaviour:
   lateralBobAmplitude: 0.17
   sensitivityXSlider: {fileID: 0}
   sensitivityYSlider: {fileID: 0}
+  maxInteractionDistance: 2
+  interactShooterPoint: {fileID: 3696423199147388390}
+  interactUI: {fileID: 0}
 --- !u!114 &3696423199745172925
 MonoBehaviour:
   m_ObjectHideFlags: 0

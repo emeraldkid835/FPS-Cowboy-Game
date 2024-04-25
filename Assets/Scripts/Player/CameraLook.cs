@@ -29,13 +29,19 @@ public class CameraLook : MonoBehaviour
 
     Vector3 originalCameraPosition;
 
-    
+    [SerializeField] private float maxInteractionDistance = 1f;
+    [SerializeField] private Transform interactShooterPoint;
+    [SerializeField] private GameObject interactUI;
+
+    private bool validInteract;
+
 
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-
+        validInteract = false;
+        interactUI.SetActive(false);
         originalCameraPosition = playerCamera.localPosition;
         GameObject pausedPanel = GameObject.Find("Canvas/PausedPanel");
 
@@ -52,10 +58,47 @@ public class CameraLook : MonoBehaviour
 
         
     }
+
+    void Interactioncheck()
+    {
+        //hide interaction canvas???
+        interactUI.SetActive(false);
+        RaycastHit hit;
+        int mask = 1 << 6;
+        mask = ~mask;
+        Debug.Log("Shooter position: " + interactShooterPoint.position);
+        if(Physics.Raycast(interactShooterPoint.position, interactShooterPoint.forward, out hit, maxInteractionDistance, mask))
+        {
+            //PLAYER cAMERA IS WEIRD???
+            Debug.DrawLine(interactShooterPoint.position, hit.transform.position, Color.blue, 5f);
+            GameObject hitobject = hit.transform.gameObject;
+            MonoBehaviour[] mono = hitobject.GetComponents<MonoBehaviour>();
+            foreach(MonoBehaviour script in mono)
+            {
+                if(script is IInteract)
+                {
+                    IInteract temp = script as IInteract;
+                    if (temp.validToReinteract() == true)
+                    {
+                        interactUI.SetActive(true);
+                    }
+                    //show interaction canvas;
+                    if (validInteract == true)
+                    {
+                        temp.Interaction();
+                        validInteract = false;
+                    }
+                    break;
+                }
+            }
+        }
+    }
+
     private void Update()
     {
         HandleHeadBobbing();
 
+        Interactioncheck();
 
         transform.Rotate(Vector3.up, mouseX * Time.deltaTime);
 
@@ -69,6 +112,12 @@ public class CameraLook : MonoBehaviour
     {
         mouseX = mouseInput.x * sensitivityX;
         mouseY = mouseInput.y * sensitivityY;
+    }
+
+    public void InteractButtonPressed()
+    {
+        validInteract = true;
+       
     }
 
     private void HandleHeadBobbing()
