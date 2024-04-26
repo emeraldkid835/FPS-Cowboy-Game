@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -33,6 +34,7 @@ public class CameraLook : MonoBehaviour
     [SerializeField] private float maxInteractionDistance = 1f;
     [SerializeField] private Transform interactShooterPoint;
     [SerializeField] private GameObject interactUI;
+    [SerializeField] private TMP_Text interactText;
 
     private bool validInteract;
 
@@ -44,14 +46,14 @@ public class CameraLook : MonoBehaviour
         validInteract = false;
         interactUI.SetActive(false);
         originalCameraPosition = playerCamera.localPosition;
-        GameObject pausedPanel = GameObject.Find("Canvas/PausedPanel");
+        GameObject controlsPanel = GameObject.Find("Canvas/ControlsPanel");
         pauser = this.GetComponent<PlayerPause>();
 
-       if (pausedPanel != null)
+       if (controlsPanel != null)
         {
             // Find the sliders by type within the paused panel
-            sensitivityXSlider = pausedPanel.GetComponentInChildren<Slider>();
-            sensitivityYSlider = pausedPanel.GetComponentsInChildren<Slider>()[1]; // Assuming it's the second Slider in the hierarchy
+            sensitivityXSlider = controlsPanel.GetComponentInChildren<Slider>();
+            sensitivityYSlider = controlsPanel.GetComponentsInChildren<Slider>()[1]; // Assuming it's the second Slider in the hierarchy
 
             // Add listeners to the sliders
             sensitivityXSlider.onValueChanged.AddListener(UpdateSensitivityX);
@@ -80,11 +82,20 @@ public class CameraLook : MonoBehaviour
                 if(script is IInteract)
                 {
                     IInteract temp = script as IInteract;
+                    //do UI
                     if (temp.validToReinteract() == true && pauser.isPaused == false)
                     {
                         interactUI.SetActive(true);
+                        if (temp.contextText() != null)
+                        {
+                            interactText.text = temp.contextText();
+                        }
+                        else
+                        {
+                            interactText.text = "Interact";
+                        }
                     }
-                    //show interaction canvas;
+                    //do the Thing
                     if (validInteract == true && pauser.isPaused == false)
                     {
                         temp.Interaction();

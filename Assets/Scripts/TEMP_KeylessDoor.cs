@@ -11,6 +11,7 @@ public class TEMP_KeylessDoor : MonoBehaviour, IInteract
     [SerializeField] private AudioSource openSound;
     [SerializeField] private AudioSource closeSound;
     [SerializeField] private Transform soundPosition;
+    [SerializeField] private string contextTex = "Open";
     private Collider mycol;
     private float curTime;
     private Animation myAnim;
@@ -19,10 +20,10 @@ public class TEMP_KeylessDoor : MonoBehaviour, IInteract
    
     void Start()
     {
-        //get everything set up.
-        myAnim = this.GetComponent<Animation>();
         mycol = this.GetComponent<Collider>();
         mycol.isTrigger = true;
+        //get everything set up.
+        myAnim = this.GetComponent<Animation>();
         isOpen = false;
         curTime = 0f;
     }
@@ -83,6 +84,11 @@ public class TEMP_KeylessDoor : MonoBehaviour, IInteract
             }
             
         }
+    }
+
+    public string contextText()
+    {
+        return contextTex;
     }
 
     private void OnTriggerEnter(Collider other)

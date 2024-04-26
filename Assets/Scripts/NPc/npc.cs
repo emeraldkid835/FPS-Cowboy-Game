@@ -9,7 +9,7 @@ public class npc : MonoBehaviour, IInteract
 {
     DialogKnower dialogcanv;
     [SerializeField] Dialog_Tree[] meDialog;
-    
+    [SerializeField] private string contextTex = "Speak";
     [SerializeField] private uint dialogIndex; //becomes pointless if randomDialogs is true
     [SerializeField] private bool randomDialogs;
 
@@ -23,7 +23,10 @@ public class npc : MonoBehaviour, IInteract
         dialogcanv = DialogKnower.instance; //should be convenient
     }
 
-    
+    public string contextText()
+    {
+        return contextTex;
+    }
     public bool validToReinteract()
     {
         //don't reinit dialog if we already got one, also hide the ui for interacting
