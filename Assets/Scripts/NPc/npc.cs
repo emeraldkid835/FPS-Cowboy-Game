@@ -11,17 +11,16 @@ public class npc : MonoBehaviour, IInteract
     {
         if(dialogcanv == null)
         {
+            Debug.Log("Trying to grab the convo knower!");
             dialogcanv = GameObject.Find("Dialogcanv").GetComponent<DialogKnower>();
-        }if (dialogcanv.gameObject.activeSelf == true)
-        {
-            dialogcanv.gameObject.SetActive(false);
         }
     }
 
     
     public bool validToReinteract()
     {
-        if(dialogcanv.gameObject.activeSelf == true)
+        //don't reinit dialog if we already got one, also hide the ui for interacting
+        if (dialogcanv.gameObject.GetComponent<Canvas>().enabled == true)
         {
             return false;
         }
@@ -30,8 +29,8 @@ public class npc : MonoBehaviour, IInteract
     public void Interaction()
     {
         //do dialog stuff
-        dialogcanv.curDialog = meDialog;
-        dialogcanv.gameObject.SetActive(true);
-        dialogcanv.InitiateDialog();
+       
+      
+        dialogcanv.InitiateDialog(meDialog);
     }
 }

@@ -6,7 +6,7 @@ using XNode;
 [RequireComponent(typeof(Canvas))]
 public class DialogKnower : MonoBehaviour
 {
-    public Dialog_Tree curDialog;
+    private Dialog_Tree curDialog;
     public Text SpokenText;
     public Transform ResponsePanel;
     public GameObject buttonPrefab;
@@ -15,17 +15,19 @@ public class DialogKnower : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        me = this.GetComponent<Canvas>();
         if(pauser == null)
         {
             pauser = GameObject.Find("GoodPlayer").GetComponent<PlayerPause>(); 
         }
-        this.gameObject.SetActive(false);
+        me.enabled = false;
     }
-    public void InitiateDialog()
+    public void InitiateDialog(Dialog_Tree Dialog)
     {
-        if (curDialog != null)
+        if (Dialog != null)
         {
-            this.gameObject.SetActive(true);
+            curDialog = Dialog;
+            me.enabled = true;
             foreach (Node item in curDialog.nodes)
             {
                 if (item is Start_Generic)
@@ -148,7 +150,7 @@ public class DialogKnower : MonoBehaviour
         clearPlayerDialog();
         pauser.Resume();
         me.enabled = false;
-        this.gameObject.SetActive(false);
+   
     }
     
 }

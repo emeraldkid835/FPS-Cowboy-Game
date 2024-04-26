@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class CameraLook : MonoBehaviour
 {
     [SerializeField] PlayerMovement playerMovement;
+    private PlayerPause pauser;
 
     [SerializeField] float sensitivityX = 8f;
     [SerializeField] float sensitivityY = 0.5f;
@@ -44,6 +45,7 @@ public class CameraLook : MonoBehaviour
         interactUI.SetActive(false);
         originalCameraPosition = playerCamera.localPosition;
         GameObject pausedPanel = GameObject.Find("Canvas/PausedPanel");
+        pauser = this.GetComponent<PlayerPause>();
 
        if (pausedPanel != null)
         {
@@ -78,12 +80,12 @@ public class CameraLook : MonoBehaviour
                 if(script is IInteract)
                 {
                     IInteract temp = script as IInteract;
-                    if (temp.validToReinteract() == true)
+                    if (temp.validToReinteract() == true && pauser.isPaused == false)
                     {
                         interactUI.SetActive(true);
                     }
                     //show interaction canvas;
-                    if (validInteract == true)
+                    if (validInteract == true && pauser.isPaused == false)
                     {
                         temp.Interaction();
                         validInteract = false;
