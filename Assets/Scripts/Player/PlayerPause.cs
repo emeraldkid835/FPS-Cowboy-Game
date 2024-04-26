@@ -43,6 +43,10 @@ public class PlayerPause : MonoBehaviour
             }
             else
             {
+                if (DialogKnower.instance.gameObject.GetComponent<Canvas>().enabled == true)
+                {
+                    DialogKnower.instance.ExitDialog();
+                }
                 isPaused = false;
                 pausePanel.SetActive(false);
                 controlsPanel.SetActive(false);

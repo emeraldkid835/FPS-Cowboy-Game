@@ -1,19 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
+
 
 public class npc : MonoBehaviour, IInteract
 {
-    [SerializeField] DialogKnower dialogcanv;
-    [SerializeField] Dialog_Tree meDialog;
-    // Start is called before the first frame update
+    DialogKnower dialogcanv;
+    [SerializeField] Dialog_Tree[] meDialog;
+    
+    [SerializeField] private uint dialogIndex; //becomes pointless if randomDialogs is true
+    [SerializeField] public bool randomDialogs;
+  
     void Start()
-    {
-        if(dialogcanv == null)
-        {
-            Debug.Log("Trying to grab the convo knower!");
-            dialogcanv = GameObject.Find("Dialogcanv").GetComponent<DialogKnower>();
-        }
+    { 
+        dialogcanv = DialogKnower.instance; //should be convenient
     }
 
     
@@ -29,8 +31,15 @@ public class npc : MonoBehaviour, IInteract
     public void Interaction()
     {
         //do dialog stuff
-       
-      
-        dialogcanv.InitiateDialog(meDialog);
+        if (randomDialogs == true) 
+        {
+            int temp = Mathf.RoundToInt(Random.Range(0, meDialog.Length - 1));
+            Debug.Log("Rolled index value: " + temp);
+            dialogcanv.InitiateDialog(meDialog[temp]);
+        }
+        else
+        {
+            dialogcanv.InitiateDialog(meDialog[dialogIndex]);
+        }
     }
 }

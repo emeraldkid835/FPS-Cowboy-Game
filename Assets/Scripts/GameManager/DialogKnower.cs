@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using XNode;
+
+
 [RequireComponent(typeof(Canvas))]
 public class DialogKnower : MonoBehaviour
 {
@@ -12,6 +14,20 @@ public class DialogKnower : MonoBehaviour
     public GameObject buttonPrefab;
     [SerializeField] private PlayerPause pauser;
     private Canvas me;
+
+    public static DialogKnower instance;
+
+    private void Awake() //singleton for reference if needed
+    {
+        if(instance == null)
+        {
+            instance = this;
+        }else if(instance != null)
+        {
+            Destroy(this);
+        }
+    }
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -37,13 +53,12 @@ public class DialogKnower : MonoBehaviour
                 }
             }
    
-          
-            pauser.PanicPause();
+            pauser.PanicPause(); //causes potential issues about trying to pause while in dialog, but need to turn off controls somehow
             ParseNode();
         }
         else
         {
-            Debug.Log("Assign the dialog tree, you bumble-headed buffoon!");
+            Debug.Log("Give me an actual dialog tree, you shmuck!");
         }
     }
 
@@ -148,7 +163,7 @@ public class DialogKnower : MonoBehaviour
     public void ExitDialog()
     {
         clearPlayerDialog();
-        pauser.Resume();
+        pauser.Resume(); //again, potential issues with pausing.
         me.enabled = false;
    
     }
