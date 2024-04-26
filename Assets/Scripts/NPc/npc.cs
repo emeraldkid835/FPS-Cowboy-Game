@@ -33,8 +33,10 @@ public class npc : MonoBehaviour, IInteract
         //do dialog stuff
         if (randomDialogs == true) 
         {
-            int temp = Mathf.RoundToInt(Random.Range(0, meDialog.Length - 1));
-            Debug.Log("Rolled index value: " + temp);
+            float temper = Random.Range(0, meDialog.Length); //SHOULD BE LENGTH -1, BUT THAT DOESN'T WORK???????????
+            Debug.Log("Rolled value: " + temper);
+            int temp = Mathf.RoundToInt(temper);
+            Debug.Log("Rounded value: " + temp);
             dialogcanv.InitiateDialog(meDialog[temp]);
         }
         else
