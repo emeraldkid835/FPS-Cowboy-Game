@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
-
+using UnityEngine.Rendering;
 
 public class npc : MonoBehaviour, IInteract
 {
@@ -11,8 +11,13 @@ public class npc : MonoBehaviour, IInteract
     [SerializeField] Dialog_Tree[] meDialog;
     
     [SerializeField] private uint dialogIndex; //becomes pointless if randomDialogs is true
-    [SerializeField] public bool randomDialogs;
-  
+    [SerializeField] private bool randomDialogs;
+
+    public void SwapIndex(uint newIndex)
+    {
+        dialogIndex = newIndex;
+    }
+
     void Start()
     { 
         dialogcanv = DialogKnower.instance; //should be convenient
