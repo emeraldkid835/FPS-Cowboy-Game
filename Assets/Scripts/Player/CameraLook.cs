@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class CameraLook : MonoBehaviour
 {
     [SerializeField] PlayerMovement playerMovement;
+    private PlayerPause pauser;
 
-    [SerializeField] public float sensitivityX = 8f;
-    [SerializeField] public float sensitivityY = 0.5f;
+    [SerializeField] float sensitivityX = 8f;
+    [SerializeField] float sensitivityY = 0.5f;
     float mouseX, mouseY;
 
     [SerializeField] Transform playerCamera;
@@ -27,52 +29,89 @@ public class CameraLook : MonoBehaviour
     [SerializeField] Slider sensitivityXSlider;
     [SerializeField] Slider sensitivityYSlider;
 
-    public Button saveButton;
-    public Button loadButton;
-
     Vector3 originalCameraPosition;
 
-    
+    [SerializeField] private float maxInteractionDistance = 1f;
+    [SerializeField] private Transform interactShooterPoint;
+    [SerializeField] private GameObject interactUI;
+    [SerializeField] private TMP_Text interactText;
+
+    private bool validInteract;
+
 
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-
-        
-
+        validInteract = false;
+        interactUI.SetActive(false);
         originalCameraPosition = playerCamera.localPosition;
-        GameObject pausedPanel = GameObject.Find("Canvas/PausedPanel");
+        GameObject controlsPanel = GameObject.Find("Canvas/ControlsPanel");
+        pauser = this.GetComponent<PlayerPause>();
 
-       if (pausedPanel != null)
+       if (controlsPanel != null)
         {
             // Find the sliders by type within the paused panel
-            sensitivityXSlider = pausedPanel.GetComponentInChildren<Slider>();
-            sensitivityYSlider = pausedPanel.GetComponentsInChildren<Slider>()[1]; // Assuming it's the second Slider in the hierarchy
+            sensitivityXSlider = controlsPanel.GetComponentInChildren<Slider>();
+            sensitivityYSlider = controlsPanel.GetComponentsInChildren<Slider>()[1]; // Assuming it's the second Slider in the hierarchy
 
-            
+            // Add listeners to the sliders
+            sensitivityXSlider.onValueChanged.AddListener(UpdateSensitivityX);
+            sensitivityYSlider.onValueChanged.AddListener(UpdateSensitivityY);
         }
-            // Add listeners to sliders
-            if (sensitivityXSlider != null)
-            {
-                sensitivityXSlider.onValueChanged.AddListener(UpdateSensitivityX);
-            }
-            if (sensitivityYSlider != null)
-            {
-                sensitivityYSlider.onValueChanged.AddListener(UpdateSensitivityY);
-            }
-        // Add listeners to the Save and Load buttons
-        saveButton.onClick.AddListener(SaveSettings);
-        loadButton.onClick.AddListener(LoadSettings);
-
-        LoadSettings();
 
         
     }
+
+    void Interactioncheck()
+    {
+        //hide interaction canvas???
+        interactUI.SetActive(false);
+        RaycastHit hit;
+        int mask = 1 << 6;
+        mask = ~mask;
+
+        if(Physics.Raycast(interactShooterPoint.position, interactShooterPoint.forward, out hit, maxInteractionDistance, mask))
+        {
+            //PLAYER cAMERA IS WEIRD???
+            Debug.DrawLine(interactShooterPoint.position, hit.transform.position, Color.blue, 5f);
+            GameObject hitobject = hit.transform.gameObject;
+            MonoBehaviour[] mono = hitobject.GetComponents<MonoBehaviour>();
+            foreach(MonoBehaviour script in mono)
+            {
+                if(script is IInteract)
+                {
+                    IInteract temp = script as IInteract;
+                    //do UI
+                    if (temp.validToReinteract() == true && pauser.isPaused == false)
+                    {
+                        interactUI.SetActive(true);
+                        if (temp.contextText() != null)
+                        {
+                            interactText.text = temp.contextText();
+                        }
+                        else
+                        {
+                            interactText.text = "Interact";
+                        }
+                    }
+                    //do the Thing
+                    if (validInteract == true && pauser.isPaused == false)
+                    {
+                        temp.Interaction();
+                        validInteract = false;
+                    }
+                    break;
+                }
+            }
+        }
+    }
+
     private void Update()
     {
         HandleHeadBobbing();
 
+        Interactioncheck();
 
         transform.Rotate(Vector3.up, mouseX * Time.deltaTime);
 
@@ -86,6 +125,12 @@ public class CameraLook : MonoBehaviour
     {
         mouseX = mouseInput.x * sensitivityX;
         mouseY = mouseInput.y * sensitivityY;
+    }
+
+    public void InteractButtonPressed()
+    {
+        validInteract = true;
+       
     }
 
     private void HandleHeadBobbing()
@@ -115,55 +160,12 @@ public class CameraLook : MonoBehaviour
     public void UpdateSensitivityX(float value)
     {
         sensitivityX = value;
-        PlayerPrefs.SetFloat("sensX", value);
-        PlayerPrefs.Save();
-
-        Debug.Log("Updated sensX: " + sensitivityX);
-        Debug.Log("SliderX value: " + value);
     }
 
     // Method to update sensitivityY based on UI Slider value
     public void UpdateSensitivityY(float value)
     {
         sensitivityY = value;
-        PlayerPrefs.SetFloat("sensY", value);
-        PlayerPrefs.Save();
-
-        Debug.Log("Updated sensY: " + sensitivityY);
-        Debug.Log("SliderY value: " + value);
-    }
-
-    // Method to save sensitivity settings
-    private void SaveSettings()
-    {
-        PlayerPrefs.SetFloat("sensX", sensitivityX);
-        PlayerPrefs.SetFloat("sensY", sensitivityY);
-        PlayerPrefs.Save();
-        Debug.Log("Saved sensX: " + sensitivityX + ", sensY: " + sensitivityY);
-
-    }
-
-    // Method to load sensitivity settings
-    private void LoadSettings()
-    {
-        sensitivityX = PlayerPrefs.GetFloat("sensX", sensitivityX);
-        sensitivityY = PlayerPrefs.GetFloat("sensY", sensitivityY);
-
-        Debug.Log("Loaded sensX: " + sensitivityX + ", sensY: " + sensitivityY);
-
-        // Update sliders
-        if (sensitivityXSlider != null)
-        {
-            sensitivityXSlider.value = sensitivityX;
-            UpdateSensitivityX(sensitivityX);
-            Debug.Log("SliderX value: " + sensitivityXSlider.value);
-        }
-        if (sensitivityYSlider != null)
-        {
-            sensitivityYSlider.value = sensitivityY;
-            UpdateSensitivityY(sensitivityY);
-            Debug.Log("SliderY value: " + sensitivityYSlider.value);
-        }
     }
 
 
