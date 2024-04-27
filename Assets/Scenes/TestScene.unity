@@ -8649,6 +8649,11 @@ MonoBehaviour:
   damageRadius: 5
   damageAmount: 10
   damageType: 1
+--- !u!1 &1395285106 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8333143454171795412, guid: ad43a20080ca05c45bb050d66f1e8e9d, type: 3}
+  m_PrefabInstance: {fileID: 4051932091814834726}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &1410844167
 Mesh:
   m_ObjectHideFlags: 0
@@ -9942,6 +9947,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb9d0a32bfa99db46a46b239eea4697d, type: 3}
+--- !u!114 &1679758019 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8168530034938480707, guid: ad43a20080ca05c45bb050d66f1e8e9d, type: 3}
+  m_PrefabInstance: {fileID: 4051932091814834726}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1682561541
 GameObject:
   m_ObjectHideFlags: 0
@@ -16405,6 +16421,10 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3696423199745172921, guid: e680a3e281946174f95d9d8f76ec8129, type: 3}
+      propertyPath: interactUI
+      value: 
+      objectReference: {fileID: 1395285106}
+    - target: {fileID: 3696423199745172921, guid: e680a3e281946174f95d9d8f76ec8129, type: 3}
       propertyPath: loadButton
       value: 
       objectReference: {fileID: 1365417914}
@@ -16412,6 +16432,10 @@ PrefabInstance:
       propertyPath: saveButton
       value: 
       objectReference: {fileID: 785337759}
+    - target: {fileID: 3696423199745172921, guid: e680a3e281946174f95d9d8f76ec8129, type: 3}
+      propertyPath: interactText
+      value: 
+      objectReference: {fileID: 1679758019}
     - target: {fileID: 3696423199745172921, guid: e680a3e281946174f95d9d8f76ec8129, type: 3}
       propertyPath: sensitivityXSlider
       value: 
