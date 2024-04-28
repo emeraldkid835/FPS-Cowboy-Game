@@ -12,15 +12,33 @@ public class npc : MonoBehaviour, IInteract
     [SerializeField] private string contextTex = "Speak";
     [SerializeField] private uint dialogIndex; //becomes pointless if randomDialogs is true
     [SerializeField] private bool randomDialogs;
+    [SerializeField] private string meName;
 
     public void SwapIndex(uint newIndex)
     {
         dialogIndex = newIndex;
+        PlayerPrefs.SetInt(meName, dialogIndex.ConvertTo<int>());
+        PlayerPrefs.Save();
     }
 
-    void Start()
+    void Start() //IMPORTANT, NEVER cHANGE NPc NAMES!
     { 
+        if(meName == null)
+        {
+            meName = this.gameObject.name;
+        }
+        if(meName != this.gameObject.name)
+        {
+            Debug.Log("This gameobject is now bricked, player preferences are probably fucked, damn you.");
+            Destroy(this.gameObject);
+        }
+        
         dialogcanv = DialogKnower.instance; //should be convenient
+        
+        if (randomDialogs == false)
+        {
+            dialogIndex = PlayerPrefs.GetInt(meName).ConvertTo<uint>();
+        }
     }
 
     public string contextText()
