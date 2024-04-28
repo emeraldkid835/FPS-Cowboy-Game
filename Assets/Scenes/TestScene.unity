@@ -16708,6 +16708,7 @@ GameObject:
   - component: {fileID: 4082212496239402345}
   - component: {fileID: 1727108761}
   - component: {fileID: 1727108760}
+  - component: {fileID: 4085834903531659287}
   m_Layer: 6
   m_Name: Double-barrel_gunUnlocker
   m_TagString: Untagged
@@ -16715,6 +16716,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &4085834903531659287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4085834903531659286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d3a5d58627267945b2dc2cb2703c7a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementDistance: 1
+  movementSpeed: 1
 --- !u!1 &4086368779963619884
 GameObject:
   m_ObjectHideFlags: 0
@@ -19470,6 +19485,7 @@ GameObject:
   - component: {fileID: 6332425574491324591}
   - component: {fileID: 6332425574491324588}
   - component: {fileID: 6332425574491324592}
+  - component: {fileID: 6332425574491324593}
   m_Layer: 0
   m_Name: FireballGunUnlocker
   m_TagString: Untagged
@@ -19546,6 +19562,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponSwitcher: {fileID: 0}
   weaponIndex: 2
+--- !u!114 &6332425574491324593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6332425574491324589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d3a5d58627267945b2dc2cb2703c7a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementDistance: 1
+  movementSpeed: 1
 --- !u!4 &6332425574816434498
 Transform:
   m_ObjectHideFlags: 0

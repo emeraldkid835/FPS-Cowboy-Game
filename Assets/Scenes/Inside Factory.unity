@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17276807, g: 0.21589197, b: 0.29782572, a: 1}
+  m_IndirectSpecularColor: {r: 0.17276844, g: 0.21589246, b: 0.2978263, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -7539,6 +7539,7 @@ MonoBehaviour:
   openSound: {fileID: 0}
   closeSound: {fileID: 0}
   soundPosition: {fileID: 0}
+  contextTex: Open
 --- !u!111 &359784945
 Animation:
   m_ObjectHideFlags: 0
@@ -11099,6 +11100,14 @@ PrefabInstance:
       propertyPath: groundedRadius
       value: 0.2
       objectReference: {fileID: 0}
+    - target: {fileID: 3696423199745172921, guid: e680a3e281946174f95d9d8f76ec8129, type: 3}
+      propertyPath: interactUI
+      value: 
+      objectReference: {fileID: 851525859}
+    - target: {fileID: 3696423199745172921, guid: e680a3e281946174f95d9d8f76ec8129, type: 3}
+      propertyPath: interactText
+      value: 
+      objectReference: {fileID: 2028129977}
     - target: {fileID: 3696423199745172921, guid: e680a3e281946174f95d9d8f76ec8129, type: 3}
       propertyPath: sensitivityXSlider
       value: 
@@ -31861,6 +31870,11 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &851525859 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8333143454171795412, guid: ad43a20080ca05c45bb050d66f1e8e9d, type: 3}
+  m_PrefabInstance: {fileID: 1067540335}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &861208355 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4444492707600494576, guid: 846bf728c99b9d44e8d38d7229fdb68e, type: 3}
@@ -59147,6 +59161,8 @@ MonoBehaviour:
   audioObject: {fileID: 6841519541976787402, guid: 6df098e18579d814f8317b76ad95e13f, type: 3}
   musicVolume: {fileID: 162786171}
   sfxVolume: {fileID: 162786170}
+  musicVolumeValue: 0
+  sfxVolumeValue: 0
   minVariation: 1
   maxVariation: 1
   worldSFX: []
@@ -65875,6 +65891,17 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!114 &2028129977 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8168530034938480707, guid: ad43a20080ca05c45bb050d66f1e8e9d, type: 3}
+  m_PrefabInstance: {fileID: 1067540335}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &2029243835
 Mesh:
   m_ObjectHideFlags: 0
