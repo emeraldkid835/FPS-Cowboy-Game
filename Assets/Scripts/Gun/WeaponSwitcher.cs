@@ -23,6 +23,9 @@ public class WeaponSwitcher : MonoBehaviour
             if (i == 0 || IsWeaponUnlocked(i))
             {
                 gunBools.Add(true);
+                guns[1].SetActive(false);
+                guns[2].SetActive(false);
+
             }
             else
             {
@@ -66,23 +69,7 @@ public class WeaponSwitcher : MonoBehaviour
         }
     }
 
-    /*public void SwitchGun(int offset)
-    {
-        if (isReloading == false && gunBools[currentGunIndex + offset] == true)
-        {
-            // Disable current gun
-            guns[currentGunIndex].SetActive(false);
-
-            // Calculate the index of the next gun
-            currentGunIndex = (currentGunIndex + offset + guns.Count) % guns.Count;
-
-            // Enable the next gun
-            guns[currentGunIndex].SetActive(true);
-
-            // Notify the InputManager about the weapon switch
-            InputManager.instance.UpdateEquippedGun(guns[currentGunIndex].GetComponent<GunClass>());
-        }
-    }*/
+    
 
     // Method to check if a weapon is unlocked
     bool IsWeaponUnlocked(int index)
@@ -101,8 +88,12 @@ public class WeaponSwitcher : MonoBehaviour
         // Update the gunBools list
         gunBools[index] = true;
 
+        //SwitchGun(index);
+        // Disable current gun
+        //guns[currentGunIndex].SetActive(false);
+
         // Enable the unlocked gun
-        guns[index].SetActive(true);
+        //guns[index].SetActive(true);
     }
 
     // Method to get the currently equipped gun
