@@ -29,7 +29,7 @@ public class npc : MonoBehaviour, IInteract
         }
         if(meName != this.gameObject.name)
         {
-            Debug.Log("This gameobject is now bricked, player preferences are probably fucked, damn you.");
+            Debug.Log("This gameobject: " + gameObject.name + " is now bricked, player preferences are probably fucked, damn you. Wipe the prefs, under the edit menu.");
             Destroy(this.gameObject);
         }
         
