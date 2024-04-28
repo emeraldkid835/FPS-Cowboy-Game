@@ -10,7 +10,7 @@ public class npc : MonoBehaviour, IInteract
     DialogKnower dialogcanv;
     [SerializeField] Dialog_Tree[] meDialog;
     [SerializeField] private string contextTex = "Speak";
-    [SerializeField] private uint dialogIndex; //becomes pointless if randomDialogs is true
+    [SerializeField] private uint dialogIndex = 0; //becomes pointless if randomDialogs is true
     [SerializeField] private bool randomDialogs;
     [SerializeField] private string meName;
 
