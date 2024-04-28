@@ -31,6 +31,9 @@ public class npc : MonoBehaviour, IInteract
         {
             Debug.Log("This gameobject: " + gameObject.name + " is now bricked, player preferences are probably fucked, damn you. Wipe the prefs, under the edit menu.");
             Destroy(this.gameObject);
+#if UNITY_EDITOR
+            EditorApplication.ExitPlaymode(); //only if editor, duh!
+#endif
         }
         
         dialogcanv = DialogKnower.instance; //should be convenient
