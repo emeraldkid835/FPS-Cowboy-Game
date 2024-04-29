@@ -12,7 +12,6 @@ public class OWSPAGHETTI : MonoBehaviour
     {
         if(PlayerPrefs.GetInt("PlayerJump") > 1 && PlayerPrefs.GetInt("GunUnlocked_1") == 1)
         {
-          
             mayor.SwapIndex(2);
             Destroy(allEnemies);
             piss.Stop();
