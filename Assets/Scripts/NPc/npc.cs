@@ -10,11 +10,11 @@ public class npc : MonoBehaviour, IInteract
     DialogKnower dialogcanv;
     [SerializeField] Dialog_Tree[] meDialog;
     [SerializeField] private string contextTex = "Speak";
-    [SerializeField] private uint dialogIndex = 0; //becomes pointless if randomDialogs is true
+    [SerializeField] private int dialogIndex = 0; //becomes pointless if randomDialogs is true
     [SerializeField] private bool randomDialogs;
     [SerializeField] private string meName;
 
-    public void SwapIndex(uint newIndex)
+    public void SwapIndex(int newIndex)
     {
         dialogIndex = newIndex;
         PlayerPrefs.SetInt(meName, dialogIndex.ConvertTo<int>());
@@ -40,7 +40,7 @@ public class npc : MonoBehaviour, IInteract
         
         if (randomDialogs == false)
         {
-            dialogIndex = PlayerPrefs.GetInt(meName).ConvertTo<uint>();
+            dialogIndex = PlayerPrefs.GetInt(meName).ConvertTo<int>();
         }
     }
 
