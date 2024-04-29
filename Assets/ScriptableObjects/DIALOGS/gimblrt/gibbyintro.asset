@@ -37,7 +37,7 @@ MonoBehaviour:
         PublicKeyToken=b77a5c561934e089
       connections:
       - fieldName: entry
-        node: {fileID: 4386145178806491355}
+        node: {fileID: -1186108565647519277}
         reroutePoints: []
       _direction: 1
       _connectionType: 1
@@ -72,11 +72,11 @@ MonoBehaviour:
       - fieldName: exit 0
         node: {fileID: 824361519210148606}
         reroutePoints: []
-      - fieldName: exit
-        node: {fileID: 687732392071298714}
-        reroutePoints: []
       - fieldName: exit 0
         node: {fileID: -1850849844501244388}
+        reroutePoints: []
+      - fieldName: exit 0
+        node: {fileID: 4386145178806491355}
         reroutePoints: []
       _direction: 0
       _connectionType: 0
@@ -127,7 +127,7 @@ MonoBehaviour:
   m_Name: NPC_Dialogue
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 1319.555, y: 164.67787}
+  position: {x: 1528, y: 248}
   ports:
     keys:
     - entry
@@ -263,6 +263,59 @@ MonoBehaviour:
   dialogueText: What about them?
   entry: 0
   exit: 0
+--- !u!114 &-1186108565647519277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcb75a79dcdd3084da50c544beb38d9b, type: 3}
+  m_Name: mayorindex+=1
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 1304, y: -296}
+  ports:
+    keys:
+    - entry
+    - exit
+    values:
+    - _fieldName: entry
+      _node: {fileID: -1186108565647519277}
+      _typeQualifiedName: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: exit
+        node: {fileID: 4194296842611648172}
+        reroutePoints: []
+      - fieldName: exit
+        node: {fileID: -9156506490336065906}
+        reroutePoints: []
+      - fieldName: exit
+        node: {fileID: 2682988161916113747}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: exit
+      _node: {fileID: -1186108565647519277}
+      _typeQualifiedName: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: entry
+        node: {fileID: 4386145178806491355}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  dialogueText: 
+  eventToDo: {fileID: 0}
+  entry: 0
+  exit: 0
 --- !u!114 &-464695749955210738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -343,56 +396,9 @@ MonoBehaviour:
   - {fileID: 4031568466612604755}
   - {fileID: 4194296842611648172}
   - {fileID: 4386145178806491355}
-  - {fileID: 687732392071298714}
   - {fileID: -1850849844501244388}
+  - {fileID: -1186108565647519277}
   current: {fileID: 0}
---- !u!114 &687732392071298714
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fcb75a79dcdd3084da50c544beb38d9b, type: 3}
-  m_Name: changemayor+more?
-  m_EditorClassIdentifier: 
-  graph: {fileID: 11400000}
-  position: {x: 1618.922, y: -27.550364}
-  ports:
-    keys:
-    - entry
-    - exit
-    values:
-    - _fieldName: entry
-      _node: {fileID: 687732392071298714}
-      _typeQualifiedName: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      connections:
-      - fieldName: exit 0
-        node: {fileID: 4386145178806491355}
-        reroutePoints: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: exit
-      _node: {fileID: 687732392071298714}
-      _typeQualifiedName: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      connections:
-      - fieldName: entry
-        node: {fileID: -7653989027823508560}
-        reroutePoints: []
-      _direction: 1
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-  dialogueText: 
-  eventToDo: {fileID: 0}
-  entry: 0
-  exit: 0
 --- !u!114 &824361519210148606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -556,7 +562,7 @@ MonoBehaviour:
         PublicKeyToken=b77a5c561934e089
       connections:
       - fieldName: entry
-        node: {fileID: 4386145178806491355}
+        node: {fileID: -1186108565647519277}
         reroutePoints: []
       _direction: 1
       _connectionType: 1
@@ -734,7 +740,7 @@ MonoBehaviour:
         PublicKeyToken=b77a5c561934e089
       connections:
       - fieldName: entry
-        node: {fileID: 4386145178806491355}
+        node: {fileID: -1186108565647519277}
         reroutePoints: []
       _direction: 1
       _connectionType: 1
@@ -802,7 +808,7 @@ MonoBehaviour:
   m_Name: NPC_Dialogue
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 1293.8306, y: -140.32002}
+  position: {x: 1704, y: -216}
   ports:
     keys:
     - entry
@@ -815,13 +821,7 @@ MonoBehaviour:
         PublicKeyToken=b77a5c561934e089
       connections:
       - fieldName: exit
-        node: {fileID: -9156506490336065906}
-        reroutePoints: []
-      - fieldName: exit
-        node: {fileID: 4194296842611648172}
-        reroutePoints: []
-      - fieldName: exit
-        node: {fileID: 2682988161916113747}
+        node: {fileID: -1186108565647519277}
         reroutePoints: []
       _direction: 0
       _connectionType: 0
@@ -842,7 +842,7 @@ MonoBehaviour:
         PublicKeyToken=b77a5c561934e089
       connections:
       - fieldName: entry
-        node: {fileID: 687732392071298714}
+        node: {fileID: -7653989027823508560}
         reroutePoints: []
       _direction: 1
       _connectionType: 1

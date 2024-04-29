@@ -21,13 +21,18 @@ public class npc : MonoBehaviour, IInteract
         PlayerPrefs.Save();
     }
 
+    public int GetIndex()
+    {
+        return dialogIndex;
+    }
+
     void Start() //IMPORTANT, NEVER cHANGE NPc NAMES!
     { 
         if(meName == null)
         {
             meName = this.gameObject.name;
         }
-        if(meName != this.gameObject.name)
+        if(meName != this.gameObject.name && randomDialogs == false)
         {
             Debug.Log("This gameobject: " + gameObject.name + " is now bricked, player preferences are probably fucked, damn you. Wipe the prefs, under the edit menu.");
             Destroy(this.gameObject);
