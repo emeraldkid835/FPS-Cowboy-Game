@@ -14,6 +14,7 @@ public class Intro_Script : MonoBehaviour
     void Start()
     {
         me = this.GetComponent<VideoPlayer>();
+        me.url = Application.streamingAssetsPath + "/Video/background1.mp4";
         t = 0;
     }
 
