@@ -313,7 +313,7 @@ MonoBehaviour:
       _typeConstraint: 0
       _dynamic: 0
   dialogueText: 
-  eventToDo: {fileID: 0}
+  eventToDo: {fileID: 11400000, guid: 4b1040cee37fc48489bc24f566f7709a, type: 2}
   entry: 0
   exit: 0
 --- !u!114 &-464695749955210738
