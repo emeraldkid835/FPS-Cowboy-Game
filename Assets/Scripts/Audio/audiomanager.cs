@@ -58,14 +58,16 @@ public class audiomanager : MonoBehaviour
     }
     private void VolumeTick()
     {
-        if (canOverideMusicVolume == true && leMusic.volume != musicVolume.value && musicVolume != null)
+        if (musicVolume != null)
         {
-            musicVolumeValue = musicVolume.value;
-            
-            leMusic.volume = musicVolumeValue;
+            if (canOverideMusicVolume == true && leMusic.volume != musicVolume.value)
+            {
+                musicVolumeValue = musicVolume.value;
 
+                leMusic.volume = musicVolumeValue;
+
+            }
         }
-
     }
 
     private void Awake() //is called before Start method, at start of the game
@@ -195,16 +197,20 @@ public class audiomanager : MonoBehaviour
     // Method to load volume settings
     public void LoadVolumeSettings()
     {
-        musicVolume.value = PlayerPrefs.GetFloat("MusicVolume", 1f); // Default value of 1f
-        sfxVolume.value = PlayerPrefs.GetFloat("SfxVolume", 1f); // Default value of 1f
-
+        if (musicVolume != null && sfxVolume != null)
+        {
+            musicVolume.value = PlayerPrefs.GetFloat("MusicVolume", 1f); // Default value of 1f
+            sfxVolume.value = PlayerPrefs.GetFloat("SfxVolume", 1f); // Default value of 1f
+            UpdateVolume();
+        }
         // Update volume immediately after loading
-        UpdateVolume();
+        
     }
 
     // Method to update volume settings
     private void UpdateVolume()
     {
+       
         // Update music volume
         if (leMusic != null)
             leMusic.volume = musicVolume.value;

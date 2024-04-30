@@ -10,17 +10,43 @@ public class npc : MonoBehaviour, IInteract
     DialogKnower dialogcanv;
     [SerializeField] Dialog_Tree[] meDialog;
     [SerializeField] private string contextTex = "Speak";
-    [SerializeField] private uint dialogIndex; //becomes pointless if randomDialogs is true
+    [SerializeField] private int dialogIndex = 0; //becomes pointless if randomDialogs is true
     [SerializeField] private bool randomDialogs;
+    [SerializeField] private string meName;
 
-    public void SwapIndex(uint newIndex)
+    public void SwapIndex(int newIndex)
     {
         dialogIndex = newIndex;
+        PlayerPrefs.SetInt(meName, dialogIndex.ConvertTo<int>());
+        PlayerPrefs.Save();
     }
 
-    void Start()
+    public int GetIndex()
+    {
+        return dialogIndex;
+    }
+
+    void Start() //IMPORTANT, NEVER cHANGE NPc NAMES!
     { 
+        if(meName == null)
+        {
+            meName = this.gameObject.name;
+        }
+        if(meName != this.gameObject.name && randomDialogs == false)
+        {
+            Debug.Log("This gameobject: " + gameObject.name + " is now bricked, player preferences are probably fucked, damn you. Wipe the prefs, under the edit menu.");
+            Destroy(this.gameObject);
+#if UNITY_EDITOR
+            EditorApplication.ExitPlaymode(); //only if editor, duh!
+#endif
+        }
+        
         dialogcanv = DialogKnower.instance; //should be convenient
+        
+        if (randomDialogs == false)
+        {
+            dialogIndex = PlayerPrefs.GetInt(meName).ConvertTo<int>();
+        }
     }
 
     public string contextText()

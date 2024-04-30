@@ -11105,7 +11105,7 @@ GameObject:
   - component: {fileID: 5703780692387784210}
   - component: {fileID: 5703780692387784211}
   - component: {fileID: 5703780692387784208}
-  - component: {fileID: 3590923061350850077}
+  - component: {fileID: 3592236150696028048}
   m_Layer: 3
   m_Name: GrimoireUpgrade
   m_TagString: Untagged
@@ -11168,7 +11168,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: ebb061c538721714f9de009c28945851, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 0a107c34827044545b73ee9351383543, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -11254,7 +11254,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &3590923061350850077
+--- !u!114 &3592236150696028048
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -11263,8 +11263,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5703780692387784215}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5854646520bbfcc44bd850e9bc334e37, type: 3}
+  m_Script: {fileID: 11500000, guid: b5f5738f9ad3ef64c88a9c81242bafe9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickupSFX: {fileID: 0}
-  ambientSFX: {fileID: 0}
+  weaponSwitcher: {fileID: 0}
+  meSound: {fileID: 5703780692387784208}
+  weaponIndex: 2

@@ -69,7 +69,21 @@ public class WeaponSwitcher : MonoBehaviour
         }
     }
 
-    
+    public void MaxAllAmmo() //hopefully max every and all ammo
+    {
+        foreach(GameObject gun in guns)
+        {
+            MonoBehaviour[] monos = gun.GetComponents<MonoBehaviour>();
+            for (int i = 0; i < monos.Length; i++)
+            {
+                if(monos[i] is GunClass)
+                {
+                    GunClass temp = monos[i] as GunClass;
+                    temp.AddAmmo(9999);
+                }
+            }
+        }
+    }
 
     // Method to check if a weapon is unlocked
     bool IsWeaponUnlocked(int index)
