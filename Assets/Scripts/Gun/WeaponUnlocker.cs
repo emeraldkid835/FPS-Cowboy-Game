@@ -9,7 +9,7 @@ public class WeaponUnlocker : MonoBehaviour
     [SerializeField] private AudioSource meSound;
     [SerializeField] int weaponIndex; // int of 1 = shotgun, int of 2 = fireball shooter, 3 = winchester (depends on player prefab)
 
-    private void Start()
+    private void OnEnable()
     {
         if (weaponSwitcher == null)
         {
