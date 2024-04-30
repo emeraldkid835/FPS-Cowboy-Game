@@ -6,6 +6,7 @@ public class WeaponUnlocker : MonoBehaviour
 {
     // Reference to the WeaponSwitcher script on the player object
     public WeaponSwitcher weaponSwitcher;
+    [SerializeField] private AudioSource meSound;
     [SerializeField] int weaponIndex; // int of 1 = shotgun, int of 2 = fireball shooter, 3 = winchester (depends on player prefab)
 
     private void Start()
@@ -37,8 +38,12 @@ public class WeaponUnlocker : MonoBehaviour
                 weaponSwitcher.UnlockWeapon(index);
                 weaponSwitcher.SwitchGun(index);
             }
+        if (other.tag == "Player")
+        {
+            audiomanager.instance.PlaySFX3D(meSound.clip, this.transform.position);
 
             Destroy(this.gameObject);
+        }
     }
     
 }
