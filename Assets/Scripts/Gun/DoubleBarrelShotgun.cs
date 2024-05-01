@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
 public class DoubleBarrelShotgun : GunClass
 {
     public int currentBullets;
@@ -17,6 +18,7 @@ public class DoubleBarrelShotgun : GunClass
     [SerializeField] private GameObject bulletVisualPrefab;
     [SerializeField] private AudioSource reloadSound;
     private WeaponSwitcher ws;
+    private Animator animator;
     private bool isReloading = false;
 
     [SerializeField] PlayerPause playerPause;
@@ -145,6 +147,7 @@ public class DoubleBarrelShotgun : GunClass
             {
                 audiomanager.instance.PlaySFX3D(reloadSound.clip, this.transform.position, 0);
             }
+            animator.SetTrigger("Reload");
             StartCoroutine(Reloadtime());
         }
         

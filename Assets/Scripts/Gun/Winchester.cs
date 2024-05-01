@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
 public class Winchester : GunClass
 {
     [SerializeField] private GameObject bulletVisualPrefab;
@@ -18,6 +19,7 @@ public class Winchester : GunClass
     private WeaponSwitcher ws;
 
     private bool isReloading = false;
+    private Animator animator;
 
     [SerializeField] PlayerPause playerPause;
 
@@ -55,6 +57,7 @@ public class Winchester : GunClass
         recoil = GameObject.Find("CameraRot/CameraRecoil").GetComponent<Recoil>();
         ws = GameObject.Find("GunContainer").GetComponent<WeaponSwitcher>();
         playerPause = GameObject.Find("GoodPlayer").GetComponent<PlayerPause>();
+        animator = GetComponent<Animator>();
     }
 
     // Implement shooting logic specific to the Revolver
@@ -131,6 +134,7 @@ public class Winchester : GunClass
     {
         if (playerPause.isPaused == false && isReloading != true && currentBullets < MaxBulletsPerMagazine)
         {
+            animator.SetTrigger("Reload");
             StartCoroutine(Reloadtime());
         }
 

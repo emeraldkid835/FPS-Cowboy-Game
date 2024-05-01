@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
 public class Revolver : GunClass
 {
     [SerializeField] private GameObject bulletVisualPrefab;
@@ -17,6 +18,7 @@ public class Revolver : GunClass
     public int maxStoredAmmo = 30;
     private Recoil recoil;
     private WeaponSwitcher ws;
+    private Animator animator;
 
     [SerializeField] private AudioSource reloadSound;
     [SerializeField] PlayerPause playerPause;
@@ -57,6 +59,7 @@ public class Revolver : GunClass
         recoil = GameObject.Find("CameraRot/CameraRecoil").GetComponent<Recoil>();
         ws = GameObject.Find("GunContainer").GetComponent<WeaponSwitcher>();
         playerPause = GameObject.Find("GoodPlayer").GetComponent<PlayerPause>();
+        animator = GetComponent<Animator>();
     }
 
     // Implement shooting logic specific to the Revolver
@@ -137,6 +140,7 @@ public class Revolver : GunClass
             {
                 audiomanager.instance.PlaySFX3D(reloadSound.clip, this.transform.position, 0);
             }
+            animator.SetTrigger("Reload");
             StartCoroutine(Reloadtime());
         }
 
