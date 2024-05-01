@@ -189,6 +189,15 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""InteractButton"",
+                    ""type"": ""Button"",
+                    ""id"": ""e235f3ce-3f01-429a-8ffa-cf55e38bf733"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -233,6 +242,28 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""MouseY"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ffeb5ba9-1981-4be0-b35c-10ac08f54ef4"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""InteractButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""02f3eb6d-cebc-4254-943a-b6e66d7279aa"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""InteractButton"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -344,7 +375,7 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""3df371b6-8acc-40b5-8797-c80dc9639213"",
-                    ""path"": ""<Keyboard>/escape"",
+                    ""path"": ""<Keyboard>/tab"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -377,6 +408,7 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
         m_CameraLook = asset.FindActionMap("CameraLook", throwIfNotFound: true);
         m_CameraLook_MouseX = m_CameraLook.FindAction("MouseX", throwIfNotFound: true);
         m_CameraLook_MouseY = m_CameraLook.FindAction("MouseY", throwIfNotFound: true);
+        m_CameraLook_InteractButton = m_CameraLook.FindAction("InteractButton", throwIfNotFound: true);
         // Weapons
         m_Weapons = asset.FindActionMap("Weapons", throwIfNotFound: true);
         m_Weapons_Shoot = m_Weapons.FindAction("Shoot", throwIfNotFound: true);
@@ -511,12 +543,14 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
     private List<ICameraLookActions> m_CameraLookActionsCallbackInterfaces = new List<ICameraLookActions>();
     private readonly InputAction m_CameraLook_MouseX;
     private readonly InputAction m_CameraLook_MouseY;
+    private readonly InputAction m_CameraLook_InteractButton;
     public struct CameraLookActions
     {
         private @InputMaster m_Wrapper;
         public CameraLookActions(@InputMaster wrapper) { m_Wrapper = wrapper; }
         public InputAction @MouseX => m_Wrapper.m_CameraLook_MouseX;
         public InputAction @MouseY => m_Wrapper.m_CameraLook_MouseY;
+        public InputAction @InteractButton => m_Wrapper.m_CameraLook_InteractButton;
         public InputActionMap Get() { return m_Wrapper.m_CameraLook; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -532,6 +566,9 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
             @MouseY.started += instance.OnMouseY;
             @MouseY.performed += instance.OnMouseY;
             @MouseY.canceled += instance.OnMouseY;
+            @InteractButton.started += instance.OnInteractButton;
+            @InteractButton.performed += instance.OnInteractButton;
+            @InteractButton.canceled += instance.OnInteractButton;
         }
 
         private void UnregisterCallbacks(ICameraLookActions instance)
@@ -542,6 +579,9 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
             @MouseY.started -= instance.OnMouseY;
             @MouseY.performed -= instance.OnMouseY;
             @MouseY.canceled -= instance.OnMouseY;
+            @InteractButton.started -= instance.OnInteractButton;
+            @InteractButton.performed -= instance.OnInteractButton;
+            @InteractButton.canceled -= instance.OnInteractButton;
         }
 
         public void RemoveCallbacks(ICameraLookActions instance)
@@ -685,6 +725,7 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
     {
         void OnMouseX(InputAction.CallbackContext context);
         void OnMouseY(InputAction.CallbackContext context);
+        void OnInteractButton(InputAction.CallbackContext context);
     }
     public interface IWeaponsActions
     {

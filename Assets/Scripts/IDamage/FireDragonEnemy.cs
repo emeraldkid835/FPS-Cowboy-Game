@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 
 public class FireDragonEnemy : MonoBehaviour, IDamage // Declaring that it is an IDamage, which needs to incorporate the method from the IDamage interface
 {
@@ -27,6 +28,9 @@ public class FireDragonEnemy : MonoBehaviour, IDamage // Declaring that it is an
 
 
     [SerializeField] public float EnemycurrentHealth; // Enemy current health at a given time
+
+    [Header("Event")]
+    [SerializeField] private UnityEvent me;
 
     private void Awake()
     {
@@ -61,7 +65,7 @@ public class FireDragonEnemy : MonoBehaviour, IDamage // Declaring that it is an
 
         // Instantiate blood effect at the position where the enemy was hit
         GameObject bloodEffect = Instantiate(bloodEffectPrefab, bloodEffectLocation.position, Quaternion.identity);
-
+        enemyai.hurt = true;
         // Destroy the blood effect after a delay
         Destroy(bloodEffect, bloodEffectDuration);
 
@@ -82,6 +86,10 @@ public class FireDragonEnemy : MonoBehaviour, IDamage // Declaring that it is an
         agent.SetDestination(transform.position);
         agent.Stop();
         yield return new WaitForSeconds(3f);
+        if (me != null)
+        {
+            me.Invoke();
+        }
         Destroy(gameObject);
 
     }

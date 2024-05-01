@@ -34,6 +34,7 @@ public class EnemyAI : MonoBehaviour
     //States
     public float sightRange, attackRange, sightAngle;
     public bool playerInSightRange, playerInAttackRange;
+    public bool hurt;
 
     //Retreat
     public Transform RetreatWaypoint;
@@ -47,6 +48,7 @@ public class EnemyAI : MonoBehaviour
 
     private void Awake()
     {
+        hurt = false;
         player = GameObject.Find("GoodPlayer").transform;
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
@@ -99,7 +101,7 @@ public class EnemyAI : MonoBehaviour
             }
            
         }
-        if (playerInSightRange && !playerInAttackRange && !isenemyDead)
+        if ((playerInSightRange && !playerInAttackRange && !isenemyDead) || !playerInAttackRange && !isenemyDead && hurt)
         {
             animator.SetBool("isIdle", false);
             animator.SetBool("isWalking", false);

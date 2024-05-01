@@ -15,6 +15,9 @@ public class audiomanager : MonoBehaviour
     [SerializeField] Slider musicVolume;
     [SerializeField] Slider sfxVolume;
 
+    public float musicVolumeValue;
+    public float sfxVolumeValue;
+
     [SerializeField, Range(-3, 1)] float minVariation;
     [SerializeField, Range(1, 3)] float maxVariation;
 
@@ -55,11 +58,16 @@ public class audiomanager : MonoBehaviour
     }
     private void VolumeTick()
     {
-        if (canOverideMusicVolume == true && leMusic.volume != musicVolume.value && musicVolume != null)
+        if (musicVolume != null)
         {
-            leMusic.volume = musicVolume.value;
-        }
+            if (canOverideMusicVolume == true && leMusic.volume != musicVolume.value)
+            {
+                musicVolumeValue = musicVolume.value;
 
+                leMusic.volume = musicVolumeValue;
+
+            }
+        }
     }
 
     private void Awake() //is called before Start method, at start of the game
@@ -74,6 +82,11 @@ public class audiomanager : MonoBehaviour
         }
         InvokeRepeating("VolumeTick", 0.2f, 0.2f);
         InitSFX(); // now that the manager is up, initialize all needed audio sources
+    }
+
+    private void Start()
+    {
+        LoadVolumeSettings();
     }
 
     public void PlaySFX(AudioClip clipToPlay) 
@@ -109,7 +122,9 @@ public class audiomanager : MonoBehaviour
             AudioSource temp = gaming.GetComponent<AudioSource>();
             if (sfxVolume != null)
             {
-                temp.volume = sfxVolume.value;
+                sfxVolumeValue = sfxVolume.value;
+                
+                temp.volume = sfxVolumeValue;
             }
             temp.clip = clipToPlay;
             temp.spatialBlend = epicFloat;
@@ -169,5 +184,41 @@ public class audiomanager : MonoBehaviour
         yield return new WaitForSeconds(duration);
         worldSFX.Remove(gaming);
         Destroy(gaming);
+    }
+
+    // Method to save volume settings
+    public void SaveVolumeSettings()
+    {
+        PlayerPrefs.SetFloat("MusicVolume", musicVolume.value);
+        PlayerPrefs.SetFloat("SfxVolume", sfxVolume.value);
+        PlayerPrefs.Save();
+    }
+
+    // Method to load volume settings
+    public void LoadVolumeSettings()
+    {
+        if (musicVolume != null && sfxVolume != null)
+        {
+            musicVolume.value = PlayerPrefs.GetFloat("MusicVolume", 1f); // Default value of 1f
+            sfxVolume.value = PlayerPrefs.GetFloat("SfxVolume", 1f); // Default value of 1f
+            UpdateVolume();
+        }
+        // Update volume immediately after loading
+        
+    }
+
+    // Method to update volume settings
+    private void UpdateVolume()
+    {
+       
+        // Update music volume
+        if (leMusic != null)
+            leMusic.volume = musicVolume.value;
+
+        // Update sfx volume for existing sources
+        foreach (var source in sfxSources)
+        {
+            source.volume = sfxVolume.value;
+        }
     }
 }

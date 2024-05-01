@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class CameraLook : MonoBehaviour
 {
     [SerializeField] PlayerMovement playerMovement;
+    private PlayerPause pauser;
 
     [SerializeField] float sensitivityX = 8f;
     [SerializeField] float sensitivityY = 0.5f;
@@ -29,21 +31,29 @@ public class CameraLook : MonoBehaviour
 
     Vector3 originalCameraPosition;
 
-    
+    [SerializeField] private float maxInteractionDistance = 1f;
+    [SerializeField] private Transform interactShooterPoint;
+    [SerializeField] private GameObject interactUI;
+    [SerializeField] private TMP_Text interactText;
+
+    private bool validInteract;
+
 
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-
+        validInteract = false;
+        interactUI.SetActive(false);
         originalCameraPosition = playerCamera.localPosition;
-        GameObject pausedPanel = GameObject.Find("Canvas/PausedPanel");
+        GameObject controlsPanel = GameObject.Find("Canvas/ControlsPanel");
+        pauser = this.GetComponent<PlayerPause>();
 
-       if (pausedPanel != null)
+       if (controlsPanel != null)
         {
             // Find the sliders by type within the paused panel
-            sensitivityXSlider = pausedPanel.GetComponentInChildren<Slider>();
-            sensitivityYSlider = pausedPanel.GetComponentsInChildren<Slider>()[1]; // Assuming it's the second Slider in the hierarchy
+            sensitivityXSlider = controlsPanel.GetComponentInChildren<Slider>();
+            sensitivityYSlider = controlsPanel.GetComponentsInChildren<Slider>()[1]; // Assuming it's the second Slider in the hierarchy
 
             // Add listeners to the sliders
             sensitivityXSlider.onValueChanged.AddListener(UpdateSensitivityX);
@@ -52,10 +62,56 @@ public class CameraLook : MonoBehaviour
 
         
     }
+
+    void Interactioncheck()
+    {
+        //hide interaction canvas???
+        interactUI.SetActive(false);
+        RaycastHit hit;
+        int mask = 1 << 6;
+        mask = ~mask;
+
+        if(Physics.Raycast(interactShooterPoint.position, interactShooterPoint.forward, out hit, maxInteractionDistance, mask))
+        {
+            //PLAYER cAMERA IS WEIRD???
+            Debug.DrawLine(interactShooterPoint.position, hit.transform.position, Color.blue, 5f);
+            GameObject hitobject = hit.transform.gameObject;
+            MonoBehaviour[] mono = hitobject.GetComponents<MonoBehaviour>();
+            foreach(MonoBehaviour script in mono)
+            {
+                if(script is IInteract)
+                {
+                    IInteract temp = script as IInteract;
+                    //do UI
+                    if (temp.validToReinteract() == true && pauser.isPaused == false)
+                    {
+                        interactUI.SetActive(true);
+                        if (temp.contextText() != null)
+                        {
+                            interactText.text = temp.contextText();
+                        }
+                        else
+                        {
+                            interactText.text = "Interact";
+                        }
+                    }
+                    //do the Thing
+                    if (validInteract == true && pauser.isPaused == false)
+                    {
+                        temp.Interaction();
+                        validInteract = false;
+                    }
+                    break;
+                }
+            }
+        }
+    }
+
     private void Update()
     {
         HandleHeadBobbing();
 
+        Interactioncheck();
 
         transform.Rotate(Vector3.up, mouseX * Time.deltaTime);
 
@@ -69,6 +125,12 @@ public class CameraLook : MonoBehaviour
     {
         mouseX = mouseInput.x * sensitivityX;
         mouseY = mouseInput.y * sensitivityY;
+    }
+
+    public void InteractButtonPressed()
+    {
+        validInteract = true;
+       
     }
 
     private void HandleHeadBobbing()
