@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 
 public class ChickenEnemy : MonoBehaviour, IDamage
 {
@@ -26,6 +27,7 @@ public class ChickenEnemy : MonoBehaviour, IDamage
     public Transform player;
 
     private bool isAttacking = false;
+    [SerializeField] private UnityEvent deathEvent;
 
     private void Awake()
     {
@@ -67,6 +69,10 @@ public class ChickenEnemy : MonoBehaviour, IDamage
         if (EnemycurrentHealth <= 0) // If enemy health hits 0 or less, begin die method
         {
             Die();
+            if(deathEvent != null)
+            {
+                deathEvent.Invoke();
+            }
         }
     }
     private void Die() // Simple die method that will be added to in the future
