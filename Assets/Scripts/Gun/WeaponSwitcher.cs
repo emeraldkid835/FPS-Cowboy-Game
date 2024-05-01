@@ -53,6 +53,7 @@ public class WeaponSwitcher : MonoBehaviour
     public void SwitchGun(int offset) //we need to rethink this.
     {
         bool relog = true;
+        int ogoffset = offset;
         int nextGunIndex = (currentGunIndex + offset + guns.Count) % guns.Count;
         while (relog == true)
         {
@@ -61,7 +62,7 @@ public class WeaponSwitcher : MonoBehaviour
             {
                 if (!gunBools[nextGunIndex])
                 {
-                    offset += offset;
+                    offset += ogoffset;
                     nextGunIndex = (currentGunIndex + offset + guns.Count) % guns.Count;
                 }
                 else

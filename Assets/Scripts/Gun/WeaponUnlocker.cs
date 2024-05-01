@@ -40,7 +40,10 @@ public class WeaponUnlocker : MonoBehaviour
             }
         if (other.tag == "Player")
         {
-            audiomanager.instance.PlaySFX3D(meSound.clip, this.transform.position);
+            if (meSound != null)
+            {
+                audiomanager.instance.PlaySFX3D(meSound.clip, this.transform.position);
+            }
 
             Destroy(this.gameObject);
         }

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-[RequireComponent(typeof(Animator))]
 public class Revolver : GunClass
 {
     [SerializeField] private GameObject bulletVisualPrefab;
@@ -18,9 +17,9 @@ public class Revolver : GunClass
     public int maxStoredAmmo = 30;
     private Recoil recoil;
     private WeaponSwitcher ws;
-    private Animator _animator;
 
     [SerializeField] private AudioSource reloadSound;
+    [SerializeField] PlayerPause playerPause;
 
     private bool isReloading = false;
 
@@ -28,7 +27,7 @@ public class Revolver : GunClass
     public override float Range => 150f;
     public override float FireRate => 5f;
     public override int MaxBulletsPerMagazine => 6;
-    public override float ReloadTime => 3.5f;
+    public override float ReloadTime => 3f;
 
 
 
@@ -57,70 +56,74 @@ public class Revolver : GunClass
 
         recoil = GameObject.Find("CameraRot/CameraRecoil").GetComponent<Recoil>();
         ws = GameObject.Find("GunContainer").GetComponent<WeaponSwitcher>();
-        _animator = GetComponent<Animator>();
+        playerPause = GameObject.Find("GoodPlayer").GetComponent<PlayerPause>();
     }
 
     // Implement shooting logic specific to the Revolver
     public override void Shoot()
     {
-        // Revolver shooting logic
-        if (isReloading)
+        if (playerPause.isPaused == false)
         {
-            Debug.Log("Reloading... can't shoot yet");
-            return;
-        }
-        if (currentBullets <= 0)
-        {
-            Debug.Log("Weapon Empty!");
-            Reload();
-            return;
-        }
-        if (Time.time < nextTimeToFire || currentBullets <= 0)
-            return;
-
-        // Instantiate muzzle flash prefab at the muzzle flash location
-        muzzleFlashInstance = Instantiate(MuzzleFlashPrefab, muzzleflashLocation.position, muzzleflashLocation.rotation);
-
-        // Give Recoil
-        
-
-        Destroy(muzzleFlashInstance, 2f);
-        // Play shoot audio
-        audiomanager.instance.PlaySFX3D(shootAudio, muzzleflashLocation.position, 1f, 0.99f, 1.01f);
-
-        // Perform a raycast to detect hits
-        RaycastHit hit;
-        GameObject temp = GameObject.Instantiate(bulletVisualPrefab);
-        temp.GetComponent<bullet_Visual>().renderPoint1 = muzzleflashLocation.position;
-        temp.GetComponent<bullet_Visual>().gunDirection = muzzleflashLocation.forward;
-        temp.GetComponent<bullet_Visual>().renderPoint2 = muzzleflashLocation.position + (muzzleflashLocation.forward * 3f);
-        if (Physics.Raycast(muzzleflashLocation.position, muzzleflashLocation.forward, out hit, Range))
-        {
-            Debug.DrawLine(muzzleflashLocation.position, hit.point, Color.yellow, 5f);
-            // Handle hit detection, apply damage to the target, etc.
-            Transform objectHit = hit.transform;
-            if (objectHit.gameObject.tag != "Player") //no more self damage!
+            // Revolver shooting logic
+            if (isReloading)
             {
-                
-                MonoBehaviour[] mono = objectHit.gameObject.GetComponents<MonoBehaviour>();
+                Debug.Log("Reloading... can't shoot yet");
+                return;
+            }
+            if (currentBullets <= 0)
+            {
+                Debug.Log("Weapon Empty!");
+                Reload();
+                return;
+            }
+            if (Time.time < nextTimeToFire || currentBullets <= 0)
+                return;
 
-                foreach (MonoBehaviour item in mono)
+            // Instantiate muzzle flash prefab at the muzzle flash location
+            muzzleFlashInstance = Instantiate(MuzzleFlashPrefab, muzzleflashLocation.position, muzzleflashLocation.rotation);
+
+            // Give Recoil
+
+
+            Destroy(muzzleFlashInstance, 2f);
+            // Play shoot audio
+            audiomanager.instance.PlaySFX3D(shootAudio, muzzleflashLocation.position, 1f, 0.99f, 1.01f);
+
+            // Perform a raycast to detect hits
+            RaycastHit hit;
+            GameObject temp = GameObject.Instantiate(bulletVisualPrefab);
+            temp.GetComponent<bullet_Visual>().renderPoint1 = muzzleflashLocation.position;
+            temp.GetComponent<bullet_Visual>().gunDirection = muzzleflashLocation.forward;
+            temp.GetComponent<bullet_Visual>().renderPoint2 = muzzleflashLocation.position + (muzzleflashLocation.forward * 3f);
+            if (Physics.Raycast(muzzleflashLocation.position, muzzleflashLocation.forward, out hit, Range))
+            {
+                Debug.DrawLine(muzzleflashLocation.position, hit.point, Color.yellow, 5f);
+                // Handle hit detection, apply damage to the target, etc.
+                Transform objectHit = hit.transform;
+                if (objectHit.gameObject.tag != "Player") //no more self damage!
                 {
-                    if (item is IDamage)
+
+                    MonoBehaviour[] mono = objectHit.gameObject.GetComponents<MonoBehaviour>();
+
+                    foreach (MonoBehaviour item in mono)
                     {
-                        IDamage tempI = item as IDamage;
-                        tempI.TakeDamage(Damage, IDamage.DamageType.Sharp);
-                        break;
+                        if (item is IDamage)
+                        {
+                            IDamage tempI = item as IDamage;
+                            tempI.TakeDamage(Damage, IDamage.DamageType.Sharp);
+                            break;
+                        }
                     }
                 }
             }
-        }
 
-        recoil.RecoilFire();
-        // Update next time the pistol can fire
-        nextTimeToFire = Time.time + 1f / FireRate;
-        // Reduce current bullets
-        currentBullets--;
+            recoil.RecoilFire();
+            // Update next time the pistol can fire
+            nextTimeToFire = Time.time + 1f / FireRate;
+            // Reduce current bullets
+            currentBullets--;
+        }
+        
     }
 
 
@@ -128,13 +131,12 @@ public class Revolver : GunClass
     // Implement reloading logic specific to the Revolver
     public override void Reload()
     {
-        if (isReloading != true && currentBullets < MaxBulletsPerMagazine)
+        if (playerPause.isPaused != true && isReloading != true && currentBullets < MaxBulletsPerMagazine)
         {
             if(reloadSound != null)
             {
                 audiomanager.instance.PlaySFX3D(reloadSound.clip, this.transform.position, 0);
             }
-            _animator.SetTrigger("Reload");
             StartCoroutine(Reloadtime());
         }
 

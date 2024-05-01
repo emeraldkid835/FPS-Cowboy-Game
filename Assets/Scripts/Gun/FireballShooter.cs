@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Animator))]
 public class FireballShooter : GunClass
 {
 
@@ -18,8 +17,9 @@ public class FireballShooter : GunClass
     public int maxStoredAmmo = 30;
     private Recoil recoil;
     private WeaponSwitcher ws;
-    private Animator _animator;
     [SerializeField] private AudioSource reloadSound;
+
+    [SerializeField] PlayerPause playerPause;
 
     // Set values for the fireball shooter
     public override float Damage => 100f;
@@ -61,72 +61,78 @@ public class FireballShooter : GunClass
 
         ws = GameObject.Find("GunContainer").GetComponent<WeaponSwitcher>();
         recoil = GameObject.Find("CameraRot/CameraRecoil").GetComponent<Recoil>();
-        _animator = GetComponent<Animator>();
+        playerPause = GameObject.Find("GoodPlayer").GetComponent<PlayerPause>();
     }
 
     // Implement shooting logic specific to the fireball shooter
     public override void Shoot()
     {
-        // Check if it's time to shoot
-        if (Time.time < nextTimeToShoot)
+        if(playerPause.isPaused == false)
         {
-            return;
-        }else if(currentBullets <= 0)
-        {
-            Reload();
-            return;
+            // Check if it's time to shoot
+            if (Time.time < nextTimeToShoot)
+            {
+                return;
+            }
+            else if (currentBullets <= 0)
+            {
+                Reload();
+                return;
+            }
+
+            // Instantiate fireball prefab
+            GameObject fireballInstance = Instantiate(fireballPrefab, muzzleflashLocation.transform.position, muzzleflashLocation.transform.rotation);
+            // Give Recoil
+            recoil.RecoilFire();
+            // Get the rigidbody of the fireball
+            Rigidbody fireballRigidbody = fireballInstance.GetComponent<Rigidbody>();
+
+            Destroy(fireballInstance, 6f);
+
+            // Check if the fireball prefab has a rigidbody
+            if (fireballRigidbody != null)
+            {
+                // Add force to the fireball to make it move forward
+                fireballRigidbody.AddForce(transform.forward * fireballSpeed, ForceMode.Impulse);
+            }
+            else
+            {
+                Debug.LogError("Fireball prefab is missing a Rigidbody component!");
+            }
+
+            // Play shoot audio
+            audiomanager.instance.PlaySFX3D(shootAudio, muzzleflashLocation.position, 1f, 0.99f, 1.01f);
+
+            // Update next time the fireball shooter can shoot
+            nextTimeToShoot = Time.time + 1f / FireRate;
+
+            // Reduce current bullets
+            currentBullets--;
         }
-
-        // Instantiate fireball prefab
-        GameObject fireballInstance = Instantiate(fireballPrefab, muzzleflashLocation.transform.position, muzzleflashLocation.transform.rotation);
-        _animator.SetBool("Open",false);
-        // Give Recoil
-        recoil.RecoilFire();
-        // Get the rigidbody of the fireball
-        Rigidbody fireballRigidbody = fireballInstance.GetComponent<Rigidbody>();
-
-        Destroy(fireballInstance, 6f);
-
-        // Check if the fireball prefab has a rigidbody
-        if (fireballRigidbody != null)
-        {
-            // Add force to the fireball to make it move forward
-            fireballRigidbody.AddForce(transform.forward * fireballSpeed, ForceMode.Impulse);
-        }
-        else
-        {
-            Debug.LogError("Fireball prefab is missing a Rigidbody component!");
-        }
-
-        // Play shoot audio
-        audiomanager.instance.PlaySFX3D(shootAudio, muzzleflashLocation.position, 1f, 0.99f, 1.01f);
-
-        // Update next time the fireball shooter can shoot
-        nextTimeToShoot = Time.time + 1f / FireRate;
-
-        // Reduce current bullets
-        currentBullets--;
+        
     }
 
     // Implement reloading logic specific to the fireball shooter
     public override void Reload()
-    {
-        ws.isReloading = true;
-        if (currentStoredAmmo > 0 && currentBullets < MaxBulletsPerMagazine)
+    {if (playerPause.isPaused == false)
         {
-            if (reloadSound != null && audiomanager.instance.alreadyPlaying(reloadSound.clip) == false)
+            ws.isReloading = true;
+            if (currentStoredAmmo > 0 && currentBullets < MaxBulletsPerMagazine)
             {
-                audiomanager.instance.PlaySFX3D(reloadSound.clip, this.transform.position, 0);
-            }
-            // Calculate bullets to reload
-            int bulletsToReload = Mathf.Min(MaxBulletsPerMagazine - currentBullets, currentStoredAmmo);
+                if (reloadSound != null && audiomanager.instance.alreadyPlaying(reloadSound.clip) == false)
+                {
+                    audiomanager.instance.PlaySFX3D(reloadSound.clip, this.transform.position, 0);
+                }
+                // Calculate bullets to reload
+                int bulletsToReload = Mathf.Min(MaxBulletsPerMagazine - currentBullets, currentStoredAmmo);
 
-            // Update current bullets and stored ammo
-            currentBullets += bulletsToReload;
-            currentStoredAmmo -= bulletsToReload;
+                // Update current bullets and stored ammo
+                currentBullets += bulletsToReload;
+                currentStoredAmmo -= bulletsToReload;
+            }
+            ws.isReloading = false;
         }
-        _animator.SetBool("Open",true);
-        ws.isReloading = false;
+        
     }
 
     // Method to add ammo to the fireball shooter
