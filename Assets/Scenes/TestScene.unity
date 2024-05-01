@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44420114, g: 0.49364126, b: 0.5730381, a: 1}
+  m_IndirectSpecularColor: {r: 0.4442013, g: 0.49364144, b: 0.5730382, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -16071,75 +16071,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f216f0f1ebf29d744b79dc6b1a451fc6, type: 3}
---- !u!1001 &1971808082248134580
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1971808081066825618, guid: 925bab592cdfd4b46a09faaf55c989d3, type: 3}
-      propertyPath: m_Name
-      value: Toon Chicken
-      objectReference: {fileID: 0}
-    - target: {fileID: 1971808081066825618, guid: 925bab592cdfd4b46a09faaf55c989d3, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1971808081066825624, guid: 925bab592cdfd4b46a09faaf55c989d3, type: 3}
-      propertyPath: hurtSound
-      value: 
-      objectReference: {fileID: 863727209}
-    - target: {fileID: 1971808081066825624, guid: 925bab592cdfd4b46a09faaf55c989d3, type: 3}
-      propertyPath: bloodEffectPrefab
-      value: 
-      objectReference: {fileID: 896409933}
-    - target: {fileID: 1971808081066825628, guid: 925bab592cdfd4b46a09faaf55c989d3, type: 3}
-      propertyPath: m_RootOrder
-      value: 27
-      objectReference: {fileID: 0}
-    - target: {fileID: 1971808081066825628, guid: 925bab592cdfd4b46a09faaf55c989d3, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -22.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 1971808081066825628, guid: 925bab592cdfd4b46a09faaf55c989d3, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 36.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1971808081066825628, guid: 925bab592cdfd4b46a09faaf55c989d3, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 83.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 1971808081066825628, guid: 925bab592cdfd4b46a09faaf55c989d3, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: -0.006139583
-      objectReference: {fileID: 0}
-    - target: {fileID: 1971808081066825628, guid: 925bab592cdfd4b46a09faaf55c989d3, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1971808081066825628, guid: 925bab592cdfd4b46a09faaf55c989d3, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.99998116
-      objectReference: {fileID: 0}
-    - target: {fileID: 1971808081066825628, guid: 925bab592cdfd4b46a09faaf55c989d3, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1971808081066825628, guid: 925bab592cdfd4b46a09faaf55c989d3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1971808081066825628, guid: 925bab592cdfd4b46a09faaf55c989d3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -180.704
-      objectReference: {fileID: 0}
-    - target: {fileID: 1971808081066825628, guid: 925bab592cdfd4b46a09faaf55c989d3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 925bab592cdfd4b46a09faaf55c989d3, type: 3}
 --- !u!82 &2116398237500711566
 AudioSource:
   m_ObjectHideFlags: 0
@@ -16706,6 +16637,7 @@ GameObject:
   - component: {fileID: 1727108761}
   - component: {fileID: 1727108760}
   - component: {fileID: 4085834903531659287}
+  - component: {fileID: 4085834903531659288}
   m_Layer: 6
   m_Name: Double-barrel_gunUnlocker
   m_TagString: Untagged
@@ -16727,6 +16659,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementDistance: 1
   movementSpeed: 1
+--- !u!95 &4085834903531659288
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4085834903531659286}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &4086368779963619884
 GameObject:
   m_ObjectHideFlags: 0
@@ -19219,6 +19172,75 @@ CapsuleCollider:
   m_Height: 4.396858
   m_Direction: 1
   m_Center: {x: 0, y: 5.48, z: 0.39}
+--- !u!1001 &4939730333977783367
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4939730335478371425, guid: 58a404bd0212a1a47a2c3c85a7f85858, type: 3}
+      propertyPath: m_Name
+      value: Toon Chicken
+      objectReference: {fileID: 0}
+    - target: {fileID: 4939730335478371425, guid: 58a404bd0212a1a47a2c3c85a7f85858, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4939730335478371435, guid: 58a404bd0212a1a47a2c3c85a7f85858, type: 3}
+      propertyPath: hurtSound
+      value: 
+      objectReference: {fileID: 863727209}
+    - target: {fileID: 4939730335478371435, guid: 58a404bd0212a1a47a2c3c85a7f85858, type: 3}
+      propertyPath: bloodEffectPrefab
+      value: 
+      objectReference: {fileID: 896409933}
+    - target: {fileID: 4939730335478371439, guid: 58a404bd0212a1a47a2c3c85a7f85858, type: 3}
+      propertyPath: m_RootOrder
+      value: 27
+      objectReference: {fileID: 0}
+    - target: {fileID: 4939730335478371439, guid: 58a404bd0212a1a47a2c3c85a7f85858, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -22.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4939730335478371439, guid: 58a404bd0212a1a47a2c3c85a7f85858, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 36.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4939730335478371439, guid: 58a404bd0212a1a47a2c3c85a7f85858, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 83.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4939730335478371439, guid: 58a404bd0212a1a47a2c3c85a7f85858, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.006139583
+      objectReference: {fileID: 0}
+    - target: {fileID: 4939730335478371439, guid: 58a404bd0212a1a47a2c3c85a7f85858, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4939730335478371439, guid: 58a404bd0212a1a47a2c3c85a7f85858, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.99998116
+      objectReference: {fileID: 0}
+    - target: {fileID: 4939730335478371439, guid: 58a404bd0212a1a47a2c3c85a7f85858, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4939730335478371439, guid: 58a404bd0212a1a47a2c3c85a7f85858, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4939730335478371439, guid: 58a404bd0212a1a47a2c3c85a7f85858, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -180.704
+      objectReference: {fileID: 0}
+    - target: {fileID: 4939730335478371439, guid: 58a404bd0212a1a47a2c3c85a7f85858, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 58a404bd0212a1a47a2c3c85a7f85858, type: 3}
 --- !u!1001 &5924654573420336794
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19395,6 +19417,7 @@ GameObject:
   - component: {fileID: 6332425574491324588}
   - component: {fileID: 6332425574491324592}
   - component: {fileID: 6332425574491324593}
+  - component: {fileID: 6332425574491324594}
   m_Layer: 0
   m_Name: FireballGunUnlocker
   m_TagString: Untagged
@@ -19486,6 +19509,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementDistance: 1
   movementSpeed: 1
+--- !u!95 &6332425574491324594
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6332425574491324589}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!4 &6332425574816434498
 Transform:
   m_ObjectHideFlags: 0
