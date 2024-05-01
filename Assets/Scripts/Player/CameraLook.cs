@@ -74,7 +74,7 @@ public class CameraLook : MonoBehaviour
         if(Physics.Raycast(interactShooterPoint.position, interactShooterPoint.forward, out hit, maxInteractionDistance, mask))
         {
             //PLAYER cAMERA IS WEIRD???
-            Debug.DrawLine(interactShooterPoint.position, hit.transform.position, Color.blue, 5f);
+            Debug.DrawRay(interactShooterPoint.position, interactShooterPoint.forward, Color.blue, 5f);
             GameObject hitobject = hit.transform.gameObject;
             MonoBehaviour[] mono = hitobject.GetComponents<MonoBehaviour>();
             foreach(MonoBehaviour script in mono)
