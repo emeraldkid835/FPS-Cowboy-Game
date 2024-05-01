@@ -248,10 +248,14 @@ public class PlayerMovement : MonoBehaviour
     public void increaseJumpAmount(int amount)
     {
         jumpAmount += amount;
+        // Save the updated jumpAmount to PlayerPrefs
+        PlayerPrefs.SetInt("JumpAmount", jumpAmount);
     }
 
     private void Awake()
     {
+        // Load the saved jumpAmount from PlayerPrefs
+        jumpAmount = PlayerPrefs.GetInt("JumpAmount", 1); // Default to 1 if not set
         stepT = 0f;
         ableToLandTimer = 0f;
     }

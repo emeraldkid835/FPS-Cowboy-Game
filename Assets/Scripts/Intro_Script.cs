@@ -21,7 +21,7 @@ public class Intro_Script : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if((me.isPlaying == false && t > 1)|| Input.GetKeyDown(KeyCode.Tab))
+        if((me.isPlaying == false && t > 1)|| Input.GetKeyDown(KeyCode.Escape))
         {
             SceneManager.LoadScene(levelToLoad);
         }
