@@ -139,15 +139,17 @@ public class EnemyAI : MonoBehaviour
                 Debug.LogWarning("No waypoints assigned!");
                 return;
             }
-
-            // Move towards the current waypoint
-            agent.SetDestination(waypoints[currentWaypointIndex].position);
-
-            // Check if arrived at waypoint
-            if (Vector3.Distance(transform.position, waypoints[currentWaypointIndex].position) < 1f)
+            if (waypoints[currentWaypointIndex] != null)
             {
-                isWaitingAtWaypoint = true;
-                StartCoroutine(StopAtWaypoint());
+                // Move towards the current waypoint
+                agent.SetDestination(waypoints[currentWaypointIndex].position);
+
+                // Check if arrived at waypoint
+                if (Vector3.Distance(transform.position, waypoints[currentWaypointIndex].position) < 1f)
+                {
+                    isWaitingAtWaypoint = true;
+                    StartCoroutine(StopAtWaypoint());
+                }
             }
         }
         /*if (!walkPointSet) SearchWalkPoint();
