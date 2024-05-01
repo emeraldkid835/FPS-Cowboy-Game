@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
 public class DoubleBarrelShotgun : GunClass
 {
     public int currentBullets;
@@ -16,6 +17,7 @@ public class DoubleBarrelShotgun : GunClass
     private Recoil recoil;
     [SerializeField] private GameObject bulletVisualPrefab;
     [SerializeField] private AudioSource reloadSound;
+    private Animator _animator;
     private WeaponSwitcher ws;
     private bool isReloading = false;
 
@@ -23,7 +25,7 @@ public class DoubleBarrelShotgun : GunClass
     public override float Range => 35f;
     public override float FireRate => 3f;
     public override int MaxBulletsPerMagazine => 2;
-    public override float ReloadTime => 2f;
+    public override float ReloadTime => 4.5f;
 
     public uint pelletsPerShot = 6;
     [Range(0f,1f)] public float maxVariation = 0.2f; //tweak as necessary
@@ -52,6 +54,7 @@ public class DoubleBarrelShotgun : GunClass
         }
         recoil = GameObject.Find("CameraRot/CameraRecoil").GetComponent<Recoil>();
         ws = GameObject.Find("GunContainer").GetComponent<WeaponSwitcher>();
+        _animator = GetComponent<Animator>();
     }
 
     // Implement shooting logic specific to the shotgun
@@ -138,6 +141,7 @@ public class DoubleBarrelShotgun : GunClass
             {
                 audiomanager.instance.PlaySFX3D(reloadSound.clip, this.transform.position, 0);
             }
+            _animator.SetTrigger("Reload");
             StartCoroutine(Reloadtime());
         }
         
