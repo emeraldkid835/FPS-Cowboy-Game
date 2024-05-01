@@ -25,7 +25,7 @@ public class Winchester : GunClass
     public override float Range => 300f;
     public override float FireRate => 3f;
     public override int MaxBulletsPerMagazine => 8;
-    public override float ReloadTime => 8f;
+    public override float ReloadTime => 3f;
 
 
 
