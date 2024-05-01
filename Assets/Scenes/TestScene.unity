@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44420114, g: 0.49364126, b: 0.5730381, a: 1}
+  m_IndirectSpecularColor: {r: 0.4442013, g: 0.49364144, b: 0.5730382, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6721,6 +6721,17 @@ RectTransform:
   m_AnchoredPosition: {x: 2.07, y: 40.4}
   m_SizeDelta: {x: 20, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &544823287 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5004315426246465537, guid: 92c2d102bc69ba04e9289805b296bdef, type: 3}
+  m_PrefabInstance: {fileID: 6341009391730115469}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87479960b8505274587b7edfcfd64d37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &553509704
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14923,7 +14934,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5f5738f9ad3ef64c88a9c81242bafe9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponSwitcher: {fileID: 0}
+  weaponSwitcher: {fileID: 544823287}
   meSound: {fileID: 0}
   weaponIndex: 1
 --- !u!65 &1727108761
@@ -19378,7 +19389,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5f5738f9ad3ef64c88a9c81242bafe9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponSwitcher: {fileID: 0}
+  weaponSwitcher: {fileID: 544823287}
   meSound: {fileID: 0}
   weaponIndex: 2
 --- !u!95 &6332425574491324593
