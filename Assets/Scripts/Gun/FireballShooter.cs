@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
 public class FireballShooter : GunClass
 {
 
@@ -17,6 +18,7 @@ public class FireballShooter : GunClass
     public int maxStoredAmmo = 30;
     private Recoil recoil;
     private WeaponSwitcher ws;
+    private Animator animator;
     [SerializeField] private AudioSource reloadSound;
 
     [SerializeField] PlayerPause playerPause;
@@ -62,6 +64,7 @@ public class FireballShooter : GunClass
         ws = GameObject.Find("GunContainer").GetComponent<WeaponSwitcher>();
         recoil = GameObject.Find("CameraRot/CameraRecoil").GetComponent<Recoil>();
         playerPause = GameObject.Find("GoodPlayer").GetComponent<PlayerPause>();
+        animator = GetComponent<Animator>();
     }
 
     // Implement shooting logic specific to the fireball shooter
@@ -79,7 +82,7 @@ public class FireballShooter : GunClass
                 Reload();
                 return;
             }
-
+            animator.SetTrigger("Fire");
             // Instantiate fireball prefab
             GameObject fireballInstance = Instantiate(fireballPrefab, muzzleflashLocation.transform.position, muzzleflashLocation.transform.rotation);
             // Give Recoil
@@ -130,6 +133,7 @@ public class FireballShooter : GunClass
                 currentBullets += bulletsToReload;
                 currentStoredAmmo -= bulletsToReload;
             }
+            animator.SetTrigger("Reload");
             ws.isReloading = false;
         }
         
