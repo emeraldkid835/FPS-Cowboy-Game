@@ -18616,7 +18616,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dca266a4be68e845945ecf86e7bd6cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  contextTex: Interact
+  contextTex: Exit
   validReinteract: 1
   me:
     m_PersistentCalls:
@@ -53494,7 +53494,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh337652
+  m_Name: pb_Mesh199394
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
