@@ -7,6 +7,7 @@ public class OWSPAGHETTI : MonoBehaviour
     [SerializeField] private GameObject allEnemies;
     [SerializeField] private npc mayor;
     [SerializeField] ParticleSystem piss;
+    [SerializeField] private GameObject vfx;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +20,10 @@ public class OWSPAGHETTI : MonoBehaviour
         if(PlayerPrefs.GetInt("GunUnlocked_2") == 1)
         {
             piss.Stop();
+            if(vfx != null)
+            {
+                vfx.SetActive(false);
+            }
         }
     }
 
