@@ -23,9 +23,11 @@ public class WeaponSwitcher : MonoBehaviour
             if (i == 0 || IsWeaponUnlocked(i))
             {
                 gunBools.Add(true);
-                guns[1].SetActive(false);
-                guns[2].SetActive(false);
-
+                if (i != 0)
+                {
+                    guns[i].SetActive(false);
+                }
+               
             }
             else
             {
@@ -48,24 +50,41 @@ public class WeaponSwitcher : MonoBehaviour
             SwitchGun(-1);
         }
     }
-    public void SwitchGun(int offset)
+    public void SwitchGun(int offset) //we need to rethink this.
     {
+        bool relog = true;
         int nextGunIndex = (currentGunIndex + offset + guns.Count) % guns.Count;
-
-        // Check if the next gun is unlocked
-        if (!isReloading && gunBools[nextGunIndex])
+        while (relog == true)
         {
-            // Disable current gun
-            guns[currentGunIndex].SetActive(false);
+            // Check if the next gun is unlocked
+            if (!isReloading)
+            {
+                if (!gunBools[nextGunIndex])
+                {
+                    offset += offset;
+                    nextGunIndex = (currentGunIndex + offset + guns.Count) % guns.Count;
+                }
+                else
+                {
+                    // Disable current gun
+                    guns[currentGunIndex].SetActive(false);
 
-            // Enable the next gun
-            guns[nextGunIndex].SetActive(true);
+                    // Enable the next gun
+                    guns[nextGunIndex].SetActive(true);
 
-            // Update current gun index
-            currentGunIndex = nextGunIndex;
+                    // Update current gun index
+                    currentGunIndex = nextGunIndex;
 
-            // Notify the InputManager about the weapon switch
-            InputManager.instance.UpdateEquippedGun(guns[currentGunIndex].GetComponent<GunClass>());
+                    // Notify the InputManager about the weapon switch
+                    InputManager.instance.UpdateEquippedGun(guns[currentGunIndex].GetComponent<GunClass>());
+                    relog = false;
+                }
+
+            }
+            else
+            {
+                relog = false;
+            }
         }
     }
 
