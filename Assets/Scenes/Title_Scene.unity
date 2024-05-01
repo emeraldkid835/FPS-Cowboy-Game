@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.000054838245, g: 0.0000660327, b: 0.14467497, a: 1}
+  m_IndirectSpecularColor: {r: 0.00066579843, g: 0.00086654566, b: 0.4194915, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5602,6 +5602,8 @@ MonoBehaviour:
   audioObject: {fileID: 6841519541976787402, guid: 6df098e18579d814f8317b76ad95e13f, type: 3}
   musicVolume: {fileID: 0}
   sfxVolume: {fileID: 0}
+  musicVolumeValue: 0
+  sfxVolumeValue: 0
   minVariation: 0.975
   maxVariation: 1.025
   worldSFX: []
@@ -6130,6 +6132,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 859336968}
+        m_TargetAssemblyTypeName: WhereToSpawn, Assembly-CSharp
+        m_MethodName: SetSpawnToHome
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1247595723}
         m_TargetAssemblyTypeName: TEMP_TitleLogic, Assembly-CSharp
         m_MethodName: LoadAScene
@@ -6180,6 +6194,54 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 790320903}
   m_CullTransparentMesh: 1
+--- !u!1 &859336967
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 859336969}
+  - component: {fileID: 859336968}
+  m_Layer: 0
+  m_Name: SpawningCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &859336968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 859336967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f5bfe34dd97e3643b5c18d8ce44121c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnAtHome: 0
+  spawnAtRanch: 0
+  spawnAtFactory: 0
+  spawnAtBoss: 0
+--- !u!4 &859336969
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 859336967}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 32.599327, y: 8.569403, z: 371.13712}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &924629620
 GameObject:
   m_ObjectHideFlags: 0

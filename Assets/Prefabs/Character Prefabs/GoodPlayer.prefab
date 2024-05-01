@@ -477,6 +477,7 @@ MonoBehaviour:
   - {fileID: 6008199611198658623}
   - {fileID: 3805907468442156976}
   - {fileID: 8064399657311546500}
+  gunBools: 
 --- !u!1 &3696423198903959187
 GameObject:
   m_ObjectHideFlags: 0
@@ -721,6 +722,7 @@ GameObject:
   - component: {fileID: 3696423199745172925}
   - component: {fileID: 492052345483458277}
   - component: {fileID: 8095253975251429188}
+  - component: {fileID: 4949718968540164132}
   - component: {fileID: 8095253975251429191}
   m_Layer: 7
   m_Name: GoodPlayer
@@ -867,6 +869,7 @@ MonoBehaviour:
   maxInteractionDistance: 2
   interactShooterPoint: {fileID: 3696423199147388390}
   interactUI: {fileID: 0}
+  interactText: {fileID: 0}
 --- !u!114 &3696423199745172925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -917,6 +920,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   equippedGun: {fileID: 0}
   gunHold: {fileID: 3124156783044668437}
+--- !u!114 &4949718968540164132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3696423199745172905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f5bfe34dd97e3643b5c18d8ce44121c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnAtHome: 0
+  spawnAtRanch: 0
+  spawnAtFactory: 0
+  spawnAtBoss: 0
 --- !u!136 &8095253975251429191
 CapsuleCollider:
   m_ObjectHideFlags: 0

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17276844, g: 0.21589246, b: 0.2978263, a: 1}
+  m_IndirectSpecularColor: {r: 0.4366757, g: 0.48427194, b: 0.5645252, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -11148,6 +11148,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e485a952a1ac8540a10df974621a7b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &555620093 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4949718968540164132, guid: e680a3e281946174f95d9d8f76ec8129, type: 3}
+  m_PrefabInstance: {fileID: 555620090}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f5bfe34dd97e3643b5c18d8ce44121c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &559476428
 Mesh:
   m_ObjectHideFlags: 0
@@ -18556,6 +18567,18 @@ MonoBehaviour:
   mevent:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 555620093}
+        m_TargetAssemblyTypeName: WhereToSpawn, Assembly-CSharp
+        m_MethodName: SetSpawnToFactory
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1869472236}
         m_TargetAssemblyTypeName: TEMP_TitleLogic, Assembly-CSharp
         m_MethodName: LoadAScene
@@ -53299,7 +53322,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh155000
+  m_Name: pb_Mesh128212
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
