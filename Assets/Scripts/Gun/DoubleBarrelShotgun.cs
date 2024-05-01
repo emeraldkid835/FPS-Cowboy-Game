@@ -57,6 +57,7 @@ public class DoubleBarrelShotgun : GunClass
         recoil = GameObject.Find("CameraRot/CameraRecoil").GetComponent<Recoil>();
         ws = GameObject.Find("GunContainer").GetComponent<WeaponSwitcher>();
         playerPause = GameObject.Find("GoodPlayer").GetComponent<PlayerPause>();
+        animator = GetComponent<Animator>();
     }
 
     // Implement shooting logic specific to the shotgun
