@@ -25,7 +25,7 @@ public class DoubleBarrelShotgun : GunClass
     public override float Range => 35f;
     public override float FireRate => 3f;
     public override int MaxBulletsPerMagazine => 2;
-    public override float ReloadTime => 2f;
+    public override float ReloadTime => 4f;
 
     public uint pelletsPerShot = 6;
     [Range(0f,1f)] public float maxVariation = 0.2f; //tweak as necessary
