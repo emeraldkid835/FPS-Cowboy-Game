@@ -17,26 +17,31 @@ public class EnemyAI : MonoBehaviour
     public LayerMask whatIsGround, whatIsPlayer;
 
     //Waypoints
+    [Header("Waypoints")]
     public List<Transform> waypoints;
     private int currentWaypointIndex = 0;
     [SerializeField] public float waypointStopDuration = 2f;
     private bool isWaitingAtWaypoint = false;
 
     //Patrolling
+    [Header("Patrolling")]
     public Vector3 walkPoint;
     bool walkPointSet;
     public float walkPointRange;
 
     //Attacking
+    [Header("Attacking")]
     public float timeBetweenAttacks;
     bool alreadyAttacked;
 
     //States
+    [Header("States")]
     public float sightRange, attackRange, sightAngle;
     public bool playerInSightRange, playerInAttackRange;
     public bool hurt;
 
     //Retreat
+    [Header("Retreating")]
     public Transform RetreatWaypoint;
     public bool isRetreating = false;
     public bool isAtRetreat = false;
