@@ -49,6 +49,7 @@ using UnityEngine.AI;
             // Destroy the blood effect after a delay
             Destroy(bloodEffect, bloodEffectDuration);
         }
+        enemyai.hurt = true;
           if (EnemycurrentHealth <= 0) // If enemy health hits 0 or less, begin die method
           {
               Die();
