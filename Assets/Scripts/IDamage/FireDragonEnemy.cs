@@ -57,7 +57,7 @@ public class FireDragonEnemy : MonoBehaviour, IDamage // Declaring that it is an
         Debug.Log($"Enemy took {damage} damage. Enemy has {EnemycurrentHealth - damage} health.");
         animator.SetBool("TookHit", true);
         EnemycurrentHealth -= damage; // EnemycurrentHealth = EnemycurrentHealth - damage
-
+        enemyai.hurt = true;
         if(hurtSound != null)
         {
             audiomanager.instance.PlaySFX3D(hurtSound.clip, this.transform.position, 0.9f, 0.975f, 1.025f);
