@@ -54,7 +54,7 @@ public class EyeballEnemy : MonoBehaviour, IDamage // Declaring that it is an ID
         }
         // Instantiate blood effect at the position where the enemy was hit
         GameObject bloodEffect = Instantiate(bloodEffectPrefab, bloodEffectLocation.position, Quaternion.identity);
-
+        enemyai.hurt = true;
         // Destroy the blood effect after a delay
         Destroy(bloodEffect, bloodEffectDuration);
 

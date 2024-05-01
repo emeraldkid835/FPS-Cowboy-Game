@@ -17784,6 +17784,7 @@ GameObject:
   - component: {fileID: 753560425}
   - component: {fileID: 753560424}
   - component: {fileID: 753560429}
+  - component: {fileID: 753560430}
   m_Layer: 3
   m_Name: loadzone
   m_TagString: Untagged
@@ -18592,6 +18593,47 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   playerOnly: 1
+--- !u!114 &753560430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 753560422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dca266a4be68e845945ecf86e7bd6cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  contextTex: Interact
+  validReinteract: 1
+  me:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 555620093}
+        m_TargetAssemblyTypeName: WhereToSpawn, Assembly-CSharp
+        m_MethodName: SetSpawnToFactory
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1869472236}
+        m_TargetAssemblyTypeName: TEMP_TitleLogic, Assembly-CSharp
+        m_MethodName: LoadAScene
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &754642348
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -53322,7 +53364,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh128212
+  m_Name: pb_Mesh337652
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
