@@ -26,7 +26,7 @@ using UnityEngine.Rendering.PostProcessing;
 
         void Start()
         {
-            ResetHealthFX();
+            
 
        
             audioSource = GetComponent<AudioSource>(); // Get audio source, don't have one? add one
@@ -34,7 +34,18 @@ using UnityEngine.Rendering.PostProcessing;
             {
                 audioSource = gameObject.AddComponent<AudioSource>();
             }
-            Playercurrenthealth = PlayerstartHealth; // Setting the players current health to the players starting health at the beginning
+
+            if (PlayerPrefs.HasKey("PlayerHealth"))
+            {
+                Playercurrenthealth = PlayerPrefs.GetFloat("PlayerHealth");
+            }
+            else
+            {
+                Playercurrenthealth = PlayerstartHealth;
+            }
+
+            UpdateHealthFX();
+            
             
 
             // Find the HealthDisplay script in the scene
@@ -51,6 +62,12 @@ using UnityEngine.Rendering.PostProcessing;
                 Debug.Log("No fire hazard in scene");
             }
         }
+
+    void OnDisable()
+    {
+        PlayerPrefs.SetFloat("PlayerHealth", Playercurrenthealth);
+        PlayerPrefs.Save();
+    }
 
     public void UpdateHealthFX()
     {

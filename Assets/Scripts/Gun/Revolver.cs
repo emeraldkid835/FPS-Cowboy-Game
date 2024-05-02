@@ -48,6 +48,43 @@ public class Revolver : GunClass
         
     }
 
+    private void Start()
+    {
+        if (PlayerPrefs.HasKey("RevolverCurrentBullets"))
+        {
+            currentBullets = PlayerPrefs.GetInt("RevolverCurrentBullets");
+        }
+        else
+        {
+            currentBullets = MaxBulletsPerMagazine;
+        }
+
+        if (PlayerPrefs.HasKey("RevolverCurrentStoredAmmo"))
+        {
+            currentStoredAmmo = PlayerPrefs.GetInt("RevolverCurrentStoredAmmo");
+        }
+        else
+        {
+            currentStoredAmmo = MaxStoredAmmo;
+        }
+
+        if (PlayerPrefs.HasKey("RevolverMaxStoredAmmo"))
+        {
+            maxStoredAmmo = PlayerPrefs.GetInt("RevolverMaxStoredAmmo");
+        }
+        else
+        {
+            maxStoredAmmo = MaxStoredAmmo;
+        }
+    }
+
+    private void OnDisable()
+    {
+        PlayerPrefs.SetInt("RevolverCurrentBullets", currentBullets);
+        PlayerPrefs.SetInt("RevolverCurrentStoredAmmo", currentStoredAmmo);
+        PlayerPrefs.Save();
+    }
+
     public void Awake()
     {
         audioSource = GetComponent<AudioSource>(); // Add an audioSource if it doesn't exist
@@ -157,6 +194,8 @@ public class Revolver : GunClass
     public override void AmmoUpgrade(int amount)
     {
         maxStoredAmmo += amount;
+        PlayerPrefs.SetInt("RevolverMaxStoredAmmo", maxStoredAmmo);
+        PlayerPrefs.Save();
         Debug.Log("maxStoredAmmo+10");
     }
 

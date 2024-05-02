@@ -46,6 +46,43 @@ public class Winchester : GunClass
 
     }
 
+    private void Start()
+    {
+        if (PlayerPrefs.HasKey("WinchesterCurrentBullets"))
+        {
+            currentBullets = PlayerPrefs.GetInt("WinchesterCurrentBullets");
+        }
+        else
+        {
+            currentBullets = MaxBulletsPerMagazine;
+        }
+
+        if (PlayerPrefs.HasKey("WinchesterCurrentStoredAmmo"))
+        {
+            currentStoredAmmo = PlayerPrefs.GetInt("WinchesterCurrentStoredAmmo");
+        }
+        else
+        {
+            currentStoredAmmo = maxStoredAmmo;
+        }
+
+        if (PlayerPrefs.HasKey("WinchesterMaxStoredAmmo"))
+        {
+            maxStoredAmmo = PlayerPrefs.GetInt("WinchesterMaxStoredAmmo");
+        }
+        else
+        {
+            maxStoredAmmo = MaxStoredAmmo;
+        }
+    }
+
+    private void OnDisable()
+    {
+        PlayerPrefs.SetInt("WinchesterCurrentBullets", currentBullets);
+        PlayerPrefs.SetInt("WinchesterCurrentStoredAmmo", currentStoredAmmo);
+        PlayerPrefs.Save();
+    }
+
     public void Awake()
     {
         audioSource = GetComponent<AudioSource>(); // Add an audioSource if it doesn't exist
@@ -151,6 +188,8 @@ public class Winchester : GunClass
     public override void AmmoUpgrade(int amount)
     {
         maxStoredAmmo += amount;
+        PlayerPrefs.SetInt("WinchesterMaxStoredAmmo", maxStoredAmmo);
+        PlayerPrefs.Save();
         Debug.Log("maxStoredAmmo+10");
     }
 

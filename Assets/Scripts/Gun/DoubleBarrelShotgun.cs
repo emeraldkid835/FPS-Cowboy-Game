@@ -60,6 +60,43 @@ public class DoubleBarrelShotgun : GunClass
         animator = GetComponent<Animator>();
     }
 
+    private void Start()
+    {
+        if (PlayerPrefs.HasKey("DBCurrentBullets"))
+        {
+            currentBullets = PlayerPrefs.GetInt("DBCurrentBullets");
+        }
+        else
+        {
+            currentBullets = MaxBulletsPerMagazine;
+        }
+
+        if (PlayerPrefs.HasKey("DBCurrentStoredAmmo"))
+        {
+            currentStoredAmmo = PlayerPrefs.GetInt("DBCurrentStoredAmmo");
+        }
+        else
+        {
+            currentStoredAmmo = MaxStoredAmmo;
+        }
+
+        if (PlayerPrefs.HasKey("DBMaxStoredAmmo"))
+        {
+            maxStoredAmmo = PlayerPrefs.GetInt("DBMaxStoredAmmo");
+        }
+        else
+        {
+            maxStoredAmmo = MaxStoredAmmo;
+        }
+    }
+
+    private void OnDisable()
+    {
+        PlayerPrefs.SetInt("DBCurrentBullets", currentBullets);
+        PlayerPrefs.SetInt("DBCurrentStoredAmmo", currentStoredAmmo);
+        PlayerPrefs.Save();
+    }
+
     // Implement shooting logic specific to the shotgun
     public override void Shoot()
     {
@@ -166,6 +203,8 @@ public class DoubleBarrelShotgun : GunClass
     public override void AmmoUpgrade(int amount)
     {
         maxStoredAmmo += amount;
+        PlayerPrefs.SetInt("DBMaxStoredAmmo", maxStoredAmmo);
+        PlayerPrefs.Save();
     }
 
 

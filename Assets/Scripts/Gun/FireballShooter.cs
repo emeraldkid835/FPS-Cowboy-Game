@@ -67,6 +67,32 @@ public class FireballShooter : GunClass
         animator = GetComponent<Animator>();
     }
 
+    private void Start()
+    {
+        if (PlayerPrefs.HasKey("FireballCurrentStoredAmmo"))
+        {
+            currentStoredAmmo = PlayerPrefs.GetInt("FireballCurrentStoredAmmo");
+        }
+        else
+        {
+            currentStoredAmmo = MaxStoredAmmo;
+        }
+
+        if (PlayerPrefs.HasKey("FireballMaxStoredAmmo"))
+        {
+            maxStoredAmmo = PlayerPrefs.GetInt("FireballMaxStoredAmmo");
+        }
+        else
+        {
+            maxStoredAmmo = MaxStoredAmmo;
+        }
+    }
+    private void OnDisable()
+    {
+        PlayerPrefs.SetInt("FireballCurrentStoredAmmo", currentStoredAmmo);
+        PlayerPrefs.Save();
+    }
+
     // Implement shooting logic specific to the fireball shooter
     public override void Shoot()
     {
@@ -153,6 +179,8 @@ public class FireballShooter : GunClass
     public override void AmmoUpgrade(int amount)
     {
         maxStoredAmmo += amount;
+        PlayerPrefs.SetInt("FireballMaxStoredAmmo", maxStoredAmmo);
+        PlayerPrefs.Save();
         Debug.Log("Max stored ammo increased by " + amount);
     }
 }
