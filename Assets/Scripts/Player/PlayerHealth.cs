@@ -65,8 +65,17 @@ using UnityEngine.Rendering.PostProcessing;
 
     void OnDisable()
     {
-        PlayerPrefs.SetFloat("PlayerHealth", Playercurrenthealth);
-        PlayerPrefs.Save();
+        if (Playercurrenthealth > 0)
+        {
+            PlayerPrefs.SetFloat("PlayerHealth", Playercurrenthealth);
+            PlayerPrefs.Save();
+        }
+        else
+        {
+            PlayerPrefs.SetFloat("PlayerHealth", PlayerstartHealth);
+            PlayerPrefs.Save();
+        }
+        
     }
 
     public void UpdateHealthFX()
