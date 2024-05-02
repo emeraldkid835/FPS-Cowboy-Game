@@ -177,7 +177,10 @@ public class Revolver : GunClass
             {
                 audiomanager.instance.PlaySFX3D(reloadSound.clip, this.transform.position, 0);
             }
-            animator.SetTrigger("Reload");
+            if (currentStoredAmmo > 0)
+            {
+                animator.SetTrigger("Reload");
+            }
             StartCoroutine(Reloadtime());
         }
 
