@@ -111,7 +111,7 @@ public class audiomanager : MonoBehaviour
 
     public void PlaySFX3D(AudioClip clipToPlay, Vector3 position, float epicFloat = 1, float minPitch = 1, float maxPitch = 1)
     {
-        if (audioObject != null && valid == true) //does an audio object exist?
+        if (audioObject != null && valid == true && clipToPlay != null) //does an audio object exist?
         { 
             GameObject gaming = Instantiate(audioObject, position, Quaternion.identity); //Quaternion.identity is basically default for Quaternions
 
