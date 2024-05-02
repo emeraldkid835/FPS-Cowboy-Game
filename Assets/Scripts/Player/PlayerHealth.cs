@@ -26,7 +26,7 @@ using UnityEngine.Rendering.PostProcessing;
 
         void Start()
         {
-            
+            isPlayerDead = false;
 
        
             audioSource = GetComponent<AudioSource>(); // Get audio source, don't have one? add one
