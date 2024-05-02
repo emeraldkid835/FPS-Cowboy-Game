@@ -86,6 +86,7 @@ public class audiomanager : MonoBehaviour
 
     private void Start()
     {
+        
         LoadVolumeSettings();
     }
 
@@ -199,8 +200,8 @@ public class audiomanager : MonoBehaviour
     {
         if (musicVolume != null && sfxVolume != null)
         {
-            musicVolume.value = PlayerPrefs.GetFloat("MusicVolume", 1f); // Default value of 1f
-            sfxVolume.value = PlayerPrefs.GetFloat("SfxVolume", 1f); // Default value of 1f
+            musicVolume.value = PlayerPrefs.GetFloat("MusicVolume", .25f); // Default value of .25f
+            sfxVolume.value = PlayerPrefs.GetFloat("SfxVolume", .25f); // Default value of .25f
             UpdateVolume();
         }
         // Update volume immediately after loading

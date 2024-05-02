@@ -6986,7 +6986,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BGMVolume: 1
   titleMusic: {fileID: 1820943841}
-  continueButton: {fileID: 0}
+  continueButton: {fileID: 1972797871}
 --- !u!1 &1283908741
 GameObject:
   m_ObjectHideFlags: 0
