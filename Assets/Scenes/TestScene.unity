@@ -19179,6 +19179,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4939730335478371424, guid: 58a404bd0212a1a47a2c3c85a7f85858, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: caee2cc7d18841246b91573257d231bb, type: 2}
     - target: {fileID: 4939730335478371425, guid: 58a404bd0212a1a47a2c3c85a7f85858, type: 3}
       propertyPath: m_Name
       value: Toon Chicken
