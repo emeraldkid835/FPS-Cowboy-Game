@@ -27,8 +27,10 @@ public class TEMP_TitleLogic : MonoBehaviour
         audiomanager.instance.PlayBGM(titleMusic.clip, 5f, true, BGMVolume); //only a temp measure while we have shitty scene loading
 
         bool gameStarted = PlayerPrefs.HasKey("GameStarted");
-
-        continueButton.gameObject.SetActive(gameStarted);
+        if (continueButton != null)
+        {
+            continueButton.gameObject.SetActive(gameStarted);
+        }
 
 
 
