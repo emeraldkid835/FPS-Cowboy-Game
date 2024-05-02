@@ -30,7 +30,7 @@ public class OpenDoor : MonoBehaviour, IInteract
 
     
 
-    public void Interaction()
+    public void Interaction() //this shit used to be in update!
     {
         if (isLocked == false)
         {
