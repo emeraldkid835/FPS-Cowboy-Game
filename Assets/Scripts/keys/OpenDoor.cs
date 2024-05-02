@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OpenDoor : MonoBehaviour
+public class OpenDoor : MonoBehaviour, IInteract
 {
     public Animation doorHinge;
     private bool isLocked = true; // Assuming the door starts locked
@@ -18,41 +18,43 @@ public class OpenDoor : MonoBehaviour
     void Start()
     {
         isOpen = false;
+        isLocked = true;
         // Initialize the AudioSource component
         audioSource = GetComponent<AudioSource>();
         if (audioSource == null)
-        {
+        { //could just use [Requirecomponent(typeof(AudioSource))]
             // Log an error if no AudioSource is found
             Debug.LogError("No AudioSource component found on the GameObject.");
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    
+
+    public void Interaction()
     {
-        if (Input.GetKeyDown(KeyCode.E) && isOpen == false && inRange == true)
+        if (isLocked == false)
         {
-            if (!isLocked)
-            {
-                doorHinge.Play();
-                isOpen = true;
-                // Play open sound effect
-                if (openSound != null && audioSource != null)
-                {
-                    audioSource.PlayOneShot(openSound);
-                }
-            }
-            else
-            {
-                Debug.Log("The door is locked. You need a key to unlock it.");
-                
-                // Play locked sound effect
-                if (lockedSound != null && audioSource != null)
-                {
-                    audioSource.PlayOneShot(lockedSound);
-                }
-            }
+            doorHinge.Play();
+            isOpen = true;
+            audioSource.clip = openSound;
+            
         }
+        else
+        {
+
+            audioSource.clip = lockedSound;
+        }
+        audiomanager.instance.PlaySFX(audioSource.clip);
+    }
+
+    public bool validToReinteract()
+    {
+        return true;
+    }
+
+    public string contextText()
+    {
+        return "Unlock";
     }
 
     // Method to unlock the door
@@ -71,19 +73,4 @@ public class OpenDoor : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.tag == "Player")
-        {
-            inRange = true;
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if(other.tag == "Player")
-        {
-            inRange = false;
-        }
-    }
 }

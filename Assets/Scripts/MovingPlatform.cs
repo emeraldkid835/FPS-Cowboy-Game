@@ -2,18 +2,19 @@ using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour
 {
-    public Vector3 startPosition;
-    public Vector3 endPosition;
-    public float speed = 2.0f;
+    private Vector3 startPosition;
+    public Vector3 endOffset;
+    public float speed = .5f;
+    
 
     private void Start()
     {
-        transform.position = startPosition;
+        startPosition = transform.position;
     }
 
     private void Update()
     {
         // Move the platform between start and end positions
-        transform.position = Vector3.Lerp(startPosition, endPosition, Mathf.PingPong(Time.time * speed, 1.0f));
+        transform.position = Vector3.Lerp(startPosition, startPosition + endOffset, Mathf.PingPong(Time.time * speed, 1.0f));
     }
 }
