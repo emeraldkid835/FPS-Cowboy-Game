@@ -171,7 +171,10 @@ public class Winchester : GunClass
     {
         if (playerPause.isPaused == false && isReloading != true && currentBullets < MaxBulletsPerMagazine)
         {
-            animator.SetTrigger("Reload");
+            if (currentStoredAmmo > 0)
+            {
+                animator.SetTrigger("Reload");
+            }
             StartCoroutine(Reloadtime());
         }
 

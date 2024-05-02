@@ -159,7 +159,10 @@ public class FireballShooter : GunClass
                 currentBullets += bulletsToReload;
                 currentStoredAmmo -= bulletsToReload;
             }
-            animator.SetTrigger("Reload");
+            if(currentStoredAmmo > 0)
+            {
+              animator.SetTrigger("Reload");  
+            }
             ws.isReloading = false;
         }
         
