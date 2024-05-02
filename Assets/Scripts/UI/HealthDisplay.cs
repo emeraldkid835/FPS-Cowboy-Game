@@ -26,6 +26,8 @@ using UnityEngine.UI;
             }
 
 
+
+
             // Set the initial health text
             UpdateHealthText(playerhealth.GetPlayerCurrentHealth()); // Calling the method UpdateHealthText which gets and returns the playerhealth current health value. This is called at start to ensure the current health is displayed 
         }
