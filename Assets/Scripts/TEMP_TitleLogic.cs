@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
 
 public class TEMP_TitleLogic : MonoBehaviour
 {
@@ -9,6 +11,8 @@ public class TEMP_TitleLogic : MonoBehaviour
     [SerializeField, Range(0f,1f)] private float BGMVolume = 1;
     [SerializeField] private AudioSource titleMusic;
     // Start is called before the first frame update
+    
+    public Button continueButton;
     void Start()
     {
         meAnimator = this.GetComponent<Animator>();
@@ -21,6 +25,12 @@ public class TEMP_TitleLogic : MonoBehaviour
 
         
         audiomanager.instance.PlayBGM(titleMusic.clip, 5f, true, BGMVolume); //only a temp measure while we have shitty scene loading
+
+        bool gameStarted = PlayerPrefs.HasKey("GameStarted");
+
+        continueButton.gameObject.SetActive(gameStarted);
+
+
 
     }
 
@@ -59,6 +69,26 @@ public class TEMP_TitleLogic : MonoBehaviour
         if(meAnimator != null)
         {
             meAnimator.SetBool("showcreds", false);
+        }
+    }
+
+    public void StartNewGame()
+    {
+        PlayerPrefs.DeleteAll();
+        PlayerPrefs.SetInt("GameStarted", 1);
+        PlayerPrefs.Save();
+    }
+
+    public void ContinueGame()
+    {
+        if (PlayerPrefs.HasKey("CurrentScene"))
+        {
+            string savedSceneName = PlayerPrefs.GetString("CurrentScene");
+            SceneManager.LoadScene(savedSceneName);
+        }
+        else
+        {
+            Debug.Log("No saved Scene found!");
         }
     }
 }

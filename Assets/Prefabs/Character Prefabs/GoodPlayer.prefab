@@ -725,6 +725,7 @@ GameObject:
   - component: {fileID: 492052345483458277}
   - component: {fileID: 8095253975251429188}
   - component: {fileID: 4949718968540164132}
+  - component: {fileID: 6988735929162982861}
   - component: {fileID: 8095253975251429191}
   m_Layer: 7
   m_Name: GoodPlayer
@@ -939,6 +940,18 @@ MonoBehaviour:
   spawnAtRanch: 0
   spawnAtFactory: 0
   spawnAtBoss: 0
+--- !u!114 &6988735929162982861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3696423199745172905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9010916df7fc5e141be6060b51075e30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!136 &8095253975251429191
 CapsuleCollider:
   m_ObjectHideFlags: 0
