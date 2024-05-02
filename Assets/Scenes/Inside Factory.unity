@@ -3855,12 +3855,16 @@ PrefabInstance:
       value: Resume
       objectReference: {fileID: 0}
     - target: {fileID: 8280471961843767218, guid: dba71daeaaaeaff44aea2eb3d9ba43fc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8280471961843767218, guid: dba71daeaaaeaff44aea2eb3d9ba43fc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1869472236}
     - target: {fileID: 8280471961843767218, guid: dba71daeaaaeaff44aea2eb3d9ba43fc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Quit
+      value: LoadAScene
       objectReference: {fileID: 0}
     - target: {fileID: 8280471961843767218, guid: dba71daeaaaeaff44aea2eb3d9ba43fc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -59229,6 +59233,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BGMVolume: 1
   titleMusic: {fileID: 1869472238}
+  continueButton: {fileID: 0}
 --- !u!4 &1869472237
 Transform:
   m_ObjectHideFlags: 0
