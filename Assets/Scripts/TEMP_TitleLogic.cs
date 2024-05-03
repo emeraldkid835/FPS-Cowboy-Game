@@ -39,15 +39,24 @@ public class TEMP_TitleLogic : MonoBehaviour
     
     public void LoadAScene(int index)
     {
+        if (Time.timeScale == 0) 
+        {
+            
+            Time.timeScale = 1;
+           
+        }
+        
+        
         if (SceneManager.GetSceneByBuildIndex(index) != null)
         {
-            Debug.Log("Should be loading scene at index of: " + index);
-            SceneManager.LoadScene(index);
+                Debug.Log("Should be loading scene at index of: " + index);
+                SceneManager.LoadScene(index);
         }
         else
         {
-            Debug.Log("No scene at that index!");
+                Debug.Log("No scene at that index!");
         }
+        
     }
 
     public void Quit()
