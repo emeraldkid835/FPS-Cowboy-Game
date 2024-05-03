@@ -19,6 +19,6 @@ public class PickKey : MonoBehaviour
     void CollectKey()
     {
         keyGone.SetActive(false); // Deactivate the key GameObject
-        doorScript.KeyCollected(); // Inform the door script that a key has been collected
+        doorScript.KeyCollected(1); // Inform the door script that a key has been collected
     }
 }

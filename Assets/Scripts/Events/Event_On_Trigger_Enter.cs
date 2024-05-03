@@ -8,7 +8,7 @@ public class Event_On_Trigger_Enter : MonoBehaviour
     [SerializeField] private UnityEvent mevent;
     [SerializeField] private bool playerOnly = true;
     private Collider me;
-    [SerializeField] private bool singleInteract = false;
+   
 
     private void Start()
     {
@@ -31,10 +31,7 @@ public class Event_On_Trigger_Enter : MonoBehaviour
             mevent.Invoke();
             
         }
-        if(singleInteract == true)
-        {
-            this.gameObject.SetActive(false);
-        }
+        
 
     }
 

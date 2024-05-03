@@ -6,7 +6,7 @@ public class OpenDoor : MonoBehaviour, IInteract
 {
     public Animation doorHinge;
     private bool isLocked = true; // Assuming the door starts locked
-    private int keysCollected = 0; // Number of keys collected by the player
+    [SerializeField] private int keysCollected = 0; // Number of keys collected by the player
     private bool isOpen = false;
     private bool inRange = false;
 
@@ -32,7 +32,7 @@ public class OpenDoor : MonoBehaviour, IInteract
 
     public void Interaction() //this shit used to be in update!
     {
-        if (isLocked == false)
+        if (isLocked == false || keysCollected >= 2)
         {
             doorHinge.Play();
             isOpen = true;
@@ -64,9 +64,9 @@ public class OpenDoor : MonoBehaviour, IInteract
     }
 
     // Method to inform the door script that a key has been collected
-    public void KeyCollected()
+    public void KeyCollected(int keymount)
     {
-        keysCollected++;
+        keysCollected+=keymount;
         if (keysCollected >= 2) // Check if the player has collected enough keys to unlock the door
         {
             UnlockDoor();
