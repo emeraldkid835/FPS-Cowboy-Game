@@ -290,24 +290,6 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""DropWeapon"",
-                    ""type"": ""Button"",
-                    ""id"": ""7a7e18b8-0634-4781-a97a-a5ed0600f061"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""PickupWeapon"",
-                    ""type"": ""Button"",
-                    ""id"": ""d4f72226-8756-4698-bfcb-3682abbacbe6"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -330,28 +312,6 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Reload"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""b26728b0-e903-4a63-8d73-eb27475b5635"",
-                    ""path"": ""<Keyboard>/q"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""DropWeapon"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""aa7a20fa-e831-40eb-87b6-43547b9a85fd"",
-                    ""path"": ""<Keyboard>/e"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""PickupWeapon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -413,8 +373,6 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
         m_Weapons = asset.FindActionMap("Weapons", throwIfNotFound: true);
         m_Weapons_Shoot = m_Weapons.FindAction("Shoot", throwIfNotFound: true);
         m_Weapons_Reload = m_Weapons.FindAction("Reload", throwIfNotFound: true);
-        m_Weapons_DropWeapon = m_Weapons.FindAction("DropWeapon", throwIfNotFound: true);
-        m_Weapons_PickupWeapon = m_Weapons.FindAction("PickupWeapon", throwIfNotFound: true);
         // PauseOptions
         m_PauseOptions = asset.FindActionMap("PauseOptions", throwIfNotFound: true);
         m_PauseOptions_Pause = m_PauseOptions.FindAction("Pause", throwIfNotFound: true);
@@ -605,16 +563,12 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
     private List<IWeaponsActions> m_WeaponsActionsCallbackInterfaces = new List<IWeaponsActions>();
     private readonly InputAction m_Weapons_Shoot;
     private readonly InputAction m_Weapons_Reload;
-    private readonly InputAction m_Weapons_DropWeapon;
-    private readonly InputAction m_Weapons_PickupWeapon;
     public struct WeaponsActions
     {
         private @InputMaster m_Wrapper;
         public WeaponsActions(@InputMaster wrapper) { m_Wrapper = wrapper; }
         public InputAction @Shoot => m_Wrapper.m_Weapons_Shoot;
         public InputAction @Reload => m_Wrapper.m_Weapons_Reload;
-        public InputAction @DropWeapon => m_Wrapper.m_Weapons_DropWeapon;
-        public InputAction @PickupWeapon => m_Wrapper.m_Weapons_PickupWeapon;
         public InputActionMap Get() { return m_Wrapper.m_Weapons; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -630,12 +584,6 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
             @Reload.started += instance.OnReload;
             @Reload.performed += instance.OnReload;
             @Reload.canceled += instance.OnReload;
-            @DropWeapon.started += instance.OnDropWeapon;
-            @DropWeapon.performed += instance.OnDropWeapon;
-            @DropWeapon.canceled += instance.OnDropWeapon;
-            @PickupWeapon.started += instance.OnPickupWeapon;
-            @PickupWeapon.performed += instance.OnPickupWeapon;
-            @PickupWeapon.canceled += instance.OnPickupWeapon;
         }
 
         private void UnregisterCallbacks(IWeaponsActions instance)
@@ -646,12 +594,6 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
             @Reload.started -= instance.OnReload;
             @Reload.performed -= instance.OnReload;
             @Reload.canceled -= instance.OnReload;
-            @DropWeapon.started -= instance.OnDropWeapon;
-            @DropWeapon.performed -= instance.OnDropWeapon;
-            @DropWeapon.canceled -= instance.OnDropWeapon;
-            @PickupWeapon.started -= instance.OnPickupWeapon;
-            @PickupWeapon.performed -= instance.OnPickupWeapon;
-            @PickupWeapon.canceled -= instance.OnPickupWeapon;
         }
 
         public void RemoveCallbacks(IWeaponsActions instance)
@@ -731,8 +673,6 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
     {
         void OnShoot(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
-        void OnDropWeapon(InputAction.CallbackContext context);
-        void OnPickupWeapon(InputAction.CallbackContext context);
     }
     public interface IPauseOptionsActions
     {

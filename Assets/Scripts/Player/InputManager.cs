@@ -46,8 +46,8 @@ public class InputManager : MonoBehaviour
         weapon.Shoot.performed += _ => equippedGun.Shoot();
         weapon.Reload.performed += _ => equippedGun.Reload();
         pause.Pause.performed += _ => playerPause.OnPausePressed();
-        weapon.DropWeapon.performed += _ => player.DropGun();   
-        weapon.PickupWeapon.performed += _ => player.EquipGun(equippedGun);
+           
+        
 
        
 
