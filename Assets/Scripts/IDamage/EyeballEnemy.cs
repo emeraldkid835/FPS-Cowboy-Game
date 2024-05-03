@@ -48,7 +48,7 @@ public class EyeballEnemy : MonoBehaviour, IDamage // Declaring that it is an ID
         Debug.Log($"Enemy took {damage} damage. Enemy has {EnemycurrentHealth - damage} health.");
         animator.SetBool("TookHit", true);
         EnemycurrentHealth -= damage; // EnemycurrentHealth = EnemycurrentHealth - damage
-        if(eyeballHurtSound != null)
+        if(eyeballHurtSound != null && audiomanager.instance.alreadyPlaying(eyeballHurtSound.clip) == false)
         {
             audiomanager.instance.PlaySFX3D(eyeballHurtSound.clip, this.transform.position);
         }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -109,7 +110,7 @@ public class audiomanager : MonoBehaviour
         }
     }
 
-    public void PlaySFX3D(AudioClip clipToPlay, Vector3 position, float epicFloat = 1, float minPitch = 1, float maxPitch = 1)
+    public void PlaySFX3D(AudioClip clipToPlay, Vector3 position, float epicFloat = 1, float minPitch = 1, float maxPitch = 1, float minDistance = 5)
     {
         if (audioObject != null && valid == true && clipToPlay != null) //does an audio object exist?
         { 
@@ -130,6 +131,7 @@ public class audiomanager : MonoBehaviour
             temp.clip = clipToPlay;
             temp.spatialBlend = epicFloat;
             temp.pitch = Random.Range(minPitch, maxPitch);
+            temp.minDistance = minDistance;
             temp.Play();
             worldSFX.Add(gaming);
             if (clipToPlay != null)

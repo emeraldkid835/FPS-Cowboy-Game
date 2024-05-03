@@ -54,7 +54,7 @@ public class SniperEnemy : MonoBehaviour, IDamage
         Debug.Log($"Enemy took {damage} damage. Enemy has {EnemycurrentHealth - damage} health.");
         animator.SetBool("TookHit", true);
         EnemycurrentHealth -= damage; // EnemycurrentHealth = EnemycurrentHealth - damage
-        if (hurtSound != null)
+        if (hurtSound != null && audiomanager.instance.alreadyPlaying(hurtSound.clip) == false)
         {
             audiomanager.instance.PlaySFX3D(hurtSound.clip, this.transform.position);
         }
