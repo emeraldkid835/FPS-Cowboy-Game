@@ -56,8 +56,7 @@ public class CameraLook : MonoBehaviour
             sensitivityYSlider = controlsPanel.GetComponentsInChildren<Slider>()[1]; // Assuming it's the second Slider in the hierarchy
 
             // Add listeners to the sliders
-            sensitivityXSlider.onValueChanged.AddListener(UpdateSensitivityX);
-            sensitivityYSlider.onValueChanged.AddListener(UpdateSensitivityY);
+          
         }
 
         
@@ -157,15 +156,17 @@ public class CameraLook : MonoBehaviour
         
     }
     // Method to update sensitivityX based on UI Slider value
-    public void UpdateSensitivityX(float value)
+    public void UpdateSensitivityX()
     {
-        sensitivityX = value;
+        sensitivityX = sensitivityXSlider.value;
+        PlayerPrefs.SetFloat("sensX", sensitivityX);
     }
 
     // Method to update sensitivityY based on UI Slider value
-    public void UpdateSensitivityY(float value)
+    public void UpdateSensitivityY()
     {
-        sensitivityY = value;
+        sensitivityY = sensitivityYSlider.value;
+        PlayerPrefs.SetFloat("sensY", sensitivityY);
     }
 
 
